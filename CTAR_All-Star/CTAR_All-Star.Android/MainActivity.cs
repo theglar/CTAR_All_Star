@@ -6,6 +6,8 @@ using Android.Runtime;
 using Android.Views;
 using Android.Widget;
 using Android.OS;
+using System.IO;
+using CTAR_All_Star;
 
 namespace CTAR_All_Star.Droid
 {
@@ -19,8 +21,12 @@ namespace CTAR_All_Star.Droid
 
             base.OnCreate(bundle);
 
+            string fileName = "measurements_db.sqlite";
+            string fileLocation = System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal);
+            string full_path = Path.Combine(fileLocation, fileName);
+
             global::Xamarin.Forms.Forms.Init(this, bundle);
-            LoadApplication(new App());
+            LoadApplication(new App(full_path));
         }
     }
 }

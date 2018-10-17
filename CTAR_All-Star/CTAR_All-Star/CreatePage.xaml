@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CTAR_All_Star.CreatePage">
+    <ContentPage.Content>
+        <StackLayout Margin="10,10,10,0">
+            <Entry x:Name="nameEntry" Placeholder="User Name"/>
+            <Entry Keyboard="Numeric" x:Name="sessionEntry" Placeholder="Session Number"/>
+            <Entry Keyboard="Numeric" x:Name="pressureEntry" Placeholder="Pressure"/>
+            <Entry Keyboard="Numeric" x:Name="durationEntry" Placeholder="Duration"/>
+            <Button Text="Save"
+                    Clicked="Button_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
