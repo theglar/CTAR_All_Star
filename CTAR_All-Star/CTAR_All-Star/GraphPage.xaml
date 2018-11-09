@@ -2,6 +2,68 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
+             xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
+             xmlns:local="clr-namespace:CTAR_All_Star"
+             xmlns:local1="clr-namespace:CTAR_All_Star.Model"
              x:Class="CTAR_All_Star.GraphPage">
-    <forms:ChartView x:Name="Chart1" HeightRequest="150"/>
+    <!--<forms:ChartView x:Name="Chart1" HeightRequest="180" />-->
+    <ContentPage.BindingContext>
+
+        <local1:ViewModel></local1:ViewModel>
+        
+
+    </ContentPage.BindingContext>
+    <chart:SfChart>
+        <chart:SfChart.Title>
+
+            <chart:ChartTitle Text="Chart"/>
+
+        </chart:SfChart.Title>
+        <chart:SfChart.Legend>
+
+            <chart:ChartLegend/>
+
+        </chart:SfChart.Legend>
+        <chart:SfChart.PrimaryAxis>
+
+            <chart:CategoryAxis>
+
+                <chart:CategoryAxis.Title>
+
+                    <chart:ChartAxisTitle Text="Name"></chart:ChartAxisTitle>
+
+                </chart:CategoryAxis.Title>
+
+            </chart:CategoryAxis>
+
+        </chart:SfChart.PrimaryAxis>
+
+        <chart:SfChart.SecondaryAxis>
+
+            <chart:NumericalAxis>
+
+                <chart:NumericalAxis.Title>
+
+                    <chart:ChartAxisTitle Text="Height (in cm)"></chart:ChartAxisTitle>
+
+                </chart:NumericalAxis.Title>
+
+            </chart:NumericalAxis>
+
+        </chart:SfChart.SecondaryAxis>
+
+        <chart:SfChart.Series>
+
+            <chart:LineSeries Label="Heights" ItemsSource="{Binding Data}" XBindingPath="Name" YBindingPath="Height" EnableTooltip ="True">
+                <chart:LineSeries.ColorModel>
+
+                    <chart:ChartColorModel Palette="Natural"/>
+
+                </chart:LineSeries.ColorModel>
+            </chart:LineSeries>
+            
+
+        </chart:SfChart.Series>
+
+    </chart:SfChart>
 </ContentPage>

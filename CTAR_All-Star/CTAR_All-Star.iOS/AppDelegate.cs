@@ -28,6 +28,9 @@ namespace CTAR_All_Star.iOS
             string full_path = Path.Combine(fileLocation, fileName);
 
             global::Xamarin.Forms.Forms.Init();
+
+            Syncfusion.SfChart.XForms.iOS.Renderers.SfChartRenderer.Init();
+
             LoadApplication(new App(full_path));
 
             return base.FinishedLaunching(app, options);
