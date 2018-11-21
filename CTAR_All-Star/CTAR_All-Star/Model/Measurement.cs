@@ -5,7 +5,7 @@ using SQLite;
 
 namespace CTAR_All_Star
 {
-    class Measurement
+    public class Measurement
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
@@ -16,7 +16,9 @@ namespace CTAR_All_Star
 
         public DateTime TimeStamp { get; set; }
 
-        public string Pressure { get; set; }
+        public string DisplayTime { get; set; }
+
+        public double Pressure { get; set; }
 
         public string Duration { get; set; }
     }

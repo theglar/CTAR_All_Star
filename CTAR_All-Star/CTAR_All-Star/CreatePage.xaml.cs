@@ -18,14 +18,18 @@ namespace CTAR_All_Star
 		}
         private void Button_Clicked(object sender, EventArgs e)
         {
+            // Get current date and time
+            DateTime d = DateTime.Now;
+            DateTime dt = DateTime.Parse(d.ToString());
+
             Measurement measurement = new Measurement()
             {
                 UserName = nameEntry.Text,
                 SessionNumber = sessionEntry.Text,
-                TimeStamp = DateTime.Now,
-                Pressure = pressureEntry.Text,
-                Duration = durationEntry.Text
-
+                TimeStamp = d,
+                Pressure = Convert.ToDouble(pressureEntry.Text),
+                Duration = durationEntry.Text,
+                DisplayTime = dt.ToString("HH:mm:ss")
             };
 
             using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))

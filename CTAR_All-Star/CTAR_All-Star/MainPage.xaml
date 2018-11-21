@@ -10,6 +10,7 @@
         <ToolbarItem Text="Graph" Activated="Graph_Activated"/>
         <ToolbarItem Text="Setup" Activated="Setup_Activated"/>
         <ToolbarItem Text="+" Activated="Measure_Activated" />
+        <ToolbarItem Text="-" Activated="Remove_Activated" />
     </ContentPage.ToolbarItems>
     <ListView  x:Name="measurementsView">
         <ListView.Header>

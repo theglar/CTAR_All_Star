@@ -47,6 +47,10 @@ namespace CTAR_All_Star
         {
             Navigation.PushAsync(new CreatePage());
         }
+        private void Remove_Activated(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new RemovePage());
+        }
 
     }
 }

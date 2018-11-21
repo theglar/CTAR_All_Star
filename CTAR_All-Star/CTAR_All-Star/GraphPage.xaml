@@ -16,7 +16,7 @@
     <chart:SfChart>
         <chart:SfChart.Title>
 
-            <chart:ChartTitle Text="Chart"/>
+            <chart:ChartTitle Text="CTAR All-Star Progress"/>
 
         </chart:SfChart.Title>
         <chart:SfChart.Legend>
@@ -30,7 +30,7 @@
 
                 <chart:CategoryAxis.Title>
 
-                    <chart:ChartAxisTitle Text="Name"></chart:ChartAxisTitle>
+                    <chart:ChartAxisTitle Text="Time"></chart:ChartAxisTitle>
 
                 </chart:CategoryAxis.Title>
 
@@ -44,7 +44,7 @@
 
                 <chart:NumericalAxis.Title>
 
-                    <chart:ChartAxisTitle Text="Height (in cm)"></chart:ChartAxisTitle>
+                    <chart:ChartAxisTitle Text="Pressure"></chart:ChartAxisTitle>
 
                 </chart:NumericalAxis.Title>
 
@@ -54,7 +54,7 @@
 
         <chart:SfChart.Series>
 
-            <chart:LineSeries Label="Heights" ItemsSource="{Binding Data}" XBindingPath="Name" YBindingPath="Height" EnableTooltip ="True">
+            <chart:LineSeries Label="Pressure" ItemsSource="{Binding Data}" XBindingPath="DisplayTime" YBindingPath="Pressure" EnableTooltip ="True">
                 <chart:LineSeries.ColorModel>
 
                     <chart:ChartColorModel Palette="Natural"/>
