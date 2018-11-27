@@ -25,15 +25,7 @@ namespace CTAR_All_Star.Model
                 {
                     Data.Add(m);               
                 }
-
             }
-                        
-            //foreach(var d in Data)
-            //{
-            //    DateTime dt = DateTime.Parse(d.TimeStamp.ToString());
-            //    d.DisplayTime = dt.ToString("HH:mm:ss");
-            //}
-
         }
     }
 }
