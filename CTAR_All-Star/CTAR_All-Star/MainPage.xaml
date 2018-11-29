@@ -6,7 +6,7 @@
 
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Signin" Activated="Signin_Activated"/>
-        <ToolbarItem Text="Bluetooth" Activated="Connect_Activated"/>
+        <ToolbarItem Text="History" Activated="History_Activated"/>
         <ToolbarItem Text="Graph" Activated="Graph_Activated"/>
         <ToolbarItem Text="Setup" Activated="Setup_Activated"/>
         <ToolbarItem Text="+" Activated="Measure_Activated" />

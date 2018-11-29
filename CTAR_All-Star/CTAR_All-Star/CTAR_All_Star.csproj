@@ -16,13 +16,16 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Update="History.xaml.cs">
+      <DependentUpon>History.xaml</DependentUpon>
+    </Compile>
     <Compile Update="RemovePage.xaml.cs">
       <DependentUpon>RemovePage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="BlueToothPage.xaml">
+    <EmbeddedResource Update="History.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="CreatePage.xaml">

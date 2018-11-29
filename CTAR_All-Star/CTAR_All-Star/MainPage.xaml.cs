@@ -31,9 +31,9 @@ namespace CTAR_All_Star
         {
             Navigation.PushAsync(new SigninPage());
         }
-        private void Connect_Activated(object sender, EventArgs e)
+        private void History_Activated(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new BlueToothPage());
+            Navigation.PushAsync(new HistoryPage());
         }
         private void Graph_Activated(object sender, EventArgs e)
         {

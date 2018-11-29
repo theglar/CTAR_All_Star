@@ -10,9 +10,9 @@ using Xamarin.Forms.Xaml;
 namespace CTAR_All_Star
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class BlueToothPage : ContentPage
+	public partial class HistoryPage : ContentPage
 	{
-		public BlueToothPage ()
+		public HistoryPage()
 		{
 			InitializeComponent ();
 		}
