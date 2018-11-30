@@ -10,8 +10,11 @@ using Xamarin.Forms;
 using CTAR_All_Star.Models;
 using Plugin.BLE.Abstractions.Exceptions;
 
+
 namespace CTAR_All_Star
 {
+    using Xamarin.Forms.PlatformConfiguration;
+
     public partial class MainPage : ContentPage
     {
         IBluetoothLE ble;
@@ -47,7 +50,7 @@ namespace CTAR_All_Star
             {
                 deviceList.Add(a.Device);
             };
-        }        
+        }
 
         private void Signin_Activated(object sender, EventArgs e)
         {
@@ -73,6 +76,7 @@ namespace CTAR_All_Star
         {
             Navigation.PushAsync(new RemovePage());
         }
+
 
         private async void lv_ItemSelected(object sender, EventArgs e)
         {
@@ -120,6 +124,28 @@ namespace CTAR_All_Star
                 await adapter.StopScanningForDevicesAsync();
             }
 
+        }
+
+        //Needs work - I used online code that didn't work but pretty sure this will be usable when integrating the permissions plugin
+        private async void GetPermissions(object sender, global::System.EventArgs e)
+        {
+            var myAction = await DisplayAlert("Permissions Required", "Please allow CTAR All-Star to access your location", "OK", "CANCEL");
+            if (myAction)
+            {
+                if (Device.RuntimePlatform == global::Xamarin.Forms.Device.Android)
+                {
+
+                    //DependencyService.Get<ISettingsService>().OpenSettings();
+                    //global::Xamarin.Forms.DependencyService.Get<global::CTAR_All_Star.PermissionsInterface>().OpenSettings();
+
+                    btnPermissions.IsVisible = false;
+
+                }
+                else
+                {
+                    DisplayAlert("Device", "You are not using an Android device", "YEP");
+                }
+            }
         }
     }
 }

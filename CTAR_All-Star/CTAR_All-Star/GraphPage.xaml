@@ -8,7 +8,16 @@
              x:Class="CTAR_All_Star.GraphPage">
     <!--<forms:ChartView x:Name="Chart1" HeightRequest="180" />-->
     
-        <ContentPage.BindingContext>
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Signin" Activated="Signin_Activated"/>
+        <ToolbarItem Text="History" Activated="History_Activated"/>
+        <ToolbarItem Text="Graph" Activated="Graph_Activated"/>
+        <ToolbarItem Text="Setup" Activated="Setup_Activated"/>
+        <ToolbarItem Text="+" Activated="Measure_Activated" />
+        <ToolbarItem Text="-" Activated="Remove_Activated" />
+    </ContentPage.ToolbarItems>
+    
+    <ContentPage.BindingContext>
             <local1:ViewModel></local1:ViewModel>
         </ContentPage.BindingContext>
     <StackLayout>
