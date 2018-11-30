@@ -7,7 +7,7 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CTAR_All_Star.Android", "CT
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CTAR_All_Star.iOS", "CTAR_All-Star\CTAR_All-Star.iOS\CTAR_All_Star.iOS.csproj", "{9FEFAB77-77E8-40AD-836C-D3B2B6823CD9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CTAR_All_Star", "CTAR_All-Star\CTAR_All-Star\CTAR_All_Star.csproj", "{1EAE6F75-DCB7-4042-849D-CF7B0E4E0CEC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CTAR_All_Star", "CTAR_All-Star\CTAR_All-Star\CTAR_All_Star.csproj", "{1EAE6F75-DCB7-4042-849D-CF7B0E4E0CEC}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
