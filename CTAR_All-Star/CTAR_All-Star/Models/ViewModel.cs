@@ -7,7 +7,7 @@ using CTAR_All_Star;
 using SQLite;
 using Xamarin.Forms.Xaml;
 
-namespace CTAR_All_Star.Model
+namespace CTAR_All_Star.Models
 {
     public class ViewModel  
     { 

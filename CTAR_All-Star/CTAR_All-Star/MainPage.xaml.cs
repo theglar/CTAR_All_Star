@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
+using CTAR_All_Star.Views;
 
 namespace CTAR_All_Star
 {

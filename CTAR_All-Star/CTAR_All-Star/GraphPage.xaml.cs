@@ -9,7 +9,7 @@ using Xamarin.Forms.Xaml;
 using Microcharts.Forms;
 using SkiaSharp;
 using Microcharts;
-using CTAR_All_Star.Model;
+using CTAR_All_Star.Models;
 
 using Syncfusion.SfChart.XForms;
 
