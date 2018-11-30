@@ -17,6 +17,7 @@ namespace CTAR_All_Star.Models
             this.Password = Password;
         }
 
+
         public bool CheckInformation()
         {
             if (!this.Username.Equals("") && !this.Password.Equals(""))

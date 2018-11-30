@@ -1,0 +1,55 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CTAR_All_Star.HistoryPage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Signin" Activated="Signin_Activated"/>
+        <ToolbarItem Text="History" Activated="History_Activated"/>
+        <ToolbarItem Text="Graph" Activated="Graph_Activated"/>
+        <ToolbarItem Text="Setup" Activated="Setup_Activated"/>
+        <ToolbarItem Text="+" Activated="Measure_Activated" />
+        <ToolbarItem Text="-" Activated="Remove_Activated" />
+    </ContentPage.ToolbarItems>
+    <ListView  x:Name="measurementsView">
+        <ListView.Header>
+            <StackLayout Padding="10,0,10,10" BackgroundColor="Yellow"
+                        Orientation="Vertical">
+                <StackLayout Orientation="Horizontal">
+                    <Label Text="Name"
+                                TextColor="#2b3024" />
+                    <Label Text="Session"
+                                HorizontalOptions="EndAndExpand"
+                                TextColor="#503026" />
+                    <Label Text="Pressure"
+                                HorizontalOptions="EndAndExpand"
+                                TextColor="#f35e20" />
+                    <Label Text="Duration"
+                                HorizontalOptions="EndAndExpand"
+                                TextColor="#1c45a5" />
+                </StackLayout>
+            </StackLayout>
+        </ListView.Header>
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Padding="10,0,10,0" BackgroundColor="#eee"
+                        Orientation="Vertical">
+                        <StackLayout Orientation="Horizontal">
+                            <Label Text="{Binding UserName}"
+                                TextColor="#2b3024" />
+                            <Label Text="{Binding SessionNumber}"
+                                HorizontalOptions="EndAndExpand"
+                                TextColor="#503026" />
+                            <Label Text="{Binding Pressure}"
+                                HorizontalOptions="EndAndExpand"
+                                TextColor="#f35e20" />
+                            <Label Text="{Binding Duration}"
+                                HorizontalOptions="EndAndExpand"
+                                TextColor="#1c45a5" />
+                        </StackLayout>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
+</ContentPage>

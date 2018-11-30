@@ -1,4 +1,4 @@
-﻿using Plugin.BLE;
+using Plugin.BLE;
 using Plugin.BLE.Abstractions.Contracts;
 using System;
 using System.Collections.Generic;
@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 using CTAR_All_Star.Views;
+using CTAR_All_Star.Models;
+using Plugin.BLE.Abstractions.Exceptions;
 
 namespace CTAR_All_Star
 {
@@ -17,57 +19,44 @@ namespace CTAR_All_Star
         IAdapter adapter;
         ObservableCollection<IDevice> deviceList;
         StackLayout availableDevices = new StackLayout();
+        IDevice selectedDevice;
+        //Button button = btnConnectBluetooth;
 
         public MainPage()
         {
             InitializeComponent();
             ble = CrossBluetoothLE.Current;
             adapter = CrossBluetoothLE.Current.Adapter;
+            var state = ble.State;
             deviceList = new ObservableCollection<IDevice>();
-            //lv.ItemSource = deviceList;
-            Button btnConnectBluetooth = new Button
+            lv.ItemsSource = deviceList;
+            ble.StateChanged += (s, e) =>
             {
-                Text = "No Bluetooth Device Connected",
-                BackgroundColor = Color.Blue,
-                TextColor = Color.White,
+                DisplayAlert("Notice", $"Bluetooth: {e.NewState}", "OK");
             };
-            ListView lv = new ListView
+            adapter.ScanTimeoutElapsed += (s, e) =>
             {
-                ItemsSource = deviceList
+                DisplayAlert("Notice", "timeout elapsed", "OK");
+                btnConnectBluetooth.Text = "Tap to scan for devices";
             };
-            btnConnectBluetooth.Clicked += OnButtonClicked;
-
-            Content = new StackLayout
+            adapter.DeviceConnected += (s, a) =>
             {
-                VerticalOptions = LayoutOptions.Center,
-                Children =
-                {
-                    btnConnectBluetooth,
-                    lv
-                }
+                btnConnectBluetooth.Text = "Tap to scan for devices";
+                DisplayAlert("Notice", "Connected!", "OK");
             };
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-
-            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
+            adapter.DeviceDiscovered += (s, a) =>
             {
-                conn.CreateTable<Measurement>();
-
-                var measurements = conn.Table<Measurement>().ToList();
-                measurementsView.ItemsSource = measurements;
-            }
-        }
+                deviceList.Add(a.Device);
+            };
+        }        
 
         private void Signin_Activated(object sender, EventArgs e)
         {
             Navigation.PushAsync(new SigninPage());
         }
-        private void Connect_Activated(object sender, EventArgs e)
+        private void History_Activated(object sender, EventArgs e)
         {
-            Navigation.PushAsync(new BlueToothPage());
+            Navigation.PushAsync(new HistoryPage());
         }
         private void Graph_Activated(object sender, EventArgs e)
         {
@@ -86,31 +75,52 @@ namespace CTAR_All_Star
             Navigation.PushAsync(new RemovePage());
         }
 
+        private async void lv_ItemSelected(object sender, EventArgs e)
+        {
+            if (lv.SelectedItem == null)
+            {
+                await DisplayAlert("Notice", "No Device selected", "OK");
+                return;
+            }
+            else
+            {
+                selectedDevice = lv.SelectedItem as IDevice;
+                try
+                {
+                    await adapter.ConnectToDeviceAsync(selectedDevice);
+                }
+                catch (DeviceConnectionException ex)
+                {
+                    await DisplayAlert("Notice", "Error connecting to device!", "OK");
+                }
+                catch (ArgumentNullException ex)
+                {
+                    await DisplayAlert("Notice", "Selected device is null!", "OK");
+                }
+                catch (Exception ex)
+                {
+                    await DisplayAlert("Notice", "Unknown exception!", "OK");
+                }
+            }
+        }
+
         private async void OnButtonClicked(object sender, EventArgs args)
         {
-            //            string deviceName;
-            Button button = (Button)sender;
-            //            button.Text = $"Connecting...";
-            //            NavigationPage newDeviceConnectionPage = new NavigationPage(new ConnectDevicePage());
-            //            Navigation.PushAsync(newDeviceConnectionPage);
-            //            //Navigation.PushAsync(new NavigationPage(new ConnectDevicePage()));
-            //            MessagingCenter.Subscribe<ConnectDevicePage, string>(this, "Device Name", (s, e) =>
-            //            {
-            //                button.Text = $"Connected to {e}";
-            //            });
+            //Button button = (Button)sender;
             deviceList.Clear();
 
-            adapter.DeviceDiscovered += (s, a) =>
-            {
-                deviceList.Add(a.Device);
-            };
-            button.Text = "Scanning...";
             if (!ble.Adapter.IsScanning)
             {
+                btnConnectBluetooth.Text = "Scanning... tap to stop";
+                adapter.ScanTimeout = 30000;
                 await adapter.StartScanningForDevicesAsync();
+            }
+            else
+            {
+                btnConnectBluetooth.Text = "Tap to scan for devices";
+                await adapter.StopScanningForDevicesAsync();
             }
 
         }
-
     }
 }

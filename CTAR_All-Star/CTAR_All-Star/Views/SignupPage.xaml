@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="CTAR_All_Star.Views.SignupPage">
+    <ContentPage.Content>
+        
+        <StackLayout x:Name="LoginEntriesStack" VerticalOptions="StartAndExpand">
+            <StackLayout.Padding>
+                <OnIdiom x:TypeArguments="Thickness">
+                    <OnIdiom.Phone>40, 0, 40, 80</OnIdiom.Phone>
+                    <OnIdiom.Tablet>140, 150, 140, 0</OnIdiom.Tablet>
+                </OnIdiom>
+            </StackLayout.Padding>
+            
+            <ActivityIndicator x:Name="ActivitySpinner" Color="Red" IsRunning="true" />
+            
+            <Label x:Name="Lbl_EMR" Text="EMR Number" Margin="0, 200, 0, 0"/>
+            <Entry x:Name="Entry_EMR" Placeholder="12345..." Text=""/>
+            <Label x:Name="Lbl_DocID" Text="Physician ID" />
+            <Entry x:Name="Entry_DocID" Placeholder="12345..." Text="" />
+            <Label x:Name="Lbl_NewPassword" Text="Password" />
+            <Entry x:Name="Entry_NewPassword" Placeholder="Password" Text=""/>
+            <Button x:Name="Btn_CreateAccount" Text="Create Account" Clicked="SignUpProcedure" />
+        </StackLayout>
+        
+    </ContentPage.Content>
+</ContentPage>

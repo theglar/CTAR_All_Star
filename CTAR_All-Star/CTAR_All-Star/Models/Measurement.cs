@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using SQLite;
 
-namespace CTAR_All_Star
+namespace CTAR_All_Star.Models
 {
     public class Measurement
     {

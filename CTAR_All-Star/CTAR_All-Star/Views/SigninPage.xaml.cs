@@ -46,8 +46,7 @@ namespace CTAR_All_Star.Views
 
         void SignUpProcedure()
         {
-            //Go to sign up page.
-            //Which still needs to be made.
+            Navigation.PushAsync(new SignupPage());
         }
     }
 }
