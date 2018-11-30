@@ -18,6 +18,8 @@
             <Entry x:Name="Entry_DocID" Placeholder="12345..." Text="" />
             <Label x:Name="Lbl_NewPassword" Text="Password" />
             <Entry x:Name="Entry_NewPassword" Placeholder="Password" Text=""/>
+            <Label x:Name="Lbl_ConfirmPass" Text="Confirm Password" />
+            <Entry x:Name="Entry_ConfirmPass" Placeholder="Password" Text=""/>
             <Button x:Name="Btn_CreateAccount" Text="Create Account" Clicked="SignUpProcedure" />
         </StackLayout>
         
