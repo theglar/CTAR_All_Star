@@ -10,7 +10,7 @@ using Microcharts.Forms;
 using SkiaSharp;
 using Microcharts;
 using CTAR_All_Star.Models;
-
+using CTAR_All_Star.Views;
 using Syncfusion.SfChart.XForms;
 
 namespace CTAR_All_Star

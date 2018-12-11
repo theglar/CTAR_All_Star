@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using CTAR_All_Star.Models;
-
+using CTAR_All_Star.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
