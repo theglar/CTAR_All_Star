@@ -29,9 +29,25 @@ namespace CTAR_All_Star.Views
             Entry_ConfirmPass.Completed += (s, e) => SignUpProcedure(s, e);
         }
 
+
         void SignUpProcedure(object sender, EventArgs e)
         {
+            User user = new User(Entry_EMR.Text, Entry_NewPassword.Text);
+            if (user.CheckInformation())
+            {
+                DisplayAlert("Account Created", "You've successfully  created an account.", "Ok");
+                Navigation.PushAsync(new SigninPage());
+            }
 
+            else
+            {
+                DisplayAlert("Account Failed", "There was an error creating a new account", "Ok");
+            }
+        }
+
+        void SignUpProcedure()
+        {
+            Navigation.PushAsync(new SigninPage());
         }
     }
 }
