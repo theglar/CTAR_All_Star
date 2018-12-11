@@ -5,8 +5,6 @@
         <StackLayout x:Name="LoginEntriesStack" VerticalOptions="StartAndExpand">
             <StackLayout.Padding>
                 <OnIdiom x:TypeArguments="Thickness">
-                    <OnIdiom.Phone>40, 0, 40, 80</OnIdiom.Phone>
-                    <OnIdiom.Tablet>140, 150, 140, 0</OnIdiom.Tablet>
                 </OnIdiom>
             </StackLayout.Padding>
             

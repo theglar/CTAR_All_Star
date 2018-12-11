@@ -54,5 +54,9 @@ namespace CTAR_All_Star
         {
             Navigation.PushAsync(new ManagePatients());
         }
+        private void Home_Activated(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new MainPage());
+        }
     }
 }

@@ -4,6 +4,7 @@
              x:Class="CTAR_All_Star.ManagePatients">
 
     <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Home" Activated="Home_Activated"/>
         <ToolbarItem Text="Login" Activated="Signin_Activated"/>
         <ToolbarItem Text="Create Exercise" Activated="CreateExercise_Activated"/>
         <ToolbarItem Text="Choose Exercise" Activated="ChooseExercise_Activated"/>
@@ -20,6 +21,9 @@
             <Label Text="Manage your patients here."
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            
         </StackLayout>
+        
     </ContentPage.Content>
+   
 </ContentPage>

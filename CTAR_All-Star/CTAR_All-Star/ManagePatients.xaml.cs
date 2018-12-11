@@ -17,7 +17,11 @@ namespace CTAR_All_Star
 		{
 			InitializeComponent ();
 		}
-        private void Signin_Activated(object sender, EventArgs e)
+        private void Button_Clicked(object sender, EventArgs e)
+        {
+            DisplayAlert("Success", "You have selected a patient!", "Dismiss");
+        }
+            private void Signin_Activated(object sender, EventArgs e)
         {
             Navigation.PushAsync(new SigninPage());
         }
@@ -52,6 +56,10 @@ namespace CTAR_All_Star
         private void Patients_Activated(object sender, EventArgs e)
         {
             Navigation.PushAsync(new ManagePatients());
+        }
+        private void Home_Activated(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new MainPage());
         }
     }
 }
