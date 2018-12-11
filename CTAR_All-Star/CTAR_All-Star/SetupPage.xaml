@@ -17,10 +17,16 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Padding="100,0,100,100">
             <Label Text="Welcome to the setup page!"
                 VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+                HorizontalOptions="CenterAndExpand"
+                   FontSize="Large"/>
+            <Button Text="Bluetooth Connection" Clicked="BT_Button_Clicked"/>
+            <Button Text="Train 1 Rep Max" Clicked="Train_Button_Clicked"/>
+            <Button Text="Set Timer" Clicked="Timer_Button_Clicked"/>
+            <Button Text="Profile Information" Clicked="Profile_Button_Clicked"/>
+            
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

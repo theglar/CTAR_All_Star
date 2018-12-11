@@ -17,11 +17,23 @@
     </ContentPage.ToolbarItems>
 
     <ContentPage.Content>
-        <StackLayout>
+        <StackLayout Padding="0,20,0,100">
             <Label Text="Manage your patients here."
                 VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+                HorizontalOptions="CenterAndExpand"
+                   FontSize="Large"/>
             
+            <ListView ItemsSource="{Binding Patients}" Margin="0,20,0,0" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Label Text="{Binding patientId}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Large" />
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Text="Add a Patient" Clicked="Button_Clicked"/>
+            <Button Text="Delete Patient" Clicked="Delete_Button_Clicked" />
         </StackLayout>
         
     </ContentPage.Content>

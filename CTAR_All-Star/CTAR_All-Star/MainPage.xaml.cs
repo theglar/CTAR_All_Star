@@ -164,7 +164,7 @@ namespace CTAR_All_Star
         //Needs work - I used online code that didn't work but pretty sure this will be usable when integrating the permissions plugin
         private async void GetPermissions(object sender, global::System.EventArgs e)
         {
-            var myAction = await DisplayAlert("Permissions Required", "Please allow CTAR All-Star to access your location", "OK", "CANCEL");
+            var myAction = await DisplayAlert("Permissions Required", "This will eventually setup location permissions through our app.", "OK", "CANCEL");
             if (myAction)
             {
                 if (Device.RuntimePlatform == global::Xamarin.Forms.Device.Android)

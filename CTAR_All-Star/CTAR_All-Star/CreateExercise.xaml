@@ -16,13 +16,8 @@
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
-          <StackLayout x:Name="WorkoutEntriesStack" VerticalOptions="StartAndExpand">
-            <StackLayout.Padding>
-                <OnIdiom x:TypeArguments="Thickness">
-                    <OnIdiom.Phone>40, 0, 40, 80</OnIdiom.Phone>
-                    <OnIdiom.Tablet>140, 150, 140, 0</OnIdiom.Tablet>
-                </OnIdiom>
-            </StackLayout.Padding>
+          <StackLayout x:Name="WorkoutEntriesStack" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="100, 0, 100, 100">
+            
             
               <Picker x:Name="UserID" Title="Patient ID" Margin="0, 200, 0, 0">
           <Picker.ItemsSource>
@@ -35,7 +30,7 @@
                         
             </x:Array>
           </Picker.ItemsSource>
-        </Picker>
+            </Picker>
                <Picker x:Name="Exercise" Title="Type" Margin="0, 25, 0, 0">
           <Picker.ItemsSource>
             <x:Array Type="{x:Type x:String}">
@@ -45,12 +40,12 @@
           </Picker.ItemsSource>
         </Picker>
             
-             <Label x:Name="Lbl_NumReps" Text="Number of Repitions"/>
-            <Entry x:Name="Entry_NumReps" Placeholder="# Repitions" Text=""/>
+             <Label x:Name="Lbl_NumReps" Text="Number of Repetitions"/>
+            <Entry x:Name="Entry_NumReps" Placeholder="# Repetitions" Text="" BackgroundColor="White"/>
             <Label x:Name="Lbl_NumSets" Text="Number of Sets" />
-            <Entry x:Name="Entry_NumSets" Placeholder="# Sets" Text=""/>
+            <Entry x:Name="Entry_NumSets" Placeholder="# Sets" Text="" BackgroundColor="White"/>
             <Label x:Name="Lbl_Threshold" Text="Threshold" />
-            <Entry x:Name="Entry_Threshold" Placeholder="%" Text=""/>
+            <Entry x:Name="Entry_Threshold" Placeholder="%" Text="" BackgroundColor="White"/>
             <Button x:Name="Btn_CreateAccount" Text="Save Workout" Clicked="SaveWorkoutProcedure" />
         </StackLayout>
     </ContentPage.Content>

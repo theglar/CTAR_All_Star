@@ -26,8 +26,9 @@ namespace CTAR_All_Star
             Lbl_NumReps.TextColor = Constants.MainTextColor;
             Lbl_NumSets.TextColor = Constants.MainTextColor;
             Lbl_Threshold.TextColor = Constants.MainTextColor;
-           
 
+            UserID.BackgroundColor = Constants.MainTextColor;
+            Exercise.BackgroundColor = Constants.MainTextColor;
 
             Entry_NumReps.Completed += (s, e) => Entry_NumSets.Focus();
             Entry_NumSets.Completed += (s, e) => Entry_Threshold.Focus();
