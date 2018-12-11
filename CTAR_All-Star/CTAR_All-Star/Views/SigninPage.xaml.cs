@@ -48,6 +48,8 @@ namespace CTAR_All_Star.Views
         {
             Navigation.PushAsync(new SignupPage());
         }
+
+        
     }
 }
 

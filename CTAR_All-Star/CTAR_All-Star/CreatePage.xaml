@@ -2,6 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CTAR_All_Star.CreatePage">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="Signin" Activated="Signin_Activated"/>
+        <ToolbarItem Text="History" Activated="History_Activated"/>
+        <ToolbarItem Text="Graph" Activated="Graph_Activated"/>
+        <ToolbarItem Text="Setup" Activated="Setup_Activated"/>
+        <ToolbarItem Text="+" Activated="Measure_Activated" />
+        <ToolbarItem Text="-" Activated="Remove_Activated" />
+    </ContentPage.ToolbarItems>
     <ContentPage.Content>
         <StackLayout Margin="10,10,10,0">
             <Entry x:Name="nameEntry" Placeholder="User Name"/>
