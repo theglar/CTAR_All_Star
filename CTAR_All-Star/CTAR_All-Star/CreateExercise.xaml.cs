@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CTAR_All_Star.Models;
 using CTAR_All_Star.Views;
 
 using Xamarin.Forms;
@@ -12,25 +11,12 @@ using Xamarin.Forms.Xaml;
 namespace CTAR_All_Star
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class HistoryPage : ContentPage
+	public partial class CreateExercise : ContentPage
 	{
-		public HistoryPage()
+		public CreateExercise ()
 		{
 			InitializeComponent ();
 		}
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-
-            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
-            {
-                conn.CreateTable<Measurement>();
-
-                var measurements = conn.Table<Measurement>().ToList();
-                measurementsView.ItemsSource = measurements;
-            }
-        }
         private void Signin_Activated(object sender, EventArgs e)
         {
             Navigation.PushAsync(new SigninPage());
@@ -54,6 +40,18 @@ namespace CTAR_All_Star
         private void Remove_Activated(object sender, EventArgs e)
         {
             Navigation.PushAsync(new RemovePage());
+        }
+        private void CreateExercise_Activated(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new CreateExercise());
+        }
+        private void ChooseExercise_Activated(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new ManageExercise());
+        }
+        private void Patients_Activated(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new ManagePatients());
         }
     }
 }

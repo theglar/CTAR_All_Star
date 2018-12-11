@@ -1,6 +1,7 @@
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using CTAR_All_Star.Views;
 
 [assembly: XamlCompilation (XamlCompilationOptions.Compile)]
 namespace CTAR_All_Star
