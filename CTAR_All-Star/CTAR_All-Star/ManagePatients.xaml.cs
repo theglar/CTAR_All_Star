@@ -11,13 +11,12 @@ using Xamarin.Forms.Xaml;
 namespace CTAR_All_Star
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class SetupPage : ContentPage
+	public partial class ManagePatients : ContentPage
 	{
-		public SetupPage ()
+		public ManagePatients ()
 		{
 			InitializeComponent ();
 		}
-
         private void Signin_Activated(object sender, EventArgs e)
         {
             Navigation.PushAsync(new SigninPage());

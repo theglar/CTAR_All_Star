@@ -3,21 +3,20 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using CTAR_All_Star.Views;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using CTAR_All_Star.Views;
 
 namespace CTAR_All_Star
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class SetupPage : ContentPage
+	public partial class ManageExercise : ContentPage
 	{
-		public SetupPage ()
+		public ManageExercise ()
 		{
 			InitializeComponent ();
 		}
-
         private void Signin_Activated(object sender, EventArgs e)
         {
             Navigation.PushAsync(new SigninPage());
