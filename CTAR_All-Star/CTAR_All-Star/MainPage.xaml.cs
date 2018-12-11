@@ -31,17 +31,19 @@ namespace CTAR_All_Star
             lv.ItemsSource = deviceList;
             ble.StateChanged += (s, e) =>
             {
-                DisplayAlert("Notice", $"Bluetooth: {e.NewState}", "OK");
+                if (ble.IsOn)
+                {
+                    DisplayAlert("Notice", $"Bluetooth: {e.NewState}", "OK");
+                }
+                //if (!ble.IsOn)
+                //{
+                //    DisplayAlert("Notice", $"Bluetooth: {e.NewState}", "OK");
+                //}
             };
             adapter.ScanTimeoutElapsed += (s, e) =>
             {
                 DisplayAlert("Notice", "timeout elapsed", "OK");
                 btnConnectBluetooth.Text = "Tap to scan for devices";
-            };
-            adapter.DeviceConnected += (s, a) =>
-            {
-                btnConnectBluetooth.Text = "Tap to scan for devices";
-                DisplayAlert("Notice", "Connected!", "OK");
             };
             adapter.DeviceDiscovered += (s, a) =>
             {
@@ -76,6 +78,11 @@ namespace CTAR_All_Star
 
         private async void lv_ItemSelected(object sender, EventArgs e)
         {
+            adapter.DeviceConnected += (s, a) =>
+            {
+                DisplayAlert("Notice", "Connected!", "OK");
+                btnConnectBluetooth.Text = "Tap to scan for devices";
+            };
             if (lv.SelectedItem == null)
             {
                 await DisplayAlert("Notice", "No Device selected", "OK");
@@ -84,35 +91,46 @@ namespace CTAR_All_Star
             else
             {
                 selectedDevice = lv.SelectedItem as IDevice;
-                try
-                {
-                    await adapter.ConnectToDeviceAsync(selectedDevice);
-                }
-                catch (DeviceConnectionException ex)
-                {
-                    await DisplayAlert("Notice", "Error connecting to device!", "OK");
-                }
-                catch (ArgumentNullException ex)
-                {
-                    await DisplayAlert("Notice", "Selected device is null!", "OK");
-                }
-                catch (Exception ex)
-                {
-                    await DisplayAlert("Notice", "Unknown exception!", "OK");
-                }
+                //try
+                //{
+                    await DisplayAlert("Notice", "Connected!", "OK");
+                    btnConnectBluetooth.Text = "Tap to scan for devices";
+                    deviceList.Clear();
+                    await adapter.StopScanningForDevicesAsync();
+                //await adapter.ConnectToDeviceAsync(selectedDevice);
+                //}
+                //catch (DeviceConnectionException ex)
+                //{
+                //    await DisplayAlert("Notice", "Error connecting to device!", "OK");
+                //}
+                //catch (ArgumentNullException ex)
+                //{
+                //    await DisplayAlert("Notice", "Selected device is null!", "OK");
+                //}
+                //catch (exception ex)
+                //{
+                //    await displayalert("notice", "unknown exception!", "ok");
+                //}
             }
         }
 
-        private async void OnButtonClicked(object sender, EventArgs args)
+        private async void OnScanClicked(object sender, EventArgs args)
         {
             //Button button = (Button)sender;
             deviceList.Clear();
 
             if (!ble.Adapter.IsScanning)
             {
-                btnConnectBluetooth.Text = "Scanning... tap to stop";
-                adapter.ScanTimeout = 30000;
-                await adapter.StartScanningForDevicesAsync();
+                if(ble.IsOn)
+                {
+                    btnConnectBluetooth.Text = "Scanning... tap to stop";
+                    adapter.ScanTimeout = 30000;
+                    await adapter.StartScanningForDevicesAsync();
+                }
+                else
+                {
+                    await DisplayAlert("Notice", "Bluetooth is turned off. Please turn it on!", "OK");
+                }
             }
             else
             {
