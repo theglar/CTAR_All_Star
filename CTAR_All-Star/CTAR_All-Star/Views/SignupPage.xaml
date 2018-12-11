@@ -13,9 +13,9 @@
             <ActivityIndicator x:Name="ActivitySpinner" Color="Red" IsRunning="true" />
             
             <Label x:Name="Lbl_EMR" Text="EMR Number" Margin="0, 200, 0, 0"/>
-            <Entry x:Name="Entry_EMR" Placeholder="12345..." Text=""/>
+            <Entry x:Name="Entry_EMR" Placeholder="EMR #" Text=""/>
             <Label x:Name="Lbl_DocID" Text="Physician ID" />
-            <Entry x:Name="Entry_DocID" Placeholder="12345..." Text="" />
+            <Entry x:Name="Entry_DocID" Placeholder="Physician ID" Text="" />
             <Label x:Name="Lbl_NewPassword" Text="Password" />
             <Entry x:Name="Entry_NewPassword" Placeholder="Password" Text=""/>
             <Label x:Name="Lbl_ConfirmPass" Text="Confirm Password" />
