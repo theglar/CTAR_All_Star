@@ -1,8 +1,7 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CTAR_All_Star.CreateExercise">
-    
     <ContentPage.ToolbarItems>
         <ToolbarItem Text="Login" Activated="Signin_Activated"/>
         <ToolbarItem Text="Create Exercise" Activated="CreateExercise_Activated"/>
@@ -16,10 +15,42 @@
     </ContentPage.ToolbarItems>
     
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Create your patient's exercise plan here."
-                VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+          <StackLayout x:Name="WorkoutEntriesStack" VerticalOptions="StartAndExpand">
+            <StackLayout.Padding>
+                <OnIdiom x:TypeArguments="Thickness">
+                    <OnIdiom.Phone>40, 0, 40, 80</OnIdiom.Phone>
+                    <OnIdiom.Tablet>140, 150, 140, 0</OnIdiom.Tablet>
+                </OnIdiom>
+            </StackLayout.Padding>
+            
+              <Picker x:Name="UserID" Title="Patient ID" Margin="0, 200, 0, 0">
+          <Picker.ItemsSource>
+            <x:Array Type="{x:Type x:String}">
+              <x:String>3141592653</x:String>
+              <x:String>1891928345</x:String>
+              <x:String>9281638361</x:String>
+              <x:String>0981263768</x:String>
+              <x:String>1127347922</x:String>
+                        
+            </x:Array>
+          </Picker.ItemsSource>
+        </Picker>
+               <Picker x:Name="Exercise" Title="Type" Margin="0, 25, 0, 0">
+          <Picker.ItemsSource>
+            <x:Array Type="{x:Type x:String}">
+              <x:String>Isometric</x:String>
+              <x:String>Isotonic</x:String>                      
+            </x:Array>
+          </Picker.ItemsSource>
+        </Picker>
+            
+             <Label x:Name="Lbl_NumReps" Text="Number of Repitions"/>
+            <Entry x:Name="Entry_NumReps" Placeholder="# Repitions" Text=""/>
+            <Label x:Name="Lbl_NumSets" Text="Number of Sets" />
+            <Entry x:Name="Entry_NumSets" Placeholder="# Sets" Text=""/>
+            <Label x:Name="Lbl_Threshold" Text="Threshold" />
+            <Entry x:Name="Entry_Threshold" Placeholder="%" Text=""/>
+            <Button x:Name="Btn_CreateAccount" Text="Save Workout" Clicked="SaveWorkoutProcedure" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
