@@ -17,14 +17,13 @@ namespace CTAR_All_Star.Views
         void Init()
         {
             BackgroundColor = Constants.BackgroundColor;
-            Lbl_DocID.TextColor = Constants.MainTextColor;
-            Lbl_EMR.TextColor = Constants.MainTextColor;
+            Lbl_newUser.TextColor = Constants.MainTextColor;
             Lbl_NewPassword.TextColor = Constants.MainTextColor;
             Lbl_ConfirmPass.TextColor = Constants.MainTextColor;
             ActivitySpinner.IsVisible = false;
 
-            Entry_DocID.Completed += (s, e) => Entry_NewPassword.Focus();
-            Entry_EMR.Completed += (s, e) => Entry_NewPassword.Focus();
+          
+            Entry_NewUser.Completed += (s, e) => Entry_NewPassword.Focus();
             Entry_NewPassword.Completed += (s, e) => Entry_ConfirmPass.Focus();
             Entry_ConfirmPass.Completed += (s, e) => SignUpProcedure(s, e);
         }
@@ -32,7 +31,7 @@ namespace CTAR_All_Star.Views
 
         void SignUpProcedure(object sender, EventArgs e)
         {
-            User user = new User(Entry_EMR.Text, Entry_NewPassword.Text);
+            User user = new User(Entry_NewUser.Text, Entry_NewPassword.Text);
             if (user.CheckInformation())
             {
                 DisplayAlert("Account Created", "You've successfully  created an account.", "Ok");

@@ -12,10 +12,18 @@
             
             <ActivityIndicator x:Name="ActivitySpinner" Color="Red" IsRunning="true" />
             
-            <Label x:Name="Lbl_EMR" Text="EMR Number" Margin="0, 200, 0, 0"/>
-            <Entry x:Name="Entry_EMR" Placeholder="EMR #" Text=""/>
-            <Label x:Name="Lbl_DocID" Text="Physician ID" />
-            <Entry x:Name="Entry_DocID" Placeholder="Physician ID" Text="" />
+            <Picker x:Name="picker" Title="Select Role" Margin="0, 300, 0, 0">
+          <Picker.ItemsSource>
+            <x:Array Type="{x:Type x:String}">
+              <x:String>Patient</x:String>
+              <x:String>Doctor</x:String>
+              <x:String>Not sure</x:String>
+            </x:Array>
+          </Picker.ItemsSource>
+        </Picker>
+            <Label Text="{Binding Source={x:Reference picker}, Path=SelectedItem}" />
+            <Label x:Name="Lbl_newUser" Text="User ID" Margin="0, 0, 0, 0"/>
+            <Entry x:Name="Entry_NewUser" Placeholder="User ID" Text=""/>
             <Label x:Name="Lbl_NewPassword" Text="Password" />
             <Entry x:Name="Entry_NewPassword" Placeholder="Password" Text=""/>
             <Label x:Name="Lbl_ConfirmPass" Text="Confirm Password" />

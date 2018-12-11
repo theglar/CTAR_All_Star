@@ -36,6 +36,7 @@ namespace CTAR_All_Star.Views
             if (user.CheckInformation())
             {
                 DisplayAlert("Login Success","You've successfully logged in.","Ok");
+                Navigation.PushAsync(new MainPage());
             }
 
             else 
@@ -48,6 +49,8 @@ namespace CTAR_All_Star.Views
         {
             Navigation.PushAsync(new SignupPage());
         }
+
+        
     }
 }
 
