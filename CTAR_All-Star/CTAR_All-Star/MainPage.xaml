@@ -28,7 +28,7 @@
             HorizontalOptions="Center"
             VerticalOptions="CenterAndExpand" />
         <Button x:Name="btnPermissions" x:FieldModifier="private" Text="Grant Permissions First" Clicked="GetPermissions"/>
-        <Button x:Name="btnConnectBluetooth" x:FieldModifier="private" Text="Tap to scan for devices" Clicked="OnButtonClicked"/>
+        <Button x:Name="btnConnectBluetooth" x:FieldModifier="private" Text="Tap to scan for devices" Clicked="OnScanClicked"/>
         <ListView x:Name="lv" ItemSelected="lv_ItemSelected" BackgroundColor="Beige">
             <ListView.ItemTemplate>
                 <DataTemplate>
