@@ -19,7 +19,6 @@
             </x:Array>
           </Picker.ItemsSource>
         </Picker>
-            <Label Text="{Binding Source={x:Reference picker}, Path=SelectedItem}" />
             <Label x:Name="Lbl_newUser" Text="User ID" Margin="0, 0, 0, 0"/>
             <Entry x:Name="Entry_NewUser" Placeholder="User ID" Text=""/>
             <Label x:Name="Lbl_NewPassword" Text="Password" />
