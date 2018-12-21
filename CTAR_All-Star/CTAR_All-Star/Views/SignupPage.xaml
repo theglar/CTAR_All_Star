@@ -22,9 +22,9 @@
             <Label x:Name="Lbl_newUser" Text="User ID" Margin="0, 0, 0, 0"/>
             <Entry x:Name="Entry_NewUser" Placeholder="User ID" Text="" BackgroundColor="White"/>
             <Label x:Name="Lbl_NewPassword" Text="Password" />
-            <Entry x:Name="Entry_NewPassword" Placeholder="Password" Text="" BackgroundColor="White"/>
+            <Entry x:Name="Entry_NewPassword" Placeholder="Password" Text="" BackgroundColor="White" IsPassword="True"/>
             <Label x:Name="Lbl_ConfirmPass" Text="Confirm Password" />
-            <Entry x:Name="Entry_ConfirmPass" Placeholder="Password" Text="" BackgroundColor="White"/>
+            <Entry x:Name="Entry_ConfirmPass" Placeholder="Password" Text="" BackgroundColor="White" IsPassword="True"/>
             <Button x:Name="Btn_CreateAccount" Text="Create Account" Clicked="SignUpProcedure" />
         </StackLayout>
         
