@@ -33,11 +33,16 @@ namespace CTAR_All_Star.Navigation
             {
                 MenuItems = new ObservableCollection<HomePageMenuItem>(new[]
                 {
-                    new HomePageMenuItem { Id = 0, Title = "Page 1" },
-                    new HomePageMenuItem { Id = 1, Title = "Page 2" },
-                    new HomePageMenuItem { Id = 2, Title = "Page 3" },
-                    new HomePageMenuItem { Id = 3, Title = "Page 4" },
-                    new HomePageMenuItem { Id = 4, Title = "Page 5" },
+                    new HomePageMenuItem { Id = 0, Title = "Home"},
+                    new HomePageMenuItem { Id = 1, Title = "Login" },
+                    new HomePageMenuItem { Id = 2, Title = "Create Exercise" },
+                    new HomePageMenuItem { Id = 3, Title = "Choose Exercise" },
+                    new HomePageMenuItem { Id = 4, Title = "Manage Patients" },
+                    new HomePageMenuItem { Id = 4, Title = "History" },
+                    new HomePageMenuItem { Id = 4, Title = "Graph" },
+                    new HomePageMenuItem { Id = 4, Title = "Settings" },
+                    new HomePageMenuItem { Id = 4, Title = "Add Measurment" },
+                    new HomePageMenuItem { Id = 4, Title = "Clear Database" },
                 });
             }
             
