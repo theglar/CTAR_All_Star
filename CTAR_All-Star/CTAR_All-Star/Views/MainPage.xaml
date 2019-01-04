@@ -5,19 +5,6 @@
              x:Class="CTAR_All_Star.MainPage"
              xmlns:vm="clr-namespace:CTAR_All_Star.ViewModels">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Home" Activated="Home_Activated"/>
-        <ToolbarItem Text="Login" Activated="Signin_Activated"/>
-        <ToolbarItem Text="Create Exercise" Activated="CreateExercise_Activated"/>
-        <ToolbarItem Text="Choose Exercise" Activated="ChooseExercise_Activated"/>
-        <ToolbarItem Text="Manage Patients" Activated="Patients_Activated"/>
-        <ToolbarItem Text="History" Activated="History_Activated"/>
-        <ToolbarItem Text="Graph" Activated="Graph_Activated"/>
-        <ToolbarItem Text="Setup" Activated="Setup_Activated"/>
-        <ToolbarItem Text="+" Activated="Measure_Activated" />
-        <ToolbarItem Text="-" Activated="Remove_Activated" />
-    </ContentPage.ToolbarItems>
-    
     <ContentPage.BindingContext>
         <vm:MainViewModel></vm:MainViewModel>
     </ContentPage.BindingContext>

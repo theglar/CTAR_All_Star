@@ -4,6 +4,6 @@
              x:Class="CTAR_All_Star.Navigation.HomePageDetail"
              Title="Menu" Icon="icon_hamburger.png">
   <StackLayout Padding="10">
-    <Label Text="This is a detail page. To get the 'triple' line icon on each platform add a icon to each platform and update the 'Master' page with an Icon that references it."/>
+    <Label Text="Welcome to the CTAR All-Star Application!"/>
   </StackLayout>
 </ContentPage>
