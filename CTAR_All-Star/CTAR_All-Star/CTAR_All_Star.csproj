@@ -19,12 +19,16 @@
 
   <ItemGroup>
     <Compile Remove="Views\MyPage.xaml.cs" />
+    <Compile Remove="Models\EmptyClass.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="History.xaml.cs">
+    <Compile Update="Views\History.xaml.cs">
       <DependentUpon>History.xaml</DependentUpon>
     </Compile>
-    <Compile Update="RemovePage.xaml.cs">
+    <Compile Update="Navigation\HomePageMenuItem.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\RemovePage.xaml.cs">
       <DependentUpon>RemovePage.xaml</DependentUpon>
     </Compile>
   </ItemGroup>
@@ -33,33 +37,41 @@
     <EmbeddedResource Remove="Views\MyPage.xaml" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Update="CreateExercise.xaml">
+    <EmbeddedResource Update="Views\CreateExercise.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="History.xaml">
+    <EmbeddedResource Update="Views\History.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="ConnectDevicePage.xaml">
+    <EmbeddedResource Update="Views\ConnectDevicePage.xaml">
       <Generator>MSBuild:Compile</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="CreatePage.xaml">
+    <EmbeddedResource Update="Views\CreatePage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="GraphPage.xaml">
+    <EmbeddedResource Update="Views\GraphPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="ManageExercise.xaml">
+    <EmbeddedResource Update="Views\ManageExercise.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="ManagePatients.xaml">
+    <EmbeddedResource Update="Views\ManagePatients.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="SetupPage.xaml">
+    <EmbeddedResource Update="Navigation\HomePage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Navigation\HomePageDetail.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Navigation\HomePageMaster.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\SetupPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Data\" />
-    <Folder Include="Views\" />
   </ItemGroup>
 </Project>

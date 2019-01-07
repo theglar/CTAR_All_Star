@@ -2,11 +2,9 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="CTAR_All_Star.Views.SignupPage">
     <ContentPage.Content>
         
-        <StackLayout x:Name="LoginEntriesStack" VerticalOptions="StartAndExpand">
+        <StackLayout x:Name="LoginEntriesStack" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Margin="100, 0, 100, 200">
             <StackLayout.Padding>
                 <OnIdiom x:TypeArguments="Thickness">
-                    <OnIdiom.Phone>40, 0, 40, 80</OnIdiom.Phone>
-                    <OnIdiom.Tablet>140, 150, 140, 0</OnIdiom.Tablet>
                 </OnIdiom>
             </StackLayout.Padding>
             
@@ -21,13 +19,12 @@
             </x:Array>
           </Picker.ItemsSource>
         </Picker>
-            <Label Text="{Binding Source={x:Reference picker}, Path=SelectedItem}" />
             <Label x:Name="Lbl_newUser" Text="User ID" Margin="0, 0, 0, 0"/>
-            <Entry x:Name="Entry_NewUser" Placeholder="User ID" Text=""/>
+            <Entry x:Name="Entry_NewUser" Placeholder="User ID" Text="" BackgroundColor="White"/>
             <Label x:Name="Lbl_NewPassword" Text="Password" />
-            <Entry x:Name="Entry_NewPassword" Placeholder="Password" Text=""/>
+            <Entry x:Name="Entry_NewPassword" Placeholder="Password" Text="" BackgroundColor="White" IsPassword="True"/>
             <Label x:Name="Lbl_ConfirmPass" Text="Confirm Password" />
-            <Entry x:Name="Entry_ConfirmPass" Placeholder="Password" Text=""/>
+            <Entry x:Name="Entry_ConfirmPass" Placeholder="Password" Text="" BackgroundColor="White" IsPassword="True"/>
             <Button x:Name="Btn_CreateAccount" Text="Create Account" Clicked="SignUpProcedure" />
         </StackLayout>
         

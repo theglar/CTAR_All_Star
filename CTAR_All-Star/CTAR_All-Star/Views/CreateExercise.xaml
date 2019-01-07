@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CTAR_All_Star.CreateExercise">
+        
+    <ContentPage.Content>
+          <StackLayout x:Name="WorkoutEntriesStack" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="100, 0, 100, 100">
+            
+            
+              <Picker x:Name="UserID" Title="Patient ID" Margin="0, 200, 0, 0">
+          <Picker.ItemsSource>
+            <x:Array Type="{x:Type x:String}">
+              <x:String>3141592653</x:String>
+              <x:String>1891928345</x:String>
+              <x:String>9281638361</x:String>
+              <x:String>0981263768</x:String>
+              <x:String>1127347922</x:String>
+                        
+            </x:Array>
+          </Picker.ItemsSource>
+            </Picker>
+               <Picker x:Name="Exercise" Title="Type" Margin="0, 25, 0, 0">
+          <Picker.ItemsSource>
+            <x:Array Type="{x:Type x:String}">
+              <x:String>Isometric</x:String>
+              <x:String>Isotonic</x:String>                      
+            </x:Array>
+          </Picker.ItemsSource>
+        </Picker>
+            
+             <Label x:Name="Lbl_NumReps" Text="Number of Repetitions"/>
+            <Entry x:Name="Entry_NumReps" Placeholder="# Repetitions" Text="" BackgroundColor="White"/>
+            <Label x:Name="Lbl_NumSets" Text="Number of Sets" />
+            <Entry x:Name="Entry_NumSets" Placeholder="# Sets" Text="" BackgroundColor="White"/>
+            <Label x:Name="Lbl_Threshold" Text="Threshold" />
+            <Entry x:Name="Entry_Threshold" Placeholder="%" Text="" BackgroundColor="White"/>
+            <Button x:Name="Btn_CreateAccount" Text="Save Workout" Clicked="SaveWorkoutProcedure" />
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

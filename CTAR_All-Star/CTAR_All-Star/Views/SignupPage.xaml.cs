@@ -21,8 +21,8 @@ namespace CTAR_All_Star.Views
             Lbl_NewPassword.TextColor = Constants.MainTextColor;
             Lbl_ConfirmPass.TextColor = Constants.MainTextColor;
             ActivitySpinner.IsVisible = false;
+            picker.BackgroundColor = Constants.MainTextColor;
 
-          
             Entry_NewUser.Completed += (s, e) => Entry_NewPassword.Focus();
             Entry_NewPassword.Completed += (s, e) => Entry_ConfirmPass.Focus();
             Entry_ConfirmPass.Completed += (s, e) => SignUpProcedure(s, e);

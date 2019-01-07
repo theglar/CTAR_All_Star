@@ -138,48 +138,13 @@ namespace CTAR_All_Star
             }
         }
 
-        private void Signin_Activated(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new SigninPage());
-        }
-        private void History_Activated(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new HistoryPage());
-        }
-        private void Graph_Activated(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new GraphPage());
-        }
-        private void Setup_Activated(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new SetupPage());
-        }
-        private void Measure_Activated(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new CreatePage());
-        }
-        private void Remove_Activated(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new RemovePage());
-        }
-        private void CreateExercise_Activated(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new CreateExercise());
-        }
-        private void ChooseExercise_Activated(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new ManageExercise());
-        }
-        private void Patients_Activated(object sender, EventArgs e)
-        {
-            Navigation.PushAsync(new ManagePatients());
         }
 
 
         //Needs work - I used online code that didn't work but pretty sure this will be usable when integrating the permissions plugin
         private async void GetPermissions(object sender, global::System.EventArgs e)
         {
-            var myAction = await DisplayAlert("Permissions Required", "Please allow CTAR All-Star to access your location", "OK", "CANCEL");
+            var myAction = await DisplayAlert("Permissions Required", "This will eventually setup location permissions through our app.", "OK", "CANCEL");
             if (myAction)
             {
                 if (Device.RuntimePlatform == global::Xamarin.Forms.Device.Android)
