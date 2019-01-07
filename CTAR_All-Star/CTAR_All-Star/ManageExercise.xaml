@@ -20,6 +20,24 @@
             <Label Text="Choose your exercise here."
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand" />
+            <ListView x:Name="lv" ItemsSource="exerciseList" ItemSelected="lv_ExerciseSelected" BackgroundColor="White">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="0, 5" Orientation="Horizontal">
+                                <StackLayout VerticalOptions="Center" Spacing="0">
+                                    <Label Text="Exercise 1" />
+                                    <Label Text="Due: 12/13/18" />
+                                </StackLayout>
+                                <StackLayout VerticalOptions="Center" Spacing="0">
+                                    <Label Text="Exercise 1" />
+                                    <Label Text="Due: 12/13/18" />
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

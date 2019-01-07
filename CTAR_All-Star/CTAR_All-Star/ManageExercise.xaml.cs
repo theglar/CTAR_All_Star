@@ -7,16 +7,31 @@ using System.Threading.Tasks;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using CTAR_All_Star.Views;
+using System.Collections.ObjectModel;
 
 namespace CTAR_All_Star
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ManageExercise : ContentPage
 	{
-		public ManageExercise ()
+        //private ObservableCollection<string> exerciseList = new ObservableCollection<string>();
+        StackLayout availableExercises = new StackLayout();
+
+        public ManageExercise ()
 		{
 			InitializeComponent ();
+            //exerciseList = new ObservableCollection<string>();
+            //for (int i = 0; i < 3; i++)
+            //{
+            //    exerciseList.Add($"Exercise: {i}");
+            //}
 		}
+
+        private void lv_ExerciseSelected(object sender, EventArgs e)
+        {
+            Navigation.PushAsync(new GraphPage());
+        }
+
         private void Signin_Activated(object sender, EventArgs e)
         {
             Navigation.PushAsync(new SigninPage());
