@@ -20,7 +20,13 @@ namespace CTAR_All_Star
     {        
         public GraphPage()
         {
-            InitializeComponent();            
+            InitializeComponent();
+        //    chart.Series.Add(new LineSeries()
+        //    {
+        //        ItemsSource = ViewModel.Data,
+        //        XBindingPath = "DisplayTime",
+        //        YBindingPath = "Pressure"
+        //    });
         }
        
         private void Start_Simulation(object sender, EventArgs e)
@@ -59,7 +65,7 @@ namespace CTAR_All_Star
                 //Thread.Sleep(250);
 
                 //Refresh page
-                Navigation.PushAsync(new GraphPage());
+                //Navigation.PushAsync(new GraphPage());
             }
         }        
     }

@@ -39,7 +39,13 @@
 
             <chart:SfChart.SecondaryAxis>
 
-                <chart:NumericalAxis>
+                <chart:NumericalAxis Maximum="1" Minimum="-1">
+
+                    <chart:NumericalAxis.StripLines>
+
+                        <chart:NumericalStripLine Start="0.3" Width ="0.05" Text="Goal" FillColor="#00FA9A"/>
+
+                    </chart:NumericalAxis.StripLines>
 
                     <chart:NumericalAxis.Title>
 
@@ -59,9 +65,6 @@
                         <chart:ChartColorModel Palette="Natural"/>
 
                     </chart:LineSeries.ColorModel>
-                    <!--<chart:LineSeries.DataMarker>
-                        <chart:ChartDataMarker/>
-                    </chart:LineSeries.DataMarker>-->
                 </chart:LineSeries>
 
 

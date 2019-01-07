@@ -23,7 +23,7 @@ namespace CTAR_All_Star
             
             using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
             {
-                conn.DropTable<Measurement>();
+                conn.DeleteAll<Measurement>();
                 
                 DisplayAlert("Success", "Table has been cleared!", "Dismiss");
                 
