@@ -10,13 +10,12 @@ using Xamarin.Forms;
 using CTAR_All_Star.Views;
 using CTAR_All_Star.Models;
 using Plugin.BLE.Abstractions.Exceptions;
+using System.Diagnostics;
+using Xamarin.Forms.PlatformConfiguration;
 
 
 namespace CTAR_All_Star
 {
-    using System.Diagnostics;
-    using Xamarin.Forms.PlatformConfiguration;
-
     public partial class MainPage : ContentPage
     {
         IBluetoothLE ble;
@@ -136,8 +135,6 @@ namespace CTAR_All_Star
                     adapter.StopScanningForDevicesAsync();
                 });
             }
-        }
-
         }
 
 
