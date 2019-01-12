@@ -29,7 +29,7 @@ namespace CTAR_All_Star
         //    });
         }
        
-        private void Start_Simulation(object sender, EventArgs e)
+        private void Start_Exercise(object sender, EventArgs e)
         {           
             // Initialize a starting point
             Double pressure = 0;
@@ -67,6 +67,14 @@ namespace CTAR_All_Star
                 //Refresh page
                 //Navigation.PushAsync(new GraphPage());
             }
-        }        
+        }
+        private void Stop_Exercise(object sender, EventArgs e)
+        {
+            DisplayAlert("Stop", "You have stopped the exercise.", "Dismiss");
+        }
+        private void Save_Exercise(object sender, EventArgs e)
+        {
+            DisplayAlert("Save", "You have saved the exercise.", "Dismiss");
+        }
     }
 }

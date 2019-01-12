@@ -71,8 +71,12 @@
             </chart:SfChart.Series>
 
         </chart:SfChart>
-        <Button Text="Start Simulation"
-                Clicked="Start_Simulation"></Button>
+        <Button Text="Start"
+                Clicked="Start_Exercise" BackgroundColor="LightSlateGray" HorizontalOptions="CenterAndExpand"></Button>
+        <Button Text="Stop"
+                Clicked="Stop_Exercise" BackgroundColor="LightCoral" HorizontalOptions="CenterAndExpand"></Button>
+        <Button Text="Save Session"
+                Clicked="Save_Exercise" BackgroundColor="LightSeaGreen" HorizontalOptions="CenterAndExpand"></Button>
     </StackLayout>   
     
 </ContentPage>
