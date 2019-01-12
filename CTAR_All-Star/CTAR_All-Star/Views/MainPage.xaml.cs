@@ -12,7 +12,8 @@ using CTAR_All_Star.Models;
 using Plugin.BLE.Abstractions.Exceptions;
 using System.Diagnostics;
 using Xamarin.Forms.PlatformConfiguration;
-
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 
 namespace CTAR_All_Star
 {
@@ -141,6 +142,8 @@ namespace CTAR_All_Star
         //Needs work - I used online code that didn't work but pretty sure this will be usable when integrating the permissions plugin
         private async void GetPermissions(object sender, global::System.EventArgs e)
         {
+            
+
             var myAction = await DisplayAlert("Permissions Required", "This will eventually setup location permissions through our app.", "OK", "CANCEL");
             if (myAction)
             {
@@ -151,6 +154,25 @@ namespace CTAR_All_Star
                     //global::Xamarin.Forms.DependencyService.Get<global::CTAR_All_Star.PermissionsInterface>().OpenSettings();
 
                     btnPermissions.IsVisible = false;
+                    var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
+                    if(status != PermissionStatus.Granted)
+                    {
+                        if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Location))
+                        {
+                            await DisplayAlert("Need location", "Gunna need that location", "OK");
+                        }
+                        var results = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Location);
+                        status = results[Permission.Location];
+                        if (status == PermissionStatus.Granted)
+                        {
+                            //var results1 = await CrossGeolocator.Current.GetPositionAsync(TimeSpan.FromSeconds(10));
+                            //LabelGeolocation.Text = "Lat: " + results1.Latitude + " Long: " + results1.Longitude;
+                        }
+                        else if (status != PermissionStatus.Unknown)
+                        {
+                            await DisplayAlert("Location Denied", "Can not continue, try again.", "OK");
+                        }
+                    }
                 }
                 else
                 {
