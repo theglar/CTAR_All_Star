@@ -21,8 +21,10 @@ namespace CTAR_All_Star.Droid
     [Activity(Label = "CTAR All-Star", Icon = "@mipmap/icon", Theme = "@style/MainTheme", MainLauncher = true, ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
     public class MainActivity : global::Xamarin.Forms.Platform.Android.FormsAppCompatActivity
     {
-        protected override void OnCreate(Bundle bundle)
+        protected override async void OnCreate(Bundle bundle)
         {
+            await TryToGetPermissions();
+
             TabLayoutResource = Resource.Layout.Tabbar;
             ToolbarResource = Resource.Layout.Toolbar;
 
@@ -96,13 +98,32 @@ namespace CTAR_All_Star.Droid
             }
         }
 
+        RequestPermissions(PermissionsGroupLocation, RequestLocationId);
+
+
         //https://www.youtube.com/watch?v=Uzpy3qdYXmE
 
-        public override void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
+        public override async void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
-            PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-            base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            //PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+            //base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
+
+            switch (requestCode)
+            {
+                case RequestLocationId:
+                    if(grantResults[0] == (int)Android.Content.PM.Permission.Granted)
+                    {
+                        Toast.MakeText(this, "Permission Granted", ToastLength.Short).Show();
+                    }
+                    else
+                    {
+                        //Permission denied
+                        Toast.MakeText(this, "Permission Denied", ToastLength.Short).Show();
+                    }
+            }
+            break;
         }
+        //base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }
 
