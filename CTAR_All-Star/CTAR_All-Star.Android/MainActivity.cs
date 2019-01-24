@@ -36,19 +36,9 @@ namespace CTAR_All_Star.Droid
 
             global::Xamarin.Forms.Forms.Init(this, bundle);
             LoadApplication(new App(full_path));
-
-           
-
-            //if (ContextCompat.CheckSelfPermission(this, Manifest.Permission.AccessCoarseLocation) == (int)Permission.Granted
-            //    && ContextCompat.CheckSelfPermission(this, Manifest.Permission.AccessFineLocation) == (int)Permission.Granted)
-            //{
-            //    // We have permission, go ahead and use the location.
-            //}
-            //else
-            //{
-            //    // Location permission is not granted. If necessary display rationale & request.
-            //}
         }
+
+        // Permissions code below is from https://www.youtube.com/watch?v=Uzpy3qdYXmE
 
         async Task TryToGetPermissions()
         {
@@ -58,13 +48,12 @@ namespace CTAR_All_Star.Droid
                 return;
             }
         }
-
         const int RequestLocationId = 0;
 
         readonly string[] PermissionsGroupLocation =
         {
             Manifest.Permission.AccessCoarseLocation,
-            Manifest.Permission.AccessFineLocation
+            Manifest.Permission.AccessFineLocation,
         };
 
         async Task GetPermissionsAsync()
@@ -96,18 +85,12 @@ namespace CTAR_All_Star.Droid
 
                 return;
             }
+            RequestPermissions(PermissionsGroupLocation, RequestLocationId);
         }
-
-        RequestPermissions(PermissionsGroupLocation, RequestLocationId);
-
-
-        //https://www.youtube.com/watch?v=Uzpy3qdYXmE
+                
 
         public override async void OnRequestPermissionsResult(int requestCode, string[] permissions, [GeneratedEnum] Android.Content.PM.Permission[] grantResults)
         {
-            //PermissionsImplementation.Current.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-            //base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
-
             switch (requestCode)
             {
                 case RequestLocationId:
@@ -117,13 +100,11 @@ namespace CTAR_All_Star.Droid
                     }
                     else
                     {
-                        //Permission denied
                         Toast.MakeText(this, "Permission Denied", ToastLength.Short).Show();
                     }
-            }
-            break;
+                    break;
+            }            
         }
-        //base.OnRequestPermissionsResult(requestCode, permissions, grantResults);
     }
 }
 

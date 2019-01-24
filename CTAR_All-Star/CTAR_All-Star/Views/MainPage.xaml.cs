@@ -136,49 +136,6 @@ namespace CTAR_All_Star
                     adapter.StopScanningForDevicesAsync();
                 });
             }
-        }
-
-
-        //Needs work - I used online code that didn't work but pretty sure this will be usable when integrating the permissions plugin
-        private async void GetPermissions(object sender, global::System.EventArgs e)
-        {
-            
-
-            var myAction = await DisplayAlert("Permissions Required", "This will eventually setup location permissions through our app.", "OK", "CANCEL");
-            if (myAction)
-            {
-                if (Device.RuntimePlatform == global::Xamarin.Forms.Device.Android)
-                {
-
-                    //DependencyService.Get<ISettingsService>().OpenSettings();
-                    //global::Xamarin.Forms.DependencyService.Get<global::CTAR_All_Star.PermissionsInterface>().OpenSettings();
-
-                    btnPermissions.IsVisible = false;
-                    var status = await CrossPermissions.Current.CheckPermissionStatusAsync(Permission.Location);
-                    if(status != PermissionStatus.Granted)
-                    {
-                        if (await CrossPermissions.Current.ShouldShowRequestPermissionRationaleAsync(Permission.Location))
-                        {
-                            await DisplayAlert("Need location", "Gunna need that location", "OK");
-                        }
-                        var results = await CrossPermissions.Current.RequestPermissionsAsync(Permission.Location);
-                        status = results[Permission.Location];
-                        if (status == PermissionStatus.Granted)
-                        {
-                            //var results1 = await CrossGeolocator.Current.GetPositionAsync(TimeSpan.FromSeconds(10));
-                            //LabelGeolocation.Text = "Lat: " + results1.Latitude + " Long: " + results1.Longitude;
-                        }
-                        else if (status != PermissionStatus.Unknown)
-                        {
-                            await DisplayAlert("Location Denied", "Can not continue, try again.", "OK");
-                        }
-                    }
-                }
-                else
-                {
-                    await DisplayAlert("Device", "You are not using an Android device", "YEP");
-                }
-            }
-        }
+        }        
     }
 }
