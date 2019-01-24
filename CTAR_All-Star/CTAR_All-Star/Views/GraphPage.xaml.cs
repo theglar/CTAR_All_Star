@@ -65,7 +65,7 @@ namespace CTAR_All_Star
                 //Thread.Sleep(250);
 
                 //Refresh page
-                Navigation.PushAsync(new GraphPage());
+                //Navigation.PushAsync(new GraphPage());
             }
         }
         private void Stop_Exercise(object sender, EventArgs e)

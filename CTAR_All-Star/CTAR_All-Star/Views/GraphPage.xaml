@@ -59,7 +59,7 @@
 
             <chart:SfChart.Series>
 
-                <chart:LineSeries Label="Pressure" ItemsSource="{Binding Data}" XBindingPath="DisplayTime" YBindingPath="Pressure" EnableTooltip ="True">
+                <chart:LineSeries Label="Pressure" ItemsSource="{Binding Data}" XBindingPath="DisplayTime" YBindingPath="Pressure" EnableTooltip ="True" EnableAnimation="True" AnimationDuration="1">
                     <chart:LineSeries.ColorModel>
 
                         <chart:ChartColorModel Palette="Natural"/>
