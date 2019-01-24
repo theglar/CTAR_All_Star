@@ -21,7 +21,7 @@ namespace CTAR_All_Star.Navigation
         public HomePageMaster()
         {
             InitializeComponent();
-
+            
             BindingContext = new HomePageMasterViewModel();
             ListView = MenuItemsListView;
         }

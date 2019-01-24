@@ -16,6 +16,7 @@ namespace CTAR_All_Star.Navigation
         {
             InitializeComponent();
             MasterPage.ListView.ItemSelected += ListView_ItemSelected;
+            this.MasterBehavior = MasterBehavior.Popover;
         }
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)
