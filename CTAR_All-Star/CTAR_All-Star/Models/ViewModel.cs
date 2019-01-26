@@ -7,6 +7,7 @@ using CTAR_All_Star;
 using SQLite;
 using Xamarin.Forms.Xaml;
 using System.ComponentModel;
+using CTAR_All_Star.Navigation;
 
 namespace CTAR_All_Star.Models
 {

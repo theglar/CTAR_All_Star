@@ -16,7 +16,7 @@ namespace CTAR_All_Star
         {
             InitializeComponent();
 
-            MainPage = new NavigationPage(new HomePage());
+            MainPage = new HomePage();
             
         }
 
@@ -26,7 +26,7 @@ namespace CTAR_All_Star
 
             DB_PATH = DB_Path;
 
-            MainPage = new NavigationPage(new HomePage());
+            MainPage = new HomePage();
             
         }
 

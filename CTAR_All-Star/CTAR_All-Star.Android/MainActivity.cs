@@ -62,7 +62,7 @@ namespace CTAR_All_Star.Droid
 
             if (CheckSelfPermission(permission) == (int)Android.Content.PM.Permission.Granted)
             {
-                Toast.MakeText(this, "Permission Granted", ToastLength.Short).Show();
+                //We already have permissions...done
                 return;
             }
 
@@ -85,6 +85,7 @@ namespace CTAR_All_Star.Droid
 
                 return;
             }
+
             RequestPermissions(PermissionsGroupLocation, RequestLocationId);
         }
                 
