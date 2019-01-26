@@ -1,20 +1,10 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading;
 using SQLite;
 
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
-using Microcharts.Forms;
-using SkiaSharp;
-using Microcharts;
 using CTAR_All_Star.Models;
-using CTAR_All_Star.Views;
-
+using System.Threading;
 using Syncfusion.SfChart.XForms;
-using System.Collections.ObjectModel;
 
 namespace CTAR_All_Star
 {
@@ -25,14 +15,14 @@ namespace CTAR_All_Star
         {            
             InitializeComponent();
         }
-       
+
         private void Start_Exercise(object sender, EventArgs e)
         {           
             // Initialize a starting point
             Double pressure = 0;
 
             //Loop 100 times - REMOVED THE LOOP FOR TESTING
-            for (int i = 0; i < 1; i++)
+            for (int i = 0; i < 100; i++)
             {
                 //Create and add a measurement to the database
                 // Get current date and time
@@ -61,7 +51,7 @@ namespace CTAR_All_Star
                 MessagingCenter.Send<GraphPage>(this, "newMeasurement");                
 
                 //Wait 0.25 seconds
-                //Thread.Sleep(250);
+                Thread.Sleep(250);
 
                 //Refresh page
                 //Navigation.PushAsync(new GraphPage());
