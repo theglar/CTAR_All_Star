@@ -28,8 +28,8 @@ namespace CTAR_All_Star
             InitializeComponent();
 
             DB_PATH = DB_Path;
-
-            dbHelper.initializeMeasurementTable();
+            
+            dbHelper.initializeAllTables();
 
             MainPage = new HomePage();
             
