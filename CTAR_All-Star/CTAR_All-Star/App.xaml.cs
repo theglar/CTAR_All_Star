@@ -5,6 +5,7 @@ using CTAR_All_Star.Views;
 using CTAR_All_Star.Navigation;
 using CTAR_All_Star.Models;
 using SQLite;
+using CTAR_All_Star.Database;
 
 [assembly: XamlCompilation (XamlCompilationOptions.Compile)]
 namespace CTAR_All_Star
@@ -12,10 +13,7 @@ namespace CTAR_All_Star
     public partial class App : Application
     {
         public static string DB_PATH = string.Empty;
-
-        // Initialize a starting point
-        Double pressure = 0;
-
+        DatabaseHelper dbHelper = new DatabaseHelper();
 
         public App()
         {
@@ -30,6 +28,8 @@ namespace CTAR_All_Star
             InitializeComponent();
 
             DB_PATH = DB_Path;
+
+            dbHelper.initializeMeasurementTable();
 
             MainPage = new HomePage();
             
