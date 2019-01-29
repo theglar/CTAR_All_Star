@@ -47,39 +47,7 @@ namespace CTAR_All_Star
 
         protected override void OnResume()
         {
-            for(int i = 0; i <10; i++)
-            {               
-                testAddItem();
-            }
-        }
-
-        private void testAddItem()
-        {
-            //Create and add a measurement to the database
-            // Get current date and time
-            DateTime d = DateTime.Now;
-            DateTime dt = DateTime.Parse(d.ToString());
-
-            pressure = Math.Sin(Convert.ToDouble(d.Millisecond) / 10);
-
-            Measurement measurement = new Measurement()
-            {
-                UserName = "Tester 1",
-                SessionNumber = "1",
-                TimeStamp = d,
-                Pressure = pressure,
-                Duration = "1",
-                DisplayTime = dt.ToString("HH:mm:ss")
-            };
-
-            using (SQLiteConnection conn = new SQLiteConnection(App.DB_PATH))
-            {
-                conn.CreateTable<Measurement>();
-                conn.Insert(measurement);
-            }
-
-            // Notify ViewModel of changes
-            MessagingCenter.Send<App>(this, "newMeasurement");
+            
         }
     }
 }

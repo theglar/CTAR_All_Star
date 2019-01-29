@@ -9,6 +9,7 @@ using CTAR_All_Star.Views;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using CTAR_All_Star.Database;
 
 namespace CTAR_All_Star
 {
@@ -21,6 +22,8 @@ namespace CTAR_All_Star
 		}
         private void Button_Clicked(object sender, EventArgs e)
         {
+            DatabaseHelper dbHelper = new DatabaseHelper();
+
             // Get current date and time
             DateTime d = DateTime.Now;
             DateTime dt = DateTime.Parse(d.ToString());
@@ -35,20 +38,8 @@ namespace CTAR_All_Star
                 DisplayTime = dt.ToString("HH:mm:ss")
             };
 
-            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
-            {
-                conn.CreateTable<Measurement>();
-                var numberOfRows = conn.Insert(measurement);
-
-                if (numberOfRows > 0)
-                {
-                    DisplayAlert("Success", "You have added a measurement!", "Dismiss");
-                }
-                else
-                {
-                    DisplayAlert("Failure", "Measurement failed to be inserted!", "Dismiss");
-                }
-            }
+            dbHelper.addData(measurement);
+            DisplayAlert("Success", "You have added a measurement!", "Dismiss");
         }
     }
 }
