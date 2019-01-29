@@ -42,7 +42,7 @@
         <Button Text="Start" Margin="5"
                 Clicked="Start_Exercise" BackgroundColor="LightSlateGray" HorizontalOptions="StartAndExpand"
                 RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=LineChart, Property=Height, Factor=1.05}"  
-                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=LineChart, Property=Width,  Factor=0.4}"></Button>
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=LineChart, Property=Width,  Factor=0.3}"></Button>
         <Button Text="Stop" Margin="5"            
                 Clicked="Stop_Exercise" BackgroundColor="LightCoral" HorizontalOptions="CenterAndExpand"
                 RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=LineChart, Property=Height, Factor=1.05}"  
@@ -50,7 +50,7 @@
         <Button Text="Save Session" Margin="5"               
                 Clicked="Save_Exercise" BackgroundColor="LightSeaGreen" HorizontalOptions="EndAndExpand"
                 RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=LineChart, Property=Height, Factor=1.05}"  
-                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=LineChart, Property=Width, Factor=0.6}"></Button>
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=LineChart, Property=Width, Factor=0.7}"></Button>
     </RelativeLayout>
 
 </ContentPage>

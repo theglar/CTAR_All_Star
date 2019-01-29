@@ -22,7 +22,7 @@ namespace CTAR_All_Star
             Double pressure = 0;
 
             //Loop 100 times - REMOVED THE LOOP FOR TESTING
-            for (int i = 0; i < 100; i++)
+            for (int i = 0; i < 1; i++)
             {
                 //Create and add a measurement to the database
                 // Get current date and time
@@ -51,7 +51,7 @@ namespace CTAR_All_Star
                 MessagingCenter.Send<GraphPage>(this, "newMeasurement");                
 
                 //Wait 0.25 seconds
-                Thread.Sleep(250);
+                //Thread.Sleep(250);
 
                 //Refresh page
                 //Navigation.PushAsync(new GraphPage());
