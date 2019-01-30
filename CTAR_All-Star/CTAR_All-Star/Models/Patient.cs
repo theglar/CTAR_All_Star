@@ -6,6 +6,6 @@ namespace CTAR_All_Star.Models
 {
      public class Patient
     {
-        public int patientId { get; set; }
+        public double patientId { get; set; }
     }
 }

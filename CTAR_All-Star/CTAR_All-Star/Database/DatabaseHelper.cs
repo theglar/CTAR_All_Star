@@ -86,7 +86,7 @@ namespace CTAR_All_Star.Database
             }
 
             //Notify ViewModel of changes
-            //MessagingCenter.Send<DatabaseHelper>(this, "databaseChange");
+            MessagingCenter.Send<DatabaseHelper>(this, "patientChange");
         }        
 
         public void removePatient(int patientId)
@@ -99,8 +99,8 @@ namespace CTAR_All_Star.Database
             }
 
             // Notify ViewModel of changes
-            //MessagingCenter.Send<DatabaseHelper>(this, "databaseChange");
-        }        
+            MessagingCenter.Send<DatabaseHelper>(this, "patientChange");
+        }
 
         public void clearPatients()
         {
@@ -108,6 +108,9 @@ namespace CTAR_All_Star.Database
             {
                 conn.DeleteAll<Patient>();
             }
+
+            // Notify ViewModel of changes
+            MessagingCenter.Send<DatabaseHelper>(this, "patientChange");
         }
 
         /*******WORKOUTS*********/
