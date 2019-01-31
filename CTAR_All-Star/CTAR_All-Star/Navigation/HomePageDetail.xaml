@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CTAR_All_Star.Navigation.HomePageDetail"
-             Title="Menu" Icon="icon_hamburger.png">
+             x:Class="CTAR_All_Star.Navigation.HomePageDetail">
   <StackLayout Padding="10">
-    <Label Text="Welcome to the CTAR All-Star Application!"/>
+        <Image x:Name="LoginIcon" Source="LoginIcon.png" Margin="100, 100, 100, 50" />
+        <Label Text="Welcome to the CTAR All-Star Application!" FontAttributes="Italic" HorizontalOptions="CenterAndExpand" FontSize="Large"/>
   </StackLayout>
 </ContentPage>

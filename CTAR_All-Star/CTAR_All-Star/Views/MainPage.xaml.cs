@@ -12,7 +12,8 @@ using CTAR_All_Star.Models;
 using Plugin.BLE.Abstractions.Exceptions;
 using System.Diagnostics;
 using Xamarin.Forms.PlatformConfiguration;
-
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 
 namespace CTAR_All_Star
 {
@@ -156,28 +157,6 @@ namespace CTAR_All_Star
                     adapter.StopScanningForDevicesAsync();
                 });
             }
-        }
-
-
-        //Needs work - I used online code that didn't work but pretty sure this will be usable when integrating the permissions plugin
-        private async void GetPermissions(object sender, global::System.EventArgs e)
-        {
-            var myAction = await DisplayAlert("Permissions Required", "This will eventually setup location permissions through our app.", "OK", "CANCEL");
-            if (myAction)
-            {
-                if (Device.RuntimePlatform == global::Xamarin.Forms.Device.Android)
-                {
-
-                    //DependencyService.Get<ISettingsService>().OpenSettings();
-                    //global::Xamarin.Forms.DependencyService.Get<global::CTAR_All_Star.PermissionsInterface>().OpenSettings();
-
-                    btnPermissions.IsVisible = false;
-                }
-                else
-                {
-                    await DisplayAlert("Device", "You are not using an Android device", "YEP");
-                }
-            }
-        }
+        }        
     }
 }
