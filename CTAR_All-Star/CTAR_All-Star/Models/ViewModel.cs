@@ -6,21 +6,24 @@ using Xamarin.Forms;
 using CTAR_All_Star;
 using SQLite;
 using Xamarin.Forms.Xaml;
+using System.ComponentModel;
+using CTAR_All_Star.Navigation;
+using CTAR_All_Star.Database;
 
 namespace CTAR_All_Star.Models
 {
-    public class ViewModel  
-    { 
-      public ObservableCollection<Measurement> Data { get; set; }
+    public class ViewModel
+    {
+        public ObservableCollection<Measurement> Data { get; set; }
 
-      public ViewModel()       
-      {
+        public ViewModel()       
+        {     
             Data = new ObservableCollection<Measurement>();
 
             // Connect to database, pull data and store it in the list
             using (SQLiteConnection conn = new SQLiteConnection(App.DB_PATH))
             {
-                //To display all data in the table
+                // Display the most recent measurements
                 var table = conn.Table<Measurement>();
                 table = table.OrderByDescending(x => x.Id).Take(10);
                 table = table.OrderBy(x => x.Id);
@@ -28,8 +31,26 @@ namespace CTAR_All_Star.Models
                 {
                     Data.Add(m);
                 }
-                
             }
-        }
+
+            // Listen for signal to update data for graph
+            MessagingCenter.Subscribe<DatabaseHelper>(this, "databaseChange", (sender) =>
+            {
+                Data.Clear();
+
+                // Connect to database, pull data and store it in the list
+                using (SQLiteConnection conn = new SQLiteConnection(App.DB_PATH))
+                {
+                    // Display the most recent measurements
+                    var table = conn.Table<Measurement>();
+                    table = table.OrderByDescending(x => x.Id).Take(10);
+                    table = table.OrderBy(x => x.Id);
+                    foreach (var m in table)
+                    {
+                        Data.Add(m);
+                    }
+                }
+            });
+        }        
     }
 }

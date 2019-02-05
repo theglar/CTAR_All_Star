@@ -12,7 +12,8 @@ using CTAR_All_Star.Models;
 using Plugin.BLE.Abstractions.Exceptions;
 using System.Diagnostics;
 using Xamarin.Forms.PlatformConfiguration;
-
+using Plugin.Permissions;
+using Plugin.Permissions.Abstractions;
 
 namespace CTAR_All_Star
 {
@@ -23,7 +24,10 @@ namespace CTAR_All_Star
         ObservableCollection<IDevice> deviceList;
         StackLayout availableDevices = new StackLayout();
         IDevice selectedDevice;
-        //Button button = btnConnectBluetooth;
+        IService deviceService;
+        ICharacteristic pressureCharacteristic;
+        string pressureStr;
+        int pressureVal;
 
         public MainPage()
         {
@@ -57,10 +61,10 @@ namespace CTAR_All_Star
                         deviceList.Add(a.Device);
                     });
                     int size = deviceList.Count;
-                    Debug.WriteLine(size);
+                    //Debug.WriteLine(size);
                 }
             };
-            adapter.DeviceConnected += (s, a) =>
+            adapter.DeviceConnected += async (s, a) =>
             {
                 Device.BeginInvokeOnMainThread(() =>
                 {
@@ -68,6 +72,24 @@ namespace CTAR_All_Star
                 });
                 btnConnectBluetooth.Text = "Tap to scan for devices";
                 deviceList.Clear();
+                deviceService = await selectedDevice.GetServiceAsync(Guid.Parse("0000ffe0-0000-1000-8000-00805f9b34fb"));
+                pressureCharacteristic = await deviceService.GetCharacteristicAsync(Guid.Parse("0000ffe1-0000-1000-8000-00805f9b34fb"));
+
+                pressureCharacteristic.ValueUpdated += (o, args) =>
+                {
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        pressureStr = args.Characteristic.StringValue;
+                        pressureVal = Convert.ToInt32(pressureStr);
+                        btnConnectBluetooth.Text = $"Value: {pressureVal}";
+                    });
+                };
+
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    pressureCharacteristic.StartUpdatesAsync();
+                    //System.Threading.Thread.Sleep(500);
+                });
             };
         }
 
@@ -135,28 +157,6 @@ namespace CTAR_All_Star
                     adapter.StopScanningForDevicesAsync();
                 });
             }
-        }
-
-
-        //Needs work - I used online code that didn't work but pretty sure this will be usable when integrating the permissions plugin
-        private async void GetPermissions(object sender, global::System.EventArgs e)
-        {
-            var myAction = await DisplayAlert("Permissions Required", "This will eventually setup location permissions through our app.", "OK", "CANCEL");
-            if (myAction)
-            {
-                if (Device.RuntimePlatform == global::Xamarin.Forms.Device.Android)
-                {
-
-                    //DependencyService.Get<ISettingsService>().OpenSettings();
-                    //global::Xamarin.Forms.DependencyService.Get<global::CTAR_All_Star.PermissionsInterface>().OpenSettings();
-
-                    btnPermissions.IsVisible = false;
-                }
-                else
-                {
-                    await DisplayAlert("Device", "You are not using an Android device", "YEP");
-                }
-            }
-        }
+        }        
     }
 }

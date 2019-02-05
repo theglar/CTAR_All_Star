@@ -6,78 +6,52 @@
              xmlns:local="clr-namespace:CTAR_All_Star"
              xmlns:local1="clr-namespace:CTAR_All_Star.Models"
              x:Class="CTAR_All_Star.GraphPage">
-    <!--<forms:ChartView x:Name="Chart1" HeightRequest="180" />-->
-    
+
     <ContentPage.BindingContext>
             <local1:ViewModel></local1:ViewModel>
         </ContentPage.BindingContext>
-    <StackLayout>
-        <chart:SfChart x:Name="LineChart" VerticalOptions="FillAndExpand">
-            <chart:SfChart.Title>
-
-                <chart:ChartTitle Text="CTAR All-Star"/>
-
-            </chart:SfChart.Title>
-            <chart:SfChart.Legend>
-
-                <chart:ChartLegend/>
-
-            </chart:SfChart.Legend>
+    <RelativeLayout>
+        <chart:SfChart x:Name="LineChart" Margin="20"
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"  
+            RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.9}">
             <chart:SfChart.PrimaryAxis>
-
                 <chart:CategoryAxis>
-
                     <chart:CategoryAxis.Title>
-
                         <chart:ChartAxisTitle Text="Time"></chart:ChartAxisTitle>
-
                     </chart:CategoryAxis.Title>
-
                 </chart:CategoryAxis>
-
             </chart:SfChart.PrimaryAxis>
-
             <chart:SfChart.SecondaryAxis>
-
                 <chart:NumericalAxis Maximum="1" Minimum="-1">
-
                     <chart:NumericalAxis.StripLines>
-
-                        <chart:NumericalStripLine Start="0.3" Width ="0.05" Text="Goal" FillColor="#00FA9A"/>
-
+                        <chart:NumericalStripLine Start="0.3" Width ="0.025" Text="Goal" FillColor="#00FA9A"/>
                     </chart:NumericalAxis.StripLines>
-
                     <chart:NumericalAxis.Title>
-
                         <chart:ChartAxisTitle Text="Pressure"></chart:ChartAxisTitle>
-
                     </chart:NumericalAxis.Title>
-
                 </chart:NumericalAxis>
-
             </chart:SfChart.SecondaryAxis>
-
             <chart:SfChart.Series>
-
-                <chart:LineSeries Label="Pressure" ItemsSource="{Binding Data}" XBindingPath="DisplayTime" YBindingPath="Pressure" EnableTooltip ="True">
+                <chart:LineSeries ItemsSource="{Binding Data}" XBindingPath="DisplayTime" YBindingPath="Pressure" EnableTooltip ="True">
                     <chart:LineSeries.ColorModel>
-
                         <chart:ChartColorModel Palette="Natural"/>
-
                     </chart:LineSeries.ColorModel>
                 </chart:LineSeries>
-
-
             </chart:SfChart.Series>
-
         </chart:SfChart>
-        <Button Text="Start"
-                Clicked="Start_Exercise" BackgroundColor="LightSlateGray" HorizontalOptions="CenterAndExpand"></Button>
-        <Button Text="Stop"
-                Clicked="Stop_Exercise" BackgroundColor="LightCoral" HorizontalOptions="CenterAndExpand"></Button>
-        <Button Text="Save Session"
-                Clicked="Save_Exercise" BackgroundColor="LightSeaGreen" HorizontalOptions="CenterAndExpand"></Button>
-    </StackLayout>   
-    
+        <Button Text="Start" Margin="5"
+                Clicked="Start_Exercise" BackgroundColor="LightSlateGray" HorizontalOptions="StartAndExpand"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=LineChart, Property=Height, Factor=1.05}"  
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=LineChart, Property=Width,  Factor=0.3}"></Button>
+        <Button Text="Stop" Margin="5"            
+                Clicked="Stop_Exercise" BackgroundColor="LightCoral" HorizontalOptions="CenterAndExpand"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=LineChart, Property=Height, Factor=1.05}"  
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=LineChart, Property=Width, Factor=0.5}"></Button>
+        <Button Text="Save Session" Margin="5"               
+                Clicked="Save_Exercise" BackgroundColor="LightSeaGreen" HorizontalOptions="EndAndExpand"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=LineChart, Property=Height, Factor=1.05}"  
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=LineChart, Property=Width, Factor=0.7}"></Button>
+    </RelativeLayout>
+
 </ContentPage>
 
