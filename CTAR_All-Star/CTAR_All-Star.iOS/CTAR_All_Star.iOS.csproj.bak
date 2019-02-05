@@ -11,7 +11,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>CTAR_All_Star.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>CTAR_AllStar.iOS</AssemblyName>
+    <AssemblyName>CTAR_All-Star.iOS</AssemblyName>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
