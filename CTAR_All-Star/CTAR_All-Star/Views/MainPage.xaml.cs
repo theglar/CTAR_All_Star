@@ -24,7 +24,10 @@ namespace CTAR_All_Star
         ObservableCollection<IDevice> deviceList;
         StackLayout availableDevices = new StackLayout();
         IDevice selectedDevice;
-        //Button button = btnConnectBluetooth;
+        IService deviceService;
+        ICharacteristic pressureCharacteristic;
+        string pressureStr;
+        int pressureVal;
 
         public MainPage()
         {
@@ -58,10 +61,10 @@ namespace CTAR_All_Star
                         deviceList.Add(a.Device);
                     });
                     int size = deviceList.Count;
-                    Debug.WriteLine(size);
+                    //Debug.WriteLine(size);
                 }
             };
-            adapter.DeviceConnected += (s, a) =>
+            adapter.DeviceConnected += async (s, a) =>
             {
                 Device.BeginInvokeOnMainThread(() =>
                 {
@@ -69,6 +72,24 @@ namespace CTAR_All_Star
                 });
                 btnConnectBluetooth.Text = "Tap to scan for devices";
                 deviceList.Clear();
+                deviceService = await selectedDevice.GetServiceAsync(Guid.Parse("0000ffe0-0000-1000-8000-00805f9b34fb"));
+                pressureCharacteristic = await deviceService.GetCharacteristicAsync(Guid.Parse("0000ffe1-0000-1000-8000-00805f9b34fb"));
+
+                pressureCharacteristic.ValueUpdated += (o, args) =>
+                {
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        pressureStr = args.Characteristic.StringValue;
+                        pressureVal = Convert.ToInt32(pressureStr);
+                        btnConnectBluetooth.Text = $"Value: {pressureVal}";
+                    });
+                };
+
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    pressureCharacteristic.StartUpdatesAsync();
+                    //System.Threading.Thread.Sleep(500);
+                });
             };
         }
 
