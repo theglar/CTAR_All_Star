@@ -28,6 +28,7 @@ namespace CTAR_All_Star
 
         private void Button_Clicked(object sender, EventArgs e)
         {
+            Navigation.PopAsync();
             Navigation.PushAsync(new AddPatientPage());
         }
 
@@ -40,11 +41,12 @@ namespace CTAR_All_Star
             using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
             {
                 conn.CreateTable<Patient>();
-                patient = conn.Query<Patient>("select * from Patient where patientId =" + item.patientId).SingleOrDefault();
+                patient = conn.Query<Patient>("select * from Patient where patientId =" + item.PatientId).SingleOrDefault();
                 if (patient != null)
                 {
                     conn.Delete(patient);
                     DisplayAlert("Deleted", patient.PatientEmrNumber + " deleted", "OK");
+                    Navigation.PopToRootAsync();
                     Navigation.PushAsync(new ManagePatients());
                 }
                 else

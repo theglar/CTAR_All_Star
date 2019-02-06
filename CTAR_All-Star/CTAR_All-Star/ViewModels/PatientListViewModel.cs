@@ -22,8 +22,8 @@ namespace CTAR_All_Star.ViewModels
             {
                 // Display the most recent measurements
                 var table = conn.Table<Patient>();
-                table = table.OrderByDescending(x => x.patientId);
-                table = table.OrderBy(x => x.patientId);
+                table = table.OrderByDescending(x => x.PatientId);
+                table = table.OrderBy(x => x.PatientId);
                 foreach (var m in table)
                 {
                     Patients.Add(m);
@@ -40,8 +40,8 @@ namespace CTAR_All_Star.ViewModels
                 {
                     // Display the most recent measurements
                     var table = conn.Table<Patient>();
-                    table = table.OrderByDescending(x => x.patientId);
-                    table = table.OrderBy(x => x.patientId);
+                    table = table.OrderByDescending(x => x.PatientId);
+                    table = table.OrderBy(x => x.PatientId);
                     foreach (var m in table)
                     {
                         Patients.Add(m);

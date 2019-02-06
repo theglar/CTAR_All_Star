@@ -30,6 +30,7 @@ namespace CTAR_All_Star.Views
 
             dbHelper.addPatient(patient);
             DisplayAlert("Success", "You have added a patient!", "Dismiss");
+            Navigation.PopAsync();
             Navigation.PushAsync(new ManagePatients());
         }
     }
