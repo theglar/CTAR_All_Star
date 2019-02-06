@@ -33,10 +33,55 @@ namespace CTAR_All_Star
 
         private void Delete_Button_Clicked(object sender, EventArgs e)
         {
-            var item = ((Button)sender);
-            DisplayAlert("Delete", item.CommandParameter + " delete", "OK");
-            //int index = patientListViewModel.Patients.IndexOf();
-           // dbHelper.removePatient(index);
-        }  
+            Patient patient;
+            var button = sender as Button;
+            var item = button.BindingContext as Patient;
+
+            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
+            {
+                conn.CreateTable<Patient>();
+                patient = conn.Query<Patient>("select * from Patient where patientId =" + item.patientId).SingleOrDefault();
+                if (patient != null)
+                {
+                    conn.Delete(patient);
+                    DisplayAlert("Deleted", patient.PatientEmrNumber + " deleted", "OK");
+                    Navigation.PushAsync(new ManagePatients());
+                }
+                else
+                    DisplayAlert("Failed", "patient is null", "ok");
+            }
+            
+            
+            
+           
+        }
+
+        //public string DeleteItem(int itemId)
+        //{
+        //    string result = string.Empty;
+        //    using (var dbConn = new SQLiteConnection(App.SQLITE_PLATFORM, App.DB_PATH))
+        //    {
+        //        var existingItem = dbConn.Query<Patient>("select * from Media where Id =" + itemId).FirstOrDefault();
+        //        if (existingItem != null)
+        //        {
+        //            dbConn.RunInTransaction(() =>
+        //            {
+        //                dbConn.Delete(existingItem);
+
+        //                if (dbConn.Delete(existingItem) > 0)
+        //                {
+        //                    result = "Success";
+        //                }
+        //                else
+        //                {
+        //                    result = "This item was not removed";
+        //                }
+
+        //            });
+        //        }
+
+        //        return result;
+        //    }
+        //}
     }
 }

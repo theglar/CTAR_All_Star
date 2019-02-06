@@ -89,13 +89,13 @@ namespace CTAR_All_Star.Database
             MessagingCenter.Send<DatabaseHelper>(this, "patientChange");
         }        
 
-        public void removePatient(int patientId)
+        public void removePatient(Patient patient)
         {
             // Delete from database
             using (SQLiteConnection conn = new SQLiteConnection(App.DB_PATH))
             {
                 conn.CreateTable<Patient>();
-                conn.Delete(patientId);
+                conn.Delete(patient);
             }
 
             // Notify ViewModel of changes

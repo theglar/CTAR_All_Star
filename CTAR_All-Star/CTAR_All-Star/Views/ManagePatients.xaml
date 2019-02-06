@@ -16,9 +16,9 @@
                     <DataTemplate>
                         <ViewCell>
                             <ViewCell.View>
-                                <StackLayout Orientation="Horizontal">
-                                    <Label Text="{Binding patientId}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Large" />
-                                    <Button Text="Remove" CommandParameter="{Binding patientId}" Clicked="Delete_Button_Clicked"></Button>
+                                <StackLayout Orientation="Horizontal" Padding="100,0,0,0">
+                                    <Label Text="{Binding PatientEmrNumber}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Large" />
+                                    <Button Text="Remove" CommandParameter="{Binding PatientId}" Clicked="Delete_Button_Clicked"></Button>
                                 </StackLayout>                                
                             </ViewCell.View>                            
                         </ViewCell>

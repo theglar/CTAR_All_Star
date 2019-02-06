@@ -25,11 +25,12 @@ namespace CTAR_All_Star.Views
 
             Patient patient = new Patient()
             {
-                patientId = Convert.ToDouble(patientIdEntry.Text)
+                PatientEmrNumber = patientIdEntry.Text
             };
 
             dbHelper.addPatient(patient);
             DisplayAlert("Success", "You have added a patient!", "Dismiss");
+            Navigation.PushAsync(new ManagePatients());
         }
     }
 }
