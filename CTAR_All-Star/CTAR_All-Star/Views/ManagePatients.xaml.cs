@@ -44,7 +44,8 @@ namespace CTAR_All_Star
                 patient = conn.Query<Patient>("select * from Patient where PatientId = " + item.PatientId).SingleOrDefault();
                 if (patient != null)
                 {
-                    conn.Delete(patient);
+                    DatabaseHelper dbHelper = new DatabaseHelper();
+                    dbHelper.removePatient(patient);
                     DisplayAlert("Deleted", patient.PatientEmrNumber + " deleted", "OK");
                 }
                 else
