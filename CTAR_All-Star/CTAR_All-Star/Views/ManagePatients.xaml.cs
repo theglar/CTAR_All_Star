@@ -28,7 +28,7 @@ namespace CTAR_All_Star
 
         private void Button_Clicked(object sender, EventArgs e)
         {
-            Navigation.PopAsync();
+            //Navigation.PopAsync();
             Navigation.PushAsync(new AddPatientPage());
         }
 
@@ -46,43 +46,15 @@ namespace CTAR_All_Star
                 {
                     conn.Delete(patient);
                     DisplayAlert("Deleted", patient.PatientEmrNumber + " deleted", "OK");
-                    Navigation.PushAsync(new ManagePatients());
                 }
                 else
                     DisplayAlert("Failed", "patient is null", "ok");
-            }
-            
-            
-            
-           
+            }          
         }
 
-        //public string DeleteItem(int itemId)
-        //{
-        //    string result = string.Empty;
-        //    using (var dbConn = new SQLiteConnection(App.SQLITE_PLATFORM, App.DB_PATH))
-        //    {
-        //        var existingItem = dbConn.Query<Patient>("select * from Media where Id =" + itemId).FirstOrDefault();
-        //        if (existingItem != null)
-        //        {
-        //            dbConn.RunInTransaction(() =>
-        //            {
-        //                dbConn.Delete(existingItem);
-
-        //                if (dbConn.Delete(existingItem) > 0)
-        //                {
-        //                    result = "Success";
-        //                }
-        //                else
-        //                {
-        //                    result = "This item was not removed";
-        //                }
-
-        //            });
-        //        }
-
-        //        return result;
-        //    }
-        //}
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+        }
     }
 }
