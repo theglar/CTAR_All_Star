@@ -41,12 +41,11 @@ namespace CTAR_All_Star
             using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
             {
                 conn.CreateTable<Patient>();
-                patient = conn.Query<Patient>("select * from Patient where patientId =" + item.PatientId).SingleOrDefault();
+                patient = conn.Query<Patient>("select * from Patient where PatientId = " + item.PatientId).SingleOrDefault();
                 if (patient != null)
                 {
                     conn.Delete(patient);
                     DisplayAlert("Deleted", patient.PatientEmrNumber + " deleted", "OK");
-                    Navigation.PopToRootAsync();
                     Navigation.PushAsync(new ManagePatients());
                 }
                 else
