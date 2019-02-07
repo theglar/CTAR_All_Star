@@ -11,7 +11,7 @@
             <local1:ViewModel></local1:ViewModel>
         </ContentPage.BindingContext>
     <RelativeLayout>
-        <chart:SfChart x:Name="LineChart" Margin="20"
+        <chart:SfChart x:Name="LineChart" Margin="20" 
             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"  
             RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.9}">
             <chart:SfChart.PrimaryAxis>
@@ -22,7 +22,7 @@
                 </chart:CategoryAxis>
             </chart:SfChart.PrimaryAxis>
             <chart:SfChart.SecondaryAxis>
-                <chart:NumericalAxis Maximum="1" Minimum="-1">
+                <chart:NumericalAxis Maximum="1023" Minimum="-1">
                     <chart:NumericalAxis.StripLines>
                         <chart:NumericalStripLine Start="0.3" Width ="0.025" Text="Goal" FillColor="#00FA9A"/>
                     </chart:NumericalAxis.StripLines>
@@ -32,11 +32,11 @@
                 </chart:NumericalAxis>
             </chart:SfChart.SecondaryAxis>
             <chart:SfChart.Series>
-                <chart:LineSeries ItemsSource="{Binding Data}" XBindingPath="DisplayTime" YBindingPath="Pressure" EnableTooltip ="True">
-                    <chart:LineSeries.ColorModel>
+                <chart:FastLineSeries ItemsSource="{Binding Data}" XBindingPath="DisplayTime" YBindingPath="Pressure" EnableTooltip ="True" ListenPropertyChange="True" StrokeWidth="1">
+                    <chart:FastLineSeries.ColorModel>
                         <chart:ChartColorModel Palette="Natural"/>
-                    </chart:LineSeries.ColorModel>
-                </chart:LineSeries>
+                    </chart:FastLineSeries.ColorModel>
+                </chart:FastLineSeries>
             </chart:SfChart.Series>
         </chart:SfChart>
         <Button Text="Start" Margin="5"

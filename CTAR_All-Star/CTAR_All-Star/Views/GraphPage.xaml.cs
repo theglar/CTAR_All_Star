@@ -31,7 +31,7 @@ namespace CTAR_All_Star
                 DateTime d = DateTime.Now;
                 DateTime dt = DateTime.Parse(d.ToString());
                 
-                pressure = Math.Sin(Convert.ToDouble(d.Millisecond)/10);
+                pressure = Math.Sin(Convert.ToDouble(d.Millisecond)/10)*100+500;
 
                 Measurement measurement = new Measurement()
                 {

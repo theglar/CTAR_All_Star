@@ -42,7 +42,7 @@ namespace CTAR_All_Star.Database
             }
 
             //Notify ViewModel of changes
-            MessagingCenter.Send<DatabaseHelper>(this, "databaseChange");
+            MessagingCenter.Send<DatabaseHelper,Measurement>(this, "databaseChange", measurement);
         }
 
         public void removeData(int measurementId)
