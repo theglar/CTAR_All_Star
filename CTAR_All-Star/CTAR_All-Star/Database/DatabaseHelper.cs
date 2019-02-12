@@ -42,7 +42,7 @@ namespace CTAR_All_Star.Database
             }
 
             //Notify ViewModel of changes
-            MessagingCenter.Send<DatabaseHelper>(this, "databaseChange");
+            Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper,Measurement>(this, "databaseChange", measurement));
         }
 
         public void removeData(int measurementId)
@@ -55,7 +55,7 @@ namespace CTAR_All_Star.Database
             }
 
             // Notify ViewModel of changes
-            MessagingCenter.Send<DatabaseHelper>(this, "databaseChange");
+            Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper>(this, "databaseChange"));
         }
 
         public void clearDatabase()
@@ -86,21 +86,21 @@ namespace CTAR_All_Star.Database
             }
 
             //Notify ViewModel of changes
-            //MessagingCenter.Send<DatabaseHelper>(this, "databaseChange");
+            Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper>(this, "patientChange"));
         }        
 
-        public void removePatient(int patientId)
+        public void removePatient(Patient patient)
         {
             // Delete from database
             using (SQLiteConnection conn = new SQLiteConnection(App.DB_PATH))
             {
                 conn.CreateTable<Patient>();
-                conn.Delete(patientId);
+                conn.Delete(patient);
             }
 
             // Notify ViewModel of changes
-            //MessagingCenter.Send<DatabaseHelper>(this, "databaseChange");
-        }        
+            Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper>(this, "patientChange"));
+        }
 
         public void clearPatients()
         {
@@ -108,6 +108,9 @@ namespace CTAR_All_Star.Database
             {
                 conn.DeleteAll<Patient>();
             }
+
+            // Notify ViewModel of changes
+            Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper>(this, "patientChange"));
         }
 
         /*******WORKOUTS*********/
@@ -130,7 +133,7 @@ namespace CTAR_All_Star.Database
             }
 
             //Notify ViewModel of changes
-            //MessagingCenter.Send<DatabaseHelper>(this, "databaseChange");
+            //Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper>(this, "databaseChange"));
         }
 
         public void removeWorkout(int workoutId)
@@ -143,7 +146,7 @@ namespace CTAR_All_Star.Database
             }
 
             // Notify ViewModel of changes
-            //MessagingCenter.Send<DatabaseHelper>(this, "databaseChange");
+            //Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper>(this, "databaseChange"));
         }
 
         public void clearWorkouts()

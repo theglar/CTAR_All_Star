@@ -11,7 +11,7 @@
     <OutputType>Exe</OutputType>
     <RootNamespace>CTAR_All_Star.iOS</RootNamespace>
     <IPhoneResourcePrefix>Resources</IPhoneResourcePrefix>
-    <AssemblyName>CTAR_AllStar.iOS</AssemblyName>
+    <AssemblyName>CTAR_All-Star.iOS</AssemblyName>
     <NuGetPackageImportStamp>
     </NuGetPackageImportStamp>
   </PropertyGroup>
@@ -152,9 +152,6 @@
     </PackageReference>
     <PackageReference Include="Microcharts.Forms">
       <Version>0.7.1</Version>
-    </PackageReference>
-    <PackageReference Include="Plugin.Permissions">
-      <Version>3.0.0.12</Version>
     </PackageReference>
     <PackageReference Include="SQLite">
       <Version>3.13.0</Version>

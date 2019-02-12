@@ -14,6 +14,7 @@ using System.Diagnostics;
 using Xamarin.Forms.PlatformConfiguration;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
+using CTAR_All_Star.Database;
 
 namespace CTAR_All_Star
 {
@@ -77,12 +78,28 @@ namespace CTAR_All_Star
 
                 pressureCharacteristic.ValueUpdated += (o, args) =>
                 {
+                    DatabaseHelper dbHelper = new DatabaseHelper();
+                    Measurement measurement = new Measurement();
+                    
                     Device.BeginInvokeOnMainThread(() =>
                     {
                         pressureStr = args.Characteristic.StringValue;
                         pressureVal = Convert.ToInt32(pressureStr);
                         btnConnectBluetooth.Text = $"Value: {pressureVal}";
                     });
+
+                    // Get current date and time
+                    DateTime d = DateTime.Now;
+                    DateTime dt = DateTime.Parse(d.ToString());
+                    measurement.UserName = "Tester 1";
+                    measurement.SessionNumber = "1";
+                    measurement.TimeStamp = d;
+                    measurement.Pressure = pressureVal;
+                    measurement.Duration = "1";
+                    measurement.DisplayTime = dt.ToString("HH:mm:ss");
+
+                    dbHelper.addData(measurement);
+                    
                 };
 
                 Device.BeginInvokeOnMainThread(() =>
