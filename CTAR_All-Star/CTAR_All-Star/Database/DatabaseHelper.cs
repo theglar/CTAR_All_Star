@@ -42,7 +42,7 @@ namespace CTAR_All_Star.Database
             }
 
             //Notify ViewModel of changes
-            MessagingCenter.Send<DatabaseHelper,Measurement>(this, "databaseChange", measurement);
+            Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper,Measurement>(this, "databaseChange", measurement));
         }
 
         public void removeData(int measurementId)
@@ -55,7 +55,7 @@ namespace CTAR_All_Star.Database
             }
 
             // Notify ViewModel of changes
-            MessagingCenter.Send<DatabaseHelper>(this, "databaseChange");
+            Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper>(this, "databaseChange"));
         }
 
         public void clearDatabase()
@@ -86,7 +86,7 @@ namespace CTAR_All_Star.Database
             }
 
             //Notify ViewModel of changes
-            MessagingCenter.Send<DatabaseHelper>(this, "patientChange");
+            Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper>(this, "patientChange"));
         }        
 
         public void removePatient(Patient patient)
@@ -99,7 +99,7 @@ namespace CTAR_All_Star.Database
             }
 
             // Notify ViewModel of changes
-            MessagingCenter.Send<DatabaseHelper>(this, "patientChange");
+            Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper>(this, "patientChange"));
         }
 
         public void clearPatients()
@@ -110,7 +110,7 @@ namespace CTAR_All_Star.Database
             }
 
             // Notify ViewModel of changes
-            MessagingCenter.Send<DatabaseHelper>(this, "patientChange");
+            Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper>(this, "patientChange"));
         }
 
         /*******WORKOUTS*********/
@@ -133,7 +133,7 @@ namespace CTAR_All_Star.Database
             }
 
             //Notify ViewModel of changes
-            //MessagingCenter.Send<DatabaseHelper>(this, "databaseChange");
+            //Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper>(this, "databaseChange"));
         }
 
         public void removeWorkout(int workoutId)
@@ -146,7 +146,7 @@ namespace CTAR_All_Star.Database
             }
 
             // Notify ViewModel of changes
-            //MessagingCenter.Send<DatabaseHelper>(this, "databaseChange");
+            //Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper>(this, "databaseChange"));
         }
 
         public void clearWorkouts()

@@ -37,7 +37,7 @@ namespace CTAR_All_Star.ViewModels
             };
 
             // Initialize list with zeros
-            for (int i=0; i<10; i++)
+            for (int i=0; i<500; i++)
             {
                 Data.Add(measurement);
             }
