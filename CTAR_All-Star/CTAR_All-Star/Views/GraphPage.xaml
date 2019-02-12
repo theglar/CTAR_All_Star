@@ -18,6 +18,9 @@
                     <chart:CategoryAxis.Title>
                         <chart:ChartAxisTitle Text="Time"></chart:ChartAxisTitle>
                     </chart:CategoryAxis.Title>
+                    <chart:CategoryAxis.LabelStyle>
+                        <chart:ChartAxisLabelStyle Font="0.01"/>
+                    </chart:CategoryAxis.LabelStyle>
                 </chart:CategoryAxis>
             </chart:SfChart.PrimaryAxis>
             <chart:SfChart.SecondaryAxis>
