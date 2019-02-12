@@ -10,7 +10,8 @@
         </ContentPage.BindingContext>
     <RelativeLayout>
         <chart:SfChart x:Name="LineChart" Margin="20" 
-            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"  
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.9}"
+            HorizontalOptions="CenterAndExpand"
             RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.9}">
             <chart:SfChart.PrimaryAxis>
                 <chart:CategoryAxis>

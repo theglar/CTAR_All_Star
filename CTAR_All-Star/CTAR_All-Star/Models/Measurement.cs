@@ -18,7 +18,7 @@ namespace CTAR_All_Star.Models
 
         public string DisplayTime { get; set; }
 
-        public double Pressure { get; set; }
+        public double? Pressure { get; set; }
 
         public string Duration { get; set; }
     }

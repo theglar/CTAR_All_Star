@@ -1,15 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using Xamarin.Forms;
-using CTAR_All_Star;
-using SQLite;
-using Xamarin.Forms.Xaml;
-using System.ComponentModel;
-using CTAR_All_Star.Navigation;
 using CTAR_All_Star.Database;
-using System.Diagnostics;
 using CTAR_All_Star.Models;
 
 namespace CTAR_All_Star.ViewModels
@@ -31,28 +23,16 @@ namespace CTAR_All_Star.ViewModels
                 UserName = "Tester 1",
                 SessionNumber = "1",
                 TimeStamp = d,
-                Pressure = 500,
+                Pressure = null,
                 Duration = "1",
-                DisplayTime = dt.ToString("HH:mm:ss")
+                DisplayTime = ""
             };
 
-            // Initialize list with zeros
+            // Initialize list with zeros and nulls for spacing
             for (int i=0; i<500; i++)
             {
                 Data.Add(measurement);
             }
-            // Connect to database, pull data and store it in the list
-            //using (SQLiteConnection conn = new SQLiteConnection(App.DB_PATH))
-            //{
-            //    // Display the most recent measurements
-            //    var table = conn.Table<Measurement>();
-            //    table = table.OrderByDescending(x => x.Id).Take(10);
-            //    table = table.OrderBy(x => x.Id);
-            //    foreach (var m in table)
-            //    {
-            //        Data.Add(m);
-            //    }
-            //}
 
             // Listen for signal to update data for graph
             MessagingCenter.Subscribe<DatabaseHelper, Measurement>(this, "databaseChange", (sender, newMeasurement) =>
@@ -60,29 +40,8 @@ namespace CTAR_All_Star.ViewModels
                 Device.BeginInvokeOnMainThread(() =>
                 {
                     Data.RemoveAt(0);
-                    Data.Add(newMeasurement);
+                    Data.Insert(400, newMeasurement);
                 });
-                
-                foreach (Measurement data in Data)
-                {
-                    Debug.Print(data.Pressure.ToString());
-                }
-                
-
-                //Data.Clear();
-
-                //// Connect to database, pull data and store it in the list
-                //using (SQLiteConnection conn = new SQLiteConnection(App.DB_PATH))
-                //{
-                //    // Display the most recent measurements
-                //    var table = conn.Table<Measurement>();
-                //    table = table.OrderByDescending(x => x.Id).Take(10);
-                //    table = table.OrderBy(x => x.Id);
-                //    foreach (var m in table)
-                //    {
-                //        Data.Add(m);
-                //    }
-                //}
             });
         } 
     }
