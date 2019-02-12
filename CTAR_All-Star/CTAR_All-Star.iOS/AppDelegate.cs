@@ -21,7 +21,7 @@ namespace CTAR_All_Star.iOS
         //
         // You have 17 seconds to return from this method, or iOS will terminate your application.
         //
-        public override bool FinishedLaunching(UIApplication app, NSDictionary options)
+        public override bool FinishedLaunching(UIApplication uiApplication, NSDictionary launchOptions)
         {
             string fileName = "measurements_db.sqlite";
             string fileLocation = Path.Combine(System.Environment.GetFolderPath(System.Environment.SpecialFolder.Personal), "..", "Library");
@@ -33,7 +33,7 @@ namespace CTAR_All_Star.iOS
 
             LoadApplication(new App(full_path));
 
-            return base.FinishedLaunching(app, options);
+            return base.FinishedLaunching(uiApplication, launchOptions);
         }
     }
 }
