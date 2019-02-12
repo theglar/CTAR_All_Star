@@ -4,11 +4,11 @@
              xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
              xmlns:local="clr-namespace:CTAR_All_Star"
-             xmlns:local1="clr-namespace:CTAR_All_Star.Models"
+             xmlns:local1="clr-namespace:CTAR_All_Star.ViewModels"
              x:Class="CTAR_All_Star.GraphPage">
 
     <ContentPage.BindingContext>
-            <local1:ViewModel></local1:ViewModel>
+        <local1:MeasurementViewModel></local1:MeasurementViewModel>
         </ContentPage.BindingContext>
     <RelativeLayout>
         <chart:SfChart x:Name="LineChart" Margin="20" 
@@ -24,7 +24,7 @@
             <chart:SfChart.SecondaryAxis>
                 <chart:NumericalAxis Maximum="1023" Minimum="-1">
                     <chart:NumericalAxis.StripLines>
-                        <chart:NumericalStripLine Start="0.3" Width ="0.025" Text="Goal" FillColor="#00FA9A"/>
+                        <chart:NumericalStripLine Start="675" Width ="0.025" Text="Goal" FillColor="#00FA9A"/>
                     </chart:NumericalAxis.StripLines>
                     <chart:NumericalAxis.Title>
                         <chart:ChartAxisTitle Text="Pressure"></chart:ChartAxisTitle>

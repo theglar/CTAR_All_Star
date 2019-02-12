@@ -10,14 +10,15 @@ using System.ComponentModel;
 using CTAR_All_Star.Navigation;
 using CTAR_All_Star.Database;
 using System.Diagnostics;
+using CTAR_All_Star.Models;
 
-namespace CTAR_All_Star.Models
+namespace CTAR_All_Star.ViewModels
 {
-    public class ViewModel
+    public class MeasurementViewModel
     {
         public ObservableCollection<Measurement> Data { get; set; }
 
-        public ViewModel()       
+        public MeasurementViewModel()       
         {     
             Data = new ObservableCollection<Measurement>();
 
