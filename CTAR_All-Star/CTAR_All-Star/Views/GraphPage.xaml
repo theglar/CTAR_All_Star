@@ -41,7 +41,7 @@
             </chart:SfChart.Series>
         </chart:SfChart>
         <Button Text="Start" Margin="5"
-                Clicked="Start_Exercise" BackgroundColor="LightSlateGray" HorizontalOptions="StartAndExpand"
+                Clicked="Start_ExerciseAsync" BackgroundColor="LightSlateGray" HorizontalOptions="StartAndExpand"
                 RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=LineChart, Property=Height, Factor=1.05}"  
                 RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=LineChart, Property=Width,  Factor=0.3}"></Button>
         <Button Text="Stop" Margin="5"            

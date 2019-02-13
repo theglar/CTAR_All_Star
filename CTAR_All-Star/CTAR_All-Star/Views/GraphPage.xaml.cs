@@ -17,7 +17,29 @@ namespace CTAR_All_Star
             InitializeComponent();
         }
 
-        private void Start_Exercise(object sender, EventArgs e)
+        private async void Start_ExerciseAsync(object sender, EventArgs e)
+        {
+            await DisplayAlert("Start", "Start exercise?", "Yes");
+
+            //Not working...
+            //Device.StartTimer(TimeSpan.FromSeconds(5), () =>
+            //{
+            //    // Start accepting bluetooth data?
+            //    return false; //True repeats, False stops
+            //});
+            await DisplayAlert("Complete", "Congratulation! You finished the exercise!", "Dismiss");
+        }
+        private void Stop_Exercise(object sender, EventArgs e)
+        {
+            DisplayAlert("Stop", "You have stopped the exercise.", "Dismiss");
+        }
+        private void Save_Exercise(object sender, EventArgs e)
+        {
+            DisplayAlert("Save", "You have saved the exercise.", "Dismiss");
+        }
+
+        //For testing
+        private void Simulation(object sender, EventArgs e)
         {
             DatabaseHelper dbHelper = new DatabaseHelper();
 
@@ -30,8 +52,8 @@ namespace CTAR_All_Star
                 // Get current date and time
                 DateTime d = DateTime.Now;
                 DateTime dt = DateTime.Parse(d.ToString());
-                
-                pressure = Math.Sin(Convert.ToDouble(d.Millisecond)/10)*100+500;
+
+                pressure = Math.Sin(Convert.ToDouble(d.Millisecond) / 10) * 100 + 500;
 
                 Measurement measurement = new Measurement()
                 {
@@ -45,14 +67,6 @@ namespace CTAR_All_Star
 
                 dbHelper.addData(measurement);
             }
-        }
-        private void Stop_Exercise(object sender, EventArgs e)
-        {
-            DisplayAlert("Stop", "You have stopped the exercise.", "Dismiss");
-        }
-        private void Save_Exercise(object sender, EventArgs e)
-        {
-            DisplayAlert("Save", "You have saved the exercise.", "Dismiss");
         }
     }
 }
