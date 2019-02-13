@@ -10,14 +10,16 @@
         </ContentPage.BindingContext>
     <RelativeLayout>
         <chart:SfChart x:Name="LineChart" Margin="20" 
-            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.9}"
-            HorizontalOptions="CenterAndExpand"
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
             RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.9}">
             <chart:SfChart.PrimaryAxis>
                 <chart:CategoryAxis>
                     <chart:CategoryAxis.Title>
                         <chart:ChartAxisTitle Text="Time"></chart:ChartAxisTitle>
                     </chart:CategoryAxis.Title>
+                    <chart:CategoryAxis.LabelStyle>
+                        <chart:ChartAxisLabelStyle Font="0.01"/>
+                    </chart:CategoryAxis.LabelStyle>
                 </chart:CategoryAxis>
             </chart:SfChart.PrimaryAxis>
             <chart:SfChart.SecondaryAxis>
