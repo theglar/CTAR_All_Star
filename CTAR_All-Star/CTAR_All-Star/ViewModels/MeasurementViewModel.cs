@@ -16,7 +16,6 @@ namespace CTAR_All_Star.ViewModels
 
             // Get current date and time
             DateTime d = DateTime.Now;
-            DateTime dt = DateTime.Parse(d.ToString());
 
             Measurement measurement = new Measurement()
             {
@@ -25,10 +24,10 @@ namespace CTAR_All_Star.ViewModels
                 TimeStamp = d,
                 Pressure = null,
                 Duration = "1",
-                DisplayTime = ""
+                DisplayTime = String.Empty
             };
 
-            // Initialize list with zeros and nulls for spacing
+            // Initialize list
             for (int i=0; i<500; i++)
             {
                 Data.Add(measurement);

@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CTAR_All_Star.Database;
 using CTAR_All_Star.Models;
 using CTAR_All_Star.ViewModels;
@@ -13,7 +10,7 @@ using Xamarin.Forms.Xaml;
 
 namespace CTAR_All_Star
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ManagePatients : ContentPage
 	{
         PatientListViewModel patientListViewModel;
