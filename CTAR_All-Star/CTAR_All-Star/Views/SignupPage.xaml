@@ -15,7 +15,6 @@
             <x:Array Type="{x:Type x:String}">
               <x:String>Patient</x:String>
               <x:String>Doctor</x:String>
-              <x:String>Not sure</x:String>
             </x:Array>
           </Picker.ItemsSource>
         </Picker>

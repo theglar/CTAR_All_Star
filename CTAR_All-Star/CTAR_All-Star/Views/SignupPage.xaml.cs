@@ -3,6 +3,7 @@ using System.Collections.Generic;
 
 using Xamarin.Forms;
 using CTAR_All_Star.Models;
+using CTAR_All_Star.Database;
 
 namespace CTAR_All_Star.Views
 {
@@ -31,11 +32,13 @@ namespace CTAR_All_Star.Views
 
         void SignUpProcedure(object sender, EventArgs e)
         {
+            DatabaseHelper dbHelper = new DatabaseHelper();
             User user = new User(Entry_NewUser.Text, Entry_NewPassword.Text);
-            if (user.CheckInformation())
+            if (user.VerifySignUp())
             {
                 DisplayAlert("Account Created", "You've successfully  created an account.", "Ok");
                 Navigation.PushAsync(new SigninPage());
+                dbHelper.addUser(user);
             }
 
             else
@@ -44,9 +47,9 @@ namespace CTAR_All_Star.Views
             }
         }
 
-        void SignUpProcedure()
-        {
-            Navigation.PushAsync(new SigninPage());
-        }
+        //void SignUpProcedure()
+        //{
+        //    Navigation.PushAsync(new SigninPage());
+        //}
     }
 }
