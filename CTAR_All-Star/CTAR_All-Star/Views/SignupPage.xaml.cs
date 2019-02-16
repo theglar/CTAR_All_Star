@@ -9,6 +9,9 @@ namespace CTAR_All_Star.Views
 {
     public partial class SignupPage : ContentPage
     {
+        public int typeIndex { get; set; }
+        public string userType { get; set; }
+
         public SignupPage()
         {
             InitializeComponent();
@@ -22,7 +25,7 @@ namespace CTAR_All_Star.Views
             Lbl_NewPassword.TextColor = Constants.MainTextColor;
             Lbl_ConfirmPass.TextColor = Constants.MainTextColor;
             ActivitySpinner.IsVisible = false;
-            picker.BackgroundColor = Constants.MainTextColor;
+            typePicker.BackgroundColor = Constants.MainTextColor;
 
             Entry_NewUser.Completed += (s, e) => Entry_NewPassword.Focus();
             Entry_NewPassword.Completed += (s, e) => Entry_ConfirmPass.Focus();
@@ -33,8 +36,8 @@ namespace CTAR_All_Star.Views
         void SignUpProcedure(object sender, EventArgs e)
         {
             DatabaseHelper dbHelper = new DatabaseHelper();
-            User user = new User(Entry_NewUser.Text, Entry_NewPassword.Text);
-            if (user.VerifySignUp())
+            User user = new User(Entry_NewUser.Text, Entry_NewPassword.Text, userType);
+            if (user.VerifySignUp() && Entry_ConfirmPass.Text == Entry_NewPassword.Text)
             {
                 DisplayAlert("Account Created", "You've successfully  created an account.", "Ok");
                 Navigation.PushAsync(new SigninPage());
@@ -46,6 +49,30 @@ namespace CTAR_All_Star.Views
                 DisplayAlert("Account Failed", "There was an error creating a new account", "Ok");
             }
         }
+
+        void typeChosen(object sender, EventArgs args)
+        {
+            Picker typePicker = (Picker)sender;
+            typeIndex = typePicker.SelectedIndex;
+
+            if (typeIndex == 0)
+            {
+                userType = "Patient";
+            }
+            else if (typeIndex == 1)
+            {
+                userType = "Doctor";
+            }
+
+            else
+            {
+                //it may be impossible for this case to ever be reached.
+                DisplayAlert("Invalid Selection", "Choose a valid user type", "OK");
+            }
+
+
+            }
+
 
         //void SignUpProcedure()
         //{

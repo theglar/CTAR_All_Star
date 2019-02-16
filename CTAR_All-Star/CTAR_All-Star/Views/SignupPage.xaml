@@ -10,7 +10,7 @@
             
             <ActivityIndicator x:Name="ActivitySpinner" Color="Red" IsRunning="true" />
             
-            <Picker x:Name="picker" Title="Select Role" Margin="0, 300, 0, 0">
+            <Picker x:Name="typePicker" Title="Select Role" Margin="0, 300, 0, 0" SelectedIndexChanged="typeChosen">>
           <Picker.ItemsSource>
             <x:Array Type="{x:Type x:String}">
               <x:String>Patient</x:String>
