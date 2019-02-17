@@ -1,9 +1,8 @@
 ﻿using CTAR_All_Star.Models;
 using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Text;
+using System.Linq;
 using Xamarin.Forms;
+using System;
 
 namespace CTAR_All_Star.Database
 {
@@ -42,20 +41,20 @@ namespace CTAR_All_Star.Database
             }
 
             //Notify ViewModel of changes
-            MessagingCenter.Send<DatabaseHelper>(this, "databaseChange");
+            Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper,Measurement>(this, "databaseChange", measurement));
         }
 
-        public void removeData(int measurementId)
+        public void removeData(Measurement measurement)
         {
             // Delete from database
             using (SQLiteConnection conn = new SQLiteConnection(App.DB_PATH))
             {
                 conn.CreateTable<Measurement>();
-                conn.Delete(measurementId);
+                conn.Delete(measurement);
             }
 
             // Notify ViewModel of changes
-            MessagingCenter.Send<DatabaseHelper>(this, "databaseChange");
+            Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper>(this, "databaseChange"));
         }
 
         public void clearDatabase()
@@ -64,6 +63,9 @@ namespace CTAR_All_Star.Database
             {
                 conn.DeleteAll<Measurement>();
             }
+
+            // Notify ViewModel of changes
+            Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper>(this, "databaseChange"));
         }
 
         /*******PATIENTS*********/
@@ -86,7 +88,7 @@ namespace CTAR_All_Star.Database
             }
 
             //Notify ViewModel of changes
-            MessagingCenter.Send<DatabaseHelper>(this, "patientChange");
+            Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper>(this, "patientChange"));
         }        
 
         public void removePatient(Patient patient)
@@ -99,7 +101,7 @@ namespace CTAR_All_Star.Database
             }
 
             // Notify ViewModel of changes
-            MessagingCenter.Send<DatabaseHelper>(this, "patientChange");
+            Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper>(this, "patientChange"));
         }
 
         public void clearPatients()
@@ -110,7 +112,7 @@ namespace CTAR_All_Star.Database
             }
 
             // Notify ViewModel of changes
-            MessagingCenter.Send<DatabaseHelper>(this, "patientChange");
+            Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper>(this, "patientChange"));
         }
 
         /*******WORKOUTS*********/
@@ -133,20 +135,20 @@ namespace CTAR_All_Star.Database
             }
 
             //Notify ViewModel of changes
-            //MessagingCenter.Send<DatabaseHelper>(this, "databaseChange");
+            Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper>(this, "workoutChange"));
         }
 
-        public void removeWorkout(int workoutId)
+        public void removeWorkout(Workout workout)
         {
             // Delete from database
             using (SQLiteConnection conn = new SQLiteConnection(App.DB_PATH))
             {
                 conn.CreateTable<Workout>();
-                conn.Delete(workoutId);
+                conn.Delete(workout);
             }
 
             // Notify ViewModel of changes
-            //MessagingCenter.Send<DatabaseHelper>(this, "databaseChange");
+            Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper>(this, "workoutChange"));
         }
 
         public void clearWorkouts()
@@ -155,6 +157,9 @@ namespace CTAR_All_Star.Database
             {
                 conn.DeleteAll<Workout>();
             }
+
+            // Notify ViewModel of changes
+            Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper>(this, "workoutChange"));
         }
 
         /*******USERS*********/
@@ -177,20 +182,20 @@ namespace CTAR_All_Star.Database
             }
 
             //Notify ViewModel of changes
-            //MessagingCenter.Send<DatabaseHelper>(this, "databaseChange");
+            MessagingCenter.Send<DatabaseHelper>(this, "userChange");
         }
 
-        public void removeUser(int userId)
+        public void removeUser(User user)
         {
             // Delete from database
             using (SQLiteConnection conn = new SQLiteConnection(App.DB_PATH))
             {
                 conn.CreateTable<User>();
-                conn.Delete(userId);
+                conn.Delete(user);
             }
 
             // Notify ViewModel of changes
-            //MessagingCenter.Send<DatabaseHelper>(this, "databaseChange");
+            MessagingCenter.Send<DatabaseHelper>(this, "userChange");
         }
 
         public void clearUsers()
@@ -199,13 +204,34 @@ namespace CTAR_All_Star.Database
             {
                 conn.DeleteAll<User>();
             }
+
+            // Notify ViewModel of changes
+            MessagingCenter.Send<DatabaseHelper>(this, "userChange");
         }
-
-        // Might need 
-        public bool verifiedUser()
+        
+        public bool verifyUser(string username, string password)
         {
-
-            return false;
+            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
+            {
+                User thisUser = conn.Query<User>("select * from User where Username = " + username).SingleOrDefault();
+                if(thisUser != null)
+                {
+                    if (thisUser.Password == password)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        System.Console.WriteLine("This password does not match.");
+                        return false;
+                    }
+                }
+                else
+                {
+                    System.Console.WriteLine("This user does not exist.");
+                    return false;
+                }
+            }
         }
     }
 }

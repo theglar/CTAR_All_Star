@@ -4,7 +4,7 @@
              x:Class="CTAR_All_Star.Views.AddPatientPage">
     <ContentPage.Content>
         <StackLayout Margin="10,10,10,0">
-            <Entry x:Name="patientIdEntry" Placeholder="Patient EMR Number"/>
+            <Entry x:Name="patientIdEntry" Placeholder="Patient EMR Number" Keyboard="Numeric"/>
             <Button Text="Add Patient"
                     Clicked="Button_Clicked"/>
         </StackLayout>

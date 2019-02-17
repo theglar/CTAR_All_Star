@@ -2,8 +2,14 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CTAR_All_Star.Navigation.HomePageDetail">
-  <StackLayout Padding="10">
-        <Image x:Name="LoginIcon" Source="LoginIcon.png" Margin="100, 100, 100, 50" />
-        <Label Text="Welcome to the CTAR All-Star Application!" FontAttributes="Italic" HorizontalOptions="CenterAndExpand" FontSize="Large"/>
-  </StackLayout>
+  <RelativeLayout Margin="20">
+        <Image x:Name="LoginIcon" Source="LoginIcon.png" 
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"  
+            RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.9}"
+            />
+        <Label Text="Welcome to the CTAR All-Star Application!" FontAttributes="Italic" HorizontalOptions="CenterAndExpand" FontSize="Large"
+            RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=LoginIcon, Property=Height, Factor=1}"
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"  
+            Margin="10"/>
+  </RelativeLayout>
 </ContentPage>
