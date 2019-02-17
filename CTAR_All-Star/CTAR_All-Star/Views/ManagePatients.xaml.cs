@@ -46,7 +46,7 @@ namespace CTAR_All_Star
                 {
                     conn.Delete(patient);
                     DisplayAlert("Deleted", patient.PatientEmrNumber + " deleted", "OK");
-                    Navigation.PopToRootAsync();
+                    Navigation.PopAsync();
                     Navigation.PushAsync(new ManagePatients());
                 }
                 else
