@@ -40,8 +40,8 @@ namespace CTAR_All_Star.Views
             if (user.VerifySignUp() && Entry_ConfirmPass.Text == Entry_NewPassword.Text)
             {
                 DisplayAlert("Account Created", "You've successfully  created an account.", "Ok");
-                Navigation.PushAsync(new SigninPage());
                 dbHelper.addUser(user);
+                Navigation.PushAsync(new SigninPage());                
             }
 
             else

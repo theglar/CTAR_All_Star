@@ -177,7 +177,7 @@ namespace CTAR_All_Star.Database
             // Add to database
             using (SQLiteConnection conn = new SQLiteConnection(App.DB_PATH))
             {
-                conn.CreateTable<User>();
+                //conn.CreateTable<User>();
                 conn.Insert(user);
             }
 
@@ -213,7 +213,7 @@ namespace CTAR_All_Star.Database
         {
             using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
             {
-                User thisUser = conn.Query<User>("select * from User where Username = " + username).SingleOrDefault();
+                User thisUser = conn.Query<User>("select * from User where Username = " + "'" + username + "'").FirstOrDefault(); //sb SingleOfDefault
                 if(thisUser != null)
                 {
                     if (thisUser.Password == password)
