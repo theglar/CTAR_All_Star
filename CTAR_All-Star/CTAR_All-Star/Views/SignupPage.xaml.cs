@@ -35,7 +35,7 @@ namespace CTAR_All_Star.Views
             if (user.CheckInformation())
             {
                 DisplayAlert("Account Created", "You've successfully  created an account.", "Ok");
-                Navigation.PushAsync(new SigninPage());
+                Navigation.PushModalAsync(new SigninPage());
             }
 
             else

@@ -31,8 +31,21 @@ namespace CTAR_All_Star
             
             dbHelper.initializeAllTables();
 
-            MainPage = new HomePage();
-            
+            //MainPage = new HomePage();
+            MainPage = new SigninPage();
+
+            // Listen for signal to update MainPage after successful login
+            MessagingCenter.Subscribe<SigninPage>(this, "signInSuccessful", (sender) =>
+            {
+                MainPage = new HomePage();
+            });
+
+            // Listen for signal to update MainPage after successful logout
+            MessagingCenter.Subscribe<LogoutPage>(this, "logOutSuccessful", (sender) =>
+            {
+                MainPage = new SigninPage();
+            });
+
         }
 
         protected override void OnStart()

@@ -34,6 +34,9 @@
     <Compile Update="Navigation\HomePageMenuItem.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\LogoutPage.xaml.cs">
+      <DependentUpon>LogoutPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\RemovePage.xaml.cs">
       <DependentUpon>RemovePage.xaml</DependentUpon>
     </Compile>
@@ -65,6 +68,9 @@
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\GraphPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
+    <EmbeddedResource Update="Views\LogoutPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ManageExercise.xaml">
