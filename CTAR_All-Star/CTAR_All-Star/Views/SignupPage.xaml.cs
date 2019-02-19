@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 using Xamarin.Forms;
@@ -40,8 +40,12 @@ namespace CTAR_All_Star.Views
             if (user.VerifySignUp() && Entry_ConfirmPass.Text == Entry_NewPassword.Text)
             {
                 DisplayAlert("Account Created", "You've successfully  created an account.", "Ok");
+<<<<<<< HEAD
                 dbHelper.addUser(user);
                 Navigation.PushAsync(new SigninPage());                
+=======
+                Navigation.PushModalAsync(new SigninPage());
+>>>>>>> 7574d7c... Changed flow to start with login page before allowing access to the rest. Also added a log out option
             }
 
             else
