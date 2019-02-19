@@ -41,7 +41,7 @@ namespace CTAR_All_Star.Views
             {
                 DisplayAlert("Account Created", "You've successfully  created an account.", "Ok");
                 dbHelper.addUser(user);
-                Navigation.PushAsync(new SigninPage());                
+                Navigation.PushModalAsync(new SigninPage());                
             }
 
             else
