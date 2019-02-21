@@ -1,6 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
     <TargetFramework>netstandard2.0</TargetFramework>
     <AssemblyName>CTAR_All_Star</AssemblyName>
     <RootNamespace>CTAR_All_Star</RootNamespace>

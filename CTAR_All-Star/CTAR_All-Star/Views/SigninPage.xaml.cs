@@ -43,7 +43,7 @@ namespace CTAR_All_Star.Views
 
             else 
             {
-                DisplayAlert("Login Failed", "Forgot Username or Password", "Ok");
+                DisplayAlert("Login Failed", "Incorrect Username or Password", "Ok");
             }
         }
 
