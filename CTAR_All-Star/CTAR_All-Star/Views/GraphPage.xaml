@@ -1,30 +1,31 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             xmlns:forms="clr-namespace:Microcharts.Forms;assembly=Microcharts.Forms"
              xmlns:chart="clr-namespace:Syncfusion.SfChart.XForms;assembly=Syncfusion.SfChart.XForms"
-             xmlns:local="clr-namespace:CTAR_All_Star"
-             xmlns:local1="clr-namespace:CTAR_All_Star.Models"
+             xmlns:local="clr-namespace:CTAR_All_Star.ViewModels"
              x:Class="CTAR_All_Star.GraphPage">
 
     <ContentPage.BindingContext>
-            <local1:ViewModel></local1:ViewModel>
+        <local:MeasurementViewModel></local:MeasurementViewModel>
         </ContentPage.BindingContext>
     <RelativeLayout>
-        <chart:SfChart x:Name="LineChart" Margin="20"
-            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"  
+        <chart:SfChart x:Name="LineChart" Margin="20" 
+            RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
             RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.9}">
             <chart:SfChart.PrimaryAxis>
                 <chart:CategoryAxis>
                     <chart:CategoryAxis.Title>
                         <chart:ChartAxisTitle Text="Time"></chart:ChartAxisTitle>
                     </chart:CategoryAxis.Title>
+                    <chart:CategoryAxis.LabelStyle>
+                        <chart:ChartAxisLabelStyle Font="0.01"/>
+                    </chart:CategoryAxis.LabelStyle>
                 </chart:CategoryAxis>
             </chart:SfChart.PrimaryAxis>
             <chart:SfChart.SecondaryAxis>
-                <chart:NumericalAxis Maximum="1" Minimum="-1">
+                <chart:NumericalAxis Maximum="1023" Minimum="-1">
                     <chart:NumericalAxis.StripLines>
-                        <chart:NumericalStripLine Start="0.3" Width ="0.025" Text="Goal" FillColor="#00FA9A"/>
+                        <chart:NumericalStripLine Start="675" Width ="10" Text="Goal" FillColor="#941414"/>
                     </chart:NumericalAxis.StripLines>
                     <chart:NumericalAxis.Title>
                         <chart:ChartAxisTitle Text="Pressure"></chart:ChartAxisTitle>
@@ -32,11 +33,11 @@
                 </chart:NumericalAxis>
             </chart:SfChart.SecondaryAxis>
             <chart:SfChart.Series>
-                <chart:LineSeries ItemsSource="{Binding Data}" XBindingPath="DisplayTime" YBindingPath="Pressure" EnableTooltip ="True">
-                    <chart:LineSeries.ColorModel>
+                <chart:FastLineSeries ItemsSource="{Binding Data}" XBindingPath="DisplayTime" YBindingPath="Pressure" EnableTooltip ="True" ListenPropertyChange="True" StrokeWidth="1">
+                    <chart:FastLineSeries.ColorModel>
                         <chart:ChartColorModel Palette="Natural"/>
-                    </chart:LineSeries.ColorModel>
-                </chart:LineSeries>
+                    </chart:FastLineSeries.ColorModel>
+                </chart:FastLineSeries>
             </chart:SfChart.Series>
         </chart:SfChart>
         <Button Text="Start" Margin="5"

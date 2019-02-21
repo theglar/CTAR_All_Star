@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CTAR_All_Star.Database;
 using CTAR_All_Star.Models;
 using CTAR_All_Star.Views;
 
@@ -20,14 +21,9 @@ namespace CTAR_All_Star
 		}
         private void Button_Clicked(object sender, EventArgs e)
         {
-            
-            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
-            {
-                conn.DeleteAll<Measurement>();
-                
-                DisplayAlert("Success", "Table has been cleared!", "Dismiss");
-                
-            }
+            DatabaseHelper dbHelper = new DatabaseHelper();
+            dbHelper.clearDatabase();
+            DisplayAlert("Success", "Table has been cleared!", "Dismiss");
         }        
     }
 }

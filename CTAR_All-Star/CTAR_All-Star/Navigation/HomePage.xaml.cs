@@ -1,14 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using CTAR_All_Star.Views;
-using CTAR_All_Star.Models;
-using SQLite;
 
 namespace CTAR_All_Star.Navigation
 {
@@ -19,7 +12,7 @@ namespace CTAR_All_Star.Navigation
         {
             InitializeComponent();
             MasterPage.ListView.ItemSelected += ListView_ItemSelected;
-            this.MasterBehavior = MasterBehavior.Popover;            
+            this.MasterBehavior = MasterBehavior.Popover;
         }
 
         private void ListView_ItemSelected(object sender, SelectedItemChangedEventArgs e)

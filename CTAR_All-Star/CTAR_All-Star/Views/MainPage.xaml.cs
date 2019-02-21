@@ -14,6 +14,7 @@ using System.Diagnostics;
 using Xamarin.Forms.PlatformConfiguration;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
+using CTAR_All_Star.Database;
 
 namespace CTAR_All_Star
 {
@@ -24,7 +25,10 @@ namespace CTAR_All_Star
         ObservableCollection<IDevice> deviceList;
         StackLayout availableDevices = new StackLayout();
         IDevice selectedDevice;
-        //Button button = btnConnectBluetooth;
+        IService deviceService;
+        ICharacteristic pressureCharacteristic;
+        string pressureStr;
+        int pressureVal;
 
         public MainPage()
         {
@@ -58,10 +62,10 @@ namespace CTAR_All_Star
                         deviceList.Add(a.Device);
                     });
                     int size = deviceList.Count;
-                    Debug.WriteLine(size);
+                    //Debug.WriteLine(size);
                 }
             };
-            adapter.DeviceConnected += (s, a) =>
+            adapter.DeviceConnected += async (s, a) =>
             {
                 Device.BeginInvokeOnMainThread(() =>
                 {
@@ -69,6 +73,40 @@ namespace CTAR_All_Star
                 });
                 btnConnectBluetooth.Text = "Tap to scan for devices";
                 deviceList.Clear();
+                deviceService = await selectedDevice.GetServiceAsync(Guid.Parse("0000ffe0-0000-1000-8000-00805f9b34fb"));
+                pressureCharacteristic = await deviceService.GetCharacteristicAsync(Guid.Parse("0000ffe1-0000-1000-8000-00805f9b34fb"));
+
+                pressureCharacteristic.ValueUpdated += (o, args) =>
+                {
+                    DatabaseHelper dbHelper = new DatabaseHelper();
+                    Measurement measurement = new Measurement();
+                    
+                    Device.BeginInvokeOnMainThread(() =>
+                    {
+                        pressureStr = args.Characteristic.StringValue;
+                        pressureVal = Convert.ToInt32(pressureStr);
+                        btnConnectBluetooth.Text = $"Value: {pressureVal}";
+                    });
+
+                    // Get current date and time
+                    DateTime d = DateTime.Now;
+                    DateTime dt = DateTime.Parse(d.ToString());
+                    measurement.UserName = "Tester 1";
+                    measurement.SessionNumber = "1";
+                    measurement.TimeStamp = d;
+                    measurement.Pressure = pressureVal;
+                    measurement.Duration = "1";
+                    measurement.DisplayTime = dt.ToString("HH:mm:ss");
+
+                    dbHelper.addData(measurement);
+                    
+                };
+
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    pressureCharacteristic.StartUpdatesAsync();
+                    //System.Threading.Thread.Sleep(500);
+                });
             };
         }
 

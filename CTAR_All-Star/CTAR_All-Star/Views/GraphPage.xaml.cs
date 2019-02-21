@@ -5,6 +5,7 @@ using Xamarin.Forms;
 using CTAR_All_Star.Models;
 using System.Threading;
 using Syncfusion.SfChart.XForms;
+using CTAR_All_Star.Database;
 
 namespace CTAR_All_Star
 {
@@ -17,19 +18,20 @@ namespace CTAR_All_Star
         }
 
         private void Start_Exercise(object sender, EventArgs e)
-        {           
+        {
+            DatabaseHelper dbHelper = new DatabaseHelper();
+
             // Initialize a starting point
             Double pressure = 0;
 
             //Loop 100 times - REMOVED THE LOOP FOR TESTING
             for (int i = 0; i < 1; i++)
             {
-                //Create and add a measurement to the database
                 // Get current date and time
                 DateTime d = DateTime.Now;
                 DateTime dt = DateTime.Parse(d.ToString());
                 
-                pressure = Math.Sin(Convert.ToDouble(d.Millisecond)/10);
+                pressure = Math.Sin(Convert.ToDouble(d.Millisecond)/10)*100+500;
 
                 Measurement measurement = new Measurement()
                 {
@@ -41,20 +43,7 @@ namespace CTAR_All_Star
                     DisplayTime = dt.ToString("HH:mm:ss")
                 };
 
-                using (SQLiteConnection conn = new SQLiteConnection(App.DB_PATH))
-                {
-                    conn.CreateTable<Measurement>();
-                    conn.Insert(measurement);
-                }                               
-
-                // Notify ViewModel of changes
-                MessagingCenter.Send<GraphPage>(this, "newMeasurement");                
-
-                //Wait 0.25 seconds
-                //Thread.Sleep(250);
-
-                //Refresh page
-                //Navigation.PushAsync(new GraphPage());
+                dbHelper.addData(measurement);
             }
         }
         private void Stop_Exercise(object sender, EventArgs e)

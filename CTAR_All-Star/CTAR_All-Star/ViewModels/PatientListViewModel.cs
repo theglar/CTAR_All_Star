@@ -1,8 +1,11 @@
-﻿using CTAR_All_Star.Models;
+﻿using CTAR_All_Star.Database;
+using CTAR_All_Star.Models;
+using SQLite;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Text;
+using Xamarin.Forms;
 
 namespace CTAR_All_Star.ViewModels
 {
@@ -12,27 +15,38 @@ namespace CTAR_All_Star.ViewModels
 
         public PatientListViewModel()
         {
-            this.Patients = new ObservableCollection<Patient>();
-            //Just for tesing
-            this.Patients.Add(new Patient
+            Patients = new ObservableCollection<Patient>();
+
+            // Connect to database, pull data and store it in the list
+            using (SQLiteConnection conn = new SQLiteConnection(App.DB_PATH))
             {
-                patientId = 63452574
-            });
-            this.Patients.Add(new Patient
+                // Display the most recent measurements
+                var table = conn.Table<Patient>();
+                table = table.OrderByDescending(x => x.PatientId);
+                table = table.OrderBy(x => x.PatientId);
+                foreach (var m in table)
+                {
+                    Patients.Add(m);
+                }
+            }
+
+            // Listen for signal to update data for graph
+            MessagingCenter.Subscribe<DatabaseHelper>(this, "patientChange", (sender) =>
             {
-                patientId = 54554421
-            });
-            this.Patients.Add(new Patient
-            {
-                patientId = 46652351
-            });
-            this.Patients.Add(new Patient
-            {
-                patientId = 68753444
-            });
-            this.Patients.Add(new Patient
-            {
-                patientId = 94345454
+                Patients.Clear();
+
+                // Connect to database, pull data and store it in the list
+                using (SQLiteConnection conn = new SQLiteConnection(App.DB_PATH))
+                {
+                    // Display the most recent measurements
+                    var table = conn.Table<Patient>();
+                    table = table.OrderByDescending(x => x.PatientId);
+                    table = table.OrderBy(x => x.PatientId);
+                    foreach (var m in table)
+                    {
+                        Patients.Add(m);
+                    }
+                }
             });
         }
     }
