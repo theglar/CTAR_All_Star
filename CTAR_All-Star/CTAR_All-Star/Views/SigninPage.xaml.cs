@@ -36,18 +36,20 @@ namespace CTAR_All_Star.Views
             if (user.CheckInformation())
             {
                 DisplayAlert("Login Success","You've successfully logged in.","Ok");
-                Navigation.PushAsync(new MainPage());
+                //Notify App to change Main Page
+                Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<SigninPage>(this, "signInSuccessful"));
+                Navigation.PushModalAsync(new MainPage());
             }
 
             else 
             {
-                DisplayAlert("Login Failed", "Forgot Username or Password", "Ok");
+                DisplayAlert("Login Failed", "Incorrect Username or Password", "Ok");
             }
         }
 
         void SignUpProcedure()
         {
-            Navigation.PushAsync(new SignupPage());
+            Navigation.PushModalAsync(new SignupPage());
         }
 
         
