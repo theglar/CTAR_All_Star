@@ -11,15 +11,15 @@ namespace CTAR_All_Star.Models
 {
     class BLEModel
     {
-        IBluetoothLE ble;
-        IAdapter adapter;
-        ObservableCollection<IDevice> deviceList;
+        private IBluetoothLE ble;
+        private IAdapter adapter;
+        private ObservableCollection<IDevice> deviceList;
         //StackLayout availableDevices = new StackLayout();
-        IDevice selectedDevice;
-        IService deviceService;
-        ICharacteristic pressureCharacteristic;
-        string pressureStr;
-        int pressureVal;
+        private IDevice selectedDevice;
+        private IService deviceService;
+        private ICharacteristic pressureCharacteristic;
+        private string pressureStr;
+        private int pressureVal;
 
         public BLEModel()
         {
@@ -52,8 +52,6 @@ namespace CTAR_All_Star.Models
                     {
                         deviceList.Add(a.Device);
                     });
-                    //int size = deviceList.Count;
-                    //Debug.WriteLine(size);
                 }
             };
             adapter.DeviceConnected += async (s, a) =>
