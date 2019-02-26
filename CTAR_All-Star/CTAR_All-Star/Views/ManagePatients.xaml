@@ -17,7 +17,7 @@
                         <ViewCell>
                             <ViewCell.View>
                                 <StackLayout Orientation="Horizontal" Padding="100,0,0,0" HorizontalOptions="Center">
-                                    <Label Text="{Binding PatientEmrNumber}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Large" Margin="10"/>
+                                    <Label Text="{Binding PatientEmrNumber}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Medium" Margin="10"/>
                                     <Button Text="Remove" CommandParameter="{Binding PatientId}" Clicked="Delete_Button_Clicked"></Button>
                                 </StackLayout>                                
                             </ViewCell.View>                            
@@ -25,7 +25,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button Text="Add a Patient" Clicked="Button_Clicked"/>
+            <Button Text="Add a Patient" Clicked="Button_Clicked"  HorizontalOptions="Center"/>
         </StackLayout>
         
     </ContentPage.Content>

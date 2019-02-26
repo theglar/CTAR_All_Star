@@ -4,10 +4,15 @@
              x:Class="CTAR_All_Star.Views.SigninPage">
     
     <StackLayout x:Name="MasterLayout">
-
+        <StackLayout Padding="0, 100, 0, 0">
+            <Label x:Name="WelcomeMessage" Text="Welcome to the CTAR All-Star!" TextColor="White"
+                   FontAttributes="Italic" HorizontalOptions="CenterAndExpand" FontSize="Large"></Label>
+            <Label x:Name="LoginMessage" Text="Please Sign In or Sign Up Below." TextColor="White"
+                   FontAttributes="Italic" HorizontalOptions="CenterAndExpand" FontSize="Medium"></Label>
+        </StackLayout>
         <StackLayout x:Name="LogoStack" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
             
-             <Image x:Name="LoginIcon" Source="LoginIcon.png" Margin="0, 100, 0, 0" />      
+             <Image x:Name="LoginIcon" Source="LoginIcon.png"  />      
         </StackLayout>
 
         <StackLayout x:Name="LoginEntriesStack" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="50,0,50,200">

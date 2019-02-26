@@ -4,7 +4,8 @@
              x:Class="CTAR_All_Star.Views.AddPatientPage">
     <ContentPage.Content>
         <StackLayout Margin="10,10,10,0">
-            <Entry x:Name="patientIdEntry" Placeholder="Patient EMR Number" Keyboard="Numeric"/>
+            <Label FontSize="Large" FontAttributes="Italic" Margin="20" HorizontalOptions="CenterAndExpand">Please enter the Patient EMR number:</Label>
+            <Entry x:Name="patientIdEntry" Placeholder="Patient EMR Number" Keyboard="Numeric" HorizontalOptions="CenterAndExpand"/>
             <Button Text="Add Patient"
                     Clicked="Button_Clicked"/>
         </StackLayout>
