@@ -11,106 +11,106 @@ namespace CTAR_All_Star.Models
 {
     class BLEModel
     {
-        private IBluetoothLE ble;
-        private IAdapter adapter;
-        private ObservableCollection<IDevice> deviceList;
-        //StackLayout availableDevices = new StackLayout();
-        private IDevice selectedDevice;
-        private IService deviceService;
-        private ICharacteristic pressureCharacteristic;
-        private string pressureStr;
-        private int pressureVal;
+        private IBluetoothLE BLE;
+        private IAdapter Adapter;
+        private ObservableCollection<IDevice> DeviceList;
+        //StackLayout availaBLEDevices = new StackLayout();
+        private IDevice SelectedDevice;
+        private IService DeviceService;
+        private ICharacteristic PressureCharacteristic;
+        private string PressureStr;
+        private int PressureVal;
 
         public BLEModel()
         {
             //InitializeComponent();
-            ble = CrossBluetoothLE.Current;
-            adapter = CrossBluetoothLE.Current.Adapter;
-            var state = ble.State;
-            deviceList = new ObservableCollection<IDevice>();
-            //lv.ItemsSource = deviceList;
+            BLE = CrossBluetoothLE.Current;
+            Adapter = CrossBluetoothLE.Current.Adapter;
+            //var state = BLE.State;
+            DeviceList = new ObservableCollection<IDevice>();
+            //lv.ItemsSource = DeviceList;
 
-            ble.StateChanged += (s, e) =>
+            BLE.StateChanged += (s, e) =>
             {
-                if (ble.IsOn)
+                if (BLE.IsOn)
                 {
                     //DisplayAlert("Notice", $"Bluetooth: {e.NewState}", "OK");
                 }
             };
-            adapter.ScanTimeoutElapsed += (s, e) =>
+            Adapter.ScanTimeoutElapsed += (s, e) =>
             {
                 //DisplayAlert("Notice", "timeout elapsed", "OK");
-                //btnConnectBluetooth.Text = "Tap to scan for devices";
-                deviceList.Clear();
+                //btnConnectBluetooth.Text = "Tap to scan for Devices";
+                DeviceList.Clear();
             };
 
-            adapter.DeviceDiscovered += (s, a) =>
+            Adapter.DeviceDiscovered += (s, a) =>
             {
-                if (a.Device.Name != null && !deviceList.Contains(a.Device))
+                if (a.Device.Name != null && !DeviceList.Contains(a.Device))
                 {
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        deviceList.Add(a.Device);
+                        DeviceList.Add(a.Device);
                     });
                 }
             };
-            adapter.DeviceConnected += async (s, a) =>
+            Adapter.DeviceConnected += async (s, a) =>
             {
                 Device.BeginInvokeOnMainThread(() =>
                 {
                     //DisplayAlert("Notice", "Connected!", "OK");
                 });
-                //btnConnectBluetooth.Text = "Tap to scan for devices";
-                deviceList.Clear();
-                deviceService = await selectedDevice.GetServiceAsync(Guid.Parse("0000ffe0-0000-1000-8000-00805f9b34fb"));
-                pressureCharacteristic = await deviceService.GetCharacteristicAsync(Guid.Parse("0000ffe1-0000-1000-8000-00805f9b34fb"));
+                //btnConnectBluetooth.Text = "Tap to scan for Devices";
+                DeviceList.Clear();
+                DeviceService = await SelectedDevice.GetServiceAsync(Guid.Parse("0000ffe0-0000-1000-8000-00805f9b34fb"));
+                PressureCharacteristic = await DeviceService.GetCharacteristicAsync(Guid.Parse("0000ffe1-0000-1000-8000-00805f9b34fb"));
 
-                pressureCharacteristic.ValueUpdated += (o, args) =>
+                PressureCharacteristic.ValueUpdated += (o, args) =>
                 {
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        pressureStr = args.Characteristic.StringValue;
-                        pressureVal = Convert.ToInt32(pressureStr);
-                        //btnConnectBluetooth.Text = $"Value: {pressureVal}";
+                        PressureStr = args.Characteristic.StringValue;
+                        PressureVal = Convert.ToInt32(PressureStr);
+                        //btnConnectBluetooth.Text = $"Value: {PressureVal}";
                     });
                 };
 
                 Device.BeginInvokeOnMainThread(() =>
                 {
-                    pressureCharacteristic.StartUpdatesAsync();
+                    PressureCharacteristic.StartUpdatesAsync();
                     //System.Threading.Thread.Sleep(500);
                 });
             };
         }
 
-        public bool ConnectToDevice(IDevice device)
+        public bool ConnectToDevice(IDevice SelectedDevice)
         {
-            if (device == null)
+            if (SelectedDevice == null)
             {
                 //await DisplayAlert("Notice", "No Device selected", "OK");
                 return false;
             }
             else
             {
-                //selectedDevice = lv.SelectedItem as IDevice;
+                //SelectedDevice = lv.SelectedItem as IDevice;
                 try
                 {
                     //await DisplayAlert("Notice", "Connected!", "OK")
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        adapter.StopScanningForDevicesAsync();
-                        adapter.ConnectToDeviceAsync(device);
+                        Adapter.StopScanningForDevicesAsync();
+                        Adapter.ConnectToDeviceAsync(SelectedDevice);
                     });
-                    //btnConnectBluetooth.Text = "Tap to scan for devices";
+                    //btnConnectBluetooth.Text = "Tap to scan for Devices";
                 }
                 catch (DeviceConnectionException ex)
                 {
-                    //await DisplayAlert("Notice", "Error connecting to device!", "OK");
+                    //await DisplayAlert("Notice", "Error connecting to Device!", "OK");
                     return false;
                 }
                 catch (ArgumentNullException ex)
                 {
-                    //await DisplayAlert("Notice", "Selected device is null!", "OK");
+                    //await DisplayAlert("Notice", "Selected Device is null!", "OK");
                     return false;
                 }
                 catch (Exception ex)
@@ -122,48 +122,44 @@ namespace CTAR_All_Star.Models
             }
         }
 
-        public bool BeginScanning()
+        public bool StartScan()
         {
-            deviceList.Clear();
+            DeviceList.Clear();
 
-            if (!ble.Adapter.IsScanning)
+            if (!BLE.Adapter.IsScanning)
             {
-                if (ble.IsOn)
+                if (BLE.IsOn)
                 {
                     //btnConnectBluetooth.Text = "Scanning... tap to stop";
-                    adapter.ScanTimeout = 30000;
+                    Adapter.ScanTimeout = 30000;
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        adapter.StartScanningForDevicesAsync();
+                        Adapter.StartScanningForDevicesAsync();
                     });
                     return true;
                 }
-                else
+                else //bluetooth is off
                 {
                     //await DisplayAlert("Notice", "Bluetooth is turned off. Please turn it on!", "OK");
                     return false;
                 }
             }
-            else
+            else //
             {
-                btnConnectBluetooth.Text = "Tap to scan for devices";
-                Device.BeginInvokeOnMainThread(() =>
-                {
-                    adapter.StopScanningForDevicesAsync();
-                });
+                return false;
             }
         }
 
-        public bool StopScanning()
+        public bool StopScan()
         {
-            deviceList.Clear();
+            DeviceList.Clear();
 
-            if (ble.Adapter.IsScanning)
+            if (BLE.Adapter.IsScanning)
             {
                 //btnConnectBluetooth.Text = "Scanning... tap to stop";
                 Device.BeginInvokeOnMainThread(() =>
                 {
-                    adapter.StopScanningForDevicesAsync();
+                    Adapter.StopScanningForDevicesAsync();
                 });
                 return true;
             }
@@ -172,6 +168,26 @@ namespace CTAR_All_Star.Models
                 //await DisplayAlert("Notice", "Bluetooth is turned off. Please turn it on!", "OK");
                 return false;
             }
+        }
+
+        public void ClearDeviceList()
+        {
+            DeviceList.Clear();
+        }
+
+        public bool IsScanning()
+        {
+            return BLE.Adapter.IsScanning;
+        }
+
+        public bool IsOn()
+        {
+            return BLE.IsOn;
+        }
+
+        public void SetScanTimeout(Int32 Duration)
+        {
+            Adapter.ScanTimeout = Duration;
         }
     }
 }

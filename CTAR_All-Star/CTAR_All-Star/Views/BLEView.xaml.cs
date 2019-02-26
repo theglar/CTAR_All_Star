@@ -14,33 +14,33 @@ namespace CTAR_All_Star.Views
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class BLEView : ContentPage
 	{
-        private IDevice selectedDevice;
-        private BLEViewModel vm;
+        private IDevice SelectedDevice;
+        private BLEViewModel VM;
 
 		public BLEView ()
 		{
 			InitializeComponent ();
 		}
 
-        private async void lv_ItemSelected(object sender, EventArgs e)
+        private async void LV_ItemSelected(object Sender, EventArgs E)
         {
-            if (lv.SelectedItem == null)
+            if (LV.SelectedItem == null)
             {
                 await DisplayAlert("Notice", "No Device selected", "OK");
                 return;
             }
             else
             {
-                selectedDevice = lv.SelectedItem as IDevice;
+                SelectedDevice = LV.SelectedItem as IDevice;
                 //try
                 //{
                     //await DisplayAlert("Notice", "Connected!", "OK")
                     //Device.BeginInvokeOnMainThread(() =>
                     //{
-                        vm.StopScan();
-                        vm.ConnectToDevice(selectedDevice);
+                        VM.StopScan();
+                        VM.ConnectToDevice(SelectedDevice);
                     //});
-                    btnConnectBluetooth.Text = "Tap to scan for devices";
+                    BtnConnectBluetooth.Text = "Tap to scan for devices";
                 //}
                 //catch (DeviceConnectionException ex)
                 //{
@@ -56,20 +56,20 @@ namespace CTAR_All_Star.Views
                 //}
             }
         }
-        private async void OnScanClicked(object sender, EventArgs args)
+        private async void OnScanClicked(object Sender, EventArgs args)
         {
-            //Button button = (Button)sender;
-            vm.clearDevices();
+            //Button button = (Button)Sender;
+            VM.ClearDeviceList();
 
-            if (!vm.IsScanning)
+            if (!VM.IsScanning())
             {
-                if (vm.IsOn)
+                if (VM.IsOn())
                 {
-                    btnConnectBluetooth.Text = "Scanning... tap to stop";
-                    vm.setScanTimeout = 30000;
+                    BtnConnectBluetooth.Text = "Scanning... tap to stop";
+                    VM.SetScanTimeout(30000);
                     Device.BeginInvokeOnMainThread(() =>
                     {
-                        vm.StartScan();
+                        VM.StartScan();
                     });
                 }
                 else
@@ -79,10 +79,10 @@ namespace CTAR_All_Star.Views
             }
             else
             {
-                btnConnectBluetooth.Text = "Tap to scan for devices";
+                BtnConnectBluetooth.Text = "Tap to scan for devices";
                 Device.BeginInvokeOnMainThread(() =>
                 {
-                    vm.StopScan();
+                    VM.StopScan();
                 });
             }
         }

@@ -14,8 +14,8 @@
         <Label Text="CTAR All-Star" 
             HorizontalOptions="Center"
             VerticalOptions="CenterAndExpand" />
-        <Button x:Name="btnConnectBluetooth" x:FieldModifier="private" Text="Tap to scan for devices" Clicked="OnScanClicked"/>
-        <ListView x:Name="lv" ItemSelected="lv_ItemSelected" BackgroundColor="Beige">
+        <Button x:Name="BtnConnectBluetooth" x:FieldModifier="private" Text="Tap to scan for devices" Clicked="OnScanClicked"/>
+        <ListView x:Name="LV" ItemSelected="LV_ItemSelected" BackgroundColor="Beige">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>

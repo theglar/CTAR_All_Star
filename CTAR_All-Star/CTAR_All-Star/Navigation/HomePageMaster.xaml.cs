@@ -35,7 +35,7 @@ namespace CTAR_All_Star.Navigation
                 MenuItems = new ObservableCollection<HomePageMenuItem>(new[]
                 {
                     new HomePageMenuItem { Id = 0, Title = "Home", TargetType = typeof(HomePageDetail) },
-                    new HomePageMenuItem { Id = 1, Title = "Bluetooth", TargetType = typeof(MainPage) },
+                    new HomePageMenuItem { Id = 1, Title = "Bluetooth", TargetType = typeof(BLEView) },
                     new HomePageMenuItem { Id = 2, Title = "Create Exercise", TargetType = typeof(CreateExercise)  },
                     new HomePageMenuItem { Id = 3, Title = "Choose Exercise", TargetType = typeof(ManageExercise)  },
                     new HomePageMenuItem { Id = 4, Title = "Manage Patients", TargetType = typeof(ManagePatients)  },
