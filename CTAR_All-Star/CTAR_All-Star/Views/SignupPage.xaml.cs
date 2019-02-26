@@ -37,21 +37,23 @@ namespace CTAR_All_Star.Views
         {
             DatabaseHelper dbHelper = new DatabaseHelper();
             User user = new User(Entry_NewUser.Text, Entry_NewPassword.Text, userType);
-            if (user.VerifySignUp() && Entry_ConfirmPass.Text == Entry_NewPassword.Text)
-            {
-                DisplayAlert("Account Created", "You've successfully  created an account.", "Ok");
-<<<<<<< HEAD
-                dbHelper.addUser(user);
-                Navigation.PushAsync(new SigninPage());                
-=======
-                Navigation.PushModalAsync(new SigninPage());
->>>>>>> 7574d7c... Changed flow to start with login page before allowing access to the rest. Also added a log out option
-            }
+            if (dbHelper.UniqueUser(Entry_NewUser.Text) == true)
+                if (user.VerifySignUp() && Entry_ConfirmPass.Text == Entry_NewPassword.Text)
+                {
+                    DisplayAlert("Account Created", "You've successfully  created an account.", "Ok");
 
-            else
-            {
-                DisplayAlert("Account Failed", "There was an error creating a new account", "Ok");
-            }
+                    dbHelper.addUser(user);
+                    Navigation.PushAsync(new SigninPage());                
+
+                    Navigation.PushModalAsync(new SigninPage());
+                }
+
+                else
+                {
+                    DisplayAlert("Account Failed", "There was an error creating a new account", "Ok");
+                }
+            else //say username already exists
+                DisplayAlert("Account Not Created", "Username already exists", "Ok");
         }
 
         void typeChosen(object sender, EventArgs args)

@@ -233,5 +233,25 @@ namespace CTAR_All_Star.Database
                 }
             }
         }
+
+        public bool UniqueUser(string username)
+        {
+            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
+            {
+                //this works, but using exists query i think is proper.
+                User thisUser = conn.Query<User>("Select * from User where Username = " + "'" + username + "'").FirstOrDefault(); //sb SingleOfDefault
+                if (thisUser == null)
+                {
+                    return true;
+                }
+
+                else
+                {
+                    return false;
+                }
+            }
+
+        }
+
     }
 }
