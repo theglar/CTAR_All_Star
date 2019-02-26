@@ -14,7 +14,7 @@
         <RelativeLayout x:Name="Header" HorizontalOptions="CenterAndExpand" 
                     RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
                     RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.4}" >
-            <StackLayout Orientation="Horizontal" Margin="5" Spacing="150" >
+            <StackLayout Orientation="Horizontal" Margin="5" Spacing="20" >
                 <StackLayout Spacing="10" Padding="0,30,0,0">
                     <Label Text="SETS" HorizontalTextAlignment="Center" FontSize="Medium"></Label>
                     <Label Text="1" BackgroundColor="LightGray" FontSize="35" HorizontalTextAlignment="Center" FontAttributes="Bold"></Label>
