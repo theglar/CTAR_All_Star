@@ -1,31 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" x:Class="CTAR_All_Star.Views.SignupPage">
     <ContentPage.Content>
-        
-        <StackLayout x:Name="LoginEntriesStack" VerticalOptions="CenterAndExpand" HorizontalOptions="FillAndExpand" Margin="100, 0, 100, 200">
-            <StackLayout.Padding>
-                <OnIdiom x:TypeArguments="Thickness">
-                </OnIdiom>
-            </StackLayout.Padding>
-            
-            <ActivityIndicator x:Name="ActivitySpinner" Color="Red" IsRunning="true" />
-            
-            <Picker x:Name="typePicker" Title="Select Role" Margin="0, 300, 0, 0" SelectedIndexChanged="typeChosen">>
-          <Picker.ItemsSource>
-            <x:Array Type="{x:Type x:String}">
-              <x:String>Patient</x:String>
-              <x:String>Doctor</x:String>
-            </x:Array>
-          </Picker.ItemsSource>
-        </Picker>
-            <Label x:Name="Lbl_newUser" Text="User ID" Margin="0, 0, 0, 0"/>
-            <Entry x:Name="Entry_NewUser" Placeholder="User ID" Text="" BackgroundColor="White"/>
-            <Label x:Name="Lbl_NewPassword" Text="Password" />
-            <Entry x:Name="Entry_NewPassword" Placeholder="Password" Text="" BackgroundColor="White" IsPassword="True"/>
-            <Label x:Name="Lbl_ConfirmPass" Text="Confirm Password" />
-            <Entry x:Name="Entry_ConfirmPass" Placeholder="Password" Text="" BackgroundColor="White" IsPassword="True"/>
-            <Button x:Name="Btn_CreateAccount" Text="Create Account" Clicked="SignUpProcedure" />
-        </StackLayout>
-        
+        <RelativeLayout x:Name="LoginEntriesStack" >
+            <StackLayout Padding="50,0,50,0" VerticalOptions="CenterAndExpand"
+                        RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+                        RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}">
+                <ActivityIndicator x:Name="ActivitySpinner" Color="Red" IsRunning="true" />
+                <Picker x:Name="typePicker" Title="Select Role" SelectedIndexChanged="typeChosen" HorizontalOptions="FillAndExpand" >
+                    <Picker.ItemsSource>
+                        <x:Array Type="{x:Type x:String}">
+                            <x:String>Patient</x:String>
+                            <x:String>Doctor</x:String>
+                        </x:Array>
+                    </Picker.ItemsSource>
+                </Picker>
+                <Label x:Name="Lbl_newUser" Text="User ID" HorizontalOptions="CenterAndExpand" />
+                <Entry x:Name="Entry_NewUser" Placeholder="User ID" Text="" BackgroundColor="White" HorizontalOptions="FillAndExpand" />
+                <Label x:Name="Lbl_NewPassword" Text="Password" HorizontalOptions="CenterAndExpand" />
+                <Entry x:Name="Entry_NewPassword" Placeholder="Password" Text="" BackgroundColor="White" IsPassword="True" HorizontalOptions="FillAndExpand" />
+                <Label x:Name="Lbl_ConfirmPass" Text="Confirm Password" HorizontalOptions="CenterAndExpand"/>
+                <Entry x:Name="Entry_ConfirmPass" Placeholder="Password" Text="" BackgroundColor="White" IsPassword="True" HorizontalOptions="FillAndExpand" />
+                <Button x:Name="Btn_CreateAccount" Text="Create Account" Clicked="SignUpProcedure" HorizontalOptions="FillAndExpand" />
+            </StackLayout>
+        </RelativeLayout>
     </ContentPage.Content>
 </ContentPage>
