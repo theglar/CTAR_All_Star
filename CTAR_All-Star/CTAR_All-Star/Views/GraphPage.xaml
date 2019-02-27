@@ -13,28 +13,29 @@
                     VerticalOptions="CenterAndExpand">
         <RelativeLayout x:Name="Header" HorizontalOptions="CenterAndExpand" 
                     RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
-                    RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.4}" >
-            <StackLayout Orientation="Horizontal" Margin="5" Spacing="20" >
+                    RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.2}" >
+            <StackLayout Orientation="Horizontal" Spacing="20">
                 <StackLayout Spacing="10" Padding="0,30,0,0">
-                    <Label Text="SETS" HorizontalTextAlignment="Center" FontSize="Medium"></Label>
-                    <Label Text="1" BackgroundColor="LightGray" FontSize="35" HorizontalTextAlignment="Center" FontAttributes="Bold"></Label>
-                    <Label Text="of 2" HorizontalTextAlignment="Center" FontSize="Small"></Label>
+                    <Label Text="SETS" HorizontalTextAlignment="Center" FontSize="Small"></Label>
+                    <Label x:Name ="NumSets" Text="1" BackgroundColor="LightGray" FontSize="20" HorizontalTextAlignment="Center" FontAttributes="Bold"></Label>
+                    <Label x:Name="TotalSets" Text="of 2" HorizontalTextAlignment="Center" FontSize="Micro"></Label>
                 </StackLayout>
                 <StackLayout Spacing="10">
-                    <Label Text="REST" FontSize="Large" FontAttributes="Bold" HorizontalTextAlignment="Center" ></Label>
-                    <Label Text="2:00" BackgroundColor="LightGreen" FontSize="72" TextColor="Red" HorizontalTextAlignment="Center" WidthRequest="200"></Label>
+                    <Label x:Name="TimerLabel" Text="REST" FontSize="Large" FontAttributes="Bold" HorizontalTextAlignment="Center" ></Label>
+                    <Label x:Name="Time" Text="2:00" BackgroundColor="MidnightBlue" FontSize="40" TextColor="White" HorizontalTextAlignment="Center" WidthRequest="200"></Label>
                 </StackLayout>
                 <StackLayout Spacing="10" Padding="0,30,0,0">
-                    <Label Text="REPS" HorizontalTextAlignment="Center" FontSize="Medium"></Label>
-                    <Label Text="1" BackgroundColor="LightGray" FontSize="35" HorizontalTextAlignment="Center" FontAttributes="Bold"></Label>
-                    <Label Text="of 2" HorizontalTextAlignment="Center" FontSize="Small"></Label>
+                    <Label Text="REPS" HorizontalTextAlignment="Center" FontSize="Small"></Label>
+                    <Label x:Name="NumReps" Text="1" BackgroundColor="LightGray" FontSize="20" HorizontalTextAlignment="Center" FontAttributes="Bold"></Label>
+                    <Label x:Name="TotalReps" Text="of 2" HorizontalTextAlignment="Center" FontSize="Micro"></Label>
                 </StackLayout>
             </StackLayout>
         </RelativeLayout>
 
         <RelativeLayout RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
-                    RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Header, Property=Y, Constant=130}">
-            <chart:SfChart x:Name="LineChart" Margin="20" HeightRequest="450">
+                    RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Header, Property=Y, Constant=100}"
+                        RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.7}">
+            <chart:SfChart x:Name="LineChart" Margin="20">
                 <chart:SfChart.PrimaryAxis>
                     <chart:CategoryAxis>
                         <chart:CategoryAxis.Title>
@@ -63,20 +64,16 @@
                     </chart:FastLineSeries>
                 </chart:SfChart.Series>
             </chart:SfChart>
-            <Button Text="Start" Margin="5"
-                Clicked="Start_Exercise" BackgroundColor="LightSlateGray" HorizontalOptions="StartAndExpand"
-                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=LineChart, Property=Height, Factor=1.05}"  
-                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=LineChart, Property=Width,  Factor=0.3}"></Button>
-            <Button Text="Stop" Margin="5"            
-                Clicked="Stop_Exercise" BackgroundColor="LightCoral" HorizontalOptions="CenterAndExpand"
-                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=LineChart, Property=Height, Factor=1.05}"  
-                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=LineChart, Property=Width, Factor=0.5}"></Button>
-            <Button Text="Save Session" Margin="5"               
-                Clicked="Save_Exercise" BackgroundColor="LightSeaGreen" HorizontalOptions="EndAndExpand"
-                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=LineChart, Property=Height, Factor=1.05}"  
-                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToView, ElementName=LineChart, Property=Width, Factor=0.7}"></Button>
+            <RelativeLayout x:Name="Footer" HorizontalOptions="CenterAndExpand" 
+                    RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=LineChart, Property=Height, Factor=1.05}"  
+                    RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}" >
+                <StackLayout Orientation="Horizontal" Spacing="20" HorizontalOptions="Center">
+                    <Button Text="Start" Clicked="Start_Exercise" BackgroundColor="LightSlateGray"></Button>
+                    <Button Text="Stop" Clicked="Stop_Exercise" BackgroundColor="LightCoral"></Button>
+                    <Button Text="Save" Clicked="Save_Exercise" BackgroundColor="LightSeaGreen"></Button>
+                </StackLayout>
+            </RelativeLayout>                     
         </RelativeLayout>        
     </RelativeLayout>
-
 </ContentPage>
 
