@@ -20,6 +20,8 @@ namespace CTAR_All_Star.Views
 		public BLEView ()
 		{
 			InitializeComponent ();
+            VM = new BLEViewModel();
+            LV.ItemsSource = VM.GetDeviceList();
 		}
 
         private async void LV_ItemSelected(object Sender, EventArgs E)

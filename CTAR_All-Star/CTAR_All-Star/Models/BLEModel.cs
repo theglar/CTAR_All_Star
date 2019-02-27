@@ -15,7 +15,7 @@ namespace CTAR_All_Star.Models
         private IAdapter Adapter;
         private ObservableCollection<IDevice> DeviceList;
         //StackLayout availaBLEDevices = new StackLayout();
-        private IDevice SelectedDevice;
+        //private IDevice SelectedDevice;
         private IService DeviceService;
         private ICharacteristic PressureCharacteristic;
         private string PressureStr;
@@ -188,6 +188,11 @@ namespace CTAR_All_Star.Models
         public void SetScanTimeout(Int32 Duration)
         {
             Adapter.ScanTimeout = Duration;
+        }
+
+        public ObservableCollection<IDevice> GetDeviceList()
+        {
+
         }
     }
 }

@@ -2,6 +2,7 @@
 using Plugin.BLE.Abstractions.Contracts;
 using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Text;
 
 namespace CTAR_All_Star.ViewModels
@@ -9,6 +10,11 @@ namespace CTAR_All_Star.ViewModels
     class BLEViewModel
     {
         private BLEModel BLE;
+
+        public BLEViewModel()
+        {
+            BLE = new BLEModel;
+        }
 
         public bool StopScan()
         {
@@ -43,6 +49,11 @@ namespace CTAR_All_Star.ViewModels
         public void SetScanTimeout(Int32 Duration)
         {
             BLE.SetScanTimeout(Duration);
+        }
+
+        public ObservableCollection<IDevice> GetDeviceList()
+        {
+            return BLE.GetDeviceList();
         }
     }
 }
