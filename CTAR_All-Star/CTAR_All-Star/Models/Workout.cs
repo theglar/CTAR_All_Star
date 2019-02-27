@@ -1,9 +1,13 @@
-﻿using System;
+﻿using SQLite;
+using System;
 namespace CTAR_All_Star.Models
 {
     public class Workout
     {
-        public int work { get; set; }
+        [PrimaryKey, AutoIncrement, Unique]
+        public int WorkID { get; set; }
+        public string PatientEmrNumber { get; set; }
+        public string Type { get; set; }
         public string NumReps { get; set; }
         public string NumSets { get; set; }
         public string ThresholdPercentage { get; set; }
