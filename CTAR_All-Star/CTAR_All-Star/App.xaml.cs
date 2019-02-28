@@ -15,6 +15,11 @@ namespace CTAR_All_Star
         public static string DB_PATH = string.Empty;
         DatabaseHelper dbHelper = new DatabaseHelper();
 
+        //For current user
+        public static User currentUser = new User();
+
+        //Can use in other pages as: "App.currentUser"
+
         public App()
         {
             InitializeComponent();
@@ -35,14 +40,18 @@ namespace CTAR_All_Star
             MainPage = new SigninPage();
 
             // Listen for signal to update MainPage after successful login
-            MessagingCenter.Subscribe<SigninPage>(this, "signInSuccessful", (sender) =>
+            MessagingCenter.Subscribe<SigninPage, User>(this, "signInSuccessful", (sender, user) =>
             {
+                currentUser = user;
+                currentUser.IsLoggedIn = true;
                 MainPage = new HomePage();
             });
 
             // Listen for signal to update MainPage after successful logout
             MessagingCenter.Subscribe<LogoutPage>(this, "logOutSuccessful", (sender) =>
             {
+                currentUser = null;
+                currentUser.IsLoggedIn = false;
                 MainPage = new SigninPage();
             });
 

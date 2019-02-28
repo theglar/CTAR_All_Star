@@ -11,7 +11,8 @@ namespace CTAR_All_Star.Models
         public string Username { get; set; }
         public string Password { get; set; }
         public string ConfirmPass { get; set; }
-        public string userType { get; set;  }
+        public string UserType { get; set;  }
+        public bool IsLoggedIn { get; set; }
 
         public User()
         {
@@ -21,7 +22,7 @@ namespace CTAR_All_Star.Models
         {
             this.Username = Username;
             this.Password = Password;
-            this.userType = userType;
+            this.UserType = userType;
         }
 
         public User(string Username, string Password)

@@ -19,7 +19,7 @@ namespace CTAR_All_Star.Database
             initializePatientTable();
             initializeUsersTable();
             initializeWorkoutTable();
-            //deleteWOTable();
+            //deleteTable();
         }
 
         /*******MEASUREMENTS*********/
@@ -163,14 +163,6 @@ namespace CTAR_All_Star.Database
             Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper>(this, "workoutChange"));
         }
 
-        public void deleteWOTable()
-        {
-            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
-            {
-                conn.DropTable<Workout>();
-            }
-        }
-
         /*******USERS*********/
 
         public void initializeUsersTable()
@@ -240,6 +232,15 @@ namespace CTAR_All_Star.Database
                     System.Console.WriteLine("This user does not exist.");
                     return false;
                 }
+            }
+        }
+
+        // For use in development
+        public void deleteTable()
+        {
+            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
+            {
+                conn.DropTable<Workout>(); // Change to the table you want to delete
             }
         }
     }
