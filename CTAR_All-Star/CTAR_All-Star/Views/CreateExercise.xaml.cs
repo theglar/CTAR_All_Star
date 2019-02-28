@@ -37,7 +37,7 @@ namespace CTAR_All_Star
 
         void SaveWorkoutProcedure(object sender, EventArgs e)
         {
-            Workout workout = new Workout(Entry_NumReps.Text, Entry_NumSets.Text, Entry_Threshold.Text);
+            Workout workout = new Workout(UserID.SelectedItem.ToString(), Exercise.SelectedItem.ToString(), Entry_NumReps.Text, Entry_NumSets.Text, Entry_Threshold.Text);
             if (workout.CheckInformation())
             {
                 DisplayAlert("Workout Saved", "You've successfully saved a workout.", "Ok");
