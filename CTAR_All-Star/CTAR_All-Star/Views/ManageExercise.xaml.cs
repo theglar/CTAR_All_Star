@@ -6,22 +6,16 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using CTAR_All_Star.Views;
 
 namespace CTAR_All_Star
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class SigninPage : ContentPage
+	public partial class ManageExercise : ContentPage
 	{
-		public SigninPage ()
+		public ManageExercise ()
 		{
 			InitializeComponent ();
-		}
-
-        private void Button_Clicked(object sender, EventArgs e)
-        {
-            DisplayAlert("Success", "Welcome! You have signed in.", "Dismiss");
-        }
-
-        
+		}        
     }
 }

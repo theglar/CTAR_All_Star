@@ -1,30 +1,20 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:CTAR_All_Star"
              x:Class="CTAR_All_Star.MainPage"
              xmlns:vm="clr-namespace:CTAR_All_Star.ViewModels">
 
-    <ContentPage.ToolbarItems>
-        <ToolbarItem Text="Signin" Activated="Signin_Activated"/>
-        <ToolbarItem Text="History" Activated="History_Activated"/>
-        <ToolbarItem Text="Graph" Activated="Graph_Activated"/>
-        <ToolbarItem Text="Setup" Activated="Setup_Activated"/>
-        <ToolbarItem Text="+" Activated="Measure_Activated" />
-        <ToolbarItem Text="-" Activated="Remove_Activated" />
-    </ContentPage.ToolbarItems>
-    
     <ContentPage.BindingContext>
         <vm:MainViewModel></vm:MainViewModel>
     </ContentPage.BindingContext>
 
     <StackLayout>
         <!-- Place new controls here -->
-        <Label Text="Welcome to Xamarin.Forms!" 
+        <Label Text="CTAR All-Star" 
             HorizontalOptions="Center"
             VerticalOptions="CenterAndExpand" />
-        <Button x:Name="btnPermissions" x:FieldModifier="private" Text="Grant Permissions First" Clicked="GetPermissions"/>
-        <Button x:Name="btnConnectBluetooth" x:FieldModifier="private" Text="Tap to scan for devices" Clicked="OnButtonClicked"/>
+        <Button x:Name="btnConnectBluetooth" x:FieldModifier="private" Text="Tap to scan for devices" Clicked="OnScanClicked"/>
         <ListView x:Name="lv" ItemSelected="lv_ItemSelected" BackgroundColor="Beige">
             <ListView.ItemTemplate>
                 <DataTemplate>

@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CTAR_All_Star.ManagePatients">
+  
+
+    <ContentPage.Content>
+        <StackLayout Padding="0,20,0,100">
+            <Label Text="Current Patients"
+                VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand"
+                   FontSize="Large" FontAttributes="Bold"/>
+            
+            <ListView ItemsSource="{Binding Patients}" Margin="0,20,0,0" x:Name="patientList">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout Orientation="Horizontal" Padding="100,0,0,0" HorizontalOptions="Center">
+                                    <Label Text="{Binding PatientEmrNumber}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Medium" Margin="10"/>
+                                    <Button Text="Remove" CommandParameter="{Binding PatientId}" Clicked="Delete_Button_Clicked"></Button>
+                                </StackLayout>                                
+                            </ViewCell.View>                            
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Text="Add a Patient" Clicked="Button_Clicked"  HorizontalOptions="Center"/>
+        </StackLayout>
+        
+    </ContentPage.Content>
+   
+</ContentPage>
