@@ -19,7 +19,7 @@ namespace CTAR_All_Star.Database
             initializePatientTable();
             initializeUsersTable();
             initializeWorkoutTable();
-            //deleteTable();
+            deleteTable();
         }
 
         /*******MEASUREMENTS*********/

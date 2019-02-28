@@ -4,7 +4,7 @@ namespace CTAR_All_Star.Models
 {
     public class Workout
     {
-        [PrimaryKey, AutoIncrement, Unique]
+        //[PrimaryKey, AutoIncrement, Unique]
         public int WorkID { get; set; }
 
         public string PatientEmrNumber { get; set; }
