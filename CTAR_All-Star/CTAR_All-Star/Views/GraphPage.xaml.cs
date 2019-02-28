@@ -3,14 +3,16 @@ using SQLite;
 
 using Xamarin.Forms;
 using CTAR_All_Star.Models;
-using System.Threading;
 using Syncfusion.SfChart.XForms;
 using CTAR_All_Star.Database;
+using System.Timers;
 
 namespace CTAR_All_Star
 {
     public partial class GraphPage : ContentPage
     {
+        private int countdown = 60;
+        Timer timer;
 
         public GraphPage()
         {            
@@ -19,6 +21,8 @@ namespace CTAR_All_Star
 
         private void Start_Exercise(object sender, EventArgs e)
         {
+            StartTimer();
+            TimerLabel.Text = "APPLY PRESSURE";
             DatabaseHelper dbHelper = new DatabaseHelper();
 
             // Initialize a starting point
@@ -48,11 +52,48 @@ namespace CTAR_All_Star
         }
         private void Stop_Exercise(object sender, EventArgs e)
         {
+            timer.Stop();
             DisplayAlert("Stop", "You have stopped the exercise.", "Dismiss");
         }
         private void Save_Exercise(object sender, EventArgs e)
         {
             DisplayAlert("Save", "You have saved the exercise.", "Dismiss");
+        }
+        private void StartTimer()
+        {
+            //base.onResume;
+            timer = new Timer
+            {
+                Interval = 1000
+            };
+            timer.Elapsed += Time_Elapsed;
+            timer.Start();
+
+
+        }
+
+        public void Time_Elapsed(object sender, ElapsedEventArgs e)
+        {
+            if (countdown > 0)
+            {
+                countdown--;
+                Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(countdown));
+
+            }
+
+            else if (countdown == 0)
+            {
+                countdown = 10;
+                Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(countdown));
+                timer.Stop();
+            }
+
+            //If it ever decides to go negative.
+            else
+            {
+                TimeDisplay.Text = "" + Convert.ToString(countdown);
+                timer.Stop();
+            }
         }
     }
 }

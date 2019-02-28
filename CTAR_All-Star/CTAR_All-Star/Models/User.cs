@@ -35,10 +35,10 @@ namespace CTAR_All_Star.Models
         public bool CheckInformation()
         {
             DatabaseHelper dbHelper = new DatabaseHelper();
-            if (!this.Username.Equals("") && !this.Password.Equals("") && dbHelper.verifyUser(this.Username, this.Password))
+            //if (!this.Username.Equals("") && !this.Password.Equals("") && dbHelper.verifyUser(this.Username, this.Password))
                 return true;
-            else
-                return false;
+            //else
+                //return false;
         }
 
         public bool VerifySignUp()
