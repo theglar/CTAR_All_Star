@@ -163,6 +163,31 @@ namespace CTAR_All_Star.Database
             Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper>(this, "workoutChange"));
         }
 
+        //public Workout GetWorkout(string )
+        //{
+        //    using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
+        //    {
+        //        User thisUser = conn.Query<User>("select * from User where Username = " + "'" + username + "'").FirstOrDefault(); //sb SingleOfDefault
+        //        if (thisUser != null)
+        //        {
+        //            if (thisUser.Password == password)
+        //            {
+        //                return true;
+        //            }
+        //            else
+        //            {
+        //                System.Console.WriteLine("This password does not match.");
+        //                return false;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            System.Console.WriteLine("This user does not exist.");
+        //            return false;
+        //        }
+        //    }
+        //}
+
         /*******USERS*********/
 
         public void initializeUsersTable()
