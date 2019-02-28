@@ -13,7 +13,7 @@ namespace CTAR_All_Star.Models
     {
         private IBluetoothLE BLE;
         private IAdapter Adapter;
-        private ObservableCollection<IDevice> DeviceList;
+        public readonly ObservableCollection<IDevice> DeviceList;
         //StackLayout availaBLEDevices = new StackLayout();
         //private IDevice SelectedDevice;
         private IService DeviceService;
