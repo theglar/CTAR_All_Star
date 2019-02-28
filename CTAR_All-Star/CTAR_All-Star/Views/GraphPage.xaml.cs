@@ -53,6 +53,7 @@ namespace CTAR_All_Star
         private void Stop_Exercise(object sender, EventArgs e)
         {
             timer.Stop();
+
             DisplayAlert("Stop", "You have stopped the exercise.", "Dismiss");
         }
         private void Save_Exercise(object sender, EventArgs e)
@@ -86,6 +87,7 @@ namespace CTAR_All_Star
                 countdown = 10;
                 Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(countdown));
                 timer.Stop();
+                TimerLabel.Text = "REST";
             }
 
             //If it ever decides to go negative.

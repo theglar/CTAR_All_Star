@@ -11,7 +11,7 @@ namespace CTAR_All_Star.Models
         public string Username { get; set; }
         public string Password { get; set; }
         public string ConfirmPass { get; set; }
-        public string UserType { get; set;  }
+        public string userType { get; set;  }
         public bool IsLoggedIn { get; set; }
 
         public User()
@@ -22,7 +22,7 @@ namespace CTAR_All_Star.Models
         {
             this.Username = Username;
             this.Password = Password;
-            this.UserType = userType;
+            this.userType = userType;
         }
 
         public User(string Username, string Password)
@@ -35,10 +35,10 @@ namespace CTAR_All_Star.Models
         public bool CheckInformation()
         {
             DatabaseHelper dbHelper = new DatabaseHelper();
-            //if (!this.Username.Equals("") && !this.Password.Equals("") && dbHelper.verifyUser(this.Username, this.Password))
+            if (!this.Username.Equals("") && !this.Password.Equals("") && dbHelper.verifyUser(this.Username, this.Password))
                 return true;
-            //else
-                //return false;
+            else
+                return false;
         }
 
         public bool VerifySignUp()
