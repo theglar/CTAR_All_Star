@@ -4,10 +4,9 @@
              x:Class="CTAR_All_Star.CreateExercise">
         
     <ContentPage.Content>
-          <StackLayout x:Name="WorkoutEntriesStack" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Margin="100, 0, 100, 100">
-            
-            
-              <Picker x:Name="UserID" Title="Patient ID" Margin="0, 200, 0, 0">
+        <StackLayout x:Name="WorkoutEntriesStack" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
+
+            <Picker x:Name="UserID" Title="Patient ID" >
           <Picker.ItemsSource>
             <x:Array Type="{x:Type x:String}">
               <x:String>3141592653</x:String>
@@ -19,7 +18,7 @@
             </x:Array>
           </Picker.ItemsSource>
             </Picker>
-               <Picker x:Name="Exercise" Title="Type" Margin="0, 25, 0, 0">
+               <Picker x:Name="Exercise" Title="Type" Margin="0, 20, 0, 0">
           <Picker.ItemsSource>
             <x:Array Type="{x:Type x:String}">
               <x:String>Isometric</x:String>
@@ -28,12 +27,14 @@
           </Picker.ItemsSource>
         </Picker>
             
-             <Label x:Name="Lbl_NumReps" Text="Number of Repetitions"/>
-            <Entry x:Name="Entry_NumReps" Placeholder="# Repetitions" Text="" BackgroundColor="White"/>
+            <Label x:Name="Lbl_WorkoutName" Text="Name of Workout" />
+            <Entry x:Name="Entry_WorkoutName" Placeholder="Name" Text="" BackgroundColor="White"/>
+            <Label x:Name="Lbl_NumReps" Text="Number of Repetitions" />
+            <Entry x:Name="Entry_NumReps" Placeholder="# Repetitions" Text="" BackgroundColor="White" Keyboard="Numeric"/>
             <Label x:Name="Lbl_NumSets" Text="Number of Sets" />
-            <Entry x:Name="Entry_NumSets" Placeholder="# Sets" Text="" BackgroundColor="White"/>
+            <Entry x:Name="Entry_NumSets" Placeholder="# Sets" Text="" BackgroundColor="White" Keyboard="Numeric"/>
             <Label x:Name="Lbl_Threshold" Text="Threshold" />
-            <Entry x:Name="Entry_Threshold" Placeholder="%" Text="" BackgroundColor="White"/>
+            <Entry x:Name="Entry_Threshold" Placeholder="%" Text="" BackgroundColor="White" Keyboard="Numeric"/>
             <Button x:Name="Btn_CreateAccount" Text="Save Workout" Clicked="SaveWorkoutProcedure" />
         </StackLayout>
     </ContentPage.Content>

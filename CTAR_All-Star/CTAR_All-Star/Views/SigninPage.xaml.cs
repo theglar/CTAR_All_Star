@@ -37,7 +37,7 @@ namespace CTAR_All_Star.Views
             {
                 DisplayAlert("Login Success","You've successfully logged in.","Ok");
                 //Notify App to change Main Page
-                Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<SigninPage, User>(this, "signInSuccessful", user));
+                //MessagingCenter.Send<SigninPage, User>(this, "signInSuccessful", user);
                 Navigation.PushModalAsync(new MainPage());
             }
 

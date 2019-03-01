@@ -26,6 +26,7 @@ namespace CTAR_All_Star
             Lbl_NumReps.TextColor = Constants.MainTextColor;
             Lbl_NumSets.TextColor = Constants.MainTextColor;
             Lbl_Threshold.TextColor = Constants.MainTextColor;
+            Lbl_WorkoutName.TextColor = Constants.MainTextColor;
 
             UserID.BackgroundColor = Constants.MainTextColor;
             Exercise.BackgroundColor = Constants.MainTextColor;
@@ -33,11 +34,12 @@ namespace CTAR_All_Star
             Entry_NumReps.Completed += (s, e) => Entry_NumSets.Focus();
             Entry_NumSets.Completed += (s, e) => Entry_Threshold.Focus();
             Entry_Threshold.Completed += (s, e) => SaveWorkoutProcedure(s, e);
+            Entry_WorkoutName.Completed += (s, e) => Entry_WorkoutName.Focus();
         }
 
         void SaveWorkoutProcedure(object sender, EventArgs e)
         {
-            Workout workout = new Workout(UserID.SelectedItem.ToString(), Exercise.SelectedItem.ToString(), Entry_NumReps.Text, Entry_NumSets.Text, Entry_Threshold.Text);
+            Workout workout = new Workout(Entry_WorkoutName.Text, UserID.SelectedItem.ToString(), Exercise.SelectedItem.ToString(), Entry_NumReps.Text, Entry_NumSets.Text, Entry_Threshold.Text);
             if (workout.CheckInformation())
             {
                 DisplayAlert("Workout Saved", "You've successfully saved a workout.", "Ok");

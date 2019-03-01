@@ -6,13 +6,14 @@ using CTAR_All_Star.Models;
 using Syncfusion.SfChart.XForms;
 using CTAR_All_Star.Database;
 using System.Timers;
+using System.Threading;
 
 namespace CTAR_All_Star
 {
     public partial class GraphPage : ContentPage
     {
-        private int countdown = 60;
-        Timer timer;
+        private int countdown = 10;
+        System.Timers.Timer timer;
 
         public GraphPage()
         {            
@@ -22,7 +23,7 @@ namespace CTAR_All_Star
         private void Start_Exercise(object sender, EventArgs e)
         {
             StartTimer();
-            TimerLabel.Text = "APPLY PRESSURE";
+            
             DatabaseHelper dbHelper = new DatabaseHelper();
 
             // Initialize a starting point
@@ -53,8 +54,8 @@ namespace CTAR_All_Star
         private void Stop_Exercise(object sender, EventArgs e)
         {
             timer.Stop();
-
-            DisplayAlert("Stop", "You have stopped the exercise.", "Dismiss");
+            TimerLabel.Text = "PAUSE";
+            TimeDisplay.BackgroundColor = Constants.RestColor;
         }
         private void Save_Exercise(object sender, EventArgs e)
         {
@@ -62,8 +63,11 @@ namespace CTAR_All_Star
         }
         private void StartTimer()
         {
+            TimerLabel.Text = "APPLY PRESSURE";
+            TimeDisplay.BackgroundColor = Constants.BackgroundColor;
+
             //base.onResume;
-            timer = new Timer
+            timer = new System.Timers.Timer
             {
                 Interval = 1000
             };
@@ -78,7 +82,7 @@ namespace CTAR_All_Star
             if (countdown > 0)
             {
                 countdown--;
-                Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(countdown));
+                Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(countdown)); 
 
             }
 
@@ -88,6 +92,7 @@ namespace CTAR_All_Star
                 Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(countdown));
                 timer.Stop();
                 TimerLabel.Text = "REST";
+                TimeDisplay.BackgroundColor = Constants.RestColor;
             }
 
             //If it ever decides to go negative.
@@ -95,6 +100,8 @@ namespace CTAR_All_Star
             {
                 TimeDisplay.Text = "" + Convert.ToString(countdown);
                 timer.Stop();
+                TimerLabel.Text = "REST";
+                TimeDisplay.BackgroundColor = Constants.RestColor;
             }
         }
     }

@@ -22,7 +22,7 @@
                 </StackLayout>
                 <StackLayout Spacing="10">
                     <Label x:Name="TimerLabel" Text="REST" FontSize="Large" FontAttributes="Bold" HorizontalTextAlignment="Center" ></Label>
-                    <Label x:Name="TimeDisplay" BackgroundColor="MidnightBlue" FontSize="40" TextColor="White" HorizontalTextAlignment="Center" WidthRequest="200"></Label>
+                    <Label x:Name="TimeDisplay" Text ="0" BackgroundColor="DimGray" FontSize="40" TextColor="White" HorizontalTextAlignment="Center" WidthRequest="200"></Label>
                 </StackLayout>
                 <StackLayout Spacing="10" Padding="0,30,0,0">
                     <Label Text="REPS" HorizontalTextAlignment="Center" FontSize="Small"></Label>

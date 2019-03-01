@@ -19,7 +19,17 @@ namespace CTAR_All_Star.Database
             initializePatientTable();
             initializeUsersTable();
             initializeWorkoutTable();
-            //deleteTable();
+        }
+        // For use in development
+        public void deleteAllTables()
+        {
+            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
+            {
+                conn.DropTable<Workout>();
+                conn.DropTable<User>();
+                conn.DropTable<Patient>();
+                conn.DropTable<Measurement>();
+            }
         }
 
         /*******MEASUREMENTS*********/
@@ -163,30 +173,14 @@ namespace CTAR_All_Star.Database
             Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper>(this, "workoutChange"));
         }
 
-        //public Workout GetWorkout(string )
-        //{
-        //    using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
-        //    {
-        //        User thisUser = conn.Query<User>("select * from User where Username = " + "'" + username + "'").FirstOrDefault(); //sb SingleOfDefault
-        //        if (thisUser != null)
-        //        {
-        //            if (thisUser.Password == password)
-        //            {
-        //                return true;
-        //            }
-        //            else
-        //            {
-        //                System.Console.WriteLine("This password does not match.");
-        //                return false;
-        //            }
-        //        }
-        //        else
-        //        {
-        //            System.Console.WriteLine("This user does not exist.");
-        //            return false;
-        //        }
-        //    }
-        //}
+        public Workout GetWorkout(int id)
+        {
+            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
+            {
+                Workout thisWorkout = conn.Query<Workout>("select * from Workout where WorkID = " + id).SingleOrDefault();
+                return thisWorkout;
+            }
+        }
 
         /*******USERS*********/
 
@@ -258,15 +252,6 @@ namespace CTAR_All_Star.Database
                     return false;
                 }
             }
-        }
-
-        // For use in development
-        public void deleteTable()
-        {
-            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
-            {
-                conn.DropTable<Workout>(); // Change to the table you want to delete
-            }
-        }
+        }        
     }
 }

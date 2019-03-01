@@ -33,11 +33,13 @@ namespace CTAR_All_Star
             InitializeComponent();
 
             DB_PATH = DB_Path;
-            
+
+            //dbHelper.deleteAllTables(); //For whenever changes are made to database tables - run once, then comment out
             dbHelper.initializeAllTables();
 
             //MainPage = new HomePage();
-            MainPage = new SigninPage();
+            //MainPage = new SigninPage();
+            MainPage = new HomePage();
 
             // Listen for signal to update MainPage after successful login
             MessagingCenter.Subscribe<SigninPage, User>(this, "signInSuccessful", (sender, user) =>
