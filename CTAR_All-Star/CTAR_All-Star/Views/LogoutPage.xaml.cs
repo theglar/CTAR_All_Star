@@ -20,7 +20,7 @@ namespace CTAR_All_Star.Views
         {
                 DisplayAlert("Logout Success", "You've successfully logged out.", "Ok");
                 //Notify App to change Main Page
-                Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<LogoutPage>(this, "logOutSuccessful"));
+                MessagingCenter.Send<LogoutPage>(this, "logOutSuccessful");
                 Navigation.PushModalAsync(new MainPage());            
         }
     }
