@@ -20,6 +20,7 @@ namespace CTAR_All_Star.Database
             initializeUsersTable();
             initializeWorkoutTable();
         }
+
         // For use in development
         public void deleteAllTables()
         {
@@ -210,7 +211,7 @@ namespace CTAR_All_Star.Database
             // Delete from database
             using (SQLiteConnection conn = new SQLiteConnection(App.DB_PATH))
             {
-                conn.CreateTable<User>();
+                //conn.CreateTable<User>();
                 conn.Delete(user);
             }
 
@@ -252,6 +253,14 @@ namespace CTAR_All_Star.Database
                     return false;
                 }
             }
-        }        
+        }
+        public User GetUser(string name)
+        {
+            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
+            {
+                User thisUser = conn.Query<User>("select * from User where Username = " + "'" + name + "'").SingleOrDefault();
+                return thisUser;
+            }
+        }
     }
 }

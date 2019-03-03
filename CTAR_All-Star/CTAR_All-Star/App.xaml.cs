@@ -22,9 +22,9 @@ namespace CTAR_All_Star
 
         public App()
         {
-            InitializeComponent();
+            //InitializeComponent();
 
-            MainPage = new HomePage();
+            //MainPage = new HomePage();
             
         }
 
@@ -37,23 +37,23 @@ namespace CTAR_All_Star
             //dbHelper.deleteAllTables(); //For whenever changes are made to database tables - run once, then comment out
             dbHelper.initializeAllTables();
 
-            //MainPage = new HomePage();
-            //MainPage = new SigninPage();
-            MainPage = new HomePage();
+            //Device.BeginInvokeOnMainThread(() => { MainPage = new SigninPage(); });
+            MainPage = new SigninPage();
 
             // Listen for signal to update MainPage after successful login
             MessagingCenter.Subscribe<SigninPage, User>(this, "signInSuccessful", (sender, user) =>
             {
                 currentUser = user;
                 currentUser.IsLoggedIn = true;
+                //Device.BeginInvokeOnMainThread(() => { MainPage = new HomePage(); });
                 MainPage = new HomePage();
+
             });
 
             // Listen for signal to update MainPage after successful logout
             MessagingCenter.Subscribe<LogoutPage>(this, "logOutSuccessful", (sender) =>
             {
-                currentUser = null;
-                currentUser.IsLoggedIn = false;
+                dbHelper.removeUser(currentUser);
                 MainPage = new SigninPage();
             });
 

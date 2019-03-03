@@ -8,6 +8,7 @@ namespace CTAR_All_Star.Models
     {
         [PrimaryKey, AutoIncrement, Unique]
         public int Id { get; set; }
+        
         public string Username { get; set; }
         public string Password { get; set; }
         public string ConfirmPass { get; set; }
