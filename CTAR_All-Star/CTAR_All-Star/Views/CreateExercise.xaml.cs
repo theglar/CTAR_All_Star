@@ -39,7 +39,7 @@ namespace CTAR_All_Star
 
         void SaveWorkoutProcedure(object sender, EventArgs e)
         {
-            Workout workout = new Workout(Entry_WorkoutName.Text, UserID.SelectedItem.ToString(), Entry_NumReps.Text, Entry_NumSets.Text, null); //Add list here later
+            Workout workout = new Workout(Entry_WorkoutName.Text, UserID.SelectedItem.ToString(), Entry_NumReps.Text, Entry_NumSets.Text, ""); //Add list here later
             if (workout.CheckInformation())
             {
                 DisplayAlert("Workout Saved", "You've successfully saved a workout.", "Ok");

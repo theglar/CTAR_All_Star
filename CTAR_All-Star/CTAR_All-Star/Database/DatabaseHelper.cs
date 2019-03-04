@@ -211,7 +211,7 @@ namespace CTAR_All_Star.Database
             // Delete from database
             using (SQLiteConnection conn = new SQLiteConnection(App.DB_PATH))
             {
-                //conn.CreateTable<User>();
+                conn.CreateTable<User>();
                 conn.Delete(user);
             }
 
