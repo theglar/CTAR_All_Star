@@ -21,6 +21,18 @@ namespace CTAR_All_Star.Database
             initializeWorkoutTable();
         }
 
+        // For use in development
+        public void deleteAllTables()
+        {
+            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
+            {
+                conn.DropTable<Workout>();
+                conn.DropTable<User>();
+                conn.DropTable<Patient>();
+                conn.DropTable<Measurement>();
+            }
+        }
+
         /*******MEASUREMENTS*********/
 
         public void initializeMeasurementTable()
@@ -162,6 +174,15 @@ namespace CTAR_All_Star.Database
             Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper>(this, "workoutChange"));
         }
 
+        public Workout GetWorkout(int id)
+        {
+            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
+            {
+                Workout thisWorkout = conn.Query<Workout>("select * from Workout where WorkID = " + id).SingleOrDefault();
+                return thisWorkout;
+            }
+        }
+
         /*******USERS*********/
 
         public void initializeUsersTable()
@@ -231,6 +252,14 @@ namespace CTAR_All_Star.Database
                     System.Console.WriteLine("This user does not exist.");
                     return false;
                 }
+            }
+        }
+        public User GetUser(string name)
+        {
+            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
+            {
+                User thisUser = conn.Query<User>("select * from User where Username = " + "'" + name + "'").SingleOrDefault();
+                return thisUser;
             }
         }
     }

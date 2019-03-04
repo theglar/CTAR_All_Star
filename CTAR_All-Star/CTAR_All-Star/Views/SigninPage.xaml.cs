@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CTAR_All_Star.Database;
 using CTAR_All_Star.Models;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -32,13 +33,16 @@ namespace CTAR_All_Star.Views
 
         void SignInProcedure(object sender, EventArgs e)
         {
-			User user = new User(Entry_Username.Text, Entry_Password.Text);
-            if (user.CheckInformation())
+            User user = new User();
+            DatabaseHelper dbHelper = new DatabaseHelper();
+            if (dbHelper.verifyUser(Entry_Username.Text, Entry_Password.Text))
             {
                 DisplayAlert("Login Success","You've successfully logged in.","Ok");
+                user = dbHelper.GetUser(Entry_Username.Text);
                 //Notify App to change Main Page
-                Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<SigninPage>(this, "signInSuccessful"));
-                Navigation.PushModalAsync(new MainPage());
+                Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<SigninPage, User>(this, "signInSuccessful", user));
+                
+                //Navigation.PushModalAsync(new MainPage());
             }
 
             else 

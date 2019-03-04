@@ -15,11 +15,16 @@ namespace CTAR_All_Star
         public static string DB_PATH = string.Empty;
         DatabaseHelper dbHelper = new DatabaseHelper();
 
+        //For current user
+        public static User currentUser = new User();
+
+        //Can use in other pages as: "App.currentUser"
+
         public App()
         {
-            InitializeComponent();
+            //InitializeComponent();
 
-            MainPage = new HomePage();
+            //MainPage = new HomePage();
             
         }
 
@@ -28,21 +33,27 @@ namespace CTAR_All_Star
             InitializeComponent();
 
             DB_PATH = DB_Path;
-            
+
+            //dbHelper.deleteAllTables(); //For whenever changes are made to database tables - run once, then comment out
             dbHelper.initializeAllTables();
 
-            //MainPage = new HomePage();
+            //Device.BeginInvokeOnMainThread(() => { MainPage = new SigninPage(); });
             MainPage = new SigninPage();
 
             // Listen for signal to update MainPage after successful login
-            MessagingCenter.Subscribe<SigninPage>(this, "signInSuccessful", (sender) =>
+            MessagingCenter.Subscribe<SigninPage, User>(this, "signInSuccessful", (sender, user) =>
             {
+                currentUser = user;
+                currentUser.IsLoggedIn = true;
+                //Device.BeginInvokeOnMainThread(() => { MainPage = new HomePage(); });
                 MainPage = new HomePage();
+
             });
 
             // Listen for signal to update MainPage after successful logout
             MessagingCenter.Subscribe<LogoutPage>(this, "logOutSuccessful", (sender) =>
             {
+                dbHelper.removeUser(currentUser);
                 MainPage = new SigninPage();
             });
 

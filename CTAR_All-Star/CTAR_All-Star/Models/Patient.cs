@@ -7,7 +7,7 @@ namespace CTAR_All_Star.Models
 {
      public class Patient
     {
-        [PrimaryKey, AutoIncrement]
+        [PrimaryKey, AutoIncrement, Unique]
         public int PatientId { get; set; }
         public string PatientEmrNumber { get; set; }
         public string DoctorName { get; set; }

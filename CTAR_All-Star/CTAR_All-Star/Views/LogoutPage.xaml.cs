@@ -18,10 +18,10 @@ namespace CTAR_All_Star.Views
 		}
         void LogOutButtonClicked(object sender, EventArgs e)
         {
-                DisplayAlert("Logout Success", "You've successfully logged out.", "Ok");
-                //Notify App to change Main Page
-                Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<LogoutPage>(this, "logOutSuccessful"));
-                Navigation.PushModalAsync(new MainPage());            
+            DisplayAlert("Logout Success", "You've successfully logged out.", "Ok");
+            //Notify App to change Main Page
+            Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<LogoutPage>(this, "logOutSuccessful"));
+            //Navigation.PushModalAsync(new MainPage());            
         }
     }
 }
