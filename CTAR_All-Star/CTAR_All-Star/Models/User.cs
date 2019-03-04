@@ -14,6 +14,7 @@ namespace CTAR_All_Star.Models
         public string ConfirmPass { get; set; }
         public string userType { get; set;  }
         public bool IsLoggedIn { get; set; }
+        public double OneRepMax { get; set; }
 
         public User()
         {

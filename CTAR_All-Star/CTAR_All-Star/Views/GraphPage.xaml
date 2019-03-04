@@ -21,8 +21,8 @@
                     <Label x:Name="TotalSets" Text="of 2" HorizontalTextAlignment="Center" FontSize="Micro"></Label>
                 </StackLayout>
                 <StackLayout Spacing="10">
-                    <Label x:Name="TimerLabel" Text="REST" FontSize="Large" FontAttributes="Bold" HorizontalTextAlignment="Center" ></Label>
-                    <Label x:Name="TimeDisplay" Text ="0" BackgroundColor="DimGray" FontSize="40" TextColor="White" HorizontalTextAlignment="Center" WidthRequest="200"></Label>
+                    <Label x:Name="TimerLabel" Text="" FontSize="Large" FontAttributes="Bold" HorizontalTextAlignment="Center" ></Label>
+                    <Label x:Name="TimeDisplay" Text ="" BackgroundColor="DimGray" FontSize="40" TextColor="White" HorizontalTextAlignment="Center" WidthRequest="200"></Label>
                 </StackLayout>
                 <StackLayout Spacing="10" Padding="0,30,0,0">
                     <Label Text="REPS" HorizontalTextAlignment="Center" FontSize="Small"></Label>
@@ -49,7 +49,7 @@
                 <chart:SfChart.SecondaryAxis>
                     <chart:NumericalAxis Maximum="1023" Minimum="-1">
                         <chart:NumericalAxis.StripLines>
-                            <chart:NumericalStripLine Start="675" Width ="10" Text="Goal" FillColor="#941414"/>
+                            <chart:NumericalStripLine x:Name="Goal" Start="675" Width ="10" Text="Goal" FillColor="#941414"/>
                         </chart:NumericalAxis.StripLines>
                         <chart:NumericalAxis.Title>
                             <chart:ChartAxisTitle Text="Pressure"></chart:ChartAxisTitle>
@@ -69,8 +69,8 @@
                     RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}" >
                 <StackLayout Orientation="Horizontal" Spacing="20" HorizontalOptions="Center">
                     <Button Text="Start" Clicked="Start_Exercise" BackgroundColor="LightSlateGray"></Button>
-                    <Button Text="Stop" Clicked="Stop_Exercise" BackgroundColor="LightCoral"></Button>
-                    <Button Text="Save" Clicked="Save_Exercise" BackgroundColor="LightSeaGreen"></Button>
+                    <Button Text="Pause" Clicked="Stop_Exercise" BackgroundColor="LightCoral"></Button>
+                    <Button Text="Done" Clicked="Save_Exercise" BackgroundColor="LightSeaGreen"></Button>
                 </StackLayout>
             </RelativeLayout>                     
         </RelativeLayout>        

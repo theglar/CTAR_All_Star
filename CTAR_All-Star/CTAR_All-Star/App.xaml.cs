@@ -17,6 +17,7 @@ namespace CTAR_All_Star
 
         //For current user
         public static User currentUser = new User();
+        public static Workout currentWorkout = new Workout();
 
         //Can use in other pages as: "App.currentUser"
 
@@ -45,6 +46,7 @@ namespace CTAR_All_Star
             {
                 currentUser = user;
                 currentUser.IsLoggedIn = true;
+                currentUser.OneRepMax = 500; //For testing
                 //Device.BeginInvokeOnMainThread(() => { MainPage = new HomePage(); });
                 MainPage = new HomePage();
 

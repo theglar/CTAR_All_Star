@@ -27,6 +27,8 @@ namespace CTAR_All_Star
             Lbl_NumSets.TextColor = Constants.MainTextColor;
             Lbl_Threshold.TextColor = Constants.MainTextColor;
             Lbl_WorkoutName.TextColor = Constants.MainTextColor;
+            Lbl_HoldDuration.TextColor = Constants.MainTextColor;
+            Lbl_RestDuration.TextColor = Constants.MainTextColor;
 
             UserID.BackgroundColor = Constants.MainTextColor;
             Exercise.BackgroundColor = Constants.MainTextColor;
@@ -35,13 +37,23 @@ namespace CTAR_All_Star
             Entry_NumSets.Completed += (s, e) => Entry_Threshold.Focus();
             Entry_Threshold.Completed += (s, e) => SaveWorkoutProcedure(s, e);
             Entry_WorkoutName.Completed += (s, e) => Entry_WorkoutName.Focus();
+            Entry_HoldDuration.Completed += (s, e) => Entry_HoldDuration.Focus();
+            Entry_RestDuration.Completed += (s, e) => Entry_RestDuration.Focus();
+
+            Exercise.SelectedIndexChanged += this.myPickerSelectedIndexChanged;
+
+        
         }
 
         void SaveWorkoutProcedure(object sender, EventArgs e)
         {
-            Workout workout = new Workout(Entry_WorkoutName.Text, UserID.SelectedItem.ToString(), Entry_NumReps.Text, Entry_NumSets.Text, null); //Add list here later
+            Workout workout = new Workout(Entry_WorkoutName.Text, UserID.SelectedItem.ToString(), App.currentUser.Username, Entry_NumReps.Text, Entry_NumSets.Text, Entry_Threshold.Text,
+                Entry_HoldDuration.Text, Entry_RestDuration.Text); 
             if (workout.CheckInformation())
             {
+                //For testing
+                App.currentWorkout = workout;
+
                 DisplayAlert("Workout Saved", "You've successfully saved a workout.", "Ok");
             }
 
@@ -49,6 +61,25 @@ namespace CTAR_All_Star
             {
                 DisplayAlert("Workout Failed", "Please complete all fields", "Ok");
             }
-        }       
+        }
+        
+        public void myPickerSelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(Exercise.SelectedIndex == 0) //Isometric
+            {
+                Entry_NumReps.Text = "1";
+                Entry_NumSets.Text = "3";
+                Entry_HoldDuration.Text = "30";
+                Entry_RestDuration.Text = "30";
+
+            }
+            else //Isotonic
+            {
+                Entry_NumReps.Text = "10";
+                Entry_NumSets.Text = "3";
+                Entry_HoldDuration.Text = "1";
+                Entry_RestDuration.Text = "1";
+            }
+        }
     }
 }
