@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using CTAR_All_Star.Database;
 using CTAR_All_Star.Models;
 using CTAR_All_Star.Views;
 
@@ -29,6 +30,7 @@ namespace CTAR_All_Star
             Lbl_WorkoutName.TextColor = Constants.MainTextColor;
             Lbl_HoldDuration.TextColor = Constants.MainTextColor;
             Lbl_RestDuration.TextColor = Constants.MainTextColor;
+            Lbl_NewPatientID.TextColor = Constants.MainTextColor;
 
             UserID.BackgroundColor = Constants.MainTextColor;
             Exercise.BackgroundColor = Constants.MainTextColor;
@@ -39,22 +41,37 @@ namespace CTAR_All_Star
             Entry_WorkoutName.Completed += (s, e) => Entry_WorkoutName.Focus();
             Entry_HoldDuration.Completed += (s, e) => Entry_HoldDuration.Focus();
             Entry_RestDuration.Completed += (s, e) => Entry_RestDuration.Focus();
+            Entry_NewPatientID.Completed += (s, e) => Entry_RestDuration.Focus();
 
             Exercise.SelectedIndexChanged += this.myPickerSelectedIndexChanged;
+            UserID.SelectedIndexChanged += this.myPatientPickerSelectedIndexChanged;
 
         
         }
 
         void SaveWorkoutProcedure(object sender, EventArgs e)
         {
-            Workout workout = new Workout(Entry_WorkoutName.Text, UserID.SelectedItem.ToString(), App.currentUser.Username, Entry_NumReps.Text, Entry_NumSets.Text, Entry_Threshold.Text,
-                Entry_HoldDuration.Text, Entry_RestDuration.Text); 
+            Workout workout = new Workout();
+            if(UserID.SelectedItem.ToString().Equals("New"))
+            {
+                workout = new Workout(Entry_WorkoutName.Text, Entry_NewPatientID.Text, App.currentUser.Username, Entry_NumReps.Text, Entry_NumSets.Text, Entry_Threshold.Text,
+                Entry_HoldDuration.Text, Entry_RestDuration.Text);
+            }
+            else
+            {
+                workout = new Workout(Entry_WorkoutName.Text, UserID.SelectedItem.ToString(), App.currentUser.Username, Entry_NumReps.Text, Entry_NumSets.Text, Entry_Threshold.Text,
+                Entry_HoldDuration.Text, Entry_RestDuration.Text);
+            }            
+
             if (workout.CheckInformation())
             {
                 //For testing
-                App.currentWorkout = workout;
+                //App.currentWorkout = workout;
+                DatabaseHelper dbHelper = new DatabaseHelper();
 
-                DisplayAlert("Workout Saved", "You've successfully saved a workout.", "Ok");
+                dbHelper.addWorkout(workout);
+                DisplayAlert("Success", "You have added an exercise!", "Dismiss");
+                Navigation.PopAsync();                
             }
 
             else
@@ -79,6 +96,15 @@ namespace CTAR_All_Star
                 Entry_NumSets.Text = "3";
                 Entry_HoldDuration.Text = "1";
                 Entry_RestDuration.Text = "1";
+            }
+        }
+
+        public void myPatientPickerSelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(UserID.SelectedIndex == 5) //Will need to fix this when we change the hardcoding
+            {
+                Lbl_NewPatientID.IsVisible = true;
+                Entry_NewPatientID.IsVisible = true;
             }
         }
     }

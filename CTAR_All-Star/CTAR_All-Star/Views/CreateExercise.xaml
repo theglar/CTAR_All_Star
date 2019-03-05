@@ -13,12 +13,16 @@
               <x:String>1891928345</x:String>
               <x:String>9281638361</x:String>
               <x:String>0981263768</x:String>
-              <x:String>1127347922</x:String>
-                        
-            </x:Array>
+              <x:String>a</x:String>
+              <x:String>New</x:String>
+
+                    </x:Array>
           </Picker.ItemsSource>
             </Picker>
-               <Picker x:Name="Exercise" Title="Type" Margin="0, 20, 0, 0">
+            <Label x:Name="Lbl_NewPatientID" Text="Enter New Patient ID" IsVisible="False"/>
+            <Entry x:Name="Entry_NewPatientID" Placeholder="Patient EMR Number" Text="" BackgroundColor="White" HorizontalTextAlignment="Center" IsVisible="False"/>
+
+            <Picker x:Name="Exercise" Title="Type" Margin="0, 20, 0, 0">
           <Picker.ItemsSource>
             <x:Array Type="{x:Type x:String}">
               <x:String>Isometric</x:String>

@@ -2,12 +2,31 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CTAR_All_Star.ManageExercise">
-    
+
     <ContentPage.Content>
-        <StackLayout>
-            <Label Text="Choose your exercise here."
+        <StackLayout Padding="0,20,0,100">
+            <Label Text="Choose an Exercise"
                 VerticalOptions="CenterAndExpand" 
-                HorizontalOptions="CenterAndExpand" />
+                HorizontalOptions="CenterAndExpand"
+                   FontSize="Large" FontAttributes="Bold"/>
+
+            <ListView ItemsSource="{Binding Workouts}" Margin="0,20,0,0" x:Name="workoutList">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <StackLayout Orientation="Horizontal" Padding="100,0,0,0" HorizontalOptions="Center">
+                                    <Label Text="{Binding WorkoutName}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Medium" Margin="10"/>
+                                    <Button Text="Select" CommandParameter="{Binding WorkId}" Clicked="Select_Button_Clicked"></Button>
+                                </StackLayout>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <Button Text="Create A New Exercise" Clicked="New_Button_Clicked"  HorizontalOptions="Center"/>
         </StackLayout>
+
     </ContentPage.Content>
+
 </ContentPage>

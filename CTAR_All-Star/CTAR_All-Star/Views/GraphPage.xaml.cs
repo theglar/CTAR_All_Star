@@ -109,7 +109,7 @@ namespace CTAR_All_Star
                 countdown--;
             }
 
-            else if (countdown <= 0)
+            else if (countdown.Equals(0))
             {
                 if(setCount <= totalSets)
                 {                    
@@ -146,7 +146,7 @@ namespace CTAR_All_Star
                 else
                 {                    
                     TimerLabel.Text = "COMPLETE";
-                    TimeDisplay.Text = "0";
+                    TimeDisplay.Text = "";
                     TimeDisplay.BackgroundColor = Constants.CompleteColor;
                     timer.Stop();
                 }                
