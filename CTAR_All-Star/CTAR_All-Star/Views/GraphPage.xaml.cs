@@ -20,6 +20,7 @@ namespace CTAR_All_Star
         System.Timers.Timer timer;
         private Workout workout = new Workout();
         private bool isAtRest = true;
+        private double newGoal;
 
         public GraphPage()
         {            
@@ -38,7 +39,7 @@ namespace CTAR_All_Star
                 NumReps.Text = repCount.ToString();
                 TotalReps.Text = "of " + workout.NumReps;
                 TimeDisplay.Text = "";
-                double newGoal = (Convert.ToDouble(workout.ThresholdPercentage)/100) * App.currentUser.OneRepMax;
+                newGoal = (Convert.ToDouble(workout.ThresholdPercentage)/100) * App.currentUser.OneRepMax;
                 Goal.Start = newGoal;
                 totalReps = Convert.ToInt32(workout.NumReps);
                 totalSets = Convert.ToInt32(workout.NumSets);
@@ -105,8 +106,24 @@ namespace CTAR_All_Star
 
             if (countdown > 0)
             {
-                Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(countdown));
-                countdown--;
+                if(TimerLabel.Text.Equals("REST"))
+                {
+                    if (App.currentMeasurement.Pressure <= newGoal)
+                    {
+                        Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(countdown));
+                        countdown--;
+                    }
+                }
+                else
+                {
+                    if (App.currentMeasurement.Pressure >= newGoal)
+                    {
+                        Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(countdown));
+                        countdown--;
+                    }
+                }
+                
+                
             }
 
             else if (countdown.Equals(0))

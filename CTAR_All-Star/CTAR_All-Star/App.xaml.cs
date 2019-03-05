@@ -15,9 +15,10 @@ namespace CTAR_All_Star
         public static string DB_PATH = string.Empty;
         DatabaseHelper dbHelper = new DatabaseHelper();
 
-        //For current user
+        //Globals
         public static User currentUser = new User();
         public static Workout currentWorkout = new Workout();
+        public static Measurement currentMeasurement = new Measurement();
 
         //Can use in other pages as: "App.currentUser"
 

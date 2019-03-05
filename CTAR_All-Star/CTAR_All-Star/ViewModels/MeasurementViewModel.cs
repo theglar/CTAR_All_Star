@@ -40,6 +40,7 @@ namespace CTAR_All_Star.ViewModels
                 {
                     Data.RemoveAt(0);
                     Data.Insert(400, newMeasurement);
+                    App.currentMeasurement = newMeasurement;
                 });
             });
         } 
