@@ -30,9 +30,14 @@ namespace CTAR_All_Star
 
         public void Init()
         {
-            workout = App.currentWorkout;
+            // Get current information
+            if (App.currentWorkout != null)
+            {
+                workout = App.currentWorkout;
+            }            
+
             //Set up current workout
-            if(workout != null)
+            if(workout != null && workout.CheckInformation())
             {
                 NumSets.Text = setCount.ToString();
                 TotalSets.Text = "of " + workout.NumSets;
@@ -44,39 +49,31 @@ namespace CTAR_All_Star
                 totalReps = Convert.ToInt32(workout.NumReps);
                 totalSets = Convert.ToInt32(workout.NumSets);
             }
-            
+            else
+            {
+                LoadExercise();
+            }            
+        }        
+
+        private async void LoadExercise()
+        {
+            bool loadExercise = await DisplayAlert("No Exercise Loaded", "Please choose an exercise", "Ok", "Cancel");
+            if (loadExercise)
+            {
+                Navigation.PushAsync(new ManageExercise());
+            }
         }
 
         private void Start_Exercise(object sender, EventArgs e)
         {
-            StartTimer();
+            if (!App.currentUser.DeviceIsConnected)
+            {
+                CheckBTConnection();
+                return;
+            }            
             
-            //DatabaseHelper dbHelper = new DatabaseHelper();
-
-            //// Initialize a starting point
-            //Double pressure = 0;
-
-            ////Loop 100 times - REMOVED THE LOOP FOR TESTING
-            //for (int i = 0; i < 1; i++)
-            //{
-            //    // Get current date and time
-            //    DateTime d = DateTime.Now;
-            //    DateTime dt = DateTime.Parse(d.ToString());
-                
-            //    pressure = Math.Sin(Convert.ToDouble(d.Millisecond)/10)*100+500;
-
-            //    Measurement measurement = new Measurement()
-            //    {
-            //        UserName = "Tester 1",
-            //        SessionNumber = "1",
-            //        TimeStamp = d,
-            //        Pressure = pressure,
-            //        Duration = "1",
-            //        DisplayTime = dt.ToString("HH:mm:ss")
-            //    };
-
-            //    dbHelper.addData(measurement);
-            //}
+            StartTimer();           
+          
         }
         private void Stop_Exercise(object sender, EventArgs e)
         {
@@ -178,6 +175,18 @@ namespace CTAR_All_Star
                 timer.Stop();
                 TimerLabel.Text = "REST";
                 TimeDisplay.BackgroundColor = Constants.RestColor;
+            }
+        }
+
+        public async void CheckBTConnection()
+        {
+            if (!App.currentUser.DeviceIsConnected)
+            {
+                bool loadDevice = await DisplayAlert("No Connected Device", "Please connect an exercise device ", "Ok", "Cancel");
+                if (loadDevice)
+                {
+                    Navigation.PushAsync(new MainPage());
+                }
             }
         }
     }

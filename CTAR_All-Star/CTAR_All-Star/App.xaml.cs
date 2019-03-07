@@ -2,10 +2,10 @@ using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using CTAR_All_Star.Views;
-using CTAR_All_Star.Navigation;
 using CTAR_All_Star.Models;
-using SQLite;
 using CTAR_All_Star.Database;
+using System.Threading.Tasks;
+using CTAR_All_Star.Navigation;
 
 [assembly: XamlCompilation (XamlCompilationOptions.Compile)]
 namespace CTAR_All_Star
@@ -19,8 +19,6 @@ namespace CTAR_All_Star
         public static User currentUser = new User();
         public static Workout currentWorkout = new Workout();
         public static Measurement currentMeasurement = new Measurement();
-
-        //Can use in other pages as: "App.currentUser"
 
         public App()
         {
@@ -38,8 +36,7 @@ namespace CTAR_All_Star
 
             //dbHelper.deleteAllTables(); //For whenever changes are made to database tables - run once, then comment out
             dbHelper.initializeAllTables();
-
-            //Device.BeginInvokeOnMainThread(() => { MainPage = new SigninPage(); });
+            
             MainPage = new SigninPage();
 
             // Listen for signal to update MainPage after successful login
@@ -48,7 +45,6 @@ namespace CTAR_All_Star
                 currentUser = user;
                 currentUser.IsLoggedIn = true;
                 currentUser.OneRepMax = 500; //For testing
-                //Device.BeginInvokeOnMainThread(() => { MainPage = new HomePage(); });
                 MainPage = new HomePage();
 
             });
@@ -58,8 +54,7 @@ namespace CTAR_All_Star
             {
                 dbHelper.removeUser(currentUser);
                 MainPage = new SigninPage();
-            });
-
+            });            
         }
 
         protected override void OnStart()
@@ -74,7 +69,7 @@ namespace CTAR_All_Star
 
         protected override void OnResume()
         {
-            
-        }
+
+        }        
     }
 }
