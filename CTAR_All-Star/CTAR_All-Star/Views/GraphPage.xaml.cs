@@ -66,11 +66,11 @@ namespace CTAR_All_Star
 
         private void Start_Exercise(object sender, EventArgs e)
         {
-            if (!App.currentUser.DeviceIsConnected)
-            {
-                CheckBTConnection();
-                return;
-            }            
+            //if (!App.currentUser.DeviceIsConnected)
+            //{
+            //    CheckBTConnection();
+            //    return;
+            //}            
             
             StartTimer();           
           
