@@ -10,7 +10,7 @@ using CTAR_All_Star.Views;
 using CTAR_All_Star.ViewModels;
 using CTAR_All_Star.Database;
 using CTAR_All_Star.Models;
-using Android.App;
+//using Android.App;
 
 namespace CTAR_All_Star
 {

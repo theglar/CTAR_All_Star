@@ -53,7 +53,7 @@ namespace CTAR_All_Star.Database
             }
 
             //Notify ViewModel of changes
-            Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper,Measurement>(this, "databaseChange", measurement));
+            Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper, Measurement>(this, "databaseChange", measurement));
         }
 
         public void removeData(Measurement measurement)
@@ -101,7 +101,7 @@ namespace CTAR_All_Star.Database
 
             //Notify ViewModel of changes
             Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper>(this, "patientChange"));
-        }        
+        }
 
         public void removePatient(Patient patient)
         {
@@ -229,13 +229,13 @@ namespace CTAR_All_Star.Database
             // Notify ViewModel of changes
             MessagingCenter.Send<DatabaseHelper>(this, "userChange");
         }
-        
+
         public bool verifyUser(string username, string password)
         {
             using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
             {
                 User thisUser = conn.Query<User>("select * from User where Username = " + "'" + username + "'").FirstOrDefault(); //sb SingleOfDefault
-                if(thisUser != null)
+                if (thisUser != null)
                 {
                     if (thisUser.Password == password)
                     {
