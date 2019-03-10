@@ -17,7 +17,7 @@ namespace CTAR_All_Star
         private int setCount = 1;
         private int totalReps;
         private int totalSets;
-        System.Timers.Timer timer;
+        private System.Timers.Timer timer;
         private Workout workout = new Workout();
         private bool isAtRest = true;
         private double newGoal;
@@ -51,12 +51,14 @@ namespace CTAR_All_Star
             }
             else
             {
-                LoadExercise();
+                DisplayAlert("No Exercise Loaded", "Please choose an exercise to continue.", "Ok");
+                //LoadExercise();
             }            
         }        
 
         private async void LoadExercise()
         {
+
             bool loadExercise = await DisplayAlert("No Exercise Loaded", "Please choose an exercise", "Ok", "Cancel");
             if (loadExercise)
             {
