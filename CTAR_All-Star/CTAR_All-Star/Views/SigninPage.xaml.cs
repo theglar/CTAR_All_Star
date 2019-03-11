@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,14 +10,14 @@ using Xamarin.Forms.Xaml;
 
 namespace CTAR_All_Star.Views
 {
-    [XamlCompilation(XamlCompilationOptions.Compile)]
-    public partial class SigninPage : ContentPage
-    {
-        public SigninPage()
-        {
-            InitializeComponent();
+	[XamlCompilation(XamlCompilationOptions.Compile)]
+	public partial class SigninPage : ContentPage
+	{
+		public SigninPage ()
+		{
+			InitializeComponent();
             Init();
-        }
+		}
 
         void Init()
         {
@@ -37,15 +37,15 @@ namespace CTAR_All_Star.Views
             DatabaseHelper dbHelper = new DatabaseHelper();
             if (dbHelper.verifyUser(Entry_Username.Text, Entry_Password.Text))
             {
-                DisplayAlert("Login Success", "You've successfully logged in.", "Ok");
+                DisplayAlert("Login Success","You've successfully logged in.","Ok");
                 user = dbHelper.GetUser(Entry_Username.Text);
                 //Notify App to change Main Page
                 Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<SigninPage, User>(this, "signInSuccessful", user));
-
+                
                 //Navigation.PushModalAsync(new MainPage());
             }
 
-            else
+            else 
             {
                 DisplayAlert("Login Failed", "Incorrect Username or Password", "Ok");
             }
@@ -56,8 +56,9 @@ namespace CTAR_All_Star.Views
             Navigation.PushModalAsync(new SignupPage());
         }
 
-
+        
     }
 }
+
 
 
