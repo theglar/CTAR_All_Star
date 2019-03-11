@@ -197,7 +197,6 @@ namespace CTAR_All_Star
                 {
                     if (second > 10)
                     {
-
                         second--;
                         Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(minute + ":" + second));
                     }
@@ -221,7 +220,7 @@ namespace CTAR_All_Star
                         {
                             if (setCount <= totalSets)
                             {
-                                if (repCount <= totalReps)
+                                if (repCount < totalReps)
                                 {
                                     Device.BeginInvokeOnMainThread(() => NumReps.Text = repCount.ToString());
                                     Device.BeginInvokeOnMainThread(() => NumSets.Text = setCount.ToString());
@@ -230,7 +229,6 @@ namespace CTAR_All_Star
                                     {
                                         Device.BeginInvokeOnMainThread(() => TimerLabel.Text = "APPLY PRESSURE");
                                         Device.BeginInvokeOnMainThread(() => TimeDisplay.BackgroundColor = Constants.BackgroundColor);
-                                        //countdown = Convert.ToInt32(workout.HoldDuration);
                                         second = Convert.ToInt32(workout.HoldDuration);
                                         if (second >= 10)
                                         {
