@@ -37,17 +37,22 @@ namespace CTAR_All_Star.Views
         {
             DatabaseHelper dbHelper = new DatabaseHelper();
             User user = new User(Entry_NewUser.Text, Entry_NewPassword.Text, userType);
-            if (user.VerifySignUp() && Entry_ConfirmPass.Text == Entry_NewPassword.Text)
+            if (dbHelper.UniqueUser(Entry_NewUser.Text) == true)
             {
-                DisplayAlert("Account Created", "You've successfully  created an account.", "Ok");
-                dbHelper.addUser(user);
-                Navigation.PushModalAsync(new SigninPage());                
-            }
+                if (user.VerifySignUp() && Entry_ConfirmPass.Text == Entry_NewPassword.Text)
+                {
+                    DisplayAlert("Account Created", "You've successfully  created an account.", "Ok");
+                    dbHelper.addUser(user);
+                    Navigation.PushModalAsync(new SigninPage());
+                }
 
-            else
-            {
-                DisplayAlert("Account Failed", "There was an error creating a new account", "Ok");
+                else
+                {
+                    DisplayAlert("Account Failed", "There was an error creating a new account", "Ok");
+                }
             }
+            else //say username already exists
+                DisplayAlert("Account Not Created", "Username already exists", "Ok");
         }
 
         void typeChosen(object sender, EventArgs args)
