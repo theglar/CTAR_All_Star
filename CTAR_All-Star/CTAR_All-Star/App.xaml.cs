@@ -52,7 +52,7 @@ namespace CTAR_All_Star
             // Listen for signal to update MainPage after successful logout
             MessagingCenter.Subscribe<LogoutPage>(this, "logOutSuccessful", (sender) =>
             {
-                dbHelper.removeUser(currentUser);
+                currentUser = null;
                 MainPage = new SigninPage();
             });            
         }

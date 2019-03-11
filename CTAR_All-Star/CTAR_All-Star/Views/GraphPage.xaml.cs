@@ -12,7 +12,8 @@ namespace CTAR_All_Star
 {
     public partial class GraphPage : ContentPage
     {
-        private int countdown = 0;
+        private int minute;
+        private int second;
         private int repCount = 1;
         private int setCount = 1;
         private int totalReps;
@@ -101,84 +102,240 @@ namespace CTAR_All_Star
 
         public void Time_Elapsed(object sender, ElapsedEventArgs e)
         {
-            
-
-            if (countdown > 0)
+            if (TimerLabel.Text.Equals("REST"))
             {
-                if(TimerLabel.Text.Equals("REST"))
+                if (App.currentMeasurement.Pressure <= newGoal)
                 {
-                    if (App.currentMeasurement.Pressure <= newGoal)
+                    if (second > 10)
                     {
-                        Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(countdown));
-                        countdown--;
-                    }
-                }
-                else
-                {
-                    if (App.currentMeasurement.Pressure >= newGoal)
-                    {
-                        Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(countdown));
-                        countdown--;
-                    }
-                }
-                
-                
-            }
 
-            else if (countdown.Equals(0))
-            {
-                if(setCount <= totalSets)
-                {                    
-                    if (repCount <= totalReps)
-                    { 
-                        Device.BeginInvokeOnMainThread(() => NumReps.Text = repCount.ToString());
-                        Device.BeginInvokeOnMainThread(() => NumSets.Text = setCount.ToString());
-                        Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(countdown));
-                    
-                        if (isAtRest)
+                        second--;
+                        Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(minute + ":" + second));
+                    }
+
+                    else if (second > 0 && second <= 10)
+                    {
+                        second--;
+                        Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(minute + ":0" + second));
+                    }
+
+                    else if (second == 0)
+                    {
+                        if (minute > 0)
                         {
-                            Device.BeginInvokeOnMainThread(() => TimerLabel.Text = "APPLY PRESSURE");
-                            Device.BeginInvokeOnMainThread(() => TimeDisplay.BackgroundColor = Constants.BackgroundColor);
-                            countdown = Convert.ToInt32(workout.HoldDuration);
-                            Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(countdown));
-                            isAtRest = false;
+                            minute--;
+                            second = 59;
+                            Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(minute + ":" + second));
                         }
+
                         else
                         {
-                            Device.BeginInvokeOnMainThread(() => TimerLabel.Text = "REST");
-                            Device.BeginInvokeOnMainThread(() => TimeDisplay.BackgroundColor = Constants.RestColor);
-                            countdown = Convert.ToInt32(workout.RestDuration);
-                            Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(countdown));
-                            repCount++;
-                            isAtRest = true;
+                            if (setCount <= totalSets)
+                            {
+                                if (repCount <= totalReps)
+                                {
+                                    Device.BeginInvokeOnMainThread(() => NumReps.Text = repCount.ToString());
+                                    Device.BeginInvokeOnMainThread(() => NumSets.Text = setCount.ToString());
+
+                                    if (isAtRest)
+                                    {
+                                        Device.BeginInvokeOnMainThread(() => TimerLabel.Text = "APPLY PRESSURE");
+                                        Device.BeginInvokeOnMainThread(() => TimeDisplay.BackgroundColor = Constants.BackgroundColor);
+                                        //countdown = Convert.ToInt32(workout.HoldDuration);
+                                        second = Convert.ToInt32(workout.HoldDuration);
+                                        if (second >= 10)
+                                        {
+                                            Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(minute + ":" + second));
+                                        }
+                                        else
+                                        {
+                                            Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(minute + ":0" + second));
+                                        }
+                                        repCount++;
+                                        isAtRest = false;
+                                    }
+
+                                    else
+                                    {
+                                        Device.BeginInvokeOnMainThread(() => TimerLabel.Text = "REST");
+                                        Device.BeginInvokeOnMainThread(() => TimeDisplay.BackgroundColor = Constants.RestColor);
+                                        //countdown = Convert.ToInt32(workout.RestDuration);
+                                        second = Convert.ToInt32(workout.RestDuration);
+                                        if (second >= 10)
+                                        {
+                                            Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(minute + ":" + second));
+                                        }
+                                        else
+                                        {
+                                            Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(minute + ":0" + second));
+                                        }
+                                        isAtRest = true;
+                                    }
+                                }
+
+                                else
+                                {
+                                    setCount++;
+                                    repCount = 0;
+                                }
+                            }
+
+                            else
+                            {
+                                Device.BeginInvokeOnMainThread(() => TimerLabel.Text = "COMPLETE");
+                                Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString("0" + minute + ":0" + second));
+                                TimeDisplay.BackgroundColor = Constants.CompleteColor;
+                                timer.Stop();
+                            }
                         }
                     }
-                    else
-                    {
-                        setCount++;
-                        repCount = 1;
-                    }
                 }
-                else
-                {                    
-                    TimerLabel.Text = "COMPLETE";
-                    TimeDisplay.Text = "";
-                    TimeDisplay.BackgroundColor = Constants.CompleteColor;
-                    timer.Stop();
-                }                
-                
-                
             }
-
-            //If it ever decides to go negative.
             else
             {
-                TimeDisplay.Text = "" + Convert.ToString(countdown);
-                timer.Stop();
-                TimerLabel.Text = "REST";
-                TimeDisplay.BackgroundColor = Constants.RestColor;
+                if (App.currentMeasurement.Pressure >= newGoal)
+                {
+                    if (second > 10)
+                    {
+
+                        second--;
+                        Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(minute + ":" + second));
+                    }
+
+                    else if (second > 0 && second <= 10)
+                    {
+                        second--;
+                        Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(minute + ":0" + second));
+                    }
+
+                    else if (second == 0)
+                    {
+                        if (minute > 0)
+                        {
+                            minute--;
+                            second = 59;
+                            Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(minute + ":" + second));
+                        }
+
+                        else
+                        {
+                            if (setCount <= totalSets)
+                            {
+                                if (repCount <= totalReps)
+                                {
+                                    Device.BeginInvokeOnMainThread(() => NumReps.Text = repCount.ToString());
+                                    Device.BeginInvokeOnMainThread(() => NumSets.Text = setCount.ToString());
+
+                                    if (isAtRest)
+                                    {
+                                        Device.BeginInvokeOnMainThread(() => TimerLabel.Text = "APPLY PRESSURE");
+                                        Device.BeginInvokeOnMainThread(() => TimeDisplay.BackgroundColor = Constants.BackgroundColor);
+                                        //countdown = Convert.ToInt32(workout.HoldDuration);
+                                        second = Convert.ToInt32(workout.HoldDuration);
+                                        if (second >= 10)
+                                        {
+                                            Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(minute + ":" + second));
+                                        }
+                                        else
+                                        {
+                                            Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(minute + ":0" + second));
+                                        }
+                                        repCount++;
+                                        isAtRest = false;
+                                    }
+
+                                    else
+                                    {
+                                        Device.BeginInvokeOnMainThread(() => TimerLabel.Text = "REST");
+                                        Device.BeginInvokeOnMainThread(() => TimeDisplay.BackgroundColor = Constants.RestColor);
+                                        //countdown = Convert.ToInt32(workout.RestDuration);
+                                        second = Convert.ToInt32(workout.RestDuration);
+                                        if (second >= 10)
+                                        {
+                                            Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(minute + ":" + second));
+                                        }
+                                        else
+                                        {
+                                            Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(minute + ":0" + second));
+                                        }
+                                        isAtRest = true;
+                                    }
+                                }
+
+                                else
+                                {
+                                    setCount++;
+                                    repCount = 0;
+                                }
+                            }
+
+                            else
+                            {
+                                Device.BeginInvokeOnMainThread(() => TimerLabel.Text = "COMPLETE");
+                                Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString("0" + minute + ":0" + second));
+                                TimeDisplay.BackgroundColor = Constants.CompleteColor;
+                                timer.Stop();
+                            }
+                        }
+                    }
+                }
             }
         }
+
+            //else if (countdown.Equals(0))
+            //{
+            //    if(setCount <= totalSets)
+            //    {                    
+            //        if (repCount <= totalReps)
+            //        { 
+            //            Device.BeginInvokeOnMainThread(() => NumReps.Text = repCount.ToString());
+            //            Device.BeginInvokeOnMainThread(() => NumSets.Text = setCount.ToString());
+            //            Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(countdown));
+                    
+            //            if (isAtRest)
+            //            {
+            //                Device.BeginInvokeOnMainThread(() => TimerLabel.Text = "APPLY PRESSURE");
+            //                Device.BeginInvokeOnMainThread(() => TimeDisplay.BackgroundColor = Constants.BackgroundColor);
+            //                countdown = Convert.ToInt32(workout.HoldDuration);
+            //                Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(countdown));
+            //                isAtRest = false;
+            //            }
+            //            else
+            //            {
+            //                Device.BeginInvokeOnMainThread(() => TimerLabel.Text = "REST");
+            //                Device.BeginInvokeOnMainThread(() => TimeDisplay.BackgroundColor = Constants.RestColor);
+            //                countdown = Convert.ToInt32(workout.RestDuration);
+            //                Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(countdown));
+            //                repCount++;
+            //                isAtRest = true;
+            //            }
+            //        }
+            //        else
+            //        {
+            //            setCount++;
+            //            repCount = 1;
+            //        }
+            //    }
+            //    else
+            //    {                    
+            //        TimerLabel.Text = "COMPLETE";
+            //        TimeDisplay.Text = "";
+            //        TimeDisplay.BackgroundColor = Constants.CompleteColor;
+            //        timer.Stop();
+            //    }                
+                
+                
+            //}
+
+            ////If it ever decides to go negative.
+            //else
+            //{
+            //    TimeDisplay.Text = "" + Convert.ToString(countdown);
+            //    timer.Stop();
+            //    TimerLabel.Text = "REST";
+            //    TimeDisplay.BackgroundColor = Constants.RestColor;
+            //}
+        
 
         public async void CheckBTConnection()
         {
