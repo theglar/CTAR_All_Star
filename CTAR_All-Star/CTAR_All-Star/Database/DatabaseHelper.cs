@@ -262,5 +262,20 @@ namespace CTAR_All_Star.Database
                 return thisUser;
             }
         }
+        public bool UniqueUser(string username)
+        {
+            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
+            {
+                User thisUser = conn.Query<User>("Select * from User where Username = " + "'" + username + "'").SingleOrDefault(); //FirstorDefault?
+                if(thisUser == null)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+        }
     }
 }
