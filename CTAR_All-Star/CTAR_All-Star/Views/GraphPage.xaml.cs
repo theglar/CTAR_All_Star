@@ -37,7 +37,7 @@ namespace CTAR_All_Star
             }            
 
             //Set up current workout
-            if(workout != null && workout.CheckInformation())
+            if(workout != null /*&& workout.CheckInformation()*/)
             {
                 NumSets.Text = setCount.ToString();
                 TotalSets.Text = "of " + workout.NumSets;
