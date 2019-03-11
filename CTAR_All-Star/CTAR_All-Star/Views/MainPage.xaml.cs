@@ -71,6 +71,7 @@ namespace CTAR_All_Star
                 {
                     DisplayAlert("Notice", "Connected!", "OK");
                 });
+                App.currentUser.DeviceIsConnected = true;
                 btnConnectBluetooth.Text = "Tap to scan for devices";
                 deviceList.Clear();
                 deviceService = await selectedDevice.GetServiceAsync(Guid.Parse("0000ffe0-0000-1000-8000-00805f9b34fb"));
@@ -91,11 +92,11 @@ namespace CTAR_All_Star
                     // Get current date and time
                     DateTime d = DateTime.Now;
                     DateTime dt = DateTime.Parse(d.ToString());
-                    measurement.UserName = "Tester 1";
-                    measurement.SessionNumber = "1";
+                    measurement.UserName = App.currentUser.Username;
+                    measurement.SessionNumber = App.currentUser.Session.ToString();
                     measurement.TimeStamp = d;
                     measurement.Pressure = pressureVal;
-                    measurement.Duration = "1";
+                    measurement.Duration = "1"; //Do we need this?
                     measurement.DisplayTime = dt.ToString("HH:mm:ss");
 
                     dbHelper.addData(measurement);
