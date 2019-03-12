@@ -14,7 +14,7 @@ namespace CTAR_All_Star
     {
         private int minute;
         private int second;
-        private int repCount = 1;
+        private int repCount = 0;
         private int setCount = 1;
         private int totalReps;
         private int totalSets;
@@ -69,12 +69,13 @@ namespace CTAR_All_Star
 
         private void Start_Exercise(object sender, EventArgs e)
         {
-            //if (!App.currentUser.DeviceIsConnected)
-            //{
-            //    CheckBTConnection();
-            //    return;
-            //}            
-            
+            if (!App.currentUser.DeviceIsConnected)
+            {
+                CheckBTConnection();
+                return;
+            }
+            Device.BeginInvokeOnMainThread(() => TimerLabel.Text = "APPLY PRESSURE");
+
             StartTimer();           
           
         }
