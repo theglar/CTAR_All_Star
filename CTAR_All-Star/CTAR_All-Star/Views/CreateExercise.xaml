@@ -4,9 +4,9 @@
              x:Class="CTAR_All_Star.CreateExercise">
         
     <ContentPage.Content>
-        <StackLayout x:Name="WorkoutEntriesStack" VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand" >
+        <StackLayout x:Name="WorkoutEntriesStack" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" >
 
-            <Picker x:Name="UserID" Title="Patient ID" >
+            <Picker x:Name="UserID" Title="Patient ID">
           <Picker.ItemsSource>
             <x:Array Type="{x:Type x:String}">
               <x:String>3141592653</x:String>
