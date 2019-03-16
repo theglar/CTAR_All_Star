@@ -19,12 +19,25 @@ namespace CTAR_All_Star
 	{
         WorkoutListViewModel workoutListViewModel;
         DatabaseHelper dbHelper = new DatabaseHelper();
+        Button selectBtn, runBtn, detailsBtn, assignBtn, removeBtn;
 
 		public ManageExercise ()
-		{
+		{            
 			InitializeComponent ();
+            InitializeButtons();
             workoutListViewModel = new WorkoutListViewModel();
             BindingContext = workoutListViewModel;
+
+            //Set up correct views
+            if(App.currentUser.userType.Equals("Doctor"))
+            {
+                selectBtn.IsVisible = false;
+            }
+            //Patient is the default
+            else
+            {
+
+            }
 		}  
         
         private void New_Button_Clicked(object sender, EventArgs e)
@@ -54,6 +67,19 @@ namespace CTAR_All_Star
             }
         }
 
+        private void Details_Button_Clicked()
+        {
+
+        }
+        private void Assign_Button_Clicked()
+        {
+
+        }
+        private void Remove_Button_Clicked()
+        {
+
+        }
+
         private void Show_All_Clicked(object sender, EventArgs e)
         {
             workoutListViewModel.ShowAllData();
@@ -62,6 +88,11 @@ namespace CTAR_All_Star
         protected override void OnAppearing()
         {
             base.OnAppearing();
+        }
+
+        private void InitializeButtons()
+        {
+            selectBtn = this.FindByName<Button>("btnSelect");
         }
     }
 }

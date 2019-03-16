@@ -17,10 +17,11 @@
                             <ViewCell.View>
                                 <StackLayout Orientation="Horizontal" Padding="100,0,0,0" HorizontalOptions="Center">
                                     <Label Text="{Binding WorkoutName}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Medium" Margin="10"/>
-                                    <Label Text="{Binding PatientEmrNumber}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Medium" Margin="10"/>
-                                    <Label Text="{Binding DoctorID}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Medium" Margin="10"/>
-
-                                    <Button Text="Select" CommandParameter="{Binding WorkId}" Clicked="Select_Button_Clicked"></Button>
+                                    <Button x:Name="btnSelect" Text="Select" CommandParameter="{Binding WorkId}" Clicked="Select_Button_Clicked"></Button>
+                                    <Button x:Name="btnRun" Text="Run" CommandParameter="{Binding WorkId}" Clicked="Select_Button_Clicked"></Button>
+                                    <Button x:Name="btnDetails" Text="Details" CommandParameter="{Binding WorkId}" Clicked="Details_Button_Clicked"></Button>                                    
+                                    <Button x:Name="btnAssign" Text="Assign" CommandParameter="{Binding WorkId}" Clicked="Assign_Button_Clicked"></Button>
+                                    <Button x:Name="btnRemove" Text="Remove" CommandParameter="{Binding WorkId}" Clicked="Remove_Button_Clicked"></Button>
                                 </StackLayout>
                             </ViewCell.View>
                         </ViewCell>
