@@ -20,16 +20,33 @@ namespace CTAR_All_Star.ViewModels
             // Connect to database, pull data and store it in the list
             using (SQLiteConnection conn = new SQLiteConnection(App.DB_PATH))
             {
-                // Display the most recent workouts
+                // Gather all the workouts
                 var table = conn.Table<Workout>();
                 table = table.OrderByDescending(x => x.WorkID);
-                foreach (var m in table)
+
+                //For Patients
+                if (App.currentUser.userType.Equals("Patient"))
                 {
-                    // Only workouts assigned to current user
-                    if(m.PatientEmrNumber == App.currentUser.Username)
+                    foreach (var w in table)
                     {
-                        Workouts.Add(m);
-                    }                    
+                        // Display only workouts assigned to current patient
+                        if (w.PatientEmrNumber.Equals(App.currentUser.Username))
+                        {
+                            Workouts.Add(w);
+                        }
+                    }
+                }
+                //For Doctors
+                else
+                {
+                    foreach (var w in table)
+                    {
+                        //Display all workouts created by current doctor
+                        if (w.DoctorID.Equals(App.currentUser.Username))
+                        {
+                            Workouts.Add(w);
+                        }
+                    }                                               
                 }
             }
 
@@ -38,18 +55,56 @@ namespace CTAR_All_Star.ViewModels
             {
                 Workouts.Clear();
 
-                // Connect to database, pull data and store it in the list
+                // Refresh list to display
                 using (SQLiteConnection conn = new SQLiteConnection(App.DB_PATH))
                 {
-                    // Display the most recent measurements
+                    // Gather all the workouts
                     var table = conn.Table<Workout>();
                     table = table.OrderByDescending(x => x.WorkID);
-                    foreach (var m in table)
+
+                    //For Patients
+                    if (App.currentUser.userType.Equals("Patient"))
                     {
-                        Workouts.Add(m);
+                        foreach (var w in table)
+                        {
+                            // Display only workouts assigned to current patient
+                            if (w.PatientEmrNumber.Equals(App.currentUser.Username))
+                            {
+                                Workouts.Add(w);
+                            }
+                        }
+                    }
+                    //For Doctors
+                    else
+                    {
+                        foreach (var w in table)
+                        {
+                            //Display all workouts created by current doctor
+                            if (w.DoctorID.Equals(App.currentUser.Username))
+                            {
+                                Workouts.Add(w);
+                            }
+                        }
                     }
                 }
             });
+        }
+
+        public void ShowAllData()
+        {
+            Workouts.Clear();
+
+            // Refresh list to display
+            using (SQLiteConnection conn = new SQLiteConnection(App.DB_PATH))
+            {
+                // Gather all the workouts
+                var table = conn.Table<Workout>();
+                table = table.OrderByDescending(x => x.WorkID);
+                foreach (var w in table)
+                {
+                    Workouts.Add(w);
+                }
+            }
         }
     }
 }

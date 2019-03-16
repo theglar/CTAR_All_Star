@@ -6,21 +6,14 @@
     <ContentPage.Content>
         <StackLayout x:Name="WorkoutEntriesStack" VerticalOptions="CenterAndExpand" HorizontalOptions="Center" >
 
-            <Picker x:Name="UserID" Title="Patient ID">
-          <Picker.ItemsSource>
-            <x:Array Type="{x:Type x:String}">
-              <x:String>3141592653</x:String>
-              <x:String>1891928345</x:String>
-              <x:String>9281638361</x:String>
-              <x:String>0981263768</x:String>
-              <x:String>a</x:String>
-              <x:String>New</x:String>
-
-                    </x:Array>
-          </Picker.ItemsSource>
-            </Picker>
-            <Label x:Name="Lbl_NewPatientID" Text="Enter New Patient ID" IsVisible="False"/>
-            <Entry x:Name="Entry_NewPatientID" Placeholder="Patient EMR Number" Text="" BackgroundColor="White" HorizontalTextAlignment="Center" IsVisible="False"/>
+            <StackLayout Orientation="Horizontal">
+                <Picker x:Name="UserID" Title="Select a Patient" ItemsSource="{Binding Patients}" 
+                        ItemDisplayBinding="{Binding PatientEmrNumber}" SelectedItem="{Binding PatientEmrNumber}"></Picker>
+                <StackLayout>
+                    <Label x:Name="Lbl_NewPatientID" Text="Enter New Patient EMR Number" IsVisible="False"/>
+                    <Entry x:Name="Entry_NewPatientID" Placeholder="Patient EMR Number" Text="" BackgroundColor="White" HorizontalTextAlignment="Center" IsVisible="False"/>
+                </StackLayout>
+            </StackLayout>
 
             <Picker x:Name="Exercise" Title="Type" Margin="0, 20, 0, 0">
           <Picker.ItemsSource>
@@ -32,17 +25,17 @@
         </Picker>
             
             <Label x:Name="Lbl_WorkoutName" Text="Name of Workout" />
-            <Entry x:Name="Entry_WorkoutName" Placeholder="Name" Text="" BackgroundColor="White" HorizontalTextAlignment="Center"/>
+            <Entry x:Name="Entry_WorkoutName" Placeholder="Name" Text="" BackgroundColor="White" />
             <Label x:Name="Lbl_NumReps" Text="Number of Repetitions" />
-            <Entry x:Name="Entry_NumReps" Placeholder="# Repetitions" Text="" BackgroundColor="White" Keyboard="Numeric" HorizontalTextAlignment="Center"/>
+            <Entry x:Name="Entry_NumReps" Placeholder="# Repetitions" Text="" BackgroundColor="White" Keyboard="Numeric" />
             <Label x:Name="Lbl_NumSets" Text="Number of Sets" />
-            <Entry x:Name="Entry_NumSets" Placeholder="# Sets" Text="" BackgroundColor="White" Keyboard="Numeric" HorizontalTextAlignment="Center"/>
+            <Entry x:Name="Entry_NumSets" Placeholder="# Sets" Text="" BackgroundColor="White" Keyboard="Numeric" />
             <Label x:Name="Lbl_Threshold" Text="Threshold" />
-            <Entry x:Name="Entry_Threshold" Placeholder="%" Text="" BackgroundColor="White" Keyboard="Numeric" HorizontalTextAlignment="Center"/>
+            <Entry x:Name="Entry_Threshold" Placeholder="%" Text="" BackgroundColor="White" Keyboard="Numeric" />
             <Label x:Name="Lbl_HoldDuration" Text="Hold Duration" />
-            <Entry x:Name="Entry_HoldDuration" Placeholder="Seconds" Text="" BackgroundColor="White" Keyboard="Numeric" HorizontalTextAlignment="Center"/>
+            <Entry x:Name="Entry_HoldDuration" Placeholder="Seconds" Text="" BackgroundColor="White" Keyboard="Numeric" />
             <Label x:Name="Lbl_RestDuration" Text="Rest Duration" />
-            <Entry x:Name="Entry_RestDuration" Placeholder="Seconds" Text="" BackgroundColor="White" Keyboard="Numeric" HorizontalTextAlignment="Center"/>
+            <Entry x:Name="Entry_RestDuration" Placeholder="Seconds" Text="" BackgroundColor="White" Keyboard="Numeric" />
             <Button x:Name="Btn_CreateAccount" Text="Save Workout" Clicked="SaveWorkoutProcedure" />
         </StackLayout>
     </ContentPage.Content>

@@ -54,6 +54,11 @@ namespace CTAR_All_Star
             }
         }
 
+        private void Show_All_Clicked(object sender, EventArgs e)
+        {
+            workoutListViewModel.ShowAllData();
+        }
+
         protected override void OnAppearing()
         {
             base.OnAppearing();

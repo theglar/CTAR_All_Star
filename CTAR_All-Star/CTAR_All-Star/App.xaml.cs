@@ -4,7 +4,6 @@ using Xamarin.Forms.Xaml;
 using CTAR_All_Star.Views;
 using CTAR_All_Star.Models;
 using CTAR_All_Star.Database;
-using System.Threading.Tasks;
 using CTAR_All_Star.Navigation;
 
 [assembly: XamlCompilation (XamlCompilationOptions.Compile)]

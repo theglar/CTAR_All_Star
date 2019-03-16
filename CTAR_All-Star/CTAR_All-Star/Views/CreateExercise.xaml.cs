@@ -1,11 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CTAR_All_Star.Database;
 using CTAR_All_Star.Models;
-using CTAR_All_Star.Views;
+using CTAR_All_Star.ViewModels;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -15,9 +11,18 @@ namespace CTAR_All_Star
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class CreateExercise : ContentPage
 	{
-		public CreateExercise()
+        PatientListViewModel patientListViewModel;
+        Patient newPatient = new Patient();
+        Patient patient = new Patient();
+        DatabaseHelper dbHelper = new DatabaseHelper();
+
+        public CreateExercise()
 		{
-			InitializeComponent();
+            newPatient.PatientEmrNumber = "New";
+            InitializeComponent();
+            patientListViewModel = new PatientListViewModel();
+            patientListViewModel.Patients.Add(newPatient);
+            BindingContext = patientListViewModel;
             Init();
 		}
 
@@ -51,24 +56,25 @@ namespace CTAR_All_Star
 
         void SaveWorkoutProcedure(object sender, EventArgs e)
         {
-            Workout workout = new Workout();
-            if(UserID.SelectedItem.ToString().Equals("New"))
+            Workout workout;
+            if(Entry_NewPatientID.Text != "")
             {
+                patient.PatientEmrNumber = Entry_NewPatientID.Text;
+                patient.DoctorName = App.currentUser.Username;
+                dbHelper.addPatient(patient);
+                DisplayAlert("New Patient", "You have also added a new patient.", "Ok");
                 workout = new Workout(Entry_WorkoutName.Text, Entry_NewPatientID.Text, App.currentUser.Username, Entry_NumReps.Text, Entry_NumSets.Text, Entry_Threshold.Text,
                 Entry_HoldDuration.Text, Entry_RestDuration.Text);
             }
             else
             {
-                workout = new Workout(Entry_WorkoutName.Text, UserID.SelectedItem.ToString(), App.currentUser.Username, Entry_NumReps.Text, Entry_NumSets.Text, Entry_Threshold.Text,
+                patient = (Patient)UserID.SelectedItem;
+                workout = new Workout(Entry_WorkoutName.Text, patient.PatientEmrNumber, App.currentUser.Username, Entry_NumReps.Text, Entry_NumSets.Text, Entry_Threshold.Text,
                 Entry_HoldDuration.Text, Entry_RestDuration.Text);
             }            
 
             if (workout.CheckInformation())
             {
-                //For testing
-                //App.currentWorkout = workout;
-                DatabaseHelper dbHelper = new DatabaseHelper();
-
                 dbHelper.addWorkout(workout);
                 DisplayAlert("Success", "You have added an exercise!", "Dismiss");
                 Navigation.PopAsync();                
@@ -101,10 +107,15 @@ namespace CTAR_All_Star
 
         public void myPatientPickerSelectedIndexChanged(object sender, EventArgs e)
         {
-            if(UserID.SelectedIndex == 5) //Will need to fix this when we change the hardcoding
+            if(UserID.SelectedIndex == patientListViewModel.Patients.Count - 1) 
             {
                 Lbl_NewPatientID.IsVisible = true;
                 Entry_NewPatientID.IsVisible = true;
+            }
+            else
+            {
+                Lbl_NewPatientID.IsVisible = false;
+                Entry_NewPatientID.IsVisible = false;
             }
         }
     }

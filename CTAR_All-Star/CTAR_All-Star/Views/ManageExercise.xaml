@@ -17,6 +17,9 @@
                             <ViewCell.View>
                                 <StackLayout Orientation="Horizontal" Padding="100,0,0,0" HorizontalOptions="Center">
                                     <Label Text="{Binding WorkoutName}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Medium" Margin="10"/>
+                                    <Label Text="{Binding PatientEmrNumber}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Medium" Margin="10"/>
+                                    <Label Text="{Binding DoctorID}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Medium" Margin="10"/>
+
                                     <Button Text="Select" CommandParameter="{Binding WorkId}" Clicked="Select_Button_Clicked"></Button>
                                 </StackLayout>
                             </ViewCell.View>
@@ -25,7 +28,9 @@
                 </ListView.ItemTemplate>
             </ListView>
             <Button Text="Create A New Exercise" Clicked="New_Button_Clicked"  HorizontalOptions="Center"/>
+            <Button Text="Show ALL" Clicked="Show_All_Clicked" HorizontalOptions="Center"/>
         </StackLayout>
+        
 
     </ContentPage.Content>
 

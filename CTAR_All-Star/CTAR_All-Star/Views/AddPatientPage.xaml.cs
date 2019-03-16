@@ -25,7 +25,8 @@ namespace CTAR_All_Star.Views
 
             Patient patient = new Patient()
             {
-                PatientEmrNumber = patientIdEntry.Text
+                PatientEmrNumber = patientIdEntry.Text,
+                DoctorName = App.currentUser.Username
             };
 
             dbHelper.addPatient(patient);

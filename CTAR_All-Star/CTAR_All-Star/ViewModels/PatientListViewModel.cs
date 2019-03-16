@@ -20,13 +20,15 @@ namespace CTAR_All_Star.ViewModels
             // Connect to database, pull data and store it in the list
             using (SQLiteConnection conn = new SQLiteConnection(App.DB_PATH))
             {
-                // Display the most recent measurements
+                // Display the current doctor's patients
                 var table = conn.Table<Patient>();
                 table = table.OrderByDescending(x => x.PatientId);
-                table = table.OrderBy(x => x.PatientId);
                 foreach (var m in table)
                 {
-                    Patients.Add(m);
+                    if(m.DoctorName == App.currentUser.Username)
+                    {
+                        Patients.Add(m);
+                    }                    
                 }
             }
 
@@ -41,10 +43,12 @@ namespace CTAR_All_Star.ViewModels
                     // Display the most recent measurements
                     var table = conn.Table<Patient>();
                     table = table.OrderByDescending(x => x.PatientId);
-                    table = table.OrderBy(x => x.PatientId);
                     foreach (var m in table)
                     {
-                        Patients.Add(m);
+                        if (m.DoctorName == App.currentUser.Username)
+                        {
+                            Patients.Add(m);
+                        }
                     }
                 }
             });
