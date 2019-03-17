@@ -24,14 +24,14 @@ namespace CTAR_All_Star
 		public ManageExercise ()
 		{            
 			InitializeComponent ();
-            InitializeButtons();
+            //InitializeButtons();
             workoutListViewModel = new WorkoutListViewModel();
             BindingContext = workoutListViewModel;
 
             //Set up correct views
             if(App.currentUser.userType.Equals("Doctor"))
             {
-                selectBtn.IsVisible = false;
+                //selectBtn.IsVisible = false;
             }
             //Patient is the default
             else
