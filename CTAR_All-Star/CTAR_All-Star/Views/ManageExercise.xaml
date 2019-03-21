@@ -5,7 +5,7 @@
 
     <ContentPage.Content>
         <StackLayout Padding="0,20,0,100">
-            <Label Text="Choose an Exercise"
+            <Label Text="Manage Exercises"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand"
                    FontSize="Large" FontAttributes="Bold"/>
@@ -17,11 +17,21 @@
                             <ViewCell.View>
                                 <StackLayout Orientation="Horizontal" Padding="100,0,0,0" HorizontalOptions="Center">
                                     <Label Text="{Binding WorkoutName}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Medium" Margin="10"/>
-                                    <Button x:Name="btnSelect" Text="Select" CommandParameter="{Binding WorkId}" Clicked="Select_Button_Clicked"></Button>
-                                    <Button x:Name="btnRun" Text="Run" CommandParameter="{Binding WorkId}" Clicked="Select_Button_Clicked"></Button>
-                                    <Button x:Name="btnDetails" Text="Details" CommandParameter="{Binding WorkId}" Clicked="Details_Button_Clicked"></Button>                                    
-                                    <Button x:Name="btnAssign" Text="Assign" CommandParameter="{Binding WorkId}" Clicked="Assign_Button_Clicked"></Button>
-                                    <Button x:Name="btnRemove" Text="Remove" CommandParameter="{Binding WorkId}" Clicked="Remove_Button_Clicked"></Button>
+                                    <Picker x:Name="Options" Title="Options" TextColor="White" BackgroundColor= "#003366">
+                                        <Picker.ItemsSource CommandParameter="{Binding WorkId}">
+                                            <x:Array Type="{x:Type x:String}">
+                                                <x:String>Select</x:String>
+                                                <x:String>Details</x:String>
+                                                <x:String>Assign</x:String>
+                                                <x:String>Remove</x:String>
+                                            </x:Array>
+                                        </Picker.ItemsSource>
+                                    </Picker>
+
+                                    <!--<Button Text="Select" CommandParameter="{Binding WorkId}" Clicked="Select_Button_Clicked"></Button>
+                                    <Button Text="Details" CommandParameter="{Binding WorkId}" Clicked="Details_Button_Clicked"></Button>                                    
+                                    <Button Text="Assign" CommandParameter="{Binding WorkId}" Clicked="Assign_Button_Clicked"></Button>
+                                    <Button Text="Remove" CommandParameter="{Binding WorkId}" Clicked="Remove_Button_Clicked"></Button>-->
                                 </StackLayout>
                             </ViewCell.View>
                         </ViewCell>

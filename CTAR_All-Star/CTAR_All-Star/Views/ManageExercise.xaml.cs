@@ -1,44 +1,33 @@
-﻿using System;
-using System.Collections.Generic;
+﻿//This will be a page for the doctos only. A similar page for the patients is called PatientManageExercise
+
+using System;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
-using CTAR_All_Star.Views;
 using CTAR_All_Star.ViewModels;
 using CTAR_All_Star.Database;
 using CTAR_All_Star.Models;
-using Android.App;
 
 namespace CTAR_All_Star
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class ManageExercise : ContentPage
 	{
         WorkoutListViewModel workoutListViewModel;
         DatabaseHelper dbHelper = new DatabaseHelper();
-        Button selectBtn, runBtn, detailsBtn, assignBtn, removeBtn;
 
 		public ManageExercise ()
 		{            
 			InitializeComponent ();
-            //InitializeButtons();
+            Init();
             workoutListViewModel = new WorkoutListViewModel();
-            BindingContext = workoutListViewModel;
-
-            //Set up correct views
-            if(App.currentUser.userType.Equals("Doctor"))
-            {
-                //selectBtn.IsVisible = false;
-            }
-            //Patient is the default
-            else
-            {
-
-            }
+            BindingContext = workoutListViewModel;            
 		}  
+
+        void Init()
+        {
+        }
         
         private void New_Button_Clicked(object sender, EventArgs e)
         {
@@ -88,11 +77,6 @@ namespace CTAR_All_Star
         protected override void OnAppearing()
         {
             base.OnAppearing();
-        }
-
-        private void InitializeButtons()
-        {
-            selectBtn = this.FindByName<Button>("btnSelect");
         }
     }
 }
