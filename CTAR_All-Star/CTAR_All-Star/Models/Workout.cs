@@ -16,13 +16,14 @@ namespace CTAR_All_Star.Models
         public string ThresholdPercentage { get; set; }
         public string HoldDuration { get; set; }
         public string RestDuration { get; set; }
+        public string Type { get; set; }
 
         public Workout()
         {
         }
 
         public Workout(string Name, string Patient, string Doctor, string NumReps, string NumSets, string ThresholdPercentage,
-                        string Hold, string Rest)
+                        string Hold, string Rest, string Type)
         {
             this.WorkoutName = Name;
             this.PatientEmrNumber = Patient;
@@ -32,12 +33,13 @@ namespace CTAR_All_Star.Models
             this.ThresholdPercentage = ThresholdPercentage;
             this.HoldDuration = Hold;
             this.RestDuration = Rest;
+            this.Type = Type;
         }
 
         public bool CheckInformation()
         {
             if (!this.WorkoutName.Equals("") && !this.NumReps.Equals("") && !this.NumSets.Equals("") && !this.ThresholdPercentage.Equals("")
-                && !this.PatientEmrNumber.Equals("") && !this.DoctorID.Equals("") && !this.HoldDuration.Equals("") && !this.RestDuration.Equals(""))
+                && !this.PatientEmrNumber.Equals("") && !this.DoctorID.Equals("") && !this.HoldDuration.Equals("") && !this.RestDuration.Equals("") && !this.Type.Equals(""))
                 return true;
             else
                 return false;

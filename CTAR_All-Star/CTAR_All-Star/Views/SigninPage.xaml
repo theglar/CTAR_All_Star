@@ -24,8 +24,8 @@
             <Entry x:Name="Entry_Username" Placeholder="EMR # or DoctorID" Text="" BackgroundColor="White"/>
             <Label x:Name="Lbl_Password" Text="Password" />
             <Entry x:Name="Entry_Password" Placeholder="Password" Text="" BackgroundColor="White" IsPassword="True"/>
-            <Button x:Name="Btn_Signin" Text="Sign in" Clicked="SignInProcedure" Margin="0,20,0,0"/>
-            <Button x:Name="Btn_Signup" Text="Sign up" Clicked="SignUpProcedure" />
+            <Button x:Name="Btn_Signin" Text="Sign in" Clicked="SignInProcedure" Margin="0,20,0,0" HorizontalOptions="Center" WidthRequest="200"/>
+            <Button x:Name="Btn_Signup" Text="Sign up" Clicked="SignUpProcedure" HorizontalOptions="Center" WidthRequest="200"/>
         </StackLayout>
         
     </StackLayout>

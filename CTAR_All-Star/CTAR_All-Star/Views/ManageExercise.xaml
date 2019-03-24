@@ -1,43 +1,42 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CTAR_All_Star.ManageExercise">
+             x:Class="CTAR_All_Star.ManageExercise"
+             BackgroundColor="#999999">
 
     <ContentPage.Content>
-        <StackLayout Padding="0,20,0,100">
+        <StackLayout Padding="20,20,20,100" HorizontalOptions="Center">
             <Label Text="Manage Exercises"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand"
-                   FontSize="Large" FontAttributes="Bold"/>
-
-            <ListView ItemsSource="{Binding Workouts}" Margin="0,20,0,0" x:Name="workoutList">
+                   FontSize="Large" FontAttributes="Bold"
+                   TextColor="#003366"/>
+            <Label Text="Choose an exercise and select an option below." VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" FontSize="Large" FontAttributes="Italic"
+                   TextColor="#003366"></Label>
+            <ListView ItemsSource="{Binding Workouts}" HorizontalOptions="Center" x:Name="workoutList" HasUnevenRows="True" SeparatorVisibility="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <ViewCell.View>
-                                <StackLayout Orientation="Horizontal" Padding="100,0,0,0" HorizontalOptions="Center">
-                                    <Label Text="{Binding WorkoutName}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Medium" Margin="10"/>
-                                    <Picker x:Name="Options" Title="Options" TextColor="White" BackgroundColor= "#003366">
-                                        <Picker.ItemsSource CommandParameter="{Binding WorkId}">
-                                            <x:Array Type="{x:Type x:String}">
-                                                <x:String>Select</x:String>
-                                                <x:String>Details</x:String>
-                                                <x:String>Assign</x:String>
-                                                <x:String>Remove</x:String>
-                                            </x:Array>
-                                        </Picker.ItemsSource>
-                                    </Picker>
-
-                                    <!--<Button Text="Select" CommandParameter="{Binding WorkId}" Clicked="Select_Button_Clicked"></Button>
-                                    <Button Text="Details" CommandParameter="{Binding WorkId}" Clicked="Details_Button_Clicked"></Button>                                    
-                                    <Button Text="Assign" CommandParameter="{Binding WorkId}" Clicked="Assign_Button_Clicked"></Button>
-                                    <Button Text="Remove" CommandParameter="{Binding WorkId}" Clicked="Remove_Button_Clicked"></Button>-->
+                            <Frame Margin="0,5,0,5">
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                    <Label Text="{Binding WorkoutName}" FontSize="Medium" VerticalOptions="Center"/>
+                                    <Label Text="{Binding PatientEmrNumber}" FontSize="Small" VerticalOptions="Center" HorizontalOptions="End" Margin="10" FontAttributes="Italic"/>
                                 </StackLayout>
-                            </ViewCell.View>
+                            </Frame>
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0,10,0,10">
+                <Button Text="Begin" Clicked="Begin_Button_Clicked" HorizontalOptions="Center" BackgroundColor="#003366" TextColor="White"></Button>
+                <Button Text="Details" Clicked="Details_Button_Clicked" HorizontalOptions="Center" BackgroundColor="#807f84" TextColor="White"></Button>
+                <Button Text="Assign" Clicked="Assign_Button_Clicked" HorizontalOptions="Center" BackgroundColor="#003366" TextColor="White"></Button>
+                <Button Text="Remove" Clicked="Remove_Button_Clicked" HorizontalOptions="Center" BackgroundColor="#807f84" TextColor="White"></Button>
+            </StackLayout>
+            <Label Text="or" VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" FontSize="Large" FontAttributes="Italic"
+                   TextColor="#003366"></Label>
             <Button Text="Create A New Exercise" Clicked="New_Button_Clicked"  HorizontalOptions="Center"/>
             <Button Text="Show ALL" Clicked="Show_All_Clicked" HorizontalOptions="Center"/>
         </StackLayout>

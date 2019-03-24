@@ -15,9 +15,11 @@ namespace CTAR_All_Star
         Patient newPatient = new Patient();
         Patient patient = new Patient();
         DatabaseHelper dbHelper = new DatabaseHelper();
+        Boolean isNew = true;
 
         public CreateExercise()
 		{
+            isNew = true;
             newPatient.PatientEmrNumber = "New";
             InitializeComponent();
             patientListViewModel = new PatientListViewModel();
@@ -25,6 +27,19 @@ namespace CTAR_All_Star
             BindingContext = patientListViewModel;
             Init();
 		}
+
+        //For workout duplication functionality
+        public CreateExercise(Workout workout)
+        {
+            isNew = false;
+            newPatient.PatientEmrNumber = "New";
+            InitializeComponent();
+            patientListViewModel = new PatientListViewModel();
+            patientListViewModel.Patients.Add(newPatient);
+            BindingContext = patientListViewModel;
+            Init();
+            SetWorkout(workout);
+        }
 
         void Init()
         {
@@ -48,29 +63,38 @@ namespace CTAR_All_Star
             Entry_RestDuration.Completed += (s, e) => Entry_RestDuration.Focus();
             Entry_NewPatientID.Completed += (s, e) => Entry_RestDuration.Focus();
 
-            Exercise.SelectedIndexChanged += this.myPickerSelectedIndexChanged;
+
             UserID.SelectedIndexChanged += this.myPatientPickerSelectedIndexChanged;
 
-        
+            // Only enable if it's a brand new exercise
+            if (isNew)
+            {
+                Exercise.SelectedIndexChanged += this.myPickerSelectedIndexChanged;
+            }           
+                    
         }
 
         void SaveWorkoutProcedure(object sender, EventArgs e)
         {
             Workout workout;
-            if(Entry_NewPatientID.Text != "")
+            string type;
+            if (Exercise.SelectedIndex == 0) { type = "Isometric"; } else { type = "Isotonic"; }
+
+            if (Entry_NewPatientID.Text != "")
             {
                 patient.PatientEmrNumber = Entry_NewPatientID.Text;
                 patient.DoctorName = App.currentUser.Username;
                 dbHelper.addPatient(patient);
                 DisplayAlert("New Patient", "You have also added a new patient.", "Ok");
+                
                 workout = new Workout(Entry_WorkoutName.Text, Entry_NewPatientID.Text, App.currentUser.Username, Entry_NumReps.Text, Entry_NumSets.Text, Entry_Threshold.Text,
-                Entry_HoldDuration.Text, Entry_RestDuration.Text);
+                Entry_HoldDuration.Text, Entry_RestDuration.Text, type);
             }
             else
             {
                 patient = (Patient)UserID.SelectedItem;
                 workout = new Workout(Entry_WorkoutName.Text, patient.PatientEmrNumber, App.currentUser.Username, Entry_NumReps.Text, Entry_NumSets.Text, Entry_Threshold.Text,
-                Entry_HoldDuration.Text, Entry_RestDuration.Text);
+                Entry_HoldDuration.Text, Entry_RestDuration.Text, type);
             }            
 
             if (workout.CheckInformation())
@@ -117,6 +141,21 @@ namespace CTAR_All_Star
                 Lbl_NewPatientID.IsVisible = false;
                 Entry_NewPatientID.IsVisible = false;
             }
+        }
+
+        void SetWorkout(Workout workout)
+        {
+            Entry_WorkoutName.Text = workout.WorkoutName;
+            Entry_NumReps.Text = workout.NumReps;
+            Entry_NumSets.Text = workout.NumSets;
+            Entry_Threshold.Text = workout.ThresholdPercentage;
+            Entry_HoldDuration.Text = workout.HoldDuration;
+            Entry_RestDuration.Text = workout.RestDuration;
+            if(workout.Type.Equals("Isometric"))
+            {
+                Exercise.SelectedIndex = 0;
+            }
+            else { Exercise.SelectedIndex = 1; }
         }
     }
 }

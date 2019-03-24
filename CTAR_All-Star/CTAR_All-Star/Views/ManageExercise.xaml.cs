@@ -20,30 +20,28 @@ namespace CTAR_All_Star
 		public ManageExercise ()
 		{            
 			InitializeComponent ();
-            Init();
             workoutListViewModel = new WorkoutListViewModel();
             BindingContext = workoutListViewModel;            
 		}  
-
-        void Init()
-        {
-        }
         
         private void New_Button_Clicked(object sender, EventArgs e)
         {
             Navigation.PushAsync(new CreateExercise());
         }
 
-        private async void Select_Button_Clicked(object sender, EventArgs e)
+        private async void Begin_Button_Clicked(object sender, EventArgs e)
         {
-            Workout workout;
-            var button = sender as Button;
-            var item = button.BindingContext as Workout;
+            if (workoutList.SelectedItem == null)
+            {
+                DisplayAlert("No Exercise Selected", "Please select an exercise.", "OK");
+                return;
+            }
+            Workout workout = workoutList.SelectedItem as Workout;
 
             using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
             {
                 conn.CreateTable<Workout>();
-                workout = conn.Query<Workout>("select * from Workout where WorkId = " + item.WorkID).SingleOrDefault();
+                workout = conn.Query<Workout>("select * from Workout where WorkId = " + workout.WorkID).SingleOrDefault();
                 if (workout != null)
                 {
                     App.currentWorkout = workout;
@@ -56,17 +54,58 @@ namespace CTAR_All_Star
             }
         }
 
-        private void Details_Button_Clicked()
+        private async void Details_Button_Clicked()
         {
+            if (workoutList.SelectedItem == null)
+            {
+                DisplayAlert("No Exercise Selected", "Please select an exercise.", "OK");
+                return;
+            }
+            Workout workout = workoutList.SelectedItem as Workout;
+
+            DisplayAlert(workout.WorkoutName + " Details", "Reps: " + workout.NumReps + "\nSets: " + workout.NumReps + "\nThreshold: " 
+                + workout.ThresholdPercentage + "%\nHold Duration: " + workout.HoldDuration + " second(s)\nRest Duration: " + workout.RestDuration + " second(s)", "OK");
 
         }
-        private void Assign_Button_Clicked()
+        private async void Assign_Button_Clicked()
         {
+            if(workoutList.SelectedItem == null)
+            {
+                DisplayAlert("No Exercise Selected", "Please select an exercise.", "OK");
+                return;
+            }
+            Workout workout = workoutList.SelectedItem as Workout;
 
+            bool getDetails = await DisplayAlert("Assign " + workout.WorkoutName, "You will be directed to the create exercise page to complete the assignment.", "OK", "Cancel");
+            if (getDetails)
+            {
+                Navigation.PushAsync(new CreateExercise(workout));
+            }
         }
-        private void Remove_Button_Clicked()
+        private async void Remove_Button_Clicked()
         {
+            if (workoutList.SelectedItem == null)
+            {
+                DisplayAlert("No Exercise Selected", "Please select an exercise.", "OK");
+                return;
+            }
+            Workout workout = workoutList.SelectedItem as Workout;
 
+            bool removeWorkout = await DisplayAlert("Remove " + workout.WorkoutName, "Continue? This cannot be undone.", "Yes", "Cancel");
+            if (removeWorkout)
+            {
+                using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
+                {
+                    conn.CreateTable<Workout>();
+                    workout = conn.Query<Workout>("select * from Workout where WorkID = " + workout.WorkID).SingleOrDefault();
+                    if (workout != null)
+                    {
+                        DatabaseHelper dbHelper = new DatabaseHelper();
+                        dbHelper.removeWorkout(workout);
+                        DisplayAlert("Deletion Complete", workout.WorkoutName + " was successfully deleted", "OK");
+                    }
+                }
+            }
         }
 
         private void Show_All_Clicked(object sender, EventArgs e)
