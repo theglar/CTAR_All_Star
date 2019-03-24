@@ -21,8 +21,18 @@ namespace CTAR_All_Star
 		{            
 			InitializeComponent ();
             workoutListViewModel = new WorkoutListViewModel();
-            BindingContext = workoutListViewModel;            
-		}  
+            BindingContext = workoutListViewModel;
+            Init();
+		}
+        
+        void Init()
+        {
+            if(App.currentUser.userType.Equals("Doctor"))
+            {
+                AssignButton.IsVisible = true;
+                RemoveButton.IsVisible = true;
+            }
+        }
         
         private void New_Button_Clicked(object sender, EventArgs e)
         {
