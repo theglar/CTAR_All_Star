@@ -3,7 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CTAR_All_Star.Navigation.HomePageDetail">
   <RelativeLayout Margin="20">
-        <Image x:Name="LoginIcon" Source="LoginIcon.png" 
+        <Image x:Name="LoginIcon" Source="SquareLogo.png" 
             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"  
             RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.9}"
             />

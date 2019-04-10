@@ -177,5 +177,17 @@
   <ItemGroup>
     <BundleResource Include="Resources\LoginIcon.png" />
   </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\CircleLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\CircleLogoBlack.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\SquareLogo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\SquareLogoBlue.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />
 </Project>
