@@ -23,7 +23,7 @@ namespace CTAR_All_Star
             BindingContext = patientListViewModel;
 		}
 
-        private void Button_Clicked(object sender, EventArgs e)
+        private void Add_Button_Clicked(object sender, EventArgs e)
         {
             //Navigation.PopAsync();
             Navigation.PushAsync(new AddPatientPage());
@@ -48,6 +48,11 @@ namespace CTAR_All_Star
                 else
                     DisplayAlert("Failed", "patient is null", "ok");
             }          
+        }
+
+        private void Assign_Button_Clicked(object sender, EventArgs e)
+        {
+
         }
 
         protected override void OnAppearing()

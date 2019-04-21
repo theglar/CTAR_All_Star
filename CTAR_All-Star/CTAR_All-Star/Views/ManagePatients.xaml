@@ -1,31 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CTAR_All_Star.ManagePatients">
+             x:Class="CTAR_All_Star.ManagePatients"
+             BackgroundColor="#999999">
   
 
     <ContentPage.Content>
-        <StackLayout Padding="0,20,0,100">
+        <StackLayout  Padding="20,20,20,100" HorizontalOptions="Center">
             <Label Text="Current Patients"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand"
-                   FontSize="Large" FontAttributes="Bold"/>
-            
-            <ListView ItemsSource="{Binding Patients}" Margin="0,20,0,0" x:Name="patientList">
+                   FontSize="Large" FontAttributes="Bold"
+                   TextColor="#003366"/>
+            <Label Text="Choose a patient and select an option below." VerticalOptions="CenterAndExpand" 
+                HorizontalOptions="CenterAndExpand" FontSize="Large" FontAttributes="Italic"
+                   TextColor="#003366"></Label>
+            <ListView ItemsSource="{Binding Patients}" HorizontalOptions="Center" x:Name="patientList" HasUnevenRows="True" SeparatorVisibility="None">
                 <ListView.ItemTemplate>
                     <DataTemplate>
                         <ViewCell>
-                            <ViewCell.View>
-                                <StackLayout Orientation="Horizontal" Padding="100,0,0,0" HorizontalOptions="Center">
-                                    <Label Text="{Binding PatientEmrNumber}" HorizontalTextAlignment="Center" VerticalTextAlignment="Center" FontSize="Medium" Margin="10"/>
-                                    <Button Text="Remove" CommandParameter="{Binding PatientId}" Clicked="Delete_Button_Clicked"></Button>
+                            <Frame Margin="0,5,0,5">
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                    <Label Text="{Binding PatientEmrNumber}" FontSize="Medium" VerticalOptions="Center"/>
                                 </StackLayout>                                
-                            </ViewCell.View>                            
+                            </Frame>                            
                         </ViewCell>
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
-            <Button Text="Add a Patient" Clicked="Button_Clicked"  HorizontalOptions="Center"/>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0,10,0,10">
+                <Button Text="Add" Clicked="Add_Button_Clicked" HorizontalOptions="Center" BackgroundColor="#003366" TextColor="White"></Button>
+                <Button x:Name="RemoveButton" Text="Remove" Clicked="Delete_Button_Clicked" HorizontalOptions="Center" BackgroundColor="#807f84" TextColor="White" IsVisible="False"></Button>
+                <Button x:Name="AssignButton" Text="Assign an Exercise" Clicked="Assign_Button_Clicked" HorizontalOptions="Center" BackgroundColor="#003366" TextColor="White" IsVisible="False"></Button>
+            </StackLayout>            
         </StackLayout>
         
     </ContentPage.Content>

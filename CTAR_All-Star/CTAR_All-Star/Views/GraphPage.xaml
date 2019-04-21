@@ -47,7 +47,7 @@
                     </chart:CategoryAxis>
                 </chart:SfChart.PrimaryAxis>
                 <chart:SfChart.SecondaryAxis>
-                    <chart:NumericalAxis Maximum="1023" Minimum="-1">
+                    <chart:NumericalAxis Maximum="400" Minimum="0">
                         <chart:NumericalAxis.StripLines>
                             <chart:NumericalStripLine x:Name="Goal" Start="675" Width ="10" Text="Goal" FillColor="#941414"/>
                         </chart:NumericalAxis.StripLines>
