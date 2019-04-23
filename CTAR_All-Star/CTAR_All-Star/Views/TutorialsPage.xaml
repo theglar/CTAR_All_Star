@@ -4,6 +4,7 @@
              x:Class="CTAR_All_Star.Views.TutorialsPage">
     <ContentPage.Content>
         <StackLayout Margin="10,10,10,0">
+            <Label Text="Tutorials Placeholder"></Label>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

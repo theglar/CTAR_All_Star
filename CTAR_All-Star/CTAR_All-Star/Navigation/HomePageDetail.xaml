@@ -7,9 +7,14 @@
             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"  
             RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.9}"
             />
-        <Label Text="Welcome to the CTAR All-Star Application!" FontAttributes="Italic" HorizontalOptions="CenterAndExpand" FontSize="Large"
+        <Label x:Name="GreetingLabel" Text="Welcome to the CTAR All-Star Application!" FontAttributes="Italic" HorizontalOptions="CenterAndExpand" FontSize="Large"
             RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=LoginIcon, Property=Height, Factor=1}"
             RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"  
             Margin="10"/>
-  </RelativeLayout>
+        <StackLayout Orientation="Vertical" 
+                RelativeLayout.XConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=0.6}">
+            <Button Text="Start Exercising" Clicked="Start_Button_Selected" HorizontalOptions="Center" BackgroundColor="#003366" TextColor="White"></Button>
+            <Button Text="Help" Clicked="Help_Button_Selected" HorizontalOptions="Center" BackgroundColor="#003366" TextColor="White"></Button>
+        </StackLayout>        
+    </RelativeLayout>
 </ContentPage>
