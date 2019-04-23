@@ -43,11 +43,11 @@ namespace CTAR_All_Star.Navigation
                         new HomePageMenuItem { Id = 4, Title = "Manage Exercises", TargetType = typeof(ManageExercise)  },
                         new HomePageMenuItem { Id = 5, Title = "Manage Patients", TargetType = typeof(ManagePatients)  },
                         new HomePageMenuItem { Id = 6, Title = "History", TargetType = typeof(HistoryPage)  },
-                        new HomePageMenuItem { Id = 7, Title = "Graph" , TargetType = typeof(GraphPage) },
+                        new HomePageMenuItem { Id = 7, Title = "Exercise" , TargetType = typeof(GraphPage) },
                         new HomePageMenuItem { Id = 8, Title = "Settings", TargetType = typeof(SetupPage)  },
-                        new HomePageMenuItem { Id = 9, Title = "Add Measurement", TargetType = typeof(CreatePage)  },
-                        new HomePageMenuItem { Id = 10, Title = "Clear Database", TargetType = typeof(RemovePage)  },
-                        new HomePageMenuItem { Id = 11, Title = "Logout", TargetType = typeof(LogoutPage) },
+                        //new HomePageMenuItem { Id = 9, Title = "Add Measurement", TargetType = typeof(CreatePage)  },
+                        //new HomePageMenuItem { Id = 10, Title = "Clear Database", TargetType = typeof(RemovePage)  },
+                        new HomePageMenuItem { Id = 9, Title = "Logout", TargetType = typeof(LogoutPage) },
                     });
                 }
                 //Patient is the default
@@ -60,7 +60,7 @@ namespace CTAR_All_Star.Navigation
                         new HomePageMenuItem { Id = 2, Title = "Bluetooth", TargetType = typeof(MainPage) },
                         new HomePageMenuItem { Id = 3, Title = "Choose Exercise", TargetType = typeof(ManageExercise)  },                        
                         new HomePageMenuItem { Id = 4, Title = "History", TargetType = typeof(HistoryPage)  },
-                        new HomePageMenuItem { Id = 5, Title = "Graph" , TargetType = typeof(GraphPage) },
+                        new HomePageMenuItem { Id = 5, Title = "Exercise" , TargetType = typeof(GraphPage) },
                         new HomePageMenuItem { Id = 6, Title = "Settings", TargetType = typeof(SetupPage)  },
                         new HomePageMenuItem { Id = 7, Title = "Logout", TargetType = typeof(LogoutPage) },
                     });

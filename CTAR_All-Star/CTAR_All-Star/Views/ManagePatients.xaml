@@ -30,8 +30,8 @@
             </ListView>
             <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0,10,0,10">
                 <Button Text="Add" Clicked="Add_Button_Clicked" HorizontalOptions="Center" BackgroundColor="#003366" TextColor="White"></Button>
-                <Button x:Name="RemoveButton" Text="Remove" Clicked="Delete_Button_Clicked" HorizontalOptions="Center" BackgroundColor="#807f84" TextColor="White" IsVisible="False"></Button>
-                <Button x:Name="AssignButton" Text="Assign an Exercise" Clicked="Assign_Button_Clicked" HorizontalOptions="Center" BackgroundColor="#003366" TextColor="White" IsVisible="False"></Button>
+                <Button x:Name="RemoveButton" Text="Remove" Clicked="Delete_Button_Clicked" HorizontalOptions="Center" BackgroundColor="#807f84" TextColor="White"></Button>
+                <Button x:Name="AssignButton" Text="Assign an Exercise" Clicked="Assign_Button_Clicked" HorizontalOptions="Center" BackgroundColor="#003366" TextColor="White"></Button>
             </StackLayout>            
         </StackLayout>
         

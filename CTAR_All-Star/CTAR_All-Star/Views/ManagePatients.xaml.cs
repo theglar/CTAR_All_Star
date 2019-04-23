@@ -29,25 +29,31 @@ namespace CTAR_All_Star
             Navigation.PushAsync(new AddPatientPage());
         }
 
-        private void Delete_Button_Clicked(object sender, EventArgs e)
+        private async void Delete_Button_Clicked(object sender, EventArgs e)
         {
-            Patient patient;
-            var button = sender as Button;
-            var item = button.BindingContext as Patient;
-
-            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
+            if (patientList == null)
             {
-                conn.CreateTable<Patient>();
-                patient = conn.Query<Patient>("select * from Patient where PatientId = " + item.PatientId).SingleOrDefault();
-                if (patient != null)
+                DisplayAlert("No Patient Selected", "Please select a patient.", "OK");
+                return;
+            }
+
+            Patient patient = patientList.SelectedItem as Patient;
+
+            bool removePatient = await DisplayAlert("Remove " + patient.PatientEmrNumber, "Continue? This cannot be undone.", "Yes", "Cancel");
+            if(removePatient)
+            {
+                using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
                 {
-                    DatabaseHelper dbHelper = new DatabaseHelper();
-                    dbHelper.removePatient(patient);
-                    DisplayAlert("Deleted", patient.PatientEmrNumber + " deleted", "OK");
+                    conn.CreateTable<Patient>();
+                    patient = conn.Query<Patient>("select * from Patient where PatientEmrNumber = " + patient.PatientEmrNumber).SingleOrDefault();
+                    if (patient != null)
+                    {
+                        DatabaseHelper dbHelper = new DatabaseHelper();
+                        dbHelper.removePatient(patient);
+                        DisplayAlert("Deletion Complete", patient.PatientEmrNumber + " was successfully deleted", "OK");
+                    }
                 }
-                else
-                    DisplayAlert("Failed", "patient is null", "ok");
-            }          
+            }
         }
 
         private void Assign_Button_Clicked(object sender, EventArgs e)
