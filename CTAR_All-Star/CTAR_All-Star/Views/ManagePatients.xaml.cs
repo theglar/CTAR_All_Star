@@ -25,7 +25,6 @@ namespace CTAR_All_Star
 
         private void Add_Button_Clicked(object sender, EventArgs e)
         {
-            //Navigation.PopAsync();
             Navigation.PushAsync(new AddPatientPage());
         }
 
@@ -56,9 +55,20 @@ namespace CTAR_All_Star
             }
         }
 
-        private void Assign_Button_Clicked(object sender, EventArgs e)
+        private async void Assign_Button_Clicked(object sender, EventArgs e)
         {
+            if (patientList.SelectedItem == null)
+            {
+                DisplayAlert("No Patient Selected", "Please select a patient.", "OK");
+                return;
+            }
+            Patient patient = patientList.SelectedItem as Patient;
 
+            bool getDetails = await DisplayAlert("Assign Exercise to " + patient.PatientEmrNumber, "You will be directed to the exercise management page to choose or create an exercise.", "OK", "Cancel");
+            if (getDetails)
+            {
+                Navigation.PushAsync(new ManageExercise());
+            }
         }
 
         protected override void OnAppearing()
