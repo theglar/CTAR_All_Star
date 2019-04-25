@@ -24,19 +24,21 @@ namespace CTAR_All_Star.Views
             Lbl_newUser.TextColor = Constants.MainTextColor;
             Lbl_NewPassword.TextColor = Constants.MainTextColor;
             Lbl_ConfirmPass.TextColor = Constants.MainTextColor;
+            Lbl_DocID.TextColor = Constants.MainTextColor;
             ActivitySpinner.IsVisible = false;
             typePicker.BackgroundColor = Constants.MainTextColor;
 
             Entry_NewUser.Completed += (s, e) => Entry_NewPassword.Focus();
             Entry_NewPassword.Completed += (s, e) => Entry_ConfirmPass.Focus();
             Entry_ConfirmPass.Completed += (s, e) => SignUpProcedure(s, e);
+            Entry_DocID.Completed += (s, e) => Entry_DocID.Focus();
         }
 
 
         void SignUpProcedure(object sender, EventArgs e)
         {
             DatabaseHelper dbHelper = new DatabaseHelper();
-            User user = new User(Entry_NewUser.Text, Entry_NewPassword.Text, userType);
+            User user = new User(Entry_NewUser.Text, Entry_NewPassword.Text, userType, Entry_DocID.ToString());
 
             if(dbHelper.UniqueUser(Entry_NewUser.Text) == true)
             {

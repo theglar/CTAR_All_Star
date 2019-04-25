@@ -20,11 +20,13 @@ namespace CTAR_All_Star.ViewModels
             Measurement measurement = new Measurement()
             {
                 UserName = "Tester 1",
+                DocID = String.Empty,
                 SessionNumber = "1",
                 TimeStamp = d,
                 Pressure = null,
-                Duration = "1",
-                DisplayTime = String.Empty
+                DisplayTime = String.Empty,
+                DisplayDate = String.Empty,
+                OneRepMax = null
             };
 
             // Initialize list

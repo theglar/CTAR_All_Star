@@ -14,22 +14,124 @@ namespace CTAR_All_Star
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class HistoryPage : ContentPage
 	{
-		public HistoryPage()
+        private Picker namePicker, sessionPicker, pressurePicker, datePicker, timePicker;
+        private List<String> nameList, sessionList, dateList, timeList;
+        private List<Double?> pressureList;
+
+        public HistoryPage()
 		{
 			InitializeComponent ();
-		}
+            InitializeLists();            
+        }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
 
+            InitializePickers();            
+
             using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
             {
                 conn.CreateTable<Measurement>();
 
+                //Set up source items for the View model
                 var measurements = conn.Table<Measurement>().ToList();
-                measurementsView.ItemsSource = measurements;
+                if(measurements != null)
+                {
+                    measurementsView.ItemsSource = measurements;
+                }               
+
+                //Load the picker items
+                var table = conn.Table<Measurement>();
+                if(table != null)
+                {
+                    foreach (var m in table)
+                    {                        
+                        if (!nameList.Contains(m.UserName) && m.UserName != null)
+                        {
+                            nameList.Add(m.UserName);
+                        }
+                        if(!sessionList.Contains(m.SessionNumber) && m.SessionNumber != null)
+                        {
+                            sessionList.Add(m.SessionNumber);
+                        }
+                        if (!pressureList.Contains(m.Pressure) && m.Pressure != null)
+                        {
+                            pressureList.Add(m.Pressure);
+                        }
+                        if (!dateList.Contains(m.DisplayDate) && m.DisplayDate != null)
+                        {
+                            dateList.Add(m.DisplayDate);
+                        }
+                        if (!timeList.Contains(m.DisplayTime) && m.DisplayTime != null)
+                        {
+                            timeList.Add(m.DisplayTime);
+                        }
+                    }
+                }              
             }
-        }        
+            LoadPickers();
+        } 
+        
+        public void InitializeLists()
+        {
+            nameList = new List<String>();
+            sessionList = new List<String>();
+            pressureList = new List<Double?>();
+            dateList = new List<String>();
+            timeList = new List<String>();
+        }
+
+        public void InitializePickers()
+        {
+            namePicker = NamePicker;
+            sessionPicker = SessionPicker;
+            pressurePicker = PressurePicker;
+            datePicker = DatePicker;
+            timePicker = TimePicker;
+        }
+
+        public void LoadPickers()
+        {
+            if (nameList != null)
+            {
+                foreach (var n in nameList)
+                {
+                    namePicker.Items.Add(n);
+                }
+            }
+
+            if (sessionList != null)
+            {
+                foreach (var n in sessionList)
+                {
+                    sessionPicker.Items.Add(n);
+                }
+            }
+
+            if (pressureList != null)
+            {
+                foreach (var n in pressureList)
+                {
+                    pressurePicker.Items.Add(n?.ToString());
+                }
+            }
+
+            if (dateList != null)
+            {
+                foreach (var n in dateList)
+                {
+                    datePicker.Items.Add(n);
+                }
+            }
+
+            if (timeList != null)
+            {
+                foreach (var n in timeList)
+                {
+                    timePicker.Items.Add(n);
+                }
+            }
+        }
     }
 }

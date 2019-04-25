@@ -8,24 +8,28 @@
             <StackLayout Padding="10,10,10,10" BackgroundColor="#003366"
                         Orientation="Vertical">
                 <StackLayout Orientation="Horizontal">
-                    <Label Text="Name" FontSize="Medium" FontAttributes="Bold"
-                                TextColor="White" />
-                    <Label Text="Session" FontSize="Medium" FontAttributes="Bold"
+                    <Picker x:Name="NamePicker" Title="NAME" FontSize="Small" FontAttributes="Bold"
+                                TextColor="#003366" BackgroundColor="White"/>
+                    <Picker x:Name="SessionPicker" Title="SESSION" FontSize="Small" FontAttributes="Bold"
                                 HorizontalOptions="EndAndExpand"
-                                TextColor="White" />
-                    <Label Text="Pressure" FontSize="Medium" FontAttributes="Bold"
+                                TextColor="#003366" BackgroundColor="White"/>
+                    <Picker x:Name="PressurePicker" Title="PRESSURE" FontSize="Small" FontAttributes="Bold"
                                 HorizontalOptions="EndAndExpand"
-                                TextColor="White" />
-                    <Label Text="Time" FontSize="Medium" FontAttributes="Bold"
+                                TextColor="#003366" BackgroundColor="White"/>
+                    <Picker x:Name="DatePicker" Title="DATE" FontSize="Small" FontAttributes="Bold"
                                 HorizontalOptions="EndAndExpand"
-                                TextColor="White" />
+                                TextColor="#003366" BackgroundColor="White"/>
+                    <Picker x:Name="TimePicker" Title="TIME" FontSize="Small" FontAttributes="Bold"
+                                HorizontalOptions="EndAndExpand"
+                                TextColor="#003366" BackgroundColor="White"/>                    
+                    
                 </StackLayout>
             </StackLayout>
         </ListView.Header>
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
-                    <StackLayout Padding="10,10,10,0" BackgroundColor="#999999"
+                    <StackLayout Padding="10,10,10,0" BackgroundColor="LightGray"
                         Orientation="Vertical">
                         <StackLayout Orientation="Horizontal" Padding="10,0,10,0">
                             <Label Text="{Binding UserName}"
@@ -34,6 +38,9 @@
                                 HorizontalOptions="EndAndExpand"
                                 TextColor="#003366" />
                             <Label Text="{Binding Pressure}"
+                                HorizontalOptions="EndAndExpand"
+                                TextColor="#003366" />
+                            <Label Text="{Binding DisplayDate}"
                                 HorizontalOptions="EndAndExpand"
                                 TextColor="#003366" />
                             <Label Text="{Binding DisplayTime}"

@@ -17,18 +17,20 @@ namespace CTAR_All_Star.Models
         public double OneRepMax { get; set; }
         public bool DeviceIsConnected { get; set; }
         public int Session { get; set; }
+        public string DocID { get; set; }
 
         public User()
         {
         }
 
-        public User(string Username, string Password, string userType)
+        public User(string Username, string Password, string userType, string Doc)
         {
             this.Username = Username;
             this.Password = Password;
             this.userType = userType;
             this.DeviceIsConnected = false;
             this.Session = 1;
+            this.DocID = Doc;
         }
 
         public User(string Username, string Password)
