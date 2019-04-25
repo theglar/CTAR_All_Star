@@ -14,10 +14,18 @@ namespace CTAR_All_Star
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class HistoryPage : ContentPage
 	{
+        private string requestedDate = "";
+
 		public HistoryPage()
 		{
 			InitializeComponent ();
 		}
+
+        public HistoryPage(Measurement measurement)
+        {
+            //requestedDate = measurement.DisplayDate;
+            InitializeComponent();
+        }
 
         protected override void OnAppearing()
         {

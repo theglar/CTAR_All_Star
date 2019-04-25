@@ -12,14 +12,20 @@ namespace CTAR_All_Star.Models
 
         public string UserName { get; set; }
 
+        public string DocID { get; set; }
+
         public string SessionNumber { get; set; }
 
         public DateTime TimeStamp { get; set; }
 
         public string DisplayTime { get; set; }
 
+        public string DisplayDate { get; set; }
+
         public double? Pressure { get; set; }
 
-        public string Duration { get; set; }
+        public string CurrentOneRepMax { get; set; }
+
+
     }
 }

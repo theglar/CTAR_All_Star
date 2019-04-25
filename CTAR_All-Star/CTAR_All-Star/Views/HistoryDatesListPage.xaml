@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CTAR_All_Star.HistoryDatesListPage"
+             BackgroundColor="#999999">
+
+    <ContentPage.Content>
+        <StackLayout Padding="20,20,20,20" HorizontalOptions="Center">
+            <Label Text="History" 
+                HorizontalOptions="CenterAndExpand"
+                   FontSize="Large" FontAttributes="Bold"
+                   TextColor="#003366"/>
+            <Label Text="Select a date and press the view button." 
+                HorizontalOptions="CenterAndExpand" FontSize="Large" FontAttributes="Italic"
+                   TextColor="#003366"></Label>
+            <ListView ItemsSource="{Binding Dates}" HorizontalOptions="Center" x:Name="historyList" HasUnevenRows="True" SeparatorVisibility="None">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <Frame Margin="0,5,0,5">
+                                <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
+                                    <Label Text="{Binding DisplayTime}" FontSize="Medium" VerticalOptions="Center"/>
+                                </StackLayout>
+                            </Frame>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <StackLayout Orientation="Horizontal" HorizontalOptions="CenterAndExpand" Padding="0,20,0,10">
+                <Button Text="View" Clicked="View_Clicked" HorizontalOptions="Center" BackgroundColor="#003366" TextColor="White"/>
+            </StackLayout>           
+        </StackLayout>
+
+    </ContentPage.Content>
+</ContentPage>
