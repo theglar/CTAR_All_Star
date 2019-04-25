@@ -5,40 +5,40 @@
     
     <ListView  x:Name="measurementsView">
         <ListView.Header>
-            <StackLayout Padding="10,0,10,10" BackgroundColor="Yellow"
+            <StackLayout Padding="10,10,10,10" BackgroundColor="#003366"
                         Orientation="Vertical">
                 <StackLayout Orientation="Horizontal">
-                    <Label Text="Name"
-                                TextColor="#2b3024" />
-                    <Label Text="Session"
+                    <Label Text="Name" FontSize="Medium" FontAttributes="Bold"
+                                TextColor="White" />
+                    <Label Text="Session" FontSize="Medium" FontAttributes="Bold"
                                 HorizontalOptions="EndAndExpand"
-                                TextColor="#503026" />
-                    <Label Text="Pressure"
+                                TextColor="White" />
+                    <Label Text="Pressure" FontSize="Medium" FontAttributes="Bold"
                                 HorizontalOptions="EndAndExpand"
-                                TextColor="#f35e20" />
-                    <Label Text="Duration"
+                                TextColor="White" />
+                    <Label Text="Time" FontSize="Medium" FontAttributes="Bold"
                                 HorizontalOptions="EndAndExpand"
-                                TextColor="#1c45a5" />
+                                TextColor="White" />
                 </StackLayout>
             </StackLayout>
         </ListView.Header>
         <ListView.ItemTemplate>
             <DataTemplate>
                 <ViewCell>
-                    <StackLayout Padding="10,0,10,0" BackgroundColor="#eee"
+                    <StackLayout Padding="10,10,10,0" BackgroundColor="#999999"
                         Orientation="Vertical">
-                        <StackLayout Orientation="Horizontal">
+                        <StackLayout Orientation="Horizontal" Padding="10,0,10,0">
                             <Label Text="{Binding UserName}"
-                                TextColor="#2b3024" />
+                                TextColor="#003366" />
                             <Label Text="{Binding SessionNumber}"
                                 HorizontalOptions="EndAndExpand"
-                                TextColor="#503026" />
+                                TextColor="#003366" />
                             <Label Text="{Binding Pressure}"
                                 HorizontalOptions="EndAndExpand"
-                                TextColor="#f35e20" />
-                            <Label Text="{Binding Duration}"
+                                TextColor="#003366" />
+                            <Label Text="{Binding DisplayTime}"
                                 HorizontalOptions="EndAndExpand"
-                                TextColor="#1c45a5" />
+                                TextColor="#003366" />
                         </StackLayout>
                     </StackLayout>
                 </ViewCell>
