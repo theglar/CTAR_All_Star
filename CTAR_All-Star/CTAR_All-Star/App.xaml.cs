@@ -43,7 +43,7 @@ namespace CTAR_All_Star
             {
                 currentUser = user;
                 currentUser.IsLoggedIn = true;
-                currentUser.OneRepMax = 500; //For testing
+                currentUser.OneRepMax = 250; //For testing
                 MainPage = new HomePage();
 
             });

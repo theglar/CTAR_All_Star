@@ -6,13 +6,15 @@
     <StackLayout x:Name="MasterLayout">
         <StackLayout Padding="0, 100, 0, 0">
             <Label x:Name="WelcomeMessage" Text="Welcome to the CTAR All-Star!" TextColor="White"
-                   FontAttributes="Italic" HorizontalOptions="CenterAndExpand" FontSize="Large"></Label>
-            <Label x:Name="LoginMessage" Text="Please Sign In or Sign Up Below." TextColor="White"
-                   FontAttributes="Italic" HorizontalOptions="CenterAndExpand" FontSize="Medium"></Label>
+                   FontAttributes="Italic" HorizontalOptions="CenterAndExpand" FontSize="Large"></Label>            
         </StackLayout>
         <StackLayout x:Name="LogoStack" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
             
-             <Image x:Name="LoginIcon" Source="LoginIcon.png"  />      
+             <Image x:Name="LoginIcon" Source="SquareLogo.png"  />      
+        </StackLayout>
+        <StackLayout>
+            <Label x:Name="LoginMessage" Text="Please Sign In or Sign Up Below." TextColor="White"
+                   FontAttributes="Italic" HorizontalOptions="CenterAndExpand" FontSize="Medium"></Label>
         </StackLayout>
 
         <StackLayout x:Name="LoginEntriesStack" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="50,0,50,200">

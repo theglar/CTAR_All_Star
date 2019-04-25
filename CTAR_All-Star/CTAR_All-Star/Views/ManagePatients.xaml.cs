@@ -23,31 +23,52 @@ namespace CTAR_All_Star
             BindingContext = patientListViewModel;
 		}
 
-        private void Button_Clicked(object sender, EventArgs e)
+        private void Add_Button_Clicked(object sender, EventArgs e)
         {
-            //Navigation.PopAsync();
             Navigation.PushAsync(new AddPatientPage());
         }
 
-        private void Delete_Button_Clicked(object sender, EventArgs e)
+        private async void Delete_Button_Clicked(object sender, EventArgs e)
         {
-            Patient patient;
-            var button = sender as Button;
-            var item = button.BindingContext as Patient;
-
-            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
+            if (patientList == null)
             {
-                conn.CreateTable<Patient>();
-                patient = conn.Query<Patient>("select * from Patient where PatientId = " + item.PatientId).SingleOrDefault();
-                if (patient != null)
+                DisplayAlert("No Patient Selected", "Please select a patient.", "OK");
+                return;
+            }
+
+            Patient patient = patientList.SelectedItem as Patient;
+
+            bool removePatient = await DisplayAlert("Remove " + patient.PatientEmrNumber, "Continue? This cannot be undone.", "Yes", "Cancel");
+            if(removePatient)
+            {
+                using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
                 {
-                    DatabaseHelper dbHelper = new DatabaseHelper();
-                    dbHelper.removePatient(patient);
-                    DisplayAlert("Deleted", patient.PatientEmrNumber + " deleted", "OK");
+                    conn.CreateTable<Patient>();
+                    patient = conn.Query<Patient>("select * from Patient where PatientEmrNumber = " + patient.PatientEmrNumber).SingleOrDefault();
+                    if (patient != null)
+                    {
+                        DatabaseHelper dbHelper = new DatabaseHelper();
+                        dbHelper.removePatient(patient);
+                        DisplayAlert("Deletion Complete", patient.PatientEmrNumber + " was successfully deleted", "OK");
+                    }
                 }
-                else
-                    DisplayAlert("Failed", "patient is null", "ok");
-            }          
+            }
+        }
+
+        private async void Assign_Button_Clicked(object sender, EventArgs e)
+        {
+            if (patientList.SelectedItem == null)
+            {
+                DisplayAlert("No Patient Selected", "Please select a patient.", "OK");
+                return;
+            }
+            Patient patient = patientList.SelectedItem as Patient;
+
+            bool getDetails = await DisplayAlert("Assign Exercise to " + patient.PatientEmrNumber, "You will be directed to the exercise management page to choose or create an exercise.", "OK", "Cancel");
+            if (getDetails)
+            {
+                Navigation.PushAsync(new ManageExercise());
+            }
         }
 
         protected override void OnAppearing()

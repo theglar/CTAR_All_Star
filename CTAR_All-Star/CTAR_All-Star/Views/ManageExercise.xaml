@@ -39,8 +39,7 @@
                    TextColor="#003366"></Label>
             <Button Text="Create A New Exercise" Clicked="New_Button_Clicked"  HorizontalOptions="Center"/>
             <Button Text="Show ALL" Clicked="Show_All_Clicked" HorizontalOptions="Center"/>
-        </StackLayout>
-        
+        </StackLayout>        
 
     </ContentPage.Content>
 
