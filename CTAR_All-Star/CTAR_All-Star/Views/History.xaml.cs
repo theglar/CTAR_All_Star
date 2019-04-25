@@ -20,8 +20,9 @@ namespace CTAR_All_Star
 
         public HistoryPage()
 		{
-			InitializeComponent ();
-            InitializeLists();            
+			InitializeComponent();
+            InitializeLists();
+            InititalizePickerListeners();            
         }
 
         protected override void OnAppearing()
@@ -130,6 +131,34 @@ namespace CTAR_All_Star
                 foreach (var n in timeList)
                 {
                     timePicker.Items.Add(n);
+                }
+            }
+        }
+
+        void InititalizePickerListeners()
+        {
+            NamePicker.SelectedIndexChanged += this.NamePickerIndexChanged;
+        }
+
+        public void NamePickerIndexChanged(object sender, EventArgs e)
+        {
+            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
+            {
+                conn.CreateTable<Measurement>();
+
+                //Set up source items for the View model
+                List<Measurement> list = new List<Measurement>();
+                var measurements = conn.Table<Measurement>();
+                if (measurements != null)
+                {
+                    foreach (var m in measurements)
+                    {
+                        if (m.UserName.Equals(NamePicker.SelectedItem))
+                        {
+                            list.Add(m);
+                        }
+                    }
+                    measurementsView.ItemsSource = list;
                 }
             }
         }
