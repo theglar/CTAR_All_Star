@@ -147,6 +147,7 @@ namespace CTAR_All_Star
 
         void InititalizePickerListeners()
         {
+            //THESE NEED TO WORK TOGETHER
             NamePicker.SelectedIndexChanged += this.NamePickerIndexChanged;
             SessionPicker.SelectedIndexChanged += this.SessionPickerIndexChanged;
             PressurePicker.SelectedIndexChanged += this.PressurePickerIndexChanged;
