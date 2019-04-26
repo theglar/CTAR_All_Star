@@ -100,6 +100,7 @@ namespace CTAR_All_Star
                 {
                     namePicker.Items.Add(n);
                 }
+                namePicker.Items.Add("All");
             }
 
             if (sessionList != null)
@@ -146,20 +147,34 @@ namespace CTAR_All_Star
             {
                 conn.CreateTable<Measurement>();
 
-                //Set up source items for the View model
-                List<Measurement> list = new List<Measurement>();
-                var measurements = conn.Table<Measurement>();
-                if (measurements != null)
+                //Show all
+                if (NamePicker.SelectedItem.Equals("All"))
                 {
-                    foreach (var m in measurements)
+                    //Set up source items for the View model
+                    var measurements = conn.Table<Measurement>().ToList();
+                    if (measurements != null)
                     {
-                        if (m.UserName.Equals(NamePicker.SelectedItem))
-                        {
-                            list.Add(m);
-                        }
+                        measurementsView.ItemsSource = measurements;
                     }
-                    measurementsView.ItemsSource = list;
                 }
+                //Filter by name
+                else
+                {
+                    //Set up source items for the View model
+                    List<Measurement> list = new List<Measurement>();
+                    var measurements = conn.Table<Measurement>();
+                    if (measurements != null)
+                    {
+                        foreach (var m in measurements)
+                        {
+                            if (m.UserName.Equals(NamePicker.SelectedItem))
+                            {
+                                list.Add(m);
+                            }
+                        }
+                        measurementsView.ItemsSource = list;
+                    }
+                }                
             }
         }
     }
