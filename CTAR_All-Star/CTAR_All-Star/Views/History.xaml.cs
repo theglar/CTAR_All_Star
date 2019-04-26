@@ -42,7 +42,7 @@ namespace CTAR_All_Star
                     measurementsView.ItemsSource = measurements;
                 }               
 
-                //Load the picker items
+                //Load the picker items - this should probably be done in the constructor only
                 var table = conn.Table<Measurement>();
                 if(table != null)
                 {
@@ -96,6 +96,7 @@ namespace CTAR_All_Star
         {
             if (nameList != null)
             {
+                namePicker.Items.Clear();
                 foreach (var n in nameList)
                 {
                     namePicker.Items.Add(n);
@@ -105,40 +106,52 @@ namespace CTAR_All_Star
 
             if (sessionList != null)
             {
+                sessionPicker.Items.Clear();
                 foreach (var n in sessionList)
                 {
                     sessionPicker.Items.Add(n);
                 }
+                sessionPicker.Items.Add("All");
             }
 
             if (pressureList != null)
             {
+                pressurePicker.Items.Clear();
                 foreach (var n in pressureList)
                 {
                     pressurePicker.Items.Add(n?.ToString());
                 }
+                pressurePicker.Items.Add("All");
             }
 
             if (dateList != null)
             {
+                datePicker.Items.Clear();
                 foreach (var n in dateList)
                 {
                     datePicker.Items.Add(n);
                 }
+                datePicker.Items.Add("All");
             }
 
             if (timeList != null)
             {
+                timePicker.Items.Clear();
                 foreach (var n in timeList)
                 {
                     timePicker.Items.Add(n);
                 }
+                timePicker.Items.Add("All");
             }
         }
 
         void InititalizePickerListeners()
         {
             NamePicker.SelectedIndexChanged += this.NamePickerIndexChanged;
+            SessionPicker.SelectedIndexChanged += this.SessionPickerIndexChanged;
+            PressurePicker.SelectedIndexChanged += this.PressurePickerIndexChanged;
+            DatePicker.SelectedIndexChanged += this.DatePickerIndexChanged;
+            TimePicker.SelectedIndexChanged += this.TimePickerIndexChanged;
         }
 
         public void NamePickerIndexChanged(object sender, EventArgs e)
@@ -156,6 +169,7 @@ namespace CTAR_All_Star
                     {
                         measurementsView.ItemsSource = measurements;
                     }
+                    //NamePicker.SelectedItem = null;
                 }
                 //Filter by name
                 else
@@ -175,6 +189,152 @@ namespace CTAR_All_Star
                         measurementsView.ItemsSource = list;
                     }
                 }                
+            }
+        }
+
+        public void SessionPickerIndexChanged(object sender, EventArgs e)
+        {
+            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
+            {
+                conn.CreateTable<Measurement>();
+
+                //Show all
+                if (SessionPicker.SelectedItem.Equals("All"))
+                {
+                    //Set up source items for the View model
+                    var measurements = conn.Table<Measurement>().ToList();
+                    if (measurements != null)
+                    {
+                        measurementsView.ItemsSource = measurements;
+                    }
+                }
+                //Filter by session
+                else
+                {
+                    //Set up source items for the View model
+                    List<Measurement> list = new List<Measurement>();
+                    var measurements = conn.Table<Measurement>();
+                    if (measurements != null)
+                    {
+                        foreach (var m in measurements)
+                        {
+                            if (m.SessionNumber.Equals(SessionPicker.SelectedItem))
+                            {
+                                list.Add(m);
+                            }
+                        }
+                        measurementsView.ItemsSource = list;
+                    }
+                }
+            }
+        }
+
+        public void PressurePickerIndexChanged(object sender, EventArgs e)
+        {
+            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
+            {
+                conn.CreateTable<Measurement>();
+
+                //Show all
+                if (PressurePicker.SelectedItem.Equals("All"))
+                {
+                    //Set up source items for the View model
+                    var measurements = conn.Table<Measurement>().ToList();
+                    if (measurements != null)
+                    {
+                        measurementsView.ItemsSource = measurements;
+                    }
+                }
+                //Filter by pressure
+                else
+                {
+                    //Set up source items for the View model
+                    List<Measurement> list = new List<Measurement>();
+                    var measurements = conn.Table<Measurement>();
+                    if (measurements != null)
+                    {
+                        foreach (var m in measurements)
+                        {
+                            if (m.Pressure.Equals(Convert.ToDouble(PressurePicker.SelectedItem)))
+                            {
+                                list.Add(m);
+                            }
+                        }
+                        measurementsView.ItemsSource = list;
+                    }
+                }
+            }
+        }
+        public void DatePickerIndexChanged(object sender, EventArgs e)
+        {
+            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
+            {
+                conn.CreateTable<Measurement>();
+
+                //Show all
+                if (DatePicker.SelectedItem.Equals("All"))
+                {
+                    //Set up source items for the View model
+                    var measurements = conn.Table<Measurement>().ToList();
+                    if (measurements != null)
+                    {
+                        measurementsView.ItemsSource = measurements;
+                    }
+                }
+                //Filter by date
+                else
+                {
+                    //Set up source items for the View model
+                    List<Measurement> list = new List<Measurement>();
+                    var measurements = conn.Table<Measurement>();
+                    if (measurements != null)
+                    {
+                        foreach (var m in measurements)
+                        {
+                            if (m.DisplayDate.Equals(DatePicker.SelectedItem))
+                            {
+                                list.Add(m);
+                            }
+                        }
+                        measurementsView.ItemsSource = list;
+                    }
+                }
+            }
+        }
+        public void TimePickerIndexChanged(object sender, EventArgs e)
+        {
+            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
+            {
+                conn.CreateTable<Measurement>();
+
+                //Show all
+                if (TimePicker.SelectedItem.Equals("All"))
+                {
+                    //Set up source items for the View model
+                    var measurements = conn.Table<Measurement>().ToList();
+                    if (measurements != null)
+                    {
+                        measurementsView.ItemsSource = measurements;
+                    }
+                }
+                //Filter by time
+                else
+                {
+                    //Set up source items for the View model
+                    List<Measurement> list = new List<Measurement>();
+                    var measurements = conn.Table<Measurement>();
+                    if (measurements != null)
+                    {
+                        foreach (var m in measurements)
+                        {
+                            if (m.DisplayTime.Equals(TimePicker.SelectedItem))
+                            {
+                                list.Add(m);
+                            }
+                        }
+                        measurementsView.ItemsSource = list;
+                    }
+                }
             }
         }
     }
