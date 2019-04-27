@@ -32,8 +32,8 @@
     <Compile Update="Views\TutorialsPage.xaml.cs">
       <DependentUpon>TutorialsPage.xaml</DependentUpon>
     </Compile>
-    <Compile Update="Views\History.xaml.cs">
-      <DependentUpon>History.xaml</DependentUpon>
+    <Compile Update="Views\HistoryDoctor.xaml.cs">
+      <DependentUpon>HistoryDoctor.xaml</DependentUpon>
     </Compile>
     <Compile Update="Navigation\HomePageMenuItem.cs">
       <SubType>Code</SubType>
@@ -62,7 +62,7 @@
     <EmbeddedResource Update="Views\CreateExercise.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-    <EmbeddedResource Update="Views\History.xaml">
+    <EmbeddedResource Update="Views\HistoryDoctor.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
     <EmbeddedResource Update="Views\ConnectDevicePage.xaml">
