@@ -1,17 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CTAR_All_Star.Models;
-using CTAR_All_Star.Views;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
 namespace CTAR_All_Star
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class HistoryDoctor : ContentPage
 	{
         private Picker namePicker, sessionPicker, datePicker;
@@ -22,14 +18,7 @@ namespace CTAR_All_Star
 		{
 			InitializeComponent();
             InitializeLists();
-            InititalizePickerListeners();            
-        }
-
-        protected override void OnAppearing()
-        {
-            base.OnAppearing();
-
-            InitializePickers();            
+            InititalizePickerListeners();
 
             using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
             {
@@ -37,22 +26,22 @@ namespace CTAR_All_Star
 
                 //Set up source items for the View model
                 var measurements = conn.Table<Measurement>().ToList();
-                if(measurements != null)
+                if (measurements != null)
                 {
                     measurementsView.ItemsSource = measurements;
-                }               
+                }
 
                 //Load the picker items - this should probably be done in the constructor only
                 var table = conn.Table<Measurement>();
-                if(table != null)
+                if (table != null)
                 {
                     foreach (var m in table)
-                    {                        
+                    {
                         if (!nameList.Contains(m.UserName) && m.UserName != null)
                         {
                             nameList.Add(m.UserName);
                         }
-                        if(!sessionList.Contains(m.SessionNumber) && m.SessionNumber != null)
+                        if (!sessionList.Contains(m.SessionNumber) && m.SessionNumber != null)
                         {
                             sessionList.Add(m.SessionNumber);
                         }
@@ -61,8 +50,16 @@ namespace CTAR_All_Star
                             dateList.Add(m.DisplayDate);
                         }
                     }
-                }              
+                }
             }
+        }
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+
+            InitializePickers();            
+
             LoadPickers();
         } 
         
@@ -123,116 +120,16 @@ namespace CTAR_All_Star
         public void NamePickerIndexChanged(object sender, EventArgs e)
         {
             FilterData();
-            //using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
-            //{
-            //    conn.CreateTable<Measurement>();
-
-            //    //Show all
-            //    if (NamePicker.SelectedItem.Equals("All"))
-            //    {
-            //        //Set up source items for the View model
-            //        var measurements = conn.Table<Measurement>().ToList();
-            //        if (measurements != null)
-            //        {
-            //            measurementsView.ItemsSource = measurements;
-            //        }
-            //        //NamePicker.SelectedItem = null;
-            //    }
-            //    //Filter by name
-            //    else
-            //    {
-            //        //Set up source items for the View model
-            //        List<Measurement> list = new List<Measurement>();
-            //        var measurements = conn.Table<Measurement>();
-            //        if (measurements != null)
-            //        {
-            //            foreach (var m in measurements)
-            //            {
-            //                if (m.UserName.Equals(NamePicker.SelectedItem))
-            //                {
-            //                    list.Add(m);
-            //                }
-            //            }
-            //            measurementsView.ItemsSource = list;
-            //        }
-            //    }                
-            //}
         }
 
         public void SessionPickerIndexChanged(object sender, EventArgs e)
         {
             FilterData();
-            //using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
-            //{
-            //    conn.CreateTable<Measurement>();
-
-            //    //Show all
-            //    if (SessionPicker.SelectedItem.Equals("All"))
-            //    {
-            //        //Set up source items for the View model
-            //        var measurements = conn.Table<Measurement>().ToList();
-            //        if (measurements != null)
-            //        {
-            //            measurementsView.ItemsSource = measurements;
-            //        }
-            //    }
-            //    //Filter by session
-            //    else
-            //    {
-            //        //Set up source items for the View model
-            //        List<Measurement> list = new List<Measurement>();
-            //        var measurements = conn.Table<Measurement>();
-            //        if (measurements != null)
-            //        {
-            //            foreach (var m in measurements)
-            //            {
-            //                if (m.SessionNumber.Equals(SessionPicker.SelectedItem))
-            //                {
-            //                    list.Add(m);
-            //                }
-            //            }
-            //            measurementsView.ItemsSource = list;
-            //        }
-            //    }
-            //}
         }
 
         public void DatePickerIndexChanged(object sender, EventArgs e)
         {
             FilterData();
-            //using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
-            //{
-            //    conn.CreateTable<Measurement>();
-
-            //    //Show all
-            //    if (DatePicker.SelectedItem.Equals("All"))
-            //    {
-            //        //Set up source items for the View model
-            //        var measurements = conn.Table<Measurement>().ToList();
-            //        if (measurements != null)
-            //        {
-            //            measurementsView.ItemsSource = measurements;
-            //        }
-            //    }
-            //    //Filter by date
-            //    else
-            //    {
-            //        //Set up source items for the View model
-            //        List<Measurement> list = new List<Measurement>();
-            //        var measurements = conn.Table<Measurement>();
-            //        if (measurements != null)
-            //        {
-            //            foreach (var m in measurements)
-            //            {
-            //                if (m.DisplayDate.Equals(DatePicker.SelectedItem))
-            //                {
-            //                    list.Add(m);
-            //                }
-            //            }
-            //            measurementsView.ItemsSource = list;
-            //        }
-            //    }
-            //}
         }
 
         public void FilterData()
@@ -254,56 +151,76 @@ namespace CTAR_All_Star
                 }
             }
 
-            //Check Patient Filter
-            if(NamePicker.SelectedIndex == -1 || NamePicker.SelectedItem.Equals("All"))
+            if(filteredList != null)
             {
-                //Do nothing, no filter requested.
-            }
-            else
-            {
-                //Remove measurments not wanted
-                foreach (var m in filteredList)
-                {
-                    if (!m.UserName.Equals(NamePicker.SelectedItem))
-                    {
-                        filteredList.Remove(m);
-                    }
-                }
-            }
+                var tempList = new List<Measurement>();
 
-            //Check Date Filter
-            if (datePicker.SelectedIndex == -1 || DatePicker.SelectedItem.Equals("All"))
-            {
-                //Do nothing, no filter requested.
-            }
-            else
-            {
-                //Remove measurments not wanted
-                foreach (var m in filteredList)
+                //Check Patient Filter
+                if(NamePicker.SelectedItem != null)
                 {
-                    if (!m.DisplayDate.Equals(DatePicker.SelectedItem))
+                    if (!NamePicker.SelectedItem.Equals("All"))
                     {
-                        filteredList.Remove(m);
+                        foreach (var m in filteredList)
+                        {
+                            if (m.UserName.Equals(NamePicker.SelectedItem))
+                            {
+                                tempList.Add(m);
+                            }
+                        }
+                        filteredList.Clear();
+                        foreach(var m in tempList)
+                        {
+                            filteredList.Add(m);
+                        }                        
+                        tempList.Clear();
                     }
                 }
-            }
+                
 
-            //Check Session Filter
-            if (SessionPicker.SelectedIndex == -1 || SessionPicker.SelectedItem.Equals("All"))
-            {
-                //Do nothing, no filter requested.
-            }
-            else
-            {
-                //Remove measurments not wanted
-                foreach (var m in filteredList)
+                //Check Date Filter
+                if(DatePicker.SelectedItem != null)
                 {
-                    if (!m.SessionNumber.Equals(SessionPicker.SelectedItem))
+                    if (!DatePicker.SelectedItem.Equals("All"))
                     {
-                        filteredList.Remove(m);
+                        foreach (var m in filteredList)
+                        {
+                            if (m.DisplayDate.Equals(datePicker.SelectedItem) || NamePicker.SelectedItem.Equals(null))
+                            {
+                                tempList.Add(m);
+                            }
+                        }
+                        filteredList.Clear();
+                        foreach (var m in tempList)
+                        {
+                            filteredList.Add(m);
+                        }
+                        tempList.Clear();
                     }
                 }
-            }
+                
+
+                //Check Session Filter
+                if(SessionPicker.SelectedItem != null)
+                {
+                    if (!SessionPicker.SelectedItem.Equals("All"))
+                    {
+                        foreach (var m in filteredList)
+                        {
+                            if (m.SessionNumber.Equals(SessionPicker.SelectedItem))
+                            {
+                                tempList.Add(m);
+                            }
+                        }
+                        filteredList.Clear();
+                        foreach (var m in tempList)
+                        {
+                            filteredList.Add(m);
+                        }
+                        tempList.Clear();
+                    }
+                }
+                
+            }            
 
             //Send filtered list to the view
             measurementsView.ItemsSource = filteredList;
