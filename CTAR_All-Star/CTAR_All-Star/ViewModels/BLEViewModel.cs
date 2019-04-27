@@ -42,7 +42,7 @@ namespace CTAR_All_Star
             adapter = CrossBluetoothLE.Current.Adapter;
             isOn = ble.IsOn;
             deviceConnected = false;
-            isScanning = adapter.IsScanning;
+            isScanning = false; // adapter.IsScanning;
             deviceList = new ObservableCollection<IDevice>();
             deviceListReadOnly = new ReadOnlyObservableCollection<IDevice>(deviceList);
             //lv.ItemsSource = deviceList;
@@ -65,6 +65,7 @@ namespace CTAR_All_Star
                 //DisplayAlert("Notice", "timeout elapsed", "OK");
                 //btnConnectBluetooth.Text = "Tap to scan for devices";
                 deviceList.Clear();
+                //isScanning = adapter.IsScanning;
                 isScanning = false;
                 OnPropertyChanged("scanTimeoutElapsed");
                 OnPropertyChanged("isScanning");
@@ -120,6 +121,7 @@ namespace CTAR_All_Star
                 //Device.BeginInvokeOnMainThread(() =>
                 //{
                 await pressureCharacteristic.StartUpdatesAsync();
+                
                 OnPropertyChanged("deviceConnected");
             };
             adapter.DeviceConnectionLost += (s, e) =>
@@ -167,6 +169,8 @@ namespace CTAR_All_Star
                 device = selectedDevice;
                 await adapter.StopScanningForDevicesAsync();
                 await adapter.ConnectToDeviceAsync(device);
+                isScanning = false;
+                OnPropertyChanged("isScanning");
                 //btnConnectBluetooth.Text = "Tap to scan for devices";
             }
             catch (DeviceConnectionException)
@@ -187,9 +191,6 @@ namespace CTAR_All_Star
                 device = null;
                 return;
             }
-
-            device = selectedDevice;
-          
         }
 
         public async void DisconnectDevice()
@@ -197,54 +198,45 @@ namespace CTAR_All_Star
             await adapter.DisconnectDeviceAsync(device);
         }
 
-        public async void StartScan()
+        public bool ToggleScan()
         {
-            //Button button = (Button)sender;
+            if(isScanning)
+            {
+                StopScan();
+            }
+            else
+            {
+                StartScan();
+            }
+            return isScanning;
+        }
+
+        public void StartScan()
+        {
             deviceList.Clear();
             if(ble.IsOn)
             {
-                await adapter.StartScanningForDevicesAsync();
+                adapter.ScanTimeout = 15000;
+                Device.BeginInvokeOnMainThread(() =>
+                {
+                    adapter.StartScanningForDevicesAsync();
+                });
                 //isScanning = adapter.IsScanning;
                 isScanning = true;
                 OnPropertyChanged("isScanning");
             }
-
-
-            //if (!ble.Adapter.IsScanning)
-            //{
-            //    if (!ble.IsOn)
-            //    {
-            //        //await DisplayAlert("Notice", "Bluetooth is turned off. Please turn it on!", "OK");
-            //        //OnPropertyChanged("state");
-            //    }
-            //    else
-            //    {
-            //        //btnConnectBluetooth.Text = "Scanning... tap to stop";
-            //        adapter.ScanTimeout = 30000;
-
-            //        await adapter.StartScanningForDevicesAsync();
-            //        isScanning = adapter.IsScanning;
-            //        OnPropertyChanged("isScanning");
-            //    }
-            //}
         }
 
-        public async void StopScan()
+        public void StopScan()
         {
-            await adapter.StopScanningForDevicesAsync();
+            deviceList.Clear();
+            Device.BeginInvokeOnMainThread(() =>
+            {
+                adapter.StopScanningForDevicesAsync();
+            });
             //isScanning = adapter.IsScanning;
             isScanning = false;
             OnPropertyChanged("isScanning");
-            //if (ble.Adapter.IsScanning)
-            //{
-            //    await adapter.StopScanningForDevicesAsync();
-            //    isScanning = adapter.IsScanning;
-            //    OnPropertyChanged("isScanning");
-            //}
-            //else
-            //{
-            //    //await DisplayAlert("Notice", "Not Currently scanning", "OK");
-            //}
         }
 
         private void OnPropertyChanged(string propertyName)
