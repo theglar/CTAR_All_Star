@@ -15,36 +15,49 @@ using Xamarin.Forms.PlatformConfiguration;
 using Plugin.Permissions;
 using Plugin.Permissions.Abstractions;
 using CTAR_All_Star.Database;
+using System.ComponentModel;
 
 namespace CTAR_All_Star
 {
-    public partial class BLEViewModel
+    public partial class BLEViewModel : INotifyPropertyChanged
     {
         private IBluetoothLE ble;
         private IAdapter adapter;
         private ObservableCollection<IDevice> deviceList;
+        private IDevice device;
+        private IService deviceService;
+        private ICharacteristic pressureCharacteristic;
         public ReadOnlyObservableCollection<IDevice> deviceListReadOnly;
-        //StackLayout availableDevices = new StackLayout();
-        IDevice selectedDevice;
-        IService deviceService;
-        ICharacteristic pressureCharacteristic;
-        string pressureStr;
-        int pressureVal;
+        public string pressureStr { get; private set; }
+        public int pressureVal { get; private set; }
+        public bool isOn { get; private set; }
+        public bool deviceConnected { get; private set; }
+        public bool isScanning { get; private set; }
+        public event PropertyChangedEventHandler PropertyChanged;
+        //public event EventHandler StateChanged;
 
         public BLEViewModel()
         {
             ble = CrossBluetoothLE.Current;
             adapter = CrossBluetoothLE.Current.Adapter;
-            var state = ble.State;
+            isOn = ble.IsOn;
+            deviceConnected = false;
+            isScanning = adapter.IsScanning;
             deviceList = new ObservableCollection<IDevice>();
             deviceListReadOnly = new ReadOnlyObservableCollection<IDevice>(deviceList);
             //lv.ItemsSource = deviceList;
 
             ble.StateChanged += (s, e) =>
             {
-                if (ble.IsOn)
+                if(ble.State == BluetoothState.Off)
                 {
-                    //DisplayAlert("Notice", $"Bluetooth: {e.NewState}", "OK");
+                    isOn = false;
+                    OnPropertyChanged("state");
+                }
+                else if(ble.State == BluetoothState.On)
+                {
+                    isOn = true;
+                    OnPropertyChanged("state");
                 }
             };
             adapter.ScanTimeoutElapsed += (s, e) =>
@@ -52,28 +65,31 @@ namespace CTAR_All_Star
                 //DisplayAlert("Notice", "timeout elapsed", "OK");
                 //btnConnectBluetooth.Text = "Tap to scan for devices";
                 deviceList.Clear();
+                isScanning = false;
+                OnPropertyChanged("scanTimeoutElapsed");
+                OnPropertyChanged("isScanning");
             };
-
             adapter.DeviceDiscovered += (s, a) =>
             {
-                if (a.Device.Name != null && !deviceList.Contains(a.Device))
+                if (a.Device.Name != null && a.Device.Name.StartsWith("CTAR") && !deviceList.Contains(a.Device))
                 {
-                    Device.BeginInvokeOnMainThread(() =>
-                    {
+                    //Device.BeginInvokeOnMainThread(() =>
+                    //{
                         deviceList.Add(a.Device);
-                    });
+                    //});
                 }
             };
             adapter.DeviceConnected += async (s, a) =>
             {
-                Device.BeginInvokeOnMainThread(() =>
-                {
-                    //DisplayAlert("Notice", "Connected!", "OK");
-                });
+                //Device.BeginInvokeOnMainThread(() =>
+                //{
+                //    //DisplayAlert("Notice", "Connected!", "OK");
+                //});
+                deviceConnected = true;
                 App.currentUser.DeviceIsConnected = true;
                 //btnConnectBluetooth.Text = "Tap to scan for devices";
                 deviceList.Clear();
-                deviceService = await selectedDevice.GetServiceAsync(Guid.Parse("0000ffe0-0000-1000-8000-00805f9b34fb"));
+                deviceService = await device.GetServiceAsync(Guid.Parse("0000ffe0-0000-1000-8000-00805f9b34fb"));
                 pressureCharacteristic = await deviceService.GetCharacteristicAsync(Guid.Parse("0000ffe1-0000-1000-8000-00805f9b34fb"));
 
                 pressureCharacteristic.ValueUpdated += (o, args) =>
@@ -99,8 +115,26 @@ namespace CTAR_All_Star
                     measurement.DisplayTime = dt.ToString("HH:mm:ss");
 
                     dbHelper.addData(measurement);
-
+                    OnPropertyChanged("pressure");
                 };
+                //Device.BeginInvokeOnMainThread(() =>
+                //{
+                await pressureCharacteristic.StartUpdatesAsync();
+                OnPropertyChanged("deviceConnected");
+            };
+            adapter.DeviceConnectionLost += (s, e) =>
+            {
+                StopUpdates();
+                deviceConnected = false;
+                device = null;
+                OnPropertyChanged("deviceConnected");
+            };
+            adapter.DeviceDisconnected += (s, e) =>
+            {
+                StopUpdates();
+                deviceConnected = false;
+                device = null;
+                OnPropertyChanged("deviceConnected");
             };
         }
 
@@ -108,7 +142,10 @@ namespace CTAR_All_Star
         {
             //Device.BeginInvokeOnMainThread(() =>
             //{
+            if (deviceConnected)
+            {
                 await pressureCharacteristic.StartUpdatesAsync();
+            }
             //    //System.Threading.Thread.Sleep(500);
             //});
         }
@@ -127,55 +164,98 @@ namespace CTAR_All_Star
             try
             {
                 //await DisplayAlert("Notice", "Connected!", "OK")
+                device = selectedDevice;
                 await adapter.StopScanningForDevicesAsync();
-                await adapter.ConnectToDeviceAsync(selectedDevice);
+                await adapter.ConnectToDeviceAsync(device);
                 //btnConnectBluetooth.Text = "Tap to scan for devices";
             }
-            catch (DeviceConnectionException ex)
+            catch (DeviceConnectionException)
             {
                 //await DisplayAlert("Notice", "Error connecting to device!", "OK");
+                device = null;
+                return;
             }
-            catch (ArgumentNullException ex)
+            catch (ArgumentNullException)
             {
                 //await DisplayAlert("Notice", "Selected device is null!", "OK");
+                device = null;
+                return;
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 //await DisplayAlert("notice", "unknown exception!", "ok");
+                device = null;
+                return;
             }
+
+            device = selectedDevice;
+          
+        }
+
+        public async void DisconnectDevice()
+        {
+            await adapter.DisconnectDeviceAsync(device);
         }
 
         public async void StartScan()
         {
             //Button button = (Button)sender;
             deviceList.Clear();
-
-            if (!ble.Adapter.IsScanning)
+            if(ble.IsOn)
             {
-                if (!ble.IsOn)
-                {
-                    //await DisplayAlert("Notice", "Bluetooth is turned off. Please turn it on!", "OK");
-                }
-                else
-                {
-                    //btnConnectBluetooth.Text = "Scanning... tap to stop";
-                    adapter.ScanTimeout = 30000;
-
-                    await adapter.StartScanningForDevicesAsync();
-                }
+                await adapter.StartScanningForDevicesAsync();
+                //isScanning = adapter.IsScanning;
+                isScanning = true;
+                OnPropertyChanged("isScanning");
             }
+
+
+            //if (!ble.Adapter.IsScanning)
+            //{
+            //    if (!ble.IsOn)
+            //    {
+            //        //await DisplayAlert("Notice", "Bluetooth is turned off. Please turn it on!", "OK");
+            //        //OnPropertyChanged("state");
+            //    }
+            //    else
+            //    {
+            //        //btnConnectBluetooth.Text = "Scanning... tap to stop";
+            //        adapter.ScanTimeout = 30000;
+
+            //        await adapter.StartScanningForDevicesAsync();
+            //        isScanning = adapter.IsScanning;
+            //        OnPropertyChanged("isScanning");
+            //    }
+            //}
         }
 
         public async void StopScan()
         {
-            if(ble.Adapter.IsScanning)
-            {
-                await adapter.StopScanningForDevicesAsync();
-            }
-            else
-            {
-                //await DisplayAlert("Notice", "Not Currently scanning", "OK");
-            }
+            await adapter.StopScanningForDevicesAsync();
+            //isScanning = adapter.IsScanning;
+            isScanning = false;
+            OnPropertyChanged("isScanning");
+            //if (ble.Adapter.IsScanning)
+            //{
+            //    await adapter.StopScanningForDevicesAsync();
+            //    isScanning = adapter.IsScanning;
+            //    OnPropertyChanged("isScanning");
+            //}
+            //else
+            //{
+            //    //await DisplayAlert("Notice", "Not Currently scanning", "OK");
+            //}
         }
+
+        private void OnPropertyChanged(string propertyName)
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
+        }
+
+        //protected virtual void OnStateChanged(EventArgs e)
+        //{
+        //    EventHandler handler = StateChanged;
+        //    handler?.Invoke(this, e);
+        //}
     }
 }

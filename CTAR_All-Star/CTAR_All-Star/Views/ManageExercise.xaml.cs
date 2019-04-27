@@ -43,7 +43,7 @@ namespace CTAR_All_Star
         {
             if (workoutList.SelectedItem == null)
             {
-                DisplayAlert("No Exercise Selected", "Please select an exercise.", "OK");
+                await DisplayAlert("No Exercise Selected", "Please select an exercise.", "OK");
                 return;
             }
             Workout workout = workoutList.SelectedItem as Workout;
@@ -57,10 +57,10 @@ namespace CTAR_All_Star
                     App.currentWorkout = workout;
                     bool startExercise = await DisplayAlert("You selected " + workout.WorkoutName, "Begin workout?", "Yes", "Cancel");
                     if(startExercise)
-                        Navigation.PushAsync(new GraphPage());
+                        await Navigation.PushAsync(new GraphPage());
                 }
                 else
-                    DisplayAlert("Failed", "workout is null", "ok");
+                    await DisplayAlert("Failed", "workout is null", "ok");
             }
         }
 
@@ -68,12 +68,12 @@ namespace CTAR_All_Star
         {
             if (workoutList.SelectedItem == null)
             {
-                DisplayAlert("No Exercise Selected", "Please select an exercise.", "OK");
+                await DisplayAlert("No Exercise Selected", "Please select an exercise.", "OK");
                 return;
             }
             Workout workout = workoutList.SelectedItem as Workout;
 
-            DisplayAlert(workout.WorkoutName + " Details", "Reps: " + workout.NumReps + "\nSets: " + workout.NumReps + "\nThreshold: " 
+            await DisplayAlert(workout.WorkoutName + " Details", "Reps: " + workout.NumReps + "\nSets: " + workout.NumReps + "\nThreshold: " 
                 + workout.ThresholdPercentage + "%\nHold Duration: " + workout.HoldDuration + " second(s)\nRest Duration: " + workout.RestDuration + " second(s)", "OK");
 
         }
@@ -81,7 +81,7 @@ namespace CTAR_All_Star
         {
             if(workoutList.SelectedItem == null)
             {
-                DisplayAlert("No Exercise Selected", "Please select an exercise.", "OK");
+                await DisplayAlert("No Exercise Selected", "Please select an exercise.", "OK");
                 return;
             }
             Workout workout = workoutList.SelectedItem as Workout;
@@ -89,14 +89,14 @@ namespace CTAR_All_Star
             bool getDetails = await DisplayAlert("Assign " + workout.WorkoutName, "You will be directed to the create exercise page to complete the assignment.", "OK", "Cancel");
             if (getDetails)
             {
-                Navigation.PushAsync(new CreateExercise(workout));
+                await Navigation.PushAsync(new CreateExercise(workout));
             }
         }
         private async void Remove_Button_Clicked()
         {
             if (workoutList.SelectedItem == null)
             {
-                DisplayAlert("No Exercise Selected", "Please select an exercise.", "OK");
+                await DisplayAlert("No Exercise Selected", "Please select an exercise.", "OK");
                 return;
             }
             Workout workout = workoutList.SelectedItem as Workout;
@@ -112,7 +112,7 @@ namespace CTAR_All_Star
                     {
                         DatabaseHelper dbHelper = new DatabaseHelper();
                         dbHelper.removeWorkout(workout);
-                        DisplayAlert("Deletion Complete", workout.WorkoutName + " was successfully deleted", "OK");
+                        await DisplayAlert("Deletion Complete", workout.WorkoutName + " was successfully deleted", "OK");
                     }
                 }
             }

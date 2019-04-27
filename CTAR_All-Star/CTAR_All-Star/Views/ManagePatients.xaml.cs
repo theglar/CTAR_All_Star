@@ -32,7 +32,7 @@ namespace CTAR_All_Star
         {
             if (patientList == null)
             {
-                DisplayAlert("No Patient Selected", "Please select a patient.", "OK");
+                await DisplayAlert("No Patient Selected", "Please select a patient.", "OK");
                 return;
             }
 
@@ -49,7 +49,7 @@ namespace CTAR_All_Star
                     {
                         DatabaseHelper dbHelper = new DatabaseHelper();
                         dbHelper.removePatient(patient);
-                        DisplayAlert("Deletion Complete", patient.PatientEmrNumber + " was successfully deleted", "OK");
+                        await DisplayAlert("Deletion Complete", patient.PatientEmrNumber + " was successfully deleted", "OK");
                     }
                 }
             }
@@ -59,7 +59,7 @@ namespace CTAR_All_Star
         {
             if (patientList.SelectedItem == null)
             {
-                DisplayAlert("No Patient Selected", "Please select a patient.", "OK");
+                await DisplayAlert("No Patient Selected", "Please select a patient.", "OK");
                 return;
             }
             Patient patient = patientList.SelectedItem as Patient;
@@ -67,7 +67,7 @@ namespace CTAR_All_Star
             bool getDetails = await DisplayAlert("Assign Exercise to " + patient.PatientEmrNumber, "You will be directed to the exercise management page to choose or create an exercise.", "OK", "Cancel");
             if (getDetails)
             {
-                Navigation.PushAsync(new ManageExercise());
+                await Navigation.PushAsync(new ManageExercise());
             }
         }
 

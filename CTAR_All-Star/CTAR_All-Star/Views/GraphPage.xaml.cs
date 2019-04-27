@@ -63,7 +63,7 @@ namespace CTAR_All_Star
             bool loadExercise = await DisplayAlert("No Exercise Loaded", "Please choose an exercise", "Ok", "Cancel");
             if (loadExercise)
             {
-                Navigation.PushAsync(new ManageExercise());
+                await Navigation.PushAsync(new ManageExercise());
             }
         }
 
@@ -343,7 +343,7 @@ namespace CTAR_All_Star
                 bool loadDevice = await DisplayAlert("No Connected Device", "Please connect an exercise device ", "Ok", "Cancel");
                 if (loadDevice)
                 {
-                    Navigation.PushAsync(new MainPage());
+                    await Navigation.PushAsync(new BLEView());
                 }
             }
         }

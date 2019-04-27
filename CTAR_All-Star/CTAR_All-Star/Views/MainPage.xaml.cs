@@ -131,15 +131,15 @@ namespace CTAR_All_Star
                     });
                     btnConnectBluetooth.Text = "Tap to scan for devices";
                 }
-                catch (DeviceConnectionException ex)
+                catch (DeviceConnectionException)
                 {
                     await DisplayAlert("Notice", "Error connecting to device!", "OK");
                 }
-                catch (ArgumentNullException ex)
+                catch (ArgumentNullException)
                 {
                     await DisplayAlert("Notice", "Selected device is null!", "OK");
                 }
-                catch (Exception ex)
+                catch (Exception)
                 {
                     await DisplayAlert("notice", "unknown exception!", "ok");
                 }
