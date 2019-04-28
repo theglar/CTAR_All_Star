@@ -45,10 +45,16 @@
                             <Label Text="{Binding Pressure}"
                                 HorizontalOptions="EndAndExpand"
                                 TextColor="#003366" />
-                        </StackLayout>
+                        </StackLayout>                        
                     </StackLayout>
                 </ViewCell>
             </DataTemplate>
         </ListView.ItemTemplate>
+        <ListView.Footer>
+            <StackLayout BackgroundColor="LightGray" HorizontalOptions="Fill" >
+                <Button x:FieldModifier="GraphButton" Text ="View Graph" Clicked="View_Graph" FontSize="Small" FontAttributes="Bold"
+                                TextColor="White" BackgroundColor="#807f84" Margin="5" HorizontalOptions="Center" />
+            </StackLayout>           
+        </ListView.Footer>
     </ListView>
 </ContentPage>

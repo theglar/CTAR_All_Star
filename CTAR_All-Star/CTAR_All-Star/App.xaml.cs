@@ -18,6 +18,9 @@ namespace CTAR_All_Star
         public static User currentUser = new User();
         public static Workout currentWorkout = new Workout();
         public static Measurement currentMeasurement = new Measurement();
+        public static string PatientFilter = "";
+        public static string DateFilter = "";
+        public static string SessionFilter = "";
 
         public App()
         {

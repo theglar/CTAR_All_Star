@@ -140,6 +140,11 @@ namespace CTAR_All_Star
             //Pull all data from the database and make a list
             filteredList = new List<Measurement>();
 
+            //Clear globals
+            App.PatientFilter = "";
+            App.DateFilter = "";
+            App.SessionFilter = "";
+
             using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
             {
                 conn.CreateTable<Measurement>();
@@ -176,6 +181,8 @@ namespace CTAR_All_Star
                             filteredList.Add(m);
                         }                        
                         tempList.Clear();
+
+                        App.PatientFilter = NamePicker.SelectedItem.ToString();
                     }
                 }
                 
@@ -198,6 +205,7 @@ namespace CTAR_All_Star
                             filteredList.Add(m);
                         }
                         tempList.Clear();
+                        App.DateFilter = DatePicker.SelectedItem.ToString();
                     }
                 }
                 
@@ -220,6 +228,7 @@ namespace CTAR_All_Star
                             filteredList.Add(m);
                         }
                         tempList.Clear();
+                        App.SessionFilter = "Session #" + SessionPicker.SelectedItem.ToString();
                     }
                 }
                 
@@ -248,6 +257,11 @@ namespace CTAR_All_Star
                     Log.Debug("tag", "m == null");
                 }
             }
+        }
+
+        public void View_Graph()
+        {
+            Navigation.PushAsync(new HistoryGraph(filteredList));
         }
     }
 }

@@ -29,6 +29,9 @@
     <Compile Remove="Models\EmptyClass.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Views\HistoryGraph.xaml.cs">
+      <DependentUpon>HistoryGraph.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\TutorialsPage.xaml.cs">
       <DependentUpon>TutorialsPage.xaml</DependentUpon>
     </Compile>
