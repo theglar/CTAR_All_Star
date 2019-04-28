@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using Android.Util;
 using CTAR_All_Star.Models;
 
 using Xamarin.Forms;
@@ -52,6 +54,7 @@ namespace CTAR_All_Star
                     }
                 }
             }
+            Test();
         }
 
         protected override void OnAppearing()
@@ -224,6 +227,27 @@ namespace CTAR_All_Star
 
             //Send filtered list to the view
             measurementsView.ItemsSource = filteredList;
+        }
+
+        public void Test()
+        {
+            Log.Debug("tag", "in test");
+            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
+            {
+                string filter = "UserName = 'jdj'";
+                string filter2 = "SessionNumber = '9'";
+                string filter3 = "DocID = 'Not'";
+                conn.CreateTable<Measurement>();
+                var measurement = conn.Query<Measurement>("select * from Measurement where " + filter + " and " + filter2 + " and " + filter3).SingleOrDefault();
+                if (measurement != null)
+                {
+                    Log.Debug("tag", "m != null");
+                }
+                else
+                {
+                    Log.Debug("tag", "m == null");
+                }
+            }
         }
     }
 }
