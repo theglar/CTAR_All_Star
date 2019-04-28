@@ -71,7 +71,7 @@ namespace CTAR_All_Star
                 {
                     DisplayAlert("Notice", "Connected!", "OK");
                 });
-                App.currentUser.DeviceIsConnected = true;
+                //App.currentUser.DeviceIsConnected = true;
                 btnConnectBluetooth.Text = "Tap to scan for devices";
                 deviceList.Clear();
                 deviceService = await selectedDevice.GetServiceAsync(Guid.Parse("0000ffe0-0000-1000-8000-00805f9b34fb"));

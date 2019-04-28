@@ -62,8 +62,6 @@ namespace CTAR_All_Star
             };
             adapter.ScanTimeoutElapsed += (s, e) =>
             {
-                //DisplayAlert("Notice", "timeout elapsed", "OK");
-                //btnConnectBluetooth.Text = "Tap to scan for devices";
                 deviceList.Clear();
                 //isScanning = adapter.IsScanning;
                 isScanning = false;
@@ -74,21 +72,13 @@ namespace CTAR_All_Star
             {
                 if (a.Device.Name != null && a.Device.Name.StartsWith("CTAR") && !deviceList.Contains(a.Device))
                 {
-                    //Device.BeginInvokeOnMainThread(() =>
-                    //{
-                        deviceList.Add(a.Device);
-                    //});
+                    deviceList.Add(a.Device);
                 }
             };
             adapter.DeviceConnected += async (s, a) =>
             {
-                //Device.BeginInvokeOnMainThread(() =>
-                //{
-                //    //DisplayAlert("Notice", "Connected!", "OK");
-                //});
                 deviceConnected = true;
-                App.currentUser.DeviceIsConnected = true;
-                //btnConnectBluetooth.Text = "Tap to scan for devices";
+                //App.currentUser.DeviceIsConnected = true;
                 deviceList.Clear();
                 deviceService = await device.GetServiceAsync(Guid.Parse("0000ffe0-0000-1000-8000-00805f9b34fb"));
                 pressureCharacteristic = await deviceService.GetCharacteristicAsync(Guid.Parse("0000ffe1-0000-1000-8000-00805f9b34fb"));
@@ -102,7 +92,6 @@ namespace CTAR_All_Star
                     {
                         pressureStr = args.Characteristic.StringValue;
                         pressureVal = Convert.ToInt32(pressureStr);
-                        //btnConnectBluetooth.Text = $"Value: {pressureVal}";
                     });
 
                     // Get current date and time
@@ -118,22 +107,17 @@ namespace CTAR_All_Star
                     dbHelper.addData(measurement);
                     OnPropertyChanged("pressure");
                 };
-                //Device.BeginInvokeOnMainThread(() =>
-                //{
-                await pressureCharacteristic.StartUpdatesAsync();
-                
+                StartUpdates();
                 OnPropertyChanged("deviceConnected");
             };
             adapter.DeviceConnectionLost += (s, e) =>
             {
-                StopUpdates();
                 deviceConnected = false;
                 device = null;
                 OnPropertyChanged("deviceConnected");
             };
             adapter.DeviceDisconnected += (s, e) =>
             {
-                StopUpdates();
                 deviceConnected = false;
                 device = null;
                 OnPropertyChanged("deviceConnected");
@@ -142,23 +126,26 @@ namespace CTAR_All_Star
 
         public async void StartUpdates()
         {
-            //Device.BeginInvokeOnMainThread(() =>
-            //{
             if (deviceConnected)
             {
-                await pressureCharacteristic.StartUpdatesAsync();
+                try
+                {
+                    await pressureCharacteristic.StartUpdatesAsync();
+                }
+                catch(InvalidOperationException)
+                {
+
+                }
+                catch(Exception)
+                {
+
+                }
             }
-            //    //System.Threading.Thread.Sleep(500);
-            //});
         }
 
         public async void StopUpdates()
         {
-            //Device.BeginInvokeOnMainThread(() =>
-            //{
             await pressureCharacteristic.StopUpdatesAsync();
-            //    //System.Threading.Thread.Sleep(500);
-            //});
         }
 
         public async void ConnectToDevice(IDevice selectedDevice)
@@ -195,7 +182,11 @@ namespace CTAR_All_Star
 
         public async void DisconnectDevice()
         {
-            await adapter.DisconnectDeviceAsync(device);
+            //Device.BeginInvokeOnMainThread(async () =>
+            //{
+                //StopUpdates();
+                await adapter.DisconnectDeviceAsync(device);
+            //});
         }
 
         public bool ToggleScan()

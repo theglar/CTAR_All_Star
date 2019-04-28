@@ -22,6 +22,7 @@ namespace CTAR_All_Star
         private Workout workout = new Workout();
         private bool isAtRest = true;
         private double newGoal;
+        private BLEViewModel ble;
 
         public GraphPage()
         {            
@@ -31,6 +32,7 @@ namespace CTAR_All_Star
 
         public void Init()
         {
+            ble = App.ble;
             // Get current information
             if (App.currentWorkout != null)
             {
@@ -69,7 +71,8 @@ namespace CTAR_All_Star
 
         private void Start_Exercise(object sender, EventArgs e)
         {
-            if (!App.currentUser.DeviceIsConnected)
+            //if (!App.currentUser.DeviceIsConnected)
+            if(!ble.deviceConnected)
             {
                 CheckBTConnection();
                 return;
@@ -338,7 +341,8 @@ namespace CTAR_All_Star
 
         public async void CheckBTConnection()
         {
-            if (!App.currentUser.DeviceIsConnected)
+            //if (!App.currentUser.DeviceIsConnected)
+            if (!ble.deviceConnected)
             {
                 bool loadDevice = await DisplayAlert("No Connected Device", "Please connect an exercise device ", "Ok", "Cancel");
                 if (loadDevice)

@@ -28,8 +28,21 @@ namespace CTAR_All_Star
         public BLEView()
         {
             InitializeComponent();
-            ble = new BLEViewModel();
+            ble = App.ble;
             lv.ItemsSource = ble.deviceListReadOnly;
+
+            if(ble.deviceConnected)
+            {
+                btnConnectBluetooth.Text = "Connected! Tap to disconnect";
+            }
+            else if(ble.isScanning)
+            {
+                btnConnectBluetooth.Text = "Scanning... tap to stop";
+            }
+            else //not connected, not scanning
+            {
+                btnConnectBluetooth.Text = "Tap to scan for devices";
+            }
 
             ble.PropertyChanged += async (s, e) =>
             {
@@ -38,17 +51,17 @@ namespace CTAR_All_Star
                     case "state":
                         if (ble.isOn)
                         {
-                            Device.BeginInvokeOnMainThread(() =>
-                            {
-                                DisplayAlert("Notice", "Bluetooth is on", "OK");
-                            });
+                            //Device.BeginInvokeOnMainThread(() =>
+                            //{
+                                await DisplayAlert("Notice", "Bluetooth is on", "OK");
+                            //});
                         }
                         else
                         {
-                            Device.BeginInvokeOnMainThread(() =>
-                            {
-                                DisplayAlert("Notice", "Bluetooth is off", "OK");
-                            });
+                            //Device.BeginInvokeOnMainThread(() =>
+                            //{
+                                await DisplayAlert("Notice", "Bluetooth is off", "OK");
+                            //});
                         }
                         break;
                     case "scanTimeoutElapsed":
@@ -64,6 +77,7 @@ namespace CTAR_All_Star
                             Device.BeginInvokeOnMainThread(() =>
                             {
                                 DisplayAlert("Notice", "Device Connected!", "OK");
+                                btnConnectBluetooth.Text = "Connected! Tap to disconnect";
                             });
                         }
                         else
@@ -71,6 +85,7 @@ namespace CTAR_All_Star
                             Device.BeginInvokeOnMainThread(() =>
                             {
                                 DisplayAlert("Notice", "Device Disconnected!", "OK");
+                                btnConnectBluetooth.Text = "Tap to scan for devices";
                             });
                         }
                         break;
@@ -121,38 +136,19 @@ namespace CTAR_All_Star
         {
             if(ble.isOn)
             {
-                //if(ble.isScanning)
-                //{
-                //    btnConnectBluetooth.Text = "Tap to scan for devices";
-                //}
-                //else
-                //{
-                //    btnConnectBluetooth.Text = "Scanning... tap to stop";
-                //}
-                ble.ToggleScan();
+                if (ble.deviceConnected)
+                {
+                    ble.DisconnectDevice();
+                }
+                else
+                {
+                    ble.ToggleScan();
+                }
             }
             else
             {
                 DisplayAlert("Notice", "Bluetooth is off! Please turn it on.", "OK");
             }
-            //if(ble.isScanning)
-            //{
-            //    ble.StopScan();
-            //}
-            //else
-            //{
-            //    if(ble.isOn)
-            //    {
-            //        ble.StartScan();
-            //    }
-            //    else
-            //    {
-            //        Device.BeginInvokeOnMainThread(() =>
-            //        {
-            //            DisplayAlert("Notice", "Bluetooth is off! Please turn it on.", "OK");
-            //        });
-            //    }
-            //}
         }
     }
 }
