@@ -15,6 +15,7 @@ namespace CTAR_All_Star
         private Picker namePicker, sessionPicker, datePicker;
         private List<String> nameList, sessionList, dateList;
         private List<Measurement> filteredList;
+        private string SQLcommand = "";
 
         public HistoryDoctor()
 		{
@@ -22,11 +23,16 @@ namespace CTAR_All_Star
             InitializeLists();
             InititalizePickerListeners();
 
+            //Clear globals
+            App.PatientFilter = "";
+            App.DateFilter = "";
+            App.SessionFilter = "";
+
             using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
             {
                 conn.CreateTable<Measurement>();
 
-                //Set up source items for the View model
+                //Set up source items for the initial View model
                 var measurements = conn.Table<Measurement>().ToList();
                 if (measurements != null)
                 {
@@ -54,16 +60,14 @@ namespace CTAR_All_Star
                     }
                 }
             }
-            Test();
         }
 
         protected override void OnAppearing()
         {
             base.OnAppearing();
-
-            InitializePickers();            
-
+            InitializePickers(); 
             LoadPickers();
+            ResetTable();
         } 
         
         public void InitializeLists()
@@ -122,146 +126,104 @@ namespace CTAR_All_Star
 
         public void NamePickerIndexChanged(object sender, EventArgs e)
         {
+            if(NamePicker.SelectedItem != null && NamePicker.SelectedItem.ToString() != "All")
+            {
+                App.PatientFilter = NamePicker.SelectedItem.ToString();
+            }
             FilterData();
         }
 
         public void SessionPickerIndexChanged(object sender, EventArgs e)
         {
+            if (SessionPicker.SelectedItem != null && SessionPicker.SelectedItem.ToString() != "All")
+            {
+                App.SessionFilter = "Session #" + SessionPicker.SelectedItem.ToString();
+            }
             FilterData();
         }
 
         public void DatePickerIndexChanged(object sender, EventArgs e)
         {
+            if (DatePicker.SelectedItem != null && DatePicker.SelectedItem.ToString() != "All")
+            {
+                App.DateFilter = DatePicker.SelectedItem.ToString();
+            }
             FilterData();
         }
 
         public void FilterData()
-        {
-            //Pull all data from the database and make a list
-            filteredList = new List<Measurement>();
-
-            //Clear globals
-            App.PatientFilter = "";
-            App.DateFilter = "";
-            App.SessionFilter = "";
-
-            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
+        {            
+            if(!App.PatientFilter.Equals(String.Empty) || !App.DateFilter.Equals(String.Empty) || !App.SessionFilter.Equals(String.Empty))
             {
-                conn.CreateTable<Measurement>();
-                var measurements = conn.Table<Measurement>().ToList();
-                if (measurements != null)
+                //Create database query command
+                SQLcommand = "select * from Measurement where ";
+                bool firstFilter = true;
+
+                //Check patient filter
+                if (!App.PatientFilter.Equals(String.Empty) && firstFilter)
                 {
-                    //Load our list to filter
-                    foreach (var m in measurements)
-                    {
-                        filteredList.Add(m);
-                    }
+                    SQLcommand = SQLcommand + "UserName = '" + App.PatientFilter + "'";
+                    firstFilter = false;
                 }
-            }
-
-            if(filteredList != null)
-            {
-                var tempList = new List<Measurement>();
-
-                //Check Patient Filter
-                if(NamePicker.SelectedItem != null)
+                else if (!App.PatientFilter.Equals(String.Empty))
                 {
-                    if (!NamePicker.SelectedItem.Equals("All"))
-                    {
-                        foreach (var m in filteredList)
-                        {
-                            if (m.UserName.Equals(NamePicker.SelectedItem))
-                            {
-                                tempList.Add(m);
-                            }
-                        }
-                        filteredList.Clear();
-                        foreach(var m in tempList)
-                        {
-                            filteredList.Add(m);
-                        }                        
-                        tempList.Clear();
-
-                        App.PatientFilter = NamePicker.SelectedItem.ToString();
-                    }
+                    SQLcommand = SQLcommand + "and UserName = '" + App.PatientFilter + "'";
                 }
-                
 
-                //Check Date Filter
-                if(DatePicker.SelectedItem != null)
+                //Check date filter
+                if (!App.DateFilter.Equals(String.Empty) && firstFilter)
                 {
-                    if (!DatePicker.SelectedItem.Equals("All"))
-                    {
-                        foreach (var m in filteredList)
-                        {
-                            if (m.DisplayDate.Equals(datePicker.SelectedItem) || NamePicker.SelectedItem.Equals(null))
-                            {
-                                tempList.Add(m);
-                            }
-                        }
-                        filteredList.Clear();
-                        foreach (var m in tempList)
-                        {
-                            filteredList.Add(m);
-                        }
-                        tempList.Clear();
-                        App.DateFilter = DatePicker.SelectedItem.ToString();
-                    }
+                    SQLcommand = SQLcommand + "DisplayDate = '" + App.DateFilter + "'";
+                    firstFilter = false;
                 }
-                
-
-                //Check Session Filter
-                if(SessionPicker.SelectedItem != null)
+                else if (!App.DateFilter.Equals(String.Empty))
                 {
-                    if (!SessionPicker.SelectedItem.Equals("All"))
-                    {
-                        foreach (var m in filteredList)
-                        {
-                            if (m.SessionNumber.Equals(SessionPicker.SelectedItem))
-                            {
-                                tempList.Add(m);
-                            }
-                        }
-                        filteredList.Clear();
-                        foreach (var m in tempList)
-                        {
-                            filteredList.Add(m);
-                        }
-                        tempList.Clear();
-                        App.SessionFilter = "Session #" + SessionPicker.SelectedItem.ToString();
-                    }
+                    SQLcommand = SQLcommand + "and DisplayDate = '" + App.DateFilter + "'";
                 }
-                
+
+                //Check session filter
+                if (!App.SessionFilter.Equals(String.Empty) && firstFilter)
+                {
+                    SQLcommand = SQLcommand + "SessionNumber = '" + App.SessionFilter + "'";
+                    firstFilter = false;
+                }
+                else if (!App.SessionFilter.Equals(String.Empty))
+                {
+                    SQLcommand = SQLcommand + "and SessionNumber = '" + App.SessionFilter + "'";
+                }
+
+                //Query database based on desired filters
+                using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
+                {
+                    conn.CreateTable<Measurement>();
+                    var measurements = conn.Query<Measurement>(SQLcommand).ToList();
+                    if (measurements != null)
+                    {
+                        measurementsView.ItemsSource = measurements;
+                    }
+                    filteredList = measurements;
+                }
             }            
-
-            //Send filtered list to the view
-            measurementsView.ItemsSource = filteredList;
-        }
-
-        public void Test()
-        {
-            Log.Debug("tag", "in test");
-            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
-            {
-                string filter = "UserName = 'jdj'";
-                string filter2 = "SessionNumber = '9'";
-                string filter3 = "DocID = 'Not'";
-                conn.CreateTable<Measurement>();
-                var measurement = conn.Query<Measurement>("select * from Measurement where " + filter + " and " + filter2 + " and " + filter3).SingleOrDefault();
-                if (measurement != null)
-                {
-                    Log.Debug("tag", "m != null");
-                }
-                else
-                {
-                    Log.Debug("tag", "m == null");
-                }
-            }
         }
 
         public void View_Graph()
         {
             Navigation.PushAsync(new HistoryGraph(filteredList));
+        }
+
+        public void ResetTable()
+        {
+            using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
+            {
+                conn.CreateTable<Measurement>();
+
+                //Set up source items for the initial View model
+                var measurements = conn.Table<Measurement>().ToList();
+                if (measurements != null)
+                {
+                    measurementsView.ItemsSource = measurements;
+                }
+            }
         }
     }
 }

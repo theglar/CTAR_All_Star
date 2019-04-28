@@ -16,17 +16,18 @@ namespace CTAR_All_Star
         private Workout workout = new Workout();
 
         public HistoryGraph()
-        {            
-            InitializeComponent();
+        {
+           
+            InitializeComponent();            
         }
 
         public HistoryGraph( List<Measurement> data)
         {
             InitializeComponent();
 
-            PatientLabel.Text = App.PatientFilter;
-            DateLabel.Text = App.DateFilter;
-            SessionLabel.Text = App.SessionFilter;
+            //NavigationPage.SetHasBackButton(this, false);
+
+            SetLabels();            
 
             //Notify ViewModel of data
             Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<HistoryGraph, List<Measurement>>(this, "databaseChange", data));
@@ -50,6 +51,36 @@ namespace CTAR_All_Star
             if(!show)
             {
                 Navigation.PopAsync();
+            }
+        }
+
+        private void SetLabels()
+        {
+            if (App.PatientFilter.Equals(String.Empty))
+            {
+                PatientLabel.Text = "All Patients";
+            }
+            else
+            {
+                PatientLabel.Text = App.PatientFilter;
+            }
+
+            if (App.DateFilter.Equals(String.Empty))
+            {
+                DateLabel.Text = "All Dates";
+            }
+            else
+            {
+                DateLabel.Text = App.DateFilter;
+            }
+
+            if (App.SessionFilter.Equals(String.Empty))
+            {
+                SessionLabel.Text = "All Sessions";
+            }
+            else
+            {
+                SessionLabel.Text = App.SessionFilter;
             }
         }
     }
