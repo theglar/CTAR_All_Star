@@ -25,8 +25,6 @@ namespace CTAR_All_Star
         {
             InitializeComponent();
 
-            //NavigationPage.SetHasBackButton(this, false);
-
             SetLabels();            
 
             //Notify ViewModel of data

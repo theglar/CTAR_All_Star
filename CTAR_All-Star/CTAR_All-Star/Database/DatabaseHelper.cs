@@ -3,6 +3,8 @@ using SQLite;
 using System.Linq;
 using Xamarin.Forms;
 using System;
+using System.Collections.Generic;
+using System.Collections.ObjectModel;
 
 namespace CTAR_All_Star.Database
 {
@@ -54,6 +56,19 @@ namespace CTAR_All_Star.Database
 
             //Notify ViewModel of changes
             Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper,Measurement>(this, "databaseChange", measurement));
+        }
+
+        public void addDataList(ObservableCollection<Measurement> data)
+        {
+            // Add to database
+            using (SQLiteConnection conn = new SQLiteConnection(App.DB_PATH))
+            {
+                conn.CreateTable<Measurement>();
+                foreach (var m in data)
+                {
+                    conn.Insert(m);
+                }               
+            }           
         }
 
         public void removeData(Measurement measurement)
