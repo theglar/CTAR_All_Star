@@ -18,22 +18,8 @@
                 <StackLayout>
                     <Label x:Name="PatientLabel" Text="Patient" TextColor="#003366" FontAttributes="Bold" Font="Large" HorizontalOptions="Center"/>
                     <Label x:Name="DateLabel" Text="0/0/00" TextColor="#003366" FontAttributes="Bold" Font="Medium" HorizontalOptions="Center"/>
-                    <Label x:Name="SessionLabel" Text="Session #1" TextColor="#003366" FontAttributes="Bold" Font="Medium" HorizontalOptions="Center"/>                    
+                    <Label x:Name="SessionLabel" Text="Session #1" TextColor="#003366" FontAttributes="Bold" Font="Medium" HorizontalOptions="Center"/>
                 </StackLayout>
-                <!--<StackLayout Spacing="10" Padding="0,30,0,0">
-                    <Label Text="SETS" HorizontalTextAlignment="Center" FontSize="Small"></Label>
-                    <Label x:Name ="NumSets" Text="1" BackgroundColor="LightGray" FontSize="20" HorizontalTextAlignment="Center" FontAttributes="Bold"></Label>
-                    <Label x:Name="TotalSets" Text="of 2" HorizontalTextAlignment="Center" FontSize="Micro"></Label>
-                </StackLayout>
-                <StackLayout Spacing="10">
-                    <Label x:Name="TimerLabel" Text="PRESS START TO BEGIN" FontSize="Large" FontAttributes="Bold" HorizontalTextAlignment="Center" ></Label>
-                    <Label x:Name="TimeDisplay" Text ="" BackgroundColor="DimGray" FontSize="40" TextColor="White" HorizontalTextAlignment="Center" WidthRequest="200"></Label>
-                </StackLayout>
-                <StackLayout Spacing="10" Padding="0,30,0,0">
-                    <Label Text="REPS" HorizontalTextAlignment="Center" FontSize="Small"></Label>
-                    <Label x:Name="NumReps" Text="1" BackgroundColor="LightGray" FontSize="20" HorizontalTextAlignment="Center" FontAttributes="Bold"></Label>
-                    <Label x:Name="TotalReps" Text="of 2" HorizontalTextAlignment="Center" FontSize="Micro"></Label>
-                </StackLayout>-->
             </StackLayout>
         </RelativeLayout>
 
