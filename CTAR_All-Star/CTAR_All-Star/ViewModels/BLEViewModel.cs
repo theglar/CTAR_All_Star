@@ -85,8 +85,8 @@ namespace CTAR_All_Star
 
                 pressureCharacteristic.ValueUpdated += (o, args) =>
                 {
-                    DatabaseHelper dbHelper = new DatabaseHelper();
-                    Measurement measurement = new Measurement();
+                    //DatabaseHelper dbHelper = new DatabaseHelper();
+                    //Measurement measurement = new Measurement();
 
                     Device.BeginInvokeOnMainThread(() =>
                     {
@@ -94,20 +94,20 @@ namespace CTAR_All_Star
                         pressureVal = Convert.ToInt32(pressureStr);
                     });
 
-                    // Get current date and time
-                    DateTime d = DateTime.Now;
-                    DateTime dt = DateTime.Parse(d.ToString());
-                    measurement.UserName = App.currentUser.Username;
-                    measurement.SessionNumber = App.currentUser.Session.ToString();
-                    measurement.TimeStamp = d;
-                    measurement.Pressure = pressureVal;
-                    measurement.Duration = "1"; //Do we need this?
-                    measurement.DisplayTime = dt.ToString("HH:mm:ss");
+                    //// Get current date and time
+                    //DateTime d = DateTime.Now;
+                    //DateTime dt = DateTime.Parse(d.ToString());
+                    //measurement.UserName = App.currentUser.Username;
+                    //measurement.SessionNumber = App.currentUser.Session.ToString();
+                    //measurement.TimeStamp = d;
+                    //measurement.Pressure = pressureVal;
+                    //measurement.Duration = "1"; //Do we need this?
+                    //measurement.DisplayTime = dt.ToString("HH:mm:ss");
 
-                    dbHelper.addData(measurement);
+                    //dbHelper.addData(measurement);
                     OnPropertyChanged("pressure");
                 };
-                StartUpdates();
+                //StartUpdates();
                 OnPropertyChanged("deviceConnected");
             };
             adapter.DeviceConnectionLost += (s, e) =>

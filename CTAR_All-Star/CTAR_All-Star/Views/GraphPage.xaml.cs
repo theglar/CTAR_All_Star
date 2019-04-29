@@ -7,6 +7,8 @@ using Syncfusion.SfChart.XForms;
 using CTAR_All_Star.Database;
 using System.Timers;
 using System.Threading;
+using System.Collections.ObjectModel;
+using CTAR_All_Star.ViewModels;
 
 namespace CTAR_All_Star
 {
@@ -23,6 +25,10 @@ namespace CTAR_All_Star
         private bool isAtRest = true;
         private double newGoal;
         private BLEViewModel ble;
+        private ObservableCollection<Measurement> allWorkoutData;
+        //private MeasurementViewModel measurementVM;
+        private int currentPressure;
+        //public ReadOnlyObservableCollection<int> displayedWorkoutData;
 
         public GraphPage()
         {            
@@ -32,12 +38,59 @@ namespace CTAR_All_Star
 
         public void Init()
         {
+            allWorkoutData = new ObservableCollection<Measurement>();
+            //measurementVM = new MeasurementViewModel();
             ble = App.ble;
+            ble.PropertyChanged += (s, e) =>
+            {
+                switch (e.PropertyName)
+                {
+                    case "state":
+                        if (ble.isOn)
+                        {
+                            Device.BeginInvokeOnMainThread(() =>
+                            {
+                                DisplayAlert("Notice", "Bluetooth is on", "OK");
+                            });
+                        }
+                        else
+                        {
+                            Device.BeginInvokeOnMainThread(() =>
+                            {
+                                DisplayAlert("Notice", "Bluetooth is off", "OK");
+                            });
+                        }
+                        break;
+                    case "deviceConnected":
+                        if (ble.deviceConnected)
+                        {
+                            Device.BeginInvokeOnMainThread(() =>
+                            {
+                                DisplayAlert("Notice", "Device Connected!", "OK");
+                            });
+                        }
+                        else
+                        {
+                            Device.BeginInvokeOnMainThread(() =>
+                            {
+                                DisplayAlert("Notice", "Device Disconnected!", "OK");
+                            });
+                        }
+                        break;
+                    case "pressure":
+                        currentPressure = ble.pressureVal;
+                        //measurementVM.InsertMeasurement(currentPressure);
+                        Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<GraphPage, int>(this, "pressureChange", currentPressure));
+                        break;
+                    default:
+                        break;
+                }
+            };
             // Get current information
             if (App.currentWorkout != null)
             {
                 workout = App.currentWorkout;
-            }            
+            }
 
             //Set up current workout
             if(workout != null /*&& workout.CheckInformation()*/)
@@ -61,7 +114,6 @@ namespace CTAR_All_Star
 
         private async void LoadExercise()
         {
-
             bool loadExercise = await DisplayAlert("No Exercise Loaded", "Please choose an exercise", "Ok", "Cancel");
             if (loadExercise)
             {
@@ -77,14 +129,16 @@ namespace CTAR_All_Star
                 CheckBTConnection();
                 return;
             }
-            Device.BeginInvokeOnMainThread(() => TimerLabel.Text = "APPLY PRESSURE");
+            //Device.BeginInvokeOnMainThread(() => TimerLabel.Text = "APPLY PRESSURE");
+            TimerLabel.Text = "APPLY PRESSURE";
 
-            StartTimer();           
-          
+            StartTimer();
+            ble.StartUpdates();
         }
         private void Stop_Exercise(object sender, EventArgs e)
         {
             timer.Stop();
+            ble.StopUpdates();
             TimerLabel.Text = "PAUSE";
             TimeDisplay.BackgroundColor = Constants.RestColor;
         }
@@ -108,7 +162,7 @@ namespace CTAR_All_Star
         {
             if (TimerLabel.Text.Equals("REST"))
             {
-                if (App.currentMeasurement.Pressure <= newGoal)
+                if (currentPressure <= newGoal)
                 {
                     if (second > 10)
                     {
@@ -197,7 +251,7 @@ namespace CTAR_All_Star
             }
             else
             {
-                if (App.currentMeasurement.Pressure >= newGoal)
+                if (currentPressure >= newGoal)
                 {
                     if (second > 10)
                     {

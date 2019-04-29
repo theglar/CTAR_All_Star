@@ -17,7 +17,7 @@ namespace CTAR_All_Star
         //Globals
         public static User currentUser = new User();
         public static Workout currentWorkout = new Workout();
-        public static Measurement currentMeasurement = new Measurement();
+        //public static Measurement currentMeasurement = new Measurement();
         public static BLEViewModel ble = new BLEViewModel();
 
         public App()

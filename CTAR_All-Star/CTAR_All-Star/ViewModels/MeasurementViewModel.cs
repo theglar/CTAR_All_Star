@@ -8,23 +8,19 @@ namespace CTAR_All_Star.ViewModels
 {
     public class MeasurementViewModel
     {
-        public ObservableCollection<Measurement> Data { get; set; }
+        public ObservableCollection<GraphMeasurement> Data { get; private set; }
 
         public MeasurementViewModel()       
         {     
-            Data = new ObservableCollection<Measurement>();
+            Data = new ObservableCollection<GraphMeasurement>();
 
             // Get current date and time
             DateTime d = DateTime.Now;
 
-            Measurement measurement = new Measurement()
+            GraphMeasurement measurement = new GraphMeasurement()
             {
-                UserName = "Tester 1",
-                SessionNumber = "1",
-                TimeStamp = d,
                 Pressure = null,
-                Duration = "1",
-                DisplayTime = String.Empty
+                Time = String.Empty
             };
 
             // Initialize list
@@ -33,16 +29,27 @@ namespace CTAR_All_Star.ViewModels
                 Data.Add(measurement);
             }
 
-            // Listen for signal to update data for graph
-            MessagingCenter.Subscribe<DatabaseHelper, Measurement>(this, "databaseChange", (sender, newMeasurement) =>
+            //// Listen for signal to update data for graph
+            MessagingCenter.Subscribe<GraphPage, int>(this, "pressureChange", (sender, newPressure) =>
             {
-                Device.BeginInvokeOnMainThread(() =>
-                {
-                    Data.RemoveAt(0);
-                    Data.Insert(400, newMeasurement);
-                    App.currentMeasurement = newMeasurement;
-                });
+                InsertMeasurement(newPressure);
+                //Device.BeginInvokeOnMainThread(() =>
+                //{
+                //    Data.RemoveAt(0);
+                //    Data.Insert(400, newMeasurement);
+                //    App.currentMeasurement = newMeasurement;
+                //});
             });
         } 
+
+        public void InsertMeasurement(int newMeasurementVal)
+        {
+            GraphMeasurement newMeasurement = new GraphMeasurement();
+            newMeasurement.Pressure = newMeasurementVal;
+            newMeasurement.Time = DateTime.Now.ToString("HH:mm:ss");
+
+            Data.RemoveAt(0);
+            Data.Insert(400, newMeasurement);
+        }
     }
 }
