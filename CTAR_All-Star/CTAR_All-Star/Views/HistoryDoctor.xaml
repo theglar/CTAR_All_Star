@@ -12,10 +12,10 @@
                             Orientation="Vertical">
                 <StackLayout Orientation="Vertical" BackgroundColor="LightGray" Spacing="5">
                     <Label x:Name="FilterLabel" Text="Filter By:" TextColor="#003366" BackgroundColor="LightGray" FontSize="Medium" 
-                               VerticalTextAlignment="Center"/>
-                    <StackLayout Orientation="Horizontal" BackgroundColor="LightGray" Spacing="5">
+                               VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand"/>
+                    <StackLayout Orientation="Horizontal" BackgroundColor="LightGray" Spacing="5" HorizontalOptions="CenterAndExpand" >
                         <Picker x:Name="DatePicker" Title="Date" FontSize="Small" FontAttributes="Bold"
-                                    TextColor="#003366" BackgroundColor="White" Margin="5"/>
+                                    TextColor="#003366" BackgroundColor="White" Margin="5" />
                         <Picker x:Name="NamePicker" Title="Patient" FontSize="Small" FontAttributes="Bold"
                                     TextColor="#003366" BackgroundColor="White" Margin="5"/>
                         <Picker x:Name="SessionPicker" Title="Session" FontSize="Small" FontAttributes="Bold"
