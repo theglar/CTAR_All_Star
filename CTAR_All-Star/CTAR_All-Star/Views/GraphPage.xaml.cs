@@ -24,19 +24,19 @@ namespace CTAR_All_Star
         private Workout workout = new Workout();
         private bool isAtRest = true;
         private double newGoal;
-        private double oneRepMax = -1;
-        private double minimumPressure = -1; //the pressure inside the ball when not under any load
-        //private bool minimumPressureIsSet = false; //bool tells whether the minimum pressure has been set
-        //private bool maximumPressureIsSet = false; //bool tells whether the maximum pressure has been set
-        private bool okIsClicked = false;
+        private double? oneRepMax = -1;
+        private double? minimumPressure = 1024; //the pressure inside the ball when not under any load
+        private bool minimumPressureIsSet = false; //bool tells whether the minimum pressure has been set
+        private bool oneRepMaxIsSet = false; //bool tells whether the maximum pressure has been set
+        //private bool okIsClicked = false;
         private BLEViewModel ble;
         private ObservableCollection<Measurement> allWorkoutData;
         //private MeasurementViewModel measurementVM;
-        private int currentPressure = -1;
+        private double? currentPressure = null;
         //public ReadOnlyObservableCollection<int> displayedWorkoutData;
 
         public GraphPage()
-        {            
+        {
             InitializeComponent();
             Init();
         }
@@ -84,8 +84,42 @@ namespace CTAR_All_Star
                         break;
                     case "pressure":
                         currentPressure = ble.pressureVal;
+
+                        if (!minimumPressureIsSet)
+                        {
+                            if(currentPressure != null || currentPressure < minimumPressure)
+                            {
+                                minimumPressure = currentPressure;
+                            }
+                        }
+                        else if (!oneRepMaxIsSet)
+                        {
+                            if (currentPressure > oneRepMax)
+                            {
+                                oneRepMax = currentPressure;
+                            }
+                        }
+
                         //measurementVM.InsertMeasurement(currentPressure);
-                        Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<GraphPage, int>(this, "pressureChange", currentPressure));
+                        Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<GraphPage, int>(this, "pressureChange", (int)currentPressure));
+
+                        // Get current date and time
+                        DateTime d = DateTime.Now;
+                        DateTime dt = DateTime.Parse(d.ToString());
+
+                        Measurement measurement = new Measurement()
+                        {
+                            UserName = App.currentUser.Username,
+                            DocID = String.Empty,
+                            SessionNumber = App.currentUser.Session.ToString(),
+                            TimeStamp = d,
+                            Pressure = currentPressure,
+                            DisplayTime = dt.ToString("HH:mm:ss"),
+                            DisplayDate = dt.ToString("MM/dd/yyyy"),
+                            OneRepMax = oneRepMax
+                        };
+
+                        allWorkoutData.Add(measurement);
                         break;
                     default:
                         break;
@@ -98,7 +132,7 @@ namespace CTAR_All_Star
             }
 
             //Set up current workout
-            if(workout != null /*&& workout.CheckInformation()*/)
+            if (workout != null /*&& workout.CheckInformation()*/)
             {
                 NumSets.Text = setCount.ToString();
                 TotalSets.Text = "of " + workout.NumSets;
@@ -115,7 +149,7 @@ namespace CTAR_All_Star
                 DisplayAlert("No Exercise Loaded", "Please choose an exercise to continue.", "Ok");
                 //LoadExercise();
             }
-        }        
+        }
 
         private async void LoadExercise()
         {
@@ -129,20 +163,23 @@ namespace CTAR_All_Star
         private void Start_Exercise(object sender, EventArgs e)
         {
             //if (!App.currentUser.DeviceIsConnected)
-            if(!ble.deviceConnected)
+            if (!ble.deviceConnected)
             {
                 CheckBTConnection();
                 return;
             }
-            if(oneRepMax == -1) //need to initialize the one rep max
+            if (!minimumPressureIsSet && !oneRepMaxIsSet) //need to initialize the one rep max
             {
-                CalibratePressure();
+                getMinimumPressure();
             }
-            //Device.BeginInvokeOnMainThread(() => TimerLabel.Text = "APPLY PRESSURE");
-            TimerLabel.Text = "APPLY PRESSURE";
+            else
+            {
+                //Device.BeginInvokeOnMainThread(() => TimerLabel.Text = "APPLY PRESSURE");
+                TimerLabel.Text = "APPLY PRESSURE";
 
-            StartTimer();
-            ble.StartUpdates();
+                StartTimer();
+                ble.StartUpdates();
+            }
         }
         private void Stop_Exercise(object sender, EventArgs e)
         {
@@ -153,12 +190,44 @@ namespace CTAR_All_Star
         }
         private void Save_Exercise(object sender, EventArgs e)
         {
+            timer.Stop();
+            ble.StopUpdates();
             DisplayAlert("Save", "You have saved the exercise.", "Dismiss");
+            DatabaseHelper dbHelper = new DatabaseHelper();
+            dbHelper.addDataList(allWorkoutData);
         }
 
-        private void OK_Clicked(object sender, EventArgs e)
+        private async void OK_Clicked(object sender, EventArgs e)
         {
-            okIsClicked = true;
+            if (!minimumPressureIsSet)
+            {
+                minimumPressureIsSet = true;
+                getMaximumPressure();
+            }
+            else if (!oneRepMaxIsSet)
+            {
+                oneRepMaxIsSet = true;
+            }
+            else //both max and minimum have been set
+            {
+                newGoal = ((Convert.ToDouble(workout.ThresholdPercentage) / 100) * ((Double)oneRepMax - (Double)minimumPressure)) + (Double)minimumPressure;
+                Goal.Start = newGoal;
+                Goal.IsVisible = true;
+                yAxis.Minimum = minimumPressure - (minimumPressure * 0.10);
+                yAxis.Maximum = oneRepMax + (oneRepMax * 0.10);
+
+                btnOK.IsVisible = false;
+
+                //Device.BeginInvokeOnMainThread(() =>
+                //{
+                await DisplayAlert("Calibration", "Great. All done with calibration. Press 'OK' to begin the workout", "Ok");
+                //});
+                TimerLabel.Text = "APPLY PRESSURE";
+
+                StartTimer();
+                //ble.StartUpdates();
+            }
+            //okIsClicked = true;
         }
 
         private void StartTimer()
@@ -353,60 +422,60 @@ namespace CTAR_All_Star
             }
         }
 
-            //else if (countdown.Equals(0))
-            //{
-            //    if(setCount <= totalSets)
-            //    {                    
-            //        if (repCount <= totalReps)
-            //        { 
-            //            Device.BeginInvokeOnMainThread(() => NumReps.Text = repCount.ToString());
-            //            Device.BeginInvokeOnMainThread(() => NumSets.Text = setCount.ToString());
-            //            Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(countdown));
-                    
-            //            if (isAtRest)
-            //            {
-            //                Device.BeginInvokeOnMainThread(() => TimerLabel.Text = "APPLY PRESSURE");
-            //                Device.BeginInvokeOnMainThread(() => TimeDisplay.BackgroundColor = Constants.BackgroundColor);
-            //                countdown = Convert.ToInt32(workout.HoldDuration);
-            //                Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(countdown));
-            //                isAtRest = false;
-            //            }
-            //            else
-            //            {
-            //                Device.BeginInvokeOnMainThread(() => TimerLabel.Text = "REST");
-            //                Device.BeginInvokeOnMainThread(() => TimeDisplay.BackgroundColor = Constants.RestColor);
-            //                countdown = Convert.ToInt32(workout.RestDuration);
-            //                Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(countdown));
-            //                repCount++;
-            //                isAtRest = true;
-            //            }
-            //        }
-            //        else
-            //        {
-            //            setCount++;
-            //            repCount = 1;
-            //        }
-            //    }
-            //    else
-            //    {                    
-            //        TimerLabel.Text = "COMPLETE";
-            //        TimeDisplay.Text = "";
-            //        TimeDisplay.BackgroundColor = Constants.CompleteColor;
-            //        timer.Stop();
-            //    }                
-                
-                
-            //}
+        //else if (countdown.Equals(0))
+        //{
+        //    if(setCount <= totalSets)
+        //    {                    
+        //        if (repCount <= totalReps)
+        //        { 
+        //            Device.BeginInvokeOnMainThread(() => NumReps.Text = repCount.ToString());
+        //            Device.BeginInvokeOnMainThread(() => NumSets.Text = setCount.ToString());
+        //            Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(countdown));
 
-            ////If it ever decides to go negative.
-            //else
-            //{
-            //    TimeDisplay.Text = "" + Convert.ToString(countdown);
-            //    timer.Stop();
-            //    TimerLabel.Text = "REST";
-            //    TimeDisplay.BackgroundColor = Constants.RestColor;
-            //}
-        
+        //            if (isAtRest)
+        //            {
+        //                Device.BeginInvokeOnMainThread(() => TimerLabel.Text = "APPLY PRESSURE");
+        //                Device.BeginInvokeOnMainThread(() => TimeDisplay.BackgroundColor = Constants.BackgroundColor);
+        //                countdown = Convert.ToInt32(workout.HoldDuration);
+        //                Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(countdown));
+        //                isAtRest = false;
+        //            }
+        //            else
+        //            {
+        //                Device.BeginInvokeOnMainThread(() => TimerLabel.Text = "REST");
+        //                Device.BeginInvokeOnMainThread(() => TimeDisplay.BackgroundColor = Constants.RestColor);
+        //                countdown = Convert.ToInt32(workout.RestDuration);
+        //                Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(countdown));
+        //                repCount++;
+        //                isAtRest = true;
+        //            }
+        //        }
+        //        else
+        //        {
+        //            setCount++;
+        //            repCount = 1;
+        //        }
+        //    }
+        //    else
+        //    {                    
+        //        TimerLabel.Text = "COMPLETE";
+        //        TimeDisplay.Text = "";
+        //        TimeDisplay.BackgroundColor = Constants.CompleteColor;
+        //        timer.Stop();
+        //    }                
+
+
+        //}
+
+        ////If it ever decides to go negative.
+        //else
+        //{
+        //    TimeDisplay.Text = "" + Convert.ToString(countdown);
+        //    timer.Stop();
+        //    TimerLabel.Text = "REST";
+        //    TimeDisplay.BackgroundColor = Constants.RestColor;
+        //}
+
 
         public async void CheckBTConnection()
         {
@@ -421,43 +490,36 @@ namespace CTAR_All_Star
             }
         }
 
-        private async void CalibratePressure()
+        private async void getMinimumPressure()
         {
+            //Device.BeginInvokeOnMainThread(async() =>
+            //{
             await DisplayAlert("Calibration", "First we need to calibrate for the pressure in the ball", "Ok");
-            btnOK.IsVisible = true;
+            //});
+
             ble.StartUpdates();
-            TimerLabel.Text = "Do not apply any pressure to ball. Press 'OK' when ready.";
+            btnOK.IsVisible = true;
+            TimerLabel.Text = "No squeezing... Press OK";
 
-            while(currentPressure == -1)
-            {
-                // wait for a pressure update
-            }
-            minimumPressure = currentPressure; //set the minimum pressure
-            while(!okIsClicked)//loop and update the minimum pressure until user clicks OK
-            {
-                if(currentPressure < minimumPressure)
-                {
-                    minimumPressure = currentPressure;
-                }
-            }
-            okIsClicked = false;
-            TimerLabel.Text = "Okay, now squeeze the ball between chin and chest as hard as you possibly can. Press 'OK' when done";
-            while (!okIsClicked)
-            {
-                if(currentPressure > oneRepMax)
-                {
-                    oneRepMax = currentPressure;
-                }
-            }
-            okIsClicked = false;
-            //LineChart.yAxis.
-            newGoal = (Convert.ToDouble(workout.ThresholdPercentage) / 100) * oneRepMax;
-            Goal.Start = newGoal;
-            Goal.IsVisible = true;
-            btnOK.IsVisible = false;
-            await DisplayAlert("Calibration", "Great. All done with calibration. Press 'OK' to begin the workout", "Ok");
+            ////while(currentPressure == -1)
+            ////{
+            ////    // wait for a pressure update
+            ////}
+            //minimumPressure = currentPressure; //set the minimum pressure
+            //while (!okIsClicked)//loop and update the minimum pressure until user clicks OK
+            //{
+            //    if (currentPressure < minimumPressure)
+            //    {
+            //        minimumPressure = currentPressure;
+            //    }
+            //}
+            //okIsClicked = false;
+
+
         }
-
-
+        private async void getMaximumPressure()
+        {
+            TimerLabel.Text = "Okay, SQUEEZE!!!";
+        }
     }
 }

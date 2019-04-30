@@ -130,7 +130,11 @@ namespace CTAR_All_Star
             {
                 try
                 {
-                    await pressureCharacteristic.StartUpdatesAsync();
+                    //Device.BeginInvokeOnMainThread(async() =>
+                    //{
+                        await pressureCharacteristic.StartUpdatesAsync();
+                    //});
+
                 }
                 catch(InvalidOperationException)
                 {
