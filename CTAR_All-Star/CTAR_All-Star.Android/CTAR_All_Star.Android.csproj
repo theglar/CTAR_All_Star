@@ -102,6 +102,11 @@
     <AndroidResource Include="Resources\mipmap-xxxhdpi\Icon.png" />
     <AndroidResource Include="Resources\mipmap-xxxhdpi\launcher_foreground.png" />
     <AndroidResource Include="Resources\drawable-xxhdpi\LoginIcon.png" />
+    <AndroidResource Include="Resources\drawable\Workout.png" />
+    <AndroidResource Include="Resources\drawable\CreateWorkout.jpg" />
+    <AndroidResource Include="Resources\drawable\Bluetooth.png" />
+    <AndroidResource Include="Resources\drawable\History.jpg" />
+    <AndroidResource Include="Resources\drawable\ManagePatients.jpg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CTAR_All-Star\CTAR_All_Star.csproj">

@@ -8,15 +8,28 @@ using System.Threading.Tasks;
 
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
+using CTAR_All_Star.ViewModels;
 
-namespace CTAR_All_Star.Views
+namespace CTAR_All_Star
 {
 	[XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class TutorialsPage : ContentPage
 	{
-		public TutorialsPage()
+        public TutorialsPage()
 		{
 			InitializeComponent ();
 		}
+
+        private void Tutorial_OnItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            var vm = BindingContext as TutorialViewModel;
+            var tutorial = e.Item as Tutorial;
+            vm.HideorShowTutorial(tutorial);
+        }
+
+        private void WebClick(object sender, EventArgs e)
+        {
+            Device.OpenUri(new Uri("https://theglar.wixsite.com/ctar"));
+        }
     }
 }
