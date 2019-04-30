@@ -93,11 +93,13 @@ namespace CTAR_All_Star
                     DateTime d = DateTime.Now;
                     DateTime dt = DateTime.Parse(d.ToString());
                     measurement.UserName = App.currentUser.Username;
+                    measurement.DocID = App.currentUser.DocID;
                     measurement.SessionNumber = App.currentUser.Session.ToString();
                     measurement.TimeStamp = d;
                     measurement.Pressure = pressureVal;
-                    measurement.Duration = "1"; //Do we need this?
                     measurement.DisplayTime = dt.ToString("HH:mm:ss");
+                    measurement.DisplayDate = dt.ToString("MM/dd/yyyy");
+                    measurement.OneRepMax = App.currentUser.OneRepMax;
 
                     dbHelper.addData(measurement);
                     

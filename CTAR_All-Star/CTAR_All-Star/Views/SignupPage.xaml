@@ -16,6 +16,8 @@
                 </Picker>
                 <Label x:Name="Lbl_newUser" Text="User ID" HorizontalOptions="CenterAndExpand" />
                 <Entry x:Name="Entry_NewUser" Placeholder="User ID" Text="" BackgroundColor="White" HorizontalOptions="FillAndExpand" />
+                <Label x:Name="Lbl_DocID" Text="Doctor ID" HorizontalOptions="CenterAndExpand" />
+                <Entry x:Name="Entry_DocID" Placeholder="Doctor ID" Text="" BackgroundColor="White" HorizontalOptions="FillAndExpand" />
                 <Label x:Name="Lbl_NewPassword" Text="Password" HorizontalOptions="CenterAndExpand" />
                 <Entry x:Name="Entry_NewPassword" Placeholder="Password" Text="" BackgroundColor="White" IsPassword="True" HorizontalOptions="FillAndExpand" />
                 <Label x:Name="Lbl_ConfirmPass" Text="Confirm Password" HorizontalOptions="CenterAndExpand"/>

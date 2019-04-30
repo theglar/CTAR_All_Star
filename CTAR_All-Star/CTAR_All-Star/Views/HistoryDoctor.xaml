@@ -1,0 +1,60 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CTAR_All_Star.HistoryDoctor">
+    
+    <ListView  x:Name="measurementsView">
+        <ListView.Header>
+            <StackLayout BackgroundColor="#003366"
+                        Orientation="Vertical">
+                <StackLayout Orientation="Vertical" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" Padding="0,5,0,5">
+                    <Label x:Name="FilterLabel" Text="Filter By:" TextColor="#003366" BackgroundColor="LightGray" FontSize="Medium" 
+                           VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand"/>
+                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" BackgroundColor="LightGray">
+                        <Picker x:Name="DatePicker" Title="Date" FontSize="Small" FontAttributes="Bold"
+                                TextColor="#003366" BackgroundColor="White" Margin="5"/>
+                        <Picker x:Name="NamePicker" Title="Patient" FontSize="Small" FontAttributes="Bold"
+                                TextColor="#003366" BackgroundColor="White" Margin="5"/>
+                        <Picker x:Name="SessionPicker" Title="Session" FontSize="Small" FontAttributes="Bold"
+                                TextColor="#003366" BackgroundColor="White" Margin="5"/>
+                    </StackLayout>
+                </StackLayout>
+                
+                <StackLayout Orientation="Horizontal" Padding="10,0,10,10">
+                    <Label x:Name="DateLabel" FontSize="Medium" FontAttributes="Bold" TextColor="White" BackgroundColor="#003366" Text="Date" />
+                    <Label x:Name="PatientLabel" FontSize="Medium" FontAttributes="Bold" TextColor="White" BackgroundColor="#003366" Text="Patient" HorizontalOptions="EndAndExpand"/>
+                    <Label x:Name="SessionLabel" FontSize="Medium" FontAttributes="Bold" TextColor="White" BackgroundColor="#003366" Text="Session" HorizontalOptions="EndAndExpand" />
+                    <Label x:Name="PressureLabel" FontSize="Medium" FontAttributes="Bold" TextColor="White" BackgroundColor="#003366" Text="Pressure" HorizontalOptions="EndAndExpand" />
+                </StackLayout>
+            </StackLayout>
+        </ListView.Header>
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout Padding="10,10,10,0" BackgroundColor="LightGray"
+                        Orientation="Vertical">
+                        <StackLayout Orientation="Horizontal" Padding="10,0,10,0">
+                            <Label Text="{Binding DisplayDate}"
+                               TextColor="#003366" />
+                            <Label Text="{Binding UserName}"
+                                HorizontalOptions="EndAndExpand"
+                                TextColor="#003366" />
+                            <Label Text="{Binding SessionNumber}"
+                                HorizontalOptions="EndAndExpand"
+                                TextColor="#003366" />
+                            <Label Text="{Binding Pressure}"
+                                HorizontalOptions="EndAndExpand"
+                                TextColor="#003366" />
+                        </StackLayout>                        
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+        <ListView.Footer>
+            <StackLayout BackgroundColor="LightGray" HorizontalOptions="Fill" >
+                <Button x:FieldModifier="GraphButton" Text ="View Graph" Clicked="View_Graph" FontSize="Small" FontAttributes="Bold"
+                                TextColor="White" BackgroundColor="#807f84" Margin="5" HorizontalOptions="Center" />
+            </StackLayout>           
+        </ListView.Footer>
+    </ListView>
+</ContentPage>

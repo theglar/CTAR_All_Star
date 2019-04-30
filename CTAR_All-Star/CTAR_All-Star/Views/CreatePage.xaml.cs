@@ -31,11 +31,13 @@ namespace CTAR_All_Star
             Measurement measurement = new Measurement()
             {
                 UserName = nameEntry.Text,
+                DocID = String.Empty,
                 SessionNumber = sessionEntry.Text,
                 TimeStamp = d,
                 Pressure = Convert.ToDouble(pressureEntry.Text),
-                Duration = durationEntry.Text,
-                DisplayTime = dt.ToString("HH:mm:ss")
+                DisplayTime = dt.ToString("HH:mm:ss"),
+                DisplayDate = dt.ToString("MM/dd/yyyy"),
+                OneRepMax = App.currentUser.OneRepMax
             };
 
             dbHelper.addData(measurement);
