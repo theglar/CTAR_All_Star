@@ -49,9 +49,10 @@
     <WarningLevel>4</WarningLevel>
     <ConsolePause>false</ConsolePause>
     <MtouchArch>ARM64</MtouchArch>
-    <CodesignKey>iPhone Developer</CodesignKey>
+    <CodesignKey>iPhone Developer: paintballa5833@yahoo.com (TPCC624L72)</CodesignKey>
     <MtouchDebug>true</MtouchDebug>
     <CodesignEntitlements>Entitlements.plist</CodesignEntitlements>
+    <CodesignProvision>iOS Team Provisioning Profile: com.companyname.CTAR-All-Star</CodesignProvision>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhone' ">
     <DebugType>none</DebugType>
@@ -176,6 +177,11 @@
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\LoginIcon.png" />
+    <BundleResource Include="Resources\Workout.png" />
+    <BundleResource Include="Resources\CreateWorkout.jpg" />
+    <BundleResource Include="Resources\Bluetooth.png" />
+    <BundleResource Include="Resources\History.jpg" />
+    <BundleResource Include="Resources\ManagePatients.jpg" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\CircleLogo.png" />
