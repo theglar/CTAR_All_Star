@@ -1,10 +1,29 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="CTAR_All_Star.Views.TutorialsPage">
-    <ContentPage.Content>
-        <StackLayout Margin="10,10,10,0">
-            <Label Text="Tutorials Placeholder"></Label>
-        </StackLayout>
-    </ContentPage.Content>
+             xmlns:local="clr-namespace:CTAR_All_Star.ViewModels"
+             x:Class="CTAR_All_Star.TutorialsPage">
+    
+    <ContentPage.BindingContext>
+        <local:TutorialViewModel/>
+    </ContentPage.BindingContext>
+      
+    <ListView ItemsSource="{Binding Tutorials}"
+              HasUnevenRows="true"
+              ItemTapped="Tutorial_OnItemTapped">
+        <ListView.ItemTemplate>
+            <DataTemplate>
+                <ViewCell>
+                    <StackLayout>
+                        <Label Text= "{Binding Topic}" TextColor="#003366" Margin="20" HorizontalTextAlignment="Start"/>
+                        <Image Source="{Binding ImageName}" Margin="60,20"
+                                   IsVisible="{Binding isVisible}"/>
+                        <Label Text="{Binding Description}" Margin="20,20"
+                                   IsVisible="{Binding isVisible}"/>
+                        <Button Text="{Binding URL}" TextColor="Blue" IsVisible="{Binding isVisible}" Clicked="WebClick"/>
+                    </StackLayout>
+                </ViewCell>
+            </DataTemplate>
+        </ListView.ItemTemplate>
+    </ListView>
 </ContentPage>

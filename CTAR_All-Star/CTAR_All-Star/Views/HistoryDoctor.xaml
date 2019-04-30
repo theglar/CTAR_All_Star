@@ -2,59 +2,69 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CTAR_All_Star.HistoryDoctor">
-    
-    <ListView  x:Name="measurementsView">
-        <ListView.Header>
-            <StackLayout BackgroundColor="#003366"
-                        Orientation="Vertical">
-                <StackLayout Orientation="Vertical" BackgroundColor="LightGray" HorizontalOptions="FillAndExpand" Padding="0,5,0,5">
+    <RelativeLayout RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+                    RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}"
+                    VerticalOptions="CenterAndExpand">
+        <RelativeLayout x:Name="Header" HorizontalOptions="CenterAndExpand" 
+                    RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+                    RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.2}">
+            <StackLayout BackgroundColor="#003366" Spacing="5"
+                            Orientation="Vertical">
+                <StackLayout Orientation="Vertical" BackgroundColor="LightGray" Spacing="5">
                     <Label x:Name="FilterLabel" Text="Filter By:" TextColor="#003366" BackgroundColor="LightGray" FontSize="Medium" 
-                           VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand"/>
-                    <StackLayout Orientation="Horizontal" HorizontalOptions="Center" BackgroundColor="LightGray">
+                               VerticalTextAlignment="Center" HorizontalOptions="CenterAndExpand"/>
+                    <StackLayout Orientation="Horizontal" BackgroundColor="LightGray" Spacing="5" HorizontalOptions="CenterAndExpand" >
                         <Picker x:Name="DatePicker" Title="Date" FontSize="Small" FontAttributes="Bold"
-                                TextColor="#003366" BackgroundColor="White" Margin="5"/>
+                                    TextColor="#003366" BackgroundColor="White" Margin="5" />
                         <Picker x:Name="NamePicker" Title="Patient" FontSize="Small" FontAttributes="Bold"
-                                TextColor="#003366" BackgroundColor="White" Margin="5"/>
+                                    TextColor="#003366" BackgroundColor="White" Margin="5"/>
                         <Picker x:Name="SessionPicker" Title="Session" FontSize="Small" FontAttributes="Bold"
-                                TextColor="#003366" BackgroundColor="White" Margin="5"/>
+                                    TextColor="#003366" BackgroundColor="White" Margin="5"/>
                     </StackLayout>
                 </StackLayout>
-                
-                <StackLayout Orientation="Horizontal" Padding="10,0,10,10">
+                <StackLayout Orientation="Horizontal" Spacing="5">
                     <Label x:Name="DateLabel" FontSize="Medium" FontAttributes="Bold" TextColor="White" BackgroundColor="#003366" Text="Date" />
-                    <Label x:Name="PatientLabel" FontSize="Medium" FontAttributes="Bold" TextColor="White" BackgroundColor="#003366" Text="Patient" HorizontalOptions="EndAndExpand"/>
-                    <Label x:Name="SessionLabel" FontSize="Medium" FontAttributes="Bold" TextColor="White" BackgroundColor="#003366" Text="Session" HorizontalOptions="EndAndExpand" />
-                    <Label x:Name="PressureLabel" FontSize="Medium" FontAttributes="Bold" TextColor="White" BackgroundColor="#003366" Text="Pressure" HorizontalOptions="EndAndExpand" />
+                    <Label x:Name="PatientLabel" FontSize="Medium" FontAttributes="Bold" TextColor="White" BackgroundColor="#003366" Text="Patient" />
+                    <Label x:Name="SessionLabel" FontSize="Medium" FontAttributes="Bold" TextColor="White" BackgroundColor="#003366" Text="Session" />
+                    <Label x:Name="PressureLabel" FontSize="Medium" FontAttributes="Bold" TextColor="White" BackgroundColor="#003366" Text="Pressure" />
                 </StackLayout>
             </StackLayout>
-        </ListView.Header>
-        <ListView.ItemTemplate>
-            <DataTemplate>
-                <ViewCell>
-                    <StackLayout Padding="10,10,10,0" BackgroundColor="LightGray"
-                        Orientation="Vertical">
-                        <StackLayout Orientation="Horizontal" Padding="10,0,10,0">
-                            <Label Text="{Binding DisplayDate}"
-                               TextColor="#003366" />
-                            <Label Text="{Binding UserName}"
-                                HorizontalOptions="EndAndExpand"
-                                TextColor="#003366" />
-                            <Label Text="{Binding SessionNumber}"
-                                HorizontalOptions="EndAndExpand"
-                                TextColor="#003366" />
-                            <Label Text="{Binding Pressure}"
-                                HorizontalOptions="EndAndExpand"
-                                TextColor="#003366" />
-                        </StackLayout>                        
-                    </StackLayout>
-                </ViewCell>
-            </DataTemplate>
-        </ListView.ItemTemplate>
-        <ListView.Footer>
-            <StackLayout BackgroundColor="LightGray" HorizontalOptions="Fill" >
+        </RelativeLayout>
+        <RelativeLayout x:Name="Body" RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
+                    RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Header, Property=Y, Constant=125}"
+                        RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.88}">
+            <ListView  x:Name="measurementsView" HeightRequest="580">
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <StackLayout Padding="10,10,10,0" BackgroundColor="LightGray"
+                                Orientation="Vertical">
+                                <StackLayout Orientation="Horizontal" Padding="10,0,10,0">
+                                    <Label Text="{Binding DisplayDate}"
+                                       TextColor="#003366" />
+                                    <Label Text="{Binding UserName}"
+                                        HorizontalOptions="EndAndExpand"
+                                        TextColor="#003366" />
+                                    <Label Text="{Binding SessionNumber}"
+                                        HorizontalOptions="EndAndExpand"
+                                        TextColor="#003366" />
+                                    <Label Text="{Binding Pressure}"
+                                        HorizontalOptions="EndAndExpand"
+                                        TextColor="#003366" />
+                                </StackLayout>
+                            </StackLayout>
+                        </ViewCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </RelativeLayout>
+        <RelativeLayout x:Name="Footer" HorizontalOptions="CenterAndExpand" 
+                    RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=Body, Property=Height, Factor=1.05}"  
+                    RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}" >
+            <StackLayout BackgroundColor="#807f84" HorizontalOptions="FillAndExpand">
                 <Button x:FieldModifier="GraphButton" Text ="View Graph" Clicked="View_Graph" FontSize="Small" FontAttributes="Bold"
-                                TextColor="White" BackgroundColor="#807f84" Margin="5" HorizontalOptions="Center" />
-            </StackLayout>           
-        </ListView.Footer>
-    </ListView>
+                                    TextColor="White" BackgroundColor="#807f84" HorizontalOptions="Center" />
+            </StackLayout>
+        </RelativeLayout>
+    </RelativeLayout>
 </ContentPage>
