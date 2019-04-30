@@ -5,9 +5,10 @@
              xmlns:local="clr-namespace:CTAR_All_Star.ViewModels"
              x:Class="CTAR_All_Star.GraphPage">
 
+
     <ContentPage.BindingContext>
         <local:MeasurementViewModel></local:MeasurementViewModel>
-        </ContentPage.BindingContext>
+    </ContentPage.BindingContext>
     <RelativeLayout RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
                     RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}"
                     VerticalOptions="CenterAndExpand">
@@ -47,9 +48,9 @@
                     </chart:CategoryAxis>
                 </chart:SfChart.PrimaryAxis>
                 <chart:SfChart.SecondaryAxis>
-                    <chart:NumericalAxis Maximum="400" Minimum="0">
+                    <chart:NumericalAxis x:Name="yAxis" Maximum="1023" Minimum="0">
                         <chart:NumericalAxis.StripLines>
-                            <chart:NumericalStripLine x:Name="Goal" Start="675" Width ="10" Text="Goal" FillColor="#941414"/>
+                            <chart:NumericalStripLine x:Name="Goal" Start="0" Width ="10" Text="Goal" FillColor="#941414" IsVisible="False"/>
                         </chart:NumericalAxis.StripLines>
                         <chart:NumericalAxis.Title>
                             <chart:ChartAxisTitle Text="Pressure"></chart:ChartAxisTitle>
@@ -72,8 +73,8 @@
                     <Button Text="Pause" Clicked="Stop_Exercise" BackgroundColor="LightCoral"></Button>
                     <Button Text="Done" Clicked="Save_Exercise" BackgroundColor="LightSeaGreen"></Button>
                 </StackLayout>
-            </RelativeLayout>                     
-        </RelativeLayout>        
+                <Button x:Name="btnOK" Text="OK" Clicked="OK_Clicked" BackgroundColor="#003366" IsVisible="False"></Button>
+            </RelativeLayout>
+        </RelativeLayout>
     </RelativeLayout>
 </ContentPage>
-

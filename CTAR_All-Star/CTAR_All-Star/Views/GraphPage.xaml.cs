@@ -24,10 +24,15 @@ namespace CTAR_All_Star
         private Workout workout = new Workout();
         private bool isAtRest = true;
         private double newGoal;
+        private double oneRepMax = -1;
+        private double minimumPressure = -1; //the pressure inside the ball when not under any load
+        //private bool minimumPressureIsSet = false; //bool tells whether the minimum pressure has been set
+        //private bool maximumPressureIsSet = false; //bool tells whether the maximum pressure has been set
+        private bool okIsClicked = false;
         private BLEViewModel ble;
         private ObservableCollection<Measurement> allWorkoutData;
         //private MeasurementViewModel measurementVM;
-        private int currentPressure;
+        private int currentPressure = -1;
         //public ReadOnlyObservableCollection<int> displayedWorkoutData;
 
         public GraphPage()
@@ -100,8 +105,8 @@ namespace CTAR_All_Star
                 NumReps.Text = repCount.ToString();
                 TotalReps.Text = "of " + workout.NumReps;
                 TimeDisplay.Text = "";
-                newGoal = (Convert.ToDouble(workout.ThresholdPercentage)/100) * App.currentUser.OneRepMax;
-                Goal.Start = newGoal;
+                //newGoal = (Convert.ToDouble(workout.ThresholdPercentage)/100) * App.currentUser.OneRepMax;
+                //Goal.Start = newGoal;
                 totalReps = Convert.ToInt32(workout.NumReps);
                 totalSets = Convert.ToInt32(workout.NumSets);
             }
@@ -109,7 +114,7 @@ namespace CTAR_All_Star
             {
                 DisplayAlert("No Exercise Loaded", "Please choose an exercise to continue.", "Ok");
                 //LoadExercise();
-            }            
+            }
         }        
 
         private async void LoadExercise()
@@ -129,6 +134,10 @@ namespace CTAR_All_Star
                 CheckBTConnection();
                 return;
             }
+            if(oneRepMax == -1) //need to initialize the one rep max
+            {
+                CalibratePressure();
+            }
             //Device.BeginInvokeOnMainThread(() => TimerLabel.Text = "APPLY PRESSURE");
             TimerLabel.Text = "APPLY PRESSURE";
 
@@ -146,6 +155,12 @@ namespace CTAR_All_Star
         {
             DisplayAlert("Save", "You have saved the exercise.", "Dismiss");
         }
+
+        private void OK_Clicked(object sender, EventArgs e)
+        {
+            okIsClicked = true;
+        }
+
         private void StartTimer()
         {
             //base.onResume;
@@ -405,5 +420,44 @@ namespace CTAR_All_Star
                 }
             }
         }
+
+        private async void CalibratePressure()
+        {
+            await DisplayAlert("Calibration", "First we need to calibrate for the pressure in the ball", "Ok");
+            btnOK.IsVisible = true;
+            ble.StartUpdates();
+            TimerLabel.Text = "Do not apply any pressure to ball. Press 'OK' when ready.";
+
+            while(currentPressure == -1)
+            {
+                // wait for a pressure update
+            }
+            minimumPressure = currentPressure; //set the minimum pressure
+            while(!okIsClicked)//loop and update the minimum pressure until user clicks OK
+            {
+                if(currentPressure < minimumPressure)
+                {
+                    minimumPressure = currentPressure;
+                }
+            }
+            okIsClicked = false;
+            TimerLabel.Text = "Okay, now squeeze the ball between chin and chest as hard as you possibly can. Press 'OK' when done";
+            while (!okIsClicked)
+            {
+                if(currentPressure > oneRepMax)
+                {
+                    oneRepMax = currentPressure;
+                }
+            }
+            okIsClicked = false;
+            //LineChart.yAxis.
+            newGoal = (Convert.ToDouble(workout.ThresholdPercentage) / 100) * oneRepMax;
+            Goal.Start = newGoal;
+            Goal.IsVisible = true;
+            btnOK.IsVisible = false;
+            await DisplayAlert("Calibration", "Great. All done with calibration. Press 'OK' to begin the workout", "Ok");
+        }
+
+
     }
 }
