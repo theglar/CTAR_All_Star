@@ -2,33 +2,35 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CTAR_All_Star.Views.SigninPage">
-    
-    <StackLayout x:Name="MasterLayout">
-        <StackLayout Padding="0, 100, 0, 0">
-            <Label x:Name="WelcomeMessage" Text="Welcome to the CTAR All-Star!" TextColor="White"
-                   FontAttributes="Italic" HorizontalOptions="CenterAndExpand" FontSize="Large"></Label>            
-        </StackLayout>
-        <StackLayout x:Name="LogoStack" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
-            
-             <Image x:Name="LoginIcon" Source="SquareLogo.png"  />      
-        </StackLayout>
-        <StackLayout>
-            <Label x:Name="LoginMessage" Text="Please Sign In or Sign Up Below." TextColor="White"
-                   FontAttributes="Italic" HorizontalOptions="CenterAndExpand" FontSize="Medium"></Label>
-        </StackLayout>
 
-        <StackLayout x:Name="LoginEntriesStack" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="50,0,50,200">
+    <ScrollView>
+        <StackLayout x:Name="MasterLayout">
+            <StackLayout Padding="0, 100, 0, 0">
+                <Label x:Name="WelcomeMessage" Text="Welcome to the CTAR All-Star!" TextColor="White"
+                       FontAttributes="Italic" HorizontalOptions="CenterAndExpand" FontSize="Large"></Label>            
+            </StackLayout>
+            <StackLayout x:Name="LogoStack" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand">
+            
+                 <Image x:Name="LoginIcon" Source="SquareLogo.png"  />      
+            </StackLayout>
+            <StackLayout>
+                <Label x:Name="LoginMessage" Text="Please Sign In or Sign Up Below." TextColor="White"
+                       FontAttributes="Italic" HorizontalOptions="CenterAndExpand" FontSize="Medium"></Label>
+            </StackLayout>
+
+            <StackLayout x:Name="LoginEntriesStack" VerticalOptions="FillAndExpand" HorizontalOptions="FillAndExpand" Padding="50,0,50,200">
             
             
-            <ActivityIndicator x:Name="ActivitySpinner" Color="Red" IsRunning="true" />
+                <ActivityIndicator x:Name="ActivitySpinner" Color="Red" IsRunning="true" />
             
-            <Label x:Name="Lbl_Username" Text="Username" />
-            <Entry x:Name="Entry_Username" Placeholder="EMR # or DoctorID" Text="" BackgroundColor="White"/>
-            <Label x:Name="Lbl_Password" Text="Password" />
-            <Entry x:Name="Entry_Password" Placeholder="Password" Text="" BackgroundColor="White" IsPassword="True"/>
-            <Button x:Name="Btn_Signin" Text="Sign in" Clicked="SignInProcedure" Margin="0,20,0,0" HorizontalOptions="Center" WidthRequest="200"/>
-            <Button x:Name="Btn_Signup" Text="Sign up" Clicked="SignUpProcedure" HorizontalOptions="Center" WidthRequest="200"/>
-        </StackLayout>
+                <Label x:Name="Lbl_Username" Text="Username" />
+                <Entry x:Name="Entry_Username" Placeholder="EMR # or DoctorID" Text="" BackgroundColor="White"/>
+                <Label x:Name="Lbl_Password" Text="Password" />
+                <Entry x:Name="Entry_Password" Placeholder="Password" Text="" BackgroundColor="White" IsPassword="True"/>
+                <Button x:Name="Btn_Signin" Text="Sign in" Clicked="SignInProcedure" Margin="0,20,0,0" HorizontalOptions="Center" WidthRequest="200"/>
+                <Button x:Name="Btn_Signup" Text="Sign up" Clicked="SignUpProcedure" HorizontalOptions="Center" WidthRequest="200"/>
+            </StackLayout>
         
-    </StackLayout>
+        </StackLayout>
+    </ScrollView>
 </ContentPage> 

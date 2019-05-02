@@ -15,7 +15,7 @@ namespace CTAR_All_Star.Models
         public string userType { get; set;  }
         public bool IsLoggedIn { get; set; }
         public double OneRepMax { get; set; }
-        public bool DeviceIsConnected { get; set; }
+        //public bool DeviceIsConnected { get; set; }
         public int Session { get; set; }
         public string DocID { get; set; }
 
@@ -28,7 +28,7 @@ namespace CTAR_All_Star.Models
             this.Username = Username;
             this.Password = Password;
             this.userType = userType;
-            this.DeviceIsConnected = false;
+            //this.DeviceIsConnected = false;
             this.Session = 1;
             this.DocID = Doc;
         }

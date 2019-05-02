@@ -35,7 +35,7 @@ namespace CTAR_All_Star.Navigation
             bool help = await DisplayAlert("Welcome " + App.currentUser.Username, "Push the Start button to begin exercising or choose another option in the navigation \"hamburger\" menu. There is also a Tutorials section for more detailed instructions.", "View Tutorials", "OK");
             if(help)
             {
-                Navigation.PushAsync(new TutorialsPage());
+                await Navigation.PushAsync(new TutorialsPage());
             }
         }
     }

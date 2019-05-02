@@ -55,7 +55,7 @@ namespace CTAR_All_Star.Database
             }
 
             //Notify ViewModel of changes
-            Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper,Measurement>(this, "databaseChange", measurement));
+            //Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper,Measurement>(this, "databaseChange", measurement));
         }
 
         public void addDataList(ObservableCollection<Measurement> data)
@@ -81,7 +81,7 @@ namespace CTAR_All_Star.Database
             }
 
             // Notify ViewModel of changes
-            Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper>(this, "databaseChange"));
+            //Device.BeginInvokeOnMainThread(() => MessagingCenter.Send<DatabaseHelper>(this, "databaseChange"));
         }
 
         public void clearDatabase()
