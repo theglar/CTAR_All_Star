@@ -115,7 +115,7 @@ namespace CTAR_All_Star
                             TimeStamp = d,
                             Pressure = currentPressure,
                             DisplayTime = dt.ToString("HH:mm:ss"),
-                            DisplayDate = dt.ToString("MM/dd/yyyy"),
+                            DisplayDate = dt.ToString("MM/dd/yy"),
                             OneRepMax = oneRepMax
                         };
 

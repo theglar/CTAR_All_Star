@@ -137,7 +137,7 @@ namespace CTAR_All_Star
         {
             if (SessionPicker.SelectedItem != null && SessionPicker.SelectedItem.ToString() != "All")
             {
-                App.SessionFilter = "Session #" + SessionPicker.SelectedItem.ToString();
+                App.SessionFilter = SessionPicker.SelectedItem.ToString();
             }
             FilterData();
         }
@@ -191,6 +191,8 @@ namespace CTAR_All_Star
                 {
                     SQLcommand = SQLcommand + "and SessionNumber = '" + App.SessionFilter + "'";
                 }
+
+                Log.Debug("***********************************************", "SQL = " + SQLcommand);
 
                 //Query database based on desired filters
                 using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))

@@ -78,7 +78,7 @@ namespace CTAR_All_Star
             }
             else
             {
-                SessionLabel.Text = App.SessionFilter;
+                SessionLabel.Text = "Session #" + App.SessionFilter;
             }
         }
     }
