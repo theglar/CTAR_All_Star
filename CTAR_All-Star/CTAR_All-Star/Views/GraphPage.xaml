@@ -69,11 +69,11 @@
                     RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=LineChart, Property=Height, Factor=1.05}"  
                     RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}" >
                 <StackLayout Orientation="Horizontal" Spacing="20" HorizontalOptions="Center">
-                    <Button Text="Start" Clicked="Start_Exercise" BackgroundColor="LightSlateGray"></Button>
-                    <Button Text="Pause" Clicked="Stop_Exercise" BackgroundColor="LightCoral"></Button>
-                    <Button Text="Done" Clicked="Save_Exercise" BackgroundColor="LightSeaGreen"></Button>
+                    <Button x:Name="startBtn" Text="Start" Clicked="Start_Exercise" BackgroundColor="#003366" TextColor="White"></Button>
+                    <!--<Button x:Name="pauseBtn" Text="Pause" Clicked="Stop_Exercise" BackgroundColor="Red" TextColor="White"></Button>-->
+                    <Button x:Name="doneBtn" Text="Done" Clicked="Save_Exercise" BackgroundColor="#003366" TextColor="White"></Button>
                 </StackLayout>
-                <Button x:Name="btnOK" Text="OK" Clicked="OK_Clicked" BackgroundColor="#003366" IsVisible="False"></Button>
+                <Button x:Name="btnOK" Text="OK" Clicked="OK_Clicked" BackgroundColor="#003366" TextColor="White" IsVisible="False"></Button>
             </RelativeLayout>
         </RelativeLayout>
     </RelativeLayout>

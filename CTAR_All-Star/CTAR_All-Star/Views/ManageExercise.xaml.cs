@@ -31,6 +31,13 @@ namespace CTAR_All_Star
             {
                 AssignButton.IsVisible = true;
                 RemoveButton.IsVisible = true;
+                Header.Text = "Manage Exercises";
+            }
+            else
+            {
+                AssignButton.IsVisible = false;
+                RemoveButton.IsVisible = false;
+                Header.Text = "Exercises";
             }
         }
         

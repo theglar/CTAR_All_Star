@@ -28,6 +28,8 @@
     <MtouchArch>x86_64</MtouchArch>
     <MtouchLink>None</MtouchLink>
     <MtouchDebug>true</MtouchDebug>
+    <CodesignProvision>iOS Team Provisioning Profile: com.companyname.CTAR-All-Star</CodesignProvision>
+    <CodesignKey>iPhone Developer: paintballa5833@yahoo.com (TPCC624L72)</CodesignKey>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|iPhoneSimulator' ">
     <DebugType>none</DebugType>
@@ -182,6 +184,7 @@
     <BundleResource Include="Resources\Bluetooth.png" />
     <BundleResource Include="Resources\History.jpg" />
     <BundleResource Include="Resources\ManagePatients.jpg" />
+    <BundleResource Include="Resources\Hardware.jpeg" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\CircleLogo.png" />

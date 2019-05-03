@@ -1,14 +1,10 @@
 ﻿using System;
-using SQLite;
 
 using Xamarin.Forms;
 using CTAR_All_Star.Models;
-using Syncfusion.SfChart.XForms;
 using CTAR_All_Star.Database;
 using System.Timers;
-using System.Threading;
 using System.Collections.ObjectModel;
-using CTAR_All_Star.ViewModels;
 
 namespace CTAR_All_Star
 {
@@ -115,7 +111,7 @@ namespace CTAR_All_Star
                             TimeStamp = d,
                             Pressure = currentPressure,
                             DisplayTime = dt.ToString("HH:mm:ss"),
-                            DisplayDate = dt.ToString("MM/dd/yyyy"),
+                            DisplayDate = dt.ToString("MM/dd/yy"),
                             OneRepMax = oneRepMax
                         };
 
@@ -146,7 +142,7 @@ namespace CTAR_All_Star
             }
             else
             {
-                DisplayAlert("No Exercise Loaded", "Please choose an exercise to continue.", "Ok");
+                //DisplayAlert("No Exercise Loaded", "Please choose an exercise to continue.", "Ok");
                 //LoadExercise();
             }
         }
@@ -162,6 +158,11 @@ namespace CTAR_All_Star
 
         private void Start_Exercise(object sender, EventArgs e)
         {
+            //if(App.currentWorkout == null)
+            //{
+            //    LoadExercise();
+            //}
+
             //if (!App.currentUser.DeviceIsConnected)
             if (!ble.deviceConnected)
             {
@@ -195,6 +196,8 @@ namespace CTAR_All_Star
             DisplayAlert("Save", "You have saved the exercise.", "Dismiss");
             DatabaseHelper dbHelper = new DatabaseHelper();
             dbHelper.addDataList(allWorkoutData);
+            App.currentUser.Session++;
+            App.currentWorkout = null;
         }
 
         private async void OK_Clicked(object sender, EventArgs e)
@@ -217,6 +220,9 @@ namespace CTAR_All_Star
                 yAxis.Maximum = oneRepMax + (oneRepMax * 0.10);
 
                 btnOK.IsVisible = false;
+                startBtn.IsVisible = true;
+                //pauseBtn.IsVisible = true;
+                doneBtn.IsVisible = true;
 
                 //Device.BeginInvokeOnMainThread(() =>
                 //{
@@ -422,60 +428,6 @@ namespace CTAR_All_Star
             }
         }
 
-        //else if (countdown.Equals(0))
-        //{
-        //    if(setCount <= totalSets)
-        //    {                    
-        //        if (repCount <= totalReps)
-        //        { 
-        //            Device.BeginInvokeOnMainThread(() => NumReps.Text = repCount.ToString());
-        //            Device.BeginInvokeOnMainThread(() => NumSets.Text = setCount.ToString());
-        //            Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(countdown));
-
-        //            if (isAtRest)
-        //            {
-        //                Device.BeginInvokeOnMainThread(() => TimerLabel.Text = "APPLY PRESSURE");
-        //                Device.BeginInvokeOnMainThread(() => TimeDisplay.BackgroundColor = Constants.BackgroundColor);
-        //                countdown = Convert.ToInt32(workout.HoldDuration);
-        //                Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(countdown));
-        //                isAtRest = false;
-        //            }
-        //            else
-        //            {
-        //                Device.BeginInvokeOnMainThread(() => TimerLabel.Text = "REST");
-        //                Device.BeginInvokeOnMainThread(() => TimeDisplay.BackgroundColor = Constants.RestColor);
-        //                countdown = Convert.ToInt32(workout.RestDuration);
-        //                Device.BeginInvokeOnMainThread(() => TimeDisplay.Text = Convert.ToString(countdown));
-        //                repCount++;
-        //                isAtRest = true;
-        //            }
-        //        }
-        //        else
-        //        {
-        //            setCount++;
-        //            repCount = 1;
-        //        }
-        //    }
-        //    else
-        //    {                    
-        //        TimerLabel.Text = "COMPLETE";
-        //        TimeDisplay.Text = "";
-        //        TimeDisplay.BackgroundColor = Constants.CompleteColor;
-        //        timer.Stop();
-        //    }                
-
-
-        //}
-
-        ////If it ever decides to go negative.
-        //else
-        //{
-        //    TimeDisplay.Text = "" + Convert.ToString(countdown);
-        //    timer.Stop();
-        //    TimerLabel.Text = "REST";
-        //    TimeDisplay.BackgroundColor = Constants.RestColor;
-        //}
-
 
         public async void CheckBTConnection()
         {
@@ -499,6 +451,9 @@ namespace CTAR_All_Star
 
             ble.StartUpdates();
             btnOK.IsVisible = true;
+            startBtn.IsVisible = false;
+            //pauseBtn.IsVisible = false;
+            doneBtn.IsVisible = false;
             TimerLabel.Text = "No squeezing... Press OK";
 
             ////while(currentPressure == -1)
@@ -521,5 +476,14 @@ namespace CTAR_All_Star
         {
             TimerLabel.Text = "Okay, SQUEEZE!!!";
         }
+
+        //protected override void OnAppearing()
+        //{
+        //    base.OnAppearing();
+        //    if(App.currentWorkout == null)
+        //    {
+        //        LoadExercise();
+        //    }
+        //}
     }
 }

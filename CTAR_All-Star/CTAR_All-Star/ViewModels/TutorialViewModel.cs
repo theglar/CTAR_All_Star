@@ -19,7 +19,7 @@ namespace CTAR_All_Star.ViewModels
                     Description = "To turn the device on, flip the switch located at the bottom of the box. If the device does not turn on, " +
                         "it may need a new 9 volt battery. To use the device, ensure it is connected with the application. When ready to start an exercise, " +
                         "place the ball between the chin and chest and apply pressure when prompted\n",
-                    ImageName = "SquareLogo.png"
+                    ImageName = "Hardware.jpeg"
                      },
 
                 new Tutorial { Topic = "Bluetooth",
@@ -43,7 +43,11 @@ namespace CTAR_All_Star.ViewModels
 
                 new Tutorial { Topic = "History",
                     isVisible = false,
-                    Description = "Things about the history page.",
+                    Description = "The History page shows the data stored from each workout completed on the device. " +
+                    	"To view the history, select \"History\" from the main menu." +
+                    	"\nThe data can be filtered by tapping Date, Patient and/or Session at the top of the page. " +
+                    	"After selecting the filter(s) the data can be viewed on a graph by selecting the \"View Graph\" " +
+                    	"button at the bottom of the page.",
                     ImageName = "History.jpg"},
 
                 new Tutorial {Topic = "Managing Patients",

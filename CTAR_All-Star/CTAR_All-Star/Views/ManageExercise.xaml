@@ -6,7 +6,7 @@
 
     <ContentPage.Content>
         <StackLayout Padding="20,20,20,100" HorizontalOptions="Center">
-            <Label Text="Manage Exercises"
+            <Label x:Name ="Header" Text="Manage Exercises"
                 VerticalOptions="CenterAndExpand" 
                 HorizontalOptions="CenterAndExpand"
                    FontSize="Large" FontAttributes="Bold"
