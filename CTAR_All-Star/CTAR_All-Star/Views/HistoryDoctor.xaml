@@ -6,7 +6,7 @@
                     RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=1}">
         <Grid x:Name="Header"  
                     RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
-                    RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.2}">
+                    RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.25}">
             <StackLayout BackgroundColor="#003366" Spacing="5" 
                             Orientation="Vertical">
                 <StackLayout Orientation="Vertical" BackgroundColor="LightGray" Spacing="5">

@@ -216,7 +216,10 @@ namespace CTAR_All_Star
                 yAxis.Minimum = minimumPressure - (minimumPressure * 0.10);
                 yAxis.Maximum = oneRepMax + (oneRepMax * 0.10);
 
+                
                 btnOK.IsVisible = false;
+                btnStart.IsVisible = true;
+                btnPause.IsVisible = true;
 
                 //Device.BeginInvokeOnMainThread(() =>
                 //{
@@ -498,6 +501,8 @@ namespace CTAR_All_Star
             //});
 
             ble.StartUpdates();
+            btnPause.IsVisible = false;
+            btnStart.IsVisible = false;
             btnOK.IsVisible = true;
             TimerLabel.Text = "No squeezing... Press OK";
 
