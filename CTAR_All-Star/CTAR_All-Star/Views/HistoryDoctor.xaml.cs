@@ -137,7 +137,7 @@ namespace CTAR_All_Star
         {
             if (SessionPicker.SelectedItem != null && SessionPicker.SelectedItem.ToString() != "All")
             {
-                App.SessionFilter = "Session #" + SessionPicker.SelectedItem.ToString();
+                App.SessionFilter = SessionPicker.SelectedItem.ToString();
             }
             FilterData();
         }

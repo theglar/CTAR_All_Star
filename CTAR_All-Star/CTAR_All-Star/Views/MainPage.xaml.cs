@@ -98,7 +98,7 @@ namespace CTAR_All_Star
                     measurement.TimeStamp = d;
                     measurement.Pressure = pressureVal;
                     measurement.DisplayTime = dt.ToString("HH:mm:ss");
-                    measurement.DisplayDate = dt.ToString("MM/dd/yyyy");
+                    measurement.DisplayDate = dt.ToString("MM/dd/yy");
                     measurement.OneRepMax = App.currentUser.OneRepMax;
 
                     dbHelper.addData(measurement);
