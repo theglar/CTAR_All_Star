@@ -5,10 +5,6 @@
              x:Class="CTAR_All_Star.BLEView"
              xmlns:vm="clr-namespace:CTAR_All_Star.ViewModels">
 
-    <ContentPage.BindingContext>
-        <vm:MainViewModel></vm:MainViewModel>
-    </ContentPage.BindingContext>
-
     <StackLayout>
         <!-- Place new controls here -->
         <Label Text="CTAR All-Star" 
