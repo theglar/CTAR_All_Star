@@ -1,19 +1,11 @@
-﻿using System;
-
+﻿
 using Android.App;
 using Android.Content.PM;
 using Android.Runtime;
-using Android.Views;
 using Android.Widget;
 using Android.OS;
 using System.IO;
-using CTAR_All_Star;
-using Plugin.Permissions;
-using Android.Support.V4.Content;
 using Android;
-using Android.Support.V4.App;
-using Android.Util;
-using Android.Support.Design.Widget;
 using System.Threading.Tasks;
 
 namespace CTAR_All_Star.Droid

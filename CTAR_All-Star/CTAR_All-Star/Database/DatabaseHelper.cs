@@ -2,8 +2,6 @@
 using SQLite;
 using System.Linq;
 using Xamarin.Forms;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace CTAR_All_Star.Database

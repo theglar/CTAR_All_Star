@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using CTAR_All_Star.Models;
 
 namespace CTAR_All_Star.ViewModels

@@ -1,5 +1,4 @@
-﻿using System;
-using CTAR_All_Star.Database;
+﻿using CTAR_All_Star.Database;
 using SQLite;
 
 namespace CTAR_All_Star.Models

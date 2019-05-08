@@ -1,4 +1,4 @@
-﻿//This will be a page for the doctos only. A similar page for the patients is called PatientManageExercise
+﻿//This will be a page for the doctors only. A similar page for the patients is called PatientManageExercise
 
 using System;
 using System.Linq;

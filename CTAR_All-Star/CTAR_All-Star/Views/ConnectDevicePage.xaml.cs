@@ -1,21 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Plugin.BLE;
 
-using System.Diagnostics;
-
 using Xamarin.Forms;
-using Xamarin.Forms.Xaml;
 using Plugin.BLE.Abstractions.Contracts;
 using System.Collections.ObjectModel;
 
 namespace BTGraph
 {
-	// [XamlCompilation(XamlCompilationOptions.Compile)]
-	public partial class ConnectDevicePage : ContentPage
+    // [XamlCompilation(XamlCompilationOptions.Compile)]
+    public partial class ConnectDevicePage : ContentPage
 	{
         IBluetoothLE ble;
         IAdapter adapter;
