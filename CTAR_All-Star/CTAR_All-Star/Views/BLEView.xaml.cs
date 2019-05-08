@@ -21,6 +21,7 @@ namespace CTAR_All_Star
 {
     public partial class BLEView : ContentPage
     {
+        //This Page allows the user to connect, disconnect, and scan for available devices by encapsulating the Plugin.ble class
         StackLayout availableDevices = new StackLayout();
         IDevice selectedDevice;
         BLEViewModel ble;
@@ -112,11 +113,6 @@ namespace CTAR_All_Star
                 }
             };
         }
-
-        //private void Ble_PropertyChanged(object sender, System.ComponentModel.PropertyChangedEventArgs e)
-        //{
-        //    throw new NotImplementedException();
-        //}
 
         private async void lv_ItemSelected(object sender, EventArgs e)
         {

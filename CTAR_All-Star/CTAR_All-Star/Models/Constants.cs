@@ -5,6 +5,8 @@ namespace CTAR_All_Star.Models
 {
     public class Constants
     {
+        //Defines colors for theme consistency
+
         public static bool IsDev = true;
         public static Color BackgroundColor = Color.FromRgb(0, 46, 98);
         public static Color MainTextColor = Color.White;

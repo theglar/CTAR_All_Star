@@ -21,6 +21,8 @@ namespace CTAR_All_Star
 {
     public partial class BLEViewModel : INotifyPropertyChanged
     {
+        //This class encapsulates the Plugin.BLE plugin making it easy for multiple views to interface with the bluetooth object.
+        //some of this code was based off of the sample code found at https://github.com/xabre/xamarin-bluetooth-le
         private IBluetoothLE ble;
         private IAdapter adapter;
         private ObservableCollection<IDevice> deviceList;
@@ -78,15 +80,12 @@ namespace CTAR_All_Star
             adapter.DeviceConnected += async (s, a) =>
             {
                 deviceConnected = true;
-                //App.currentUser.DeviceIsConnected = true;
                 deviceList.Clear();
                 deviceService = await device.GetServiceAsync(Guid.Parse("0000ffe0-0000-1000-8000-00805f9b34fb"));
                 pressureCharacteristic = await deviceService.GetCharacteristicAsync(Guid.Parse("0000ffe1-0000-1000-8000-00805f9b34fb"));
 
                 pressureCharacteristic.ValueUpdated += (o, args) =>
                 {
-                    //DatabaseHelper dbHelper = new DatabaseHelper();
-                    //Measurement measurement = new Measurement();
 
                     Device.BeginInvokeOnMainThread(() =>
                     {
@@ -94,20 +93,8 @@ namespace CTAR_All_Star
                         pressureVal = Convert.ToInt32(pressureStr);
                     });
 
-                    //// Get current date and time
-                    //DateTime d = DateTime.Now;
-                    //DateTime dt = DateTime.Parse(d.ToString());
-                    //measurement.UserName = App.currentUser.Username;
-                    //measurement.SessionNumber = App.currentUser.Session.ToString();
-                    //measurement.TimeStamp = d;
-                    //measurement.Pressure = pressureVal;
-                    //measurement.Duration = "1"; //Do we need this?
-                    //measurement.DisplayTime = dt.ToString("HH:mm:ss");
-
-                    //dbHelper.addData(measurement);
                     OnPropertyChanged("pressure");
                 };
-                //StartUpdates();
                 OnPropertyChanged("deviceConnected");
             };
             adapter.DeviceConnectionLost += (s, e) =>
@@ -238,11 +225,5 @@ namespace CTAR_All_Star
         {
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(propertyName));
         }
-
-        //protected virtual void OnStateChanged(EventArgs e)
-        //{
-        //    EventHandler handler = StateChanged;
-        //    handler?.Invoke(this, e);
-        //}
     }
 }

@@ -20,7 +20,7 @@ namespace CTAR_All_Star
         private Workout workout = new Workout();
         private bool isAtRest = true;
         private double newGoal;
-        private double? oneRepMax = -1;
+        private double? oneRepMax = -1; //the maximum pressure the user was able to apply to the ball
         private double? minimumPressure = 1024; //the pressure inside the ball when not under any load
         private bool minimumPressureIsSet = false; //bool tells whether the minimum pressure has been set
         private bool oneRepMaxIsSet = false; //bool tells whether the maximum pressure has been set
@@ -455,35 +455,10 @@ namespace CTAR_All_Star
             //pauseBtn.IsVisible = false;
             doneBtn.IsVisible = false;
             TimerLabel.Text = "No squeezing... Press OK";
-
-            ////while(currentPressure == -1)
-            ////{
-            ////    // wait for a pressure update
-            ////}
-            //minimumPressure = currentPressure; //set the minimum pressure
-            //while (!okIsClicked)//loop and update the minimum pressure until user clicks OK
-            //{
-            //    if (currentPressure < minimumPressure)
-            //    {
-            //        minimumPressure = currentPressure;
-            //    }
-            //}
-            //okIsClicked = false;
-
-
         }
         private async void getMaximumPressure()
         {
             TimerLabel.Text = "Okay, SQUEEZE!!!";
         }
-
-        //protected override void OnAppearing()
-        //{
-        //    base.OnAppearing();
-        //    if(App.currentWorkout == null)
-        //    {
-        //        LoadExercise();
-        //    }
-        //}
     }
 }
