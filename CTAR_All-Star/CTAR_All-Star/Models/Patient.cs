@@ -1,11 +1,8 @@
 ﻿using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace CTAR_All_Star.Models
 {
-     public class Patient
+    public class Patient
     {
         [PrimaryKey, AutoIncrement, Unique]
         public int PatientId { get; set; }

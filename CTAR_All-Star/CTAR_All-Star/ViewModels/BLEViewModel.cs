@@ -1,20 +1,9 @@
 ﻿using Plugin.BLE;
 using Plugin.BLE.Abstractions.Contracts;
 using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xamarin.Forms;
-using CTAR_All_Star.Views;
-using CTAR_All_Star.Models;
 using Plugin.BLE.Abstractions.Exceptions;
-using System.Diagnostics;
-using Xamarin.Forms.PlatformConfiguration;
-using Plugin.Permissions;
-using Plugin.Permissions.Abstractions;
-using CTAR_All_Star.Database;
 using System.ComponentModel;
 
 namespace CTAR_All_Star

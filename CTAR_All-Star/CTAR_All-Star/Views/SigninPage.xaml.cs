@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using CTAR_All_Star.Database;
 using CTAR_All_Star.Models;
 using Xamarin.Forms;
@@ -10,7 +6,7 @@ using Xamarin.Forms.Xaml;
 
 namespace CTAR_All_Star.Views
 {
-	[XamlCompilation(XamlCompilationOptions.Compile)]
+    [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class SigninPage : ContentPage
 	{
 		public SigninPage ()
@@ -60,4 +56,9 @@ namespace CTAR_All_Star.Views
     }
 }
 
+/*
+ * This login page was created based off of Bert Bosch's youtube tutorial 
+ * series called "Xamarin Tutorial" at the following link 
+ * https://www.youtube.com/watch?v=spPKRD0x_DQ
+ */
 

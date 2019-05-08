@@ -1,4 +1,3 @@
-using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 using CTAR_All_Star.Views;
@@ -6,7 +5,7 @@ using CTAR_All_Star.Models;
 using CTAR_All_Star.Database;
 using CTAR_All_Star.Navigation;
 
-[assembly: XamlCompilation (XamlCompilationOptions.Compile)]
+[assembly: XamlCompilation(XamlCompilationOptions.Compile)]
 namespace CTAR_All_Star
 {
     public partial class App : Application

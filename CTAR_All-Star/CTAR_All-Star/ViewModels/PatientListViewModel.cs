@@ -1,10 +1,7 @@
 ﻿using CTAR_All_Star.Database;
 using CTAR_All_Star.Models;
 using SQLite;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using Xamarin.Forms;
 
 namespace CTAR_All_Star.ViewModels

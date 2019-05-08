@@ -1,8 +1,5 @@
 ﻿using CTAR_All_Star.Models;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
-using System.Text;
 using SQLite;
 using Xamarin.Forms;
 using CTAR_All_Star.Database;

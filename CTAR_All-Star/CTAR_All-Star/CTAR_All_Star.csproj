@@ -12,6 +12,7 @@
     <EmbeddedResource Remove="Data\**" />
     <None Remove="Data\**" />
     <Compile Remove="ViewModels\EmptyClass.cs" />
+    <Compile Remove="Models\Token.cs" />
   </ItemGroup>
 
   <ItemGroup>

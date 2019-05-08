@@ -1,6 +1,4 @@
 ﻿using SQLite;
-using System;
-using System.Collections.Generic;
 
 namespace CTAR_All_Star.Models
 {

@@ -2,8 +2,6 @@
 using SQLite;
 using System.Linq;
 using Xamarin.Forms;
-using System;
-using System.Collections.Generic;
 using System.Collections.ObjectModel;
 
 namespace CTAR_All_Star.Database
@@ -249,7 +247,7 @@ namespace CTAR_All_Star.Database
         {
             using (SQLite.SQLiteConnection conn = new SQLite.SQLiteConnection(App.DB_PATH))
             {
-                User thisUser = conn.Query<User>("select * from User where Username = " + "'" + username + "'").FirstOrDefault(); //sb SingleOfDefault
+                User thisUser = conn.Query<User>("select * from User where Username = " + "'" + username + "'").FirstOrDefault(); //SingleOfDefault?
                 if(thisUser != null)
                 {
                     if (thisUser.Password == password)

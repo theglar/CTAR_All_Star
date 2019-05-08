@@ -1,12 +1,7 @@
 ﻿using System;
-using SQLite;
 
 using Xamarin.Forms;
 using CTAR_All_Star.Models;
-using Syncfusion.SfChart.XForms;
-using CTAR_All_Star.Database;
-using System.Timers;
-using System.Threading;
 using System.Collections.Generic;
 
 namespace CTAR_All_Star
