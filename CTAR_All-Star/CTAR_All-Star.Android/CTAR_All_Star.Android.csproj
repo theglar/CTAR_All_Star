@@ -107,6 +107,7 @@
     <AndroidResource Include="Resources\drawable\Bluetooth.png" />
     <AndroidResource Include="Resources\drawable\History.jpg" />
     <AndroidResource Include="Resources\drawable\ManagePatients.jpg" />
+    <AndroidResource Include="Resources\drawable\Hardware.jpeg" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CTAR_All-Star\CTAR_All_Star.csproj">
