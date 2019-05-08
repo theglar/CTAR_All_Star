@@ -9,8 +9,5 @@ namespace CTAR_All_Star.Models
         public bool isVisible { get; set; }
         public string URL { get; set; }
 
-        public Tutorial()
-        {
-        }
     }
 }

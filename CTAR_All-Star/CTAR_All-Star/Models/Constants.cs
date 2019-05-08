@@ -11,7 +11,7 @@ namespace CTAR_All_Star.Models
         public static Color RestColor = Color.DimGray;
         public static Color CompleteColor = Color.LightGreen;
 
-        //use a larger number for a tablet and 100 for Android..
+        //use a larger number for a tablet and 100 for Android...
         public static int LoginIconHeight = 150;
 
         public Constants()

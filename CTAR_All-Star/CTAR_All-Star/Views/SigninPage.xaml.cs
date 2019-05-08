@@ -56,4 +56,9 @@ namespace CTAR_All_Star.Views
     }
 }
 
+/*
+ * This login page was created based off of Bert Bosch's youtube tutorial 
+ * series called "Xamarin Tutorial" at the following link 
+ * https://www.youtube.com/watch?v=spPKRD0x_DQ
+ */
 
