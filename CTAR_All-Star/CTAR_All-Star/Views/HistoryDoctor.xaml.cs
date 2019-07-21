@@ -12,7 +12,7 @@ namespace CTAR_All_Star
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class HistoryDoctor : ContentPage
 	{
-        private Picker namePicker, sessionPicker, datePicker;
+        //private Picker namePicker, sessionPicker, datePicker;
         private List<String> nameList, sessionList, dateList;
         private List<Measurement> filteredList;
         private string SQLcommand = "";
@@ -66,7 +66,7 @@ namespace CTAR_All_Star
         {
             base.OnAppearing();
             InitializePickers(); 
-            LoadPickers();
+            //LoadPickers();
             ResetTable();
         } 
         
@@ -79,76 +79,76 @@ namespace CTAR_All_Star
 
         public void InitializePickers()
         {
-            namePicker = NamePicker;
-            sessionPicker = SessionPicker;
-            datePicker = DatePicker;
+            //namePicker = NamePicker;
+            //sessionPicker = SessionPicker;
+            //datePicker = DatePicker;
         }
 
         public void LoadPickers()
         {
-            if (nameList != null)
-            {
-                namePicker.Items.Clear();
-                foreach (var n in nameList)
-                {
-                    namePicker.Items.Add(n);
-                }
-                namePicker.Items.Add("All");
-            }
+            //if (nameList != null)
+            //{
+            //    namePicker.Items.Clear();
+            //    foreach (var n in nameList)
+            //    {
+            //        namePicker.Items.Add(n);
+            //    }
+            //    namePicker.Items.Add("All");
+            //}
 
-            if (sessionList != null)
-            {
-                sessionPicker.Items.Clear();
-                foreach (var n in sessionList)
-                {
-                    sessionPicker.Items.Add(n);
-                }
-                sessionPicker.Items.Add("All");
-            }
+            //if (sessionList != null)
+            //{
+            //    sessionPicker.Items.Clear();
+            //    foreach (var n in sessionList)
+            //    {
+            //        sessionPicker.Items.Add(n);
+            //    }
+            //    sessionPicker.Items.Add("All");
+            //}
 
-            if (dateList != null)
-            {
-                datePicker.Items.Clear();
-                foreach (var n in dateList)
-                {
-                    datePicker.Items.Add(n);
-                }
-                datePicker.Items.Add("All");
-            }
+            //if (dateList != null)
+            //{
+            //    datePicker.Items.Clear();
+            //    foreach (var n in dateList)
+            //    {
+            //        datePicker.Items.Add(n);
+            //    }
+            //    datePicker.Items.Add("All");
+            //}
         }
 
         void InititalizePickerListeners()
         {
-            NamePicker.SelectedIndexChanged += this.NamePickerIndexChanged;
-            SessionPicker.SelectedIndexChanged += this.SessionPickerIndexChanged;
-            DatePicker.SelectedIndexChanged += this.DatePickerIndexChanged;
+            //NamePicker.SelectedIndexChanged += this.NamePickerIndexChanged;
+            //SessionPicker.SelectedIndexChanged += this.SessionPickerIndexChanged;
+            //DatePicker.SelectedIndexChanged += this.DatePickerIndexChanged;
         }
 
         public void NamePickerIndexChanged(object sender, EventArgs e)
         {
-            if(NamePicker.SelectedItem != null && NamePicker.SelectedItem.ToString() != "All")
-            {
-                App.PatientFilter = NamePicker.SelectedItem.ToString();
-            }
-            FilterData();
+            //if(NamePicker.SelectedItem != null && NamePicker.SelectedItem.ToString() != "All")
+            //{
+            //    App.PatientFilter = NamePicker.SelectedItem.ToString();
+            //}
+            //FilterData();
         }
 
         public void SessionPickerIndexChanged(object sender, EventArgs e)
         {
-            if (SessionPicker.SelectedItem != null && SessionPicker.SelectedItem.ToString() != "All")
-            {
-                App.SessionFilter = SessionPicker.SelectedItem.ToString();
-            }
-            FilterData();
+            //if (SessionPicker.SelectedItem != null && SessionPicker.SelectedItem.ToString() != "All")
+            //{
+            //    App.SessionFilter = SessionPicker.SelectedItem.ToString();
+            //}
+            //FilterData();
         }
 
         public void DatePickerIndexChanged(object sender, EventArgs e)
         {
-            if (DatePicker.SelectedItem != null && DatePicker.SelectedItem.ToString() != "All")
-            {
-                App.DateFilter = DatePicker.SelectedItem.ToString();
-            }
-            FilterData();
+            //if (DatePicker.SelectedItem != null && DatePicker.SelectedItem.ToString() != "All")
+            //{
+            //    App.DateFilter = DatePicker.SelectedItem.ToString();
+            //}
+            //FilterData();
         }
 
         public void FilterData()
@@ -223,7 +223,15 @@ namespace CTAR_All_Star
                 {
                     measurementsView.ItemsSource = measurements;
                 }
+
+                //For the research branch only - no filters
+                filteredList = measurements;
             }
+        }
+
+        public void Get_PDF()
+        {
+
         }
     }
 }

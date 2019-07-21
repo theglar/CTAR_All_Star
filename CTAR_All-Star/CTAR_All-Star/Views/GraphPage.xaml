@@ -15,6 +15,7 @@
         <RelativeLayout x:Name="Header" HorizontalOptions="CenterAndExpand" 
                     RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
                     RelativeLayout.HeightConstraint="{ConstraintExpression Type=RelativeToParent, Property=Height, Factor=0.2}" >
+
             <StackLayout Orientation="Horizontal" Spacing="20">
                 <StackLayout Spacing="10" Padding="0,30,0,0">
                     <Label Text="SETS" HorizontalTextAlignment="Center" FontSize="Small"></Label>
@@ -31,6 +32,7 @@
                     <Label x:Name="TotalReps" Text="of 2" HorizontalTextAlignment="Center" FontSize="Micro"></Label>
                 </StackLayout>
             </StackLayout>
+
         </RelativeLayout>
 
         <RelativeLayout RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}"
@@ -68,12 +70,22 @@
             <RelativeLayout x:Name="Footer" HorizontalOptions="CenterAndExpand" 
                     RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToView, ElementName=LineChart, Property=Height, Factor=1.05}"  
                     RelativeLayout.WidthConstraint="{ConstraintExpression Type=RelativeToParent, Property=Width, Factor=1}" >
-                <StackLayout Orientation="Horizontal" Spacing="20" HorizontalOptions="Center">
-                    <Button x:Name="startBtn" Text="Start" Clicked="Start_Exercise" BackgroundColor="#003366" TextColor="White"></Button>
-                    <!--<Button x:Name="pauseBtn" Text="Pause" Clicked="Stop_Exercise" BackgroundColor="Red" TextColor="White"></Button>-->
-                    <Button x:Name="doneBtn" Text="Done" Clicked="Save_Exercise" BackgroundColor="#003366" TextColor="White"></Button>
+                <StackLayout>
+                    <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="End">
+                        <Label x:Name="PressureLabel" Text="Init Ball Pressure: " HorizontalTextAlignment="End" FontSize="Small"/>
+                        <Label x:Name="BallPressureLabel" Text="TBD" HorizontalTextAlignment="End" FontSize="Small"/>
+                        
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Spacing="20" HorizontalOptions="Center">
+                        <Button x:Name="startBtn" Text="Start" Clicked="Start_Exercise" BackgroundColor="#003366" TextColor="White"></Button>
+                        <!--<Button x:Name="pauseBtn" Text="Pause" Clicked="Stop_Exercise" BackgroundColor="Red" TextColor="White"></Button>-->
+                        <Button x:Name="doneBtn" Text="Done" Clicked="Save_Exercise" BackgroundColor="#003366" TextColor="White"></Button>
+                    </StackLayout>
+                    <Button x:Name="btnOK" Text="OK" Clicked="OK_Clicked" BackgroundColor="#003366" TextColor="White" IsVisible="False"></Button>
                 </StackLayout>
-                <Button x:Name="btnOK" Text="OK" Clicked="OK_Clicked" BackgroundColor="#003366" TextColor="White" IsVisible="False"></Button>
+                
+                
+                
             </RelativeLayout>
         </RelativeLayout>
     </RelativeLayout>

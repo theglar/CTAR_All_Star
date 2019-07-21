@@ -46,8 +46,8 @@ namespace CTAR_All_Star.Navigation
                         new HomePageMenuItem { Id = 7, Title = "Exercise" , TargetType = typeof(GraphPage) },
                         //new HomePageMenuItem { Id = 8, Title = "Settings", TargetType = typeof(SetupPage)  },
                         //new HomePageMenuItem { Id = 8, Title = "Add (For Debugging)", TargetType = typeof(CreatePage)  },
-                        //new HomePageMenuItem { Id = 10, Title = "Clear Database", TargetType = typeof(RemovePage)  },
-                        new HomePageMenuItem { Id = 8, Title = "Logout", TargetType = typeof(LogoutPage) },
+                        new HomePageMenuItem { Id = 8, Title = "Clear Database", TargetType = typeof(RemovePage)  },
+                        new HomePageMenuItem { Id = 9, Title = "Logout", TargetType = typeof(LogoutPage) },
                     });
                 }
                 //Patient is the default

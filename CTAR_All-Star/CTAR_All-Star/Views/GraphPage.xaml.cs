@@ -213,6 +213,7 @@ namespace CTAR_All_Star
             }
             else //both max and minimum have been set
             {
+                BallPressureLabel.Text = minimumPressure.ToString();
                 newGoal = ((Convert.ToDouble(workout.ThresholdPercentage) / 100) * ((Double)oneRepMax - (Double)minimumPressure)) + (Double)minimumPressure;
                 Goal.Start = newGoal;
                 Goal.IsVisible = true;
