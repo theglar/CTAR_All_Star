@@ -73,8 +73,15 @@
                 <StackLayout>
                     <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="End">
                         <Label x:Name="PressureLabel" Text="Init Ball Pressure: " HorizontalTextAlignment="End" FontSize="Small"/>
-                        <Label x:Name="BallPressureLabel" Text="TBD" HorizontalTextAlignment="End" FontSize="Small"/>
-                        
+                        <Label x:Name="PressureValue" Text="TBD" HorizontalTextAlignment="End" FontSize="Small"/>                        
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="End">
+                        <Label x:Name="TypeLabel" Text="Exercise Type: " HorizontalTextAlignment="End" FontSize="Small"/>
+                        <Label x:Name="TypeValue" Text="TBD" HorizontalTextAlignment="End" FontSize="Small"/>
+                    </StackLayout>
+                    <StackLayout Orientation="Horizontal" Spacing="10" HorizontalOptions="End">
+                        <Label x:Name="OneRepMaxLabel" Text="One Rep Max: " HorizontalTextAlignment="End" FontSize="Small"/>
+                        <Label x:Name="OneRepMaxValue" Text="TBD" HorizontalTextAlignment="End" FontSize="Small"/>
                     </StackLayout>
                     <StackLayout Orientation="Horizontal" Spacing="20" HorizontalOptions="Center">
                         <Button x:Name="startBtn" Text="Start" Clicked="Start_Exercise" BackgroundColor="#003366" TextColor="White"></Button>

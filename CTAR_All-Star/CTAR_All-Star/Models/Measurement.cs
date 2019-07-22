@@ -25,5 +25,7 @@ namespace CTAR_All_Star.Models
         public double? Pressure { get; set; }
 
         public double? OneRepMax { get; set; }
+
+        public string Type { get; set; }
     }
 }

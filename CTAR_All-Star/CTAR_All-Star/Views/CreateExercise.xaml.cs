@@ -44,6 +44,7 @@ namespace CTAR_All_Star
         void Init()
         {
             BackgroundColor = Constants.BackgroundColor;
+            
             Lbl_NumReps.TextColor = Constants.MainTextColor;
             Lbl_NumSets.TextColor = Constants.MainTextColor;
             Lbl_Threshold.TextColor = Constants.MainTextColor;

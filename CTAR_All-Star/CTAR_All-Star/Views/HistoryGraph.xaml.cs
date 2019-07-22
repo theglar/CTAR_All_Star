@@ -35,10 +35,10 @@ namespace CTAR_All_Star
         {
             base.OnAppearing();
 
-            if(App.DateFilter.Equals(String.Empty) || App.PatientFilter.Equals(String.Empty) || App.SessionFilter.Equals(String.Empty))
-            {
-                Instructions();
-            }
+            //if(App.DateFilter.Equals(String.Empty) || App.PatientFilter.Equals(String.Empty) || App.SessionFilter.Equals(String.Empty))
+            //{
+            //    Instructions();
+            //}
             
         }
 

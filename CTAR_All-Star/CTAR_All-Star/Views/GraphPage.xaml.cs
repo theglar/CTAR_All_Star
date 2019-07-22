@@ -16,7 +16,7 @@ namespace CTAR_All_Star
         private int setCount = 1;
         private int totalReps;
         private int totalSets;
-        private System.Timers.Timer timer;
+        private Timer timer;
         private Workout workout = new Workout();
         private bool isAtRest = true;
         private double newGoal;
@@ -30,6 +30,7 @@ namespace CTAR_All_Star
         //private MeasurementViewModel measurementVM;
         private double? currentPressure = null;
         //public ReadOnlyObservableCollection<int> displayedWorkoutData;
+        private string type = "Isometric";
 
         public GraphPage()
         {
@@ -112,7 +113,8 @@ namespace CTAR_All_Star
                             Pressure = currentPressure,
                             DisplayTime = dt.ToString("HH:mm:ss"),
                             DisplayDate = dt.ToString("MM/dd/yy"),
-                            OneRepMax = oneRepMax
+                            OneRepMax = oneRepMax,
+                            Type = type
                         };
 
                         allWorkoutData.Add(measurement);
@@ -139,6 +141,7 @@ namespace CTAR_All_Star
                 //Goal.Start = newGoal;
                 totalReps = Convert.ToInt32(workout.NumReps);
                 totalSets = Convert.ToInt32(workout.NumSets);
+                type = workout.Type;
             }
             else
             {
@@ -213,7 +216,8 @@ namespace CTAR_All_Star
             }
             else //both max and minimum have been set
             {
-                BallPressureLabel.Text = minimumPressure.ToString();
+                
+
                 newGoal = ((Convert.ToDouble(workout.ThresholdPercentage) / 100) * ((Double)oneRepMax - (Double)minimumPressure)) + (Double)minimumPressure;
                 Goal.Start = newGoal;
                 Goal.IsVisible = true;
@@ -224,6 +228,10 @@ namespace CTAR_All_Star
                 startBtn.IsVisible = true;
                 //pauseBtn.IsVisible = true;
                 doneBtn.IsVisible = true;
+
+                PressureValue.Text = minimumPressure.ToString();
+                OneRepMaxValue.Text = oneRepMax.ToString();
+                TypeValue.Text = workout.Type;
 
                 //Device.BeginInvokeOnMainThread(() =>
                 //{

@@ -19,11 +19,17 @@ namespace CTAR_All_Star
 		{
 			InitializeComponent ();
 		}
-        private void Button_Clicked(object sender, EventArgs e)
+        private async void Button_Clicked(object sender, EventArgs e)
         {
-            DatabaseHelper dbHelper = new DatabaseHelper();
-            dbHelper.clearDatabase();
-            DisplayAlert("Success", "Table has been cleared!", "Dismiss");
+            bool clear = await DisplayAlert("Delete History", "Are you sure this is what you want to do? THIS CANNOT BE UNDONE!", "Cancel", "Delete");
+            if (!clear)
+            {
+                DatabaseHelper dbHelper = new DatabaseHelper();
+                dbHelper.clearDatabase();
+                DisplayAlert("Success", "HIstory has been cleared!", "Dismiss");
+            }
+
+            
         }        
     }
 }

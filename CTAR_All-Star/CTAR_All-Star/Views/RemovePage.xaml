@@ -6,7 +6,7 @@
     <ContentPage.Content>
         <StackLayout Margin="10,10,10,0">
 
-            <Button Text="Clear Table"
+            <Button Text="Clear History"
                     Clicked="Button_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
