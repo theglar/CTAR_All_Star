@@ -5,6 +5,7 @@ using CTAR_All_Star.Models;
 using CTAR_All_Star.Database;
 using System.Timers;
 using System.Collections.ObjectModel;
+using CTAR_All_Star.Helper;
 
 namespace CTAR_All_Star
 {
@@ -80,7 +81,7 @@ namespace CTAR_All_Star
                         }
                         break;
                     case "pressure":
-                        currentPressure = ble.pressureVal;
+                        currentPressure = PressureConverter.convertToMMHG(ble.pressureVal);
 
                         if (!minimumPressureIsSet)
                         {
@@ -494,5 +495,7 @@ namespace CTAR_All_Star
         //        LoadExercise();
         //    }
         //}
+
+        
     }
 }

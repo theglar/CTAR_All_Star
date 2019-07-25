@@ -12,5 +12,16 @@ namespace CTAR_All_Star.Models
         public string Time { get; set; }
 
         public double? Pressure { get; set; }
+
+        public GraphMeasurement()
+        {
+
+        }
+
+        public GraphMeasurement(string t, double? p)
+        {
+            Time = t;
+            Pressure = p;
+        }
     }
 }
