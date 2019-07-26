@@ -49,7 +49,7 @@ namespace CTAR_All_Star.ViewModels
 
         public void InsertMeasurement(int newMeasurementVal)
         {
-            double newPressureVal = PressureConverter.convertToMMHG(newMeasurementVal);
+            double newPressureVal = newMeasurementVal;
             //GraphMeasurement newRawMeasurement = new GraphMeasurement(DateTime.Now.ToString("HH:mm:ss"), newMeasurementVal);
             GraphMeasurement newMeasurement = new GraphMeasurement(DateTime.Now.ToString("HH:mm:ss"), newPressureVal);
             //newMeasurement.Pressure = newMeasurementVal;

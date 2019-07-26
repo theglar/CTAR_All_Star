@@ -6,6 +6,7 @@ using CTAR_All_Star.Database;
 using System.Timers;
 using System.Collections.ObjectModel;
 using CTAR_All_Star.Helper;
+using Android.Util;
 
 namespace CTAR_All_Star
 {
@@ -22,7 +23,7 @@ namespace CTAR_All_Star
         private bool isAtRest = true;
         private double newGoal;
         private double? oneRepMax = -1;
-        private double? minimumPressure = 1024; //the pressure inside the ball when not under any load
+        private double? minimumPressure = 0; //the pressure inside the ball when not under any load
         private bool minimumPressureIsSet = false; //bool tells whether the minimum pressure has been set
         private bool oneRepMaxIsSet = false; //bool tells whether the maximum pressure has been set
         //private bool okIsClicked = false;
@@ -233,6 +234,7 @@ namespace CTAR_All_Star
                 PressureValue.Text = minimumPressure.ToString();
                 OneRepMaxValue.Text = oneRepMax.ToString();
                 TypeValue.Text = workout.Type;
+                
 
                 //Device.BeginInvokeOnMainThread(() =>
                 //{

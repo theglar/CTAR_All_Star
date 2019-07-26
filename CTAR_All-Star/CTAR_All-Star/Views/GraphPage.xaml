@@ -60,7 +60,7 @@
                     </chart:NumericalAxis>
                 </chart:SfChart.SecondaryAxis>
                 <chart:SfChart.Series>
-                    <chart:FastLineSeries ItemsSource="{Binding Data}" XBindingPath="Time" YBindingPath="Pressure" EnableTooltip ="True" ListenPropertyChange="True" StrokeWidth="2">
+                    <chart:FastLineSeries ItemsSource="{Binding Data}" XBindingPath="Time" YBindingPath="Pressure" EnableTooltip ="True" ListenPropertyChange="True" StrokeWidth="1">
                         <chart:FastLineSeries.ColorModel>
                             <chart:ChartColorModel Palette="Natural"/>
                         </chart:FastLineSeries.ColorModel>
