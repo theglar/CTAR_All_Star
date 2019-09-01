@@ -33,6 +33,9 @@
     <Compile Update="Views\HistoryGraph.xaml.cs">
       <DependentUpon>HistoryGraph.xaml</DependentUpon>
     </Compile>
+    <Compile Update="Views\CalibrationPage.xaml.cs">
+      <DependentUpon>CalibrationPage.xaml</DependentUpon>
+    </Compile>
     <Compile Update="Views\TutorialsPage.xaml.cs">
       <DependentUpon>TutorialsPage.xaml</DependentUpon>
     </Compile>

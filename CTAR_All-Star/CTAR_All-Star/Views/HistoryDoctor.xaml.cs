@@ -23,6 +23,8 @@ namespace CTAR_All_Star
             InitializeLists();
             InititalizePickerListeners();
 
+            PrintPDFBtn.IsVisible = false;
+
             //Clear globals
             App.PatientFilter = "";
             App.DateFilter = "";

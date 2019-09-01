@@ -1,0 +1,22 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CTAR_All_Star.Views.CalibrationPage">
+    <ContentPage.Content>
+        <StackLayout Padding="0,100,0,0" Spacing="50">
+            <Label  VerticalTextAlignment="Center" 
+                    HorizontalTextAlignment="Center"
+                    Text="Current Pressure"
+                    TextColor="#807f84"
+                    FontSize="32"
+                    FontAttributes="Bold"
+            />
+            <Label x:Name="PressureLabel" 
+                VerticalTextAlignment="Center"
+                   HorizontalTextAlignment="Center"
+                    Text= "{Binding Pressure}"
+                    TextColor="#807f84"
+                    FontSize="32"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
