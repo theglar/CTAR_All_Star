@@ -28,7 +28,7 @@ namespace CTAR_All_Star.ViewModels
             };
 
             // Initialize list
-            for (int i=0; i<500; i++)
+            for (int i=0; i<300; i++)
             {
                 Data.Add(measurement);
                 //RawData.Add(measurement);
@@ -57,7 +57,7 @@ namespace CTAR_All_Star.ViewModels
 
             Data.RemoveAt(0);
             //RawData.RemoveAt(0);
-            Data.Insert(400, newMeasurement);
+            Data.Insert(270, newMeasurement);
             //RawData.Insert(400, newRawMeasurement);
         }
     }

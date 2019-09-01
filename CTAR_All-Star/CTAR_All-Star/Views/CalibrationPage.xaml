@@ -14,7 +14,7 @@
             <Label x:Name="PressureLabel" 
                 VerticalTextAlignment="Center"
                    HorizontalTextAlignment="Center"
-                    Text= "{Binding Pressure}"
+                    Text= "Device Not Connected"
                     TextColor="#807f84"
                     FontSize="32"/>
         </StackLayout>
